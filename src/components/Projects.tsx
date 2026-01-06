@@ -1,35 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
-
-const projects = [
-  {
-    title: "Fintech Dashboard",
-    category: "Product Design",
-    description: "A comprehensive financial management platform with intuitive data visualization and seamless user flows.",
-    tags: ["UI Design", "UX Research", "Design System"],
-    color: "from-primary/20 to-accent/20",
-  },
-  {
-    title: "Healthcare App",
-    category: "Mobile Experience",
-    description: "Patient-centered mobile application focusing on accessibility and ease of appointment booking.",
-    tags: ["Mobile UI", "Accessibility", "User Testing"],
-    color: "from-accent/20 to-primary/20",
-  },
-  {
-    title: "E-commerce Platform",
-    category: "Web Design",
-    description: "End-to-end shopping experience redesign that increased conversion rates by 40%.",
-    tags: ["Conversion Optimization", "UI/UX", "A/B Testing"],
-    color: "from-primary/20 to-accent/10",
-  },
-  {
-    title: "SaaS Analytics",
-    category: "Enterprise UX",
-    description: "Complex data analytics tool simplified through thoughtful information architecture and visual hierarchy.",
-    tags: ["Enterprise", "Data Viz", "Design System"],
-    color: "from-accent/10 to-primary/20",
-  },
-];
+import { Link } from "react-router-dom";
+import { projects } from "@/data/projects";
 
 const Projects = () => {
   return (
@@ -47,10 +18,11 @@ const Projects = () => {
 
         {/* Projects grid */}
         <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <article
-              key={index}
-              className="group relative bg-card rounded-2xl overflow-hidden hover-lift cursor-pointer"
+          {projects.map((project) => (
+            <Link
+              to={`/project/${project.id}`}
+              key={project.id}
+              className="group relative bg-card rounded-2xl overflow-hidden hover-lift cursor-pointer block"
             >
               {/* Gradient background */}
               <div
@@ -88,7 +60,7 @@ const Projects = () => {
                   </div>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
