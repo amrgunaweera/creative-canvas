@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import ThemeToggle from "./ThemeToggle";
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,9 +16,24 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
+  const handleNavClick = (item: string) => {
+    if (item === "About") {
+      navigate("/about");
+    } else if (isHomePage) {
+      const element = document.getElementById(item.toLowerCase());
+      element?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate(`/#${item.toLowerCase()}`);
+    }
+  };
+
+  const handleContactClick = () => {
+    if (isHomePage) {
+      const element = document.getElementById("contact");
+      element?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/#contact");
+    }
   };
 
   return (
@@ -38,7 +57,7 @@ const Navigation = () => {
             {["Work", "About", "Skills", "Contact"].map((item) => (
               <button
                 key={item}
-                onClick={() => scrollToSection(item.toLowerCase())}
+                onClick={() => handleNavClick(item)}
                 className="font-medium text-muted-foreground hover:text-foreground line-reveal transition-colors duration-300"
               >
                 {item}
@@ -51,7 +70,7 @@ const Navigation = () => {
             <Button
               variant="outline_hero"
               size="sm"
-              onClick={() => scrollToSection("contact")}
+              onClick={handleContactClick}
             >
               Let's Talk
             </Button>
