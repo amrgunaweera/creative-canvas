@@ -1,4 +1,6 @@
-import { Quote } from "lucide-react";
+import { Quote, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
 
 const About = () => {
   return (
@@ -79,6 +81,13 @@ const About = () => {
                 of technology and human behavior.
               </p>
             </div>
+
+            <Button variant="hero" size="lg" className="mt-8" asChild>
+              <Link to="/about">
+                Learn More About Me
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+            </Button>
 
             {/* Highlights */}
             <div className="mt-12 grid grid-cols-2 gap-6">
