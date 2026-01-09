@@ -1,4 +1,5 @@
-import { Quote, Award, Users, Lightbulb, Target, Mail, Linkedin, Twitter } from "lucide-react";
+import { Quote, Award, Users, Lightbulb, Target, Mail, Linkedin, Twitter, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -58,6 +59,14 @@ const AboutPage = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
         
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Home
+          </Link>
+          
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Image Side */}
             <div className="relative order-2 lg:order-1">
