@@ -1,56 +1,59 @@
 import { Button } from "./ui/button";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown, Download } from "lucide-react";
 
 const Hero = () => {
   const scrollToWork = () => {
-    document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById("work");
+    element?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-1/4 -left-32 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-border/20 rounded-full" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-border/10 rounded-full" />
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 sm:pt-20">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-1/4 right-1/4 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-accent/10 rounded-full blur-3xl animate-pulse-slow delay-1000" />
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         <div className="max-w-5xl">
-          {/* Badge */}
-          <div className="animate-fade-up mb-8">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border text-sm font-medium text-muted-foreground">
-              <Sparkles className="w-4 h-4 text-primary" />
+          {/* Status badge */}
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-secondary border border-border mb-6 sm:mb-8 animate-fade-up">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span className="text-xs sm:text-sm font-medium text-muted-foreground">
               Available for new projects
             </span>
           </div>
 
           {/* Main heading */}
-          <h1 className="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tight animate-fade-up">
+          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight animate-fade-up">
             <span className="block text-foreground">Crafting</span>
             <span className="block text-gradient">Digital</span>
             <span className="block text-foreground">Experiences</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="mt-8 text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed animate-fade-up-delay">
-            UI/UX Lead specializing in creating intuitive, user-centered designs
+          <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl leading-relaxed animate-fade-up-delay">
+            UI/UX Lead specializing in creating meaningful digital experiences
             that bridge the gap between business goals and human needs.
           </p>
 
           {/* CTA Buttons */}
-          <div className="mt-12 flex flex-wrap gap-4 animate-fade-up-delay-2">
-            <Button variant="hero" size="xl" onClick={scrollToWork}>
+          <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 animate-fade-up-delay-2">
+            <Button variant="hero" size="lg" onClick={scrollToWork} className="w-full sm:w-auto">
               Explore My Work
             </Button>
-            <Button variant="outline_hero" size="xl">
+            <Button variant="outline_hero" size="lg" className="w-full sm:w-auto">
+              <Download className="mr-2 h-4 w-4" />
               Download Resume
             </Button>
           </div>
 
           {/* Stats */}
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-up-delay-2">
+          <div className="mt-12 sm:mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 animate-fade-up-delay-2">
             {[
               { value: "8+", label: "Years Experience" },
               { value: "50+", label: "Projects Delivered" },
@@ -58,10 +61,10 @@ const Hero = () => {
               { value: "12", label: "Design Awards" },
             ].map((stat, index) => (
               <div key={index} className="text-center md:text-left">
-                <div className="font-display font-bold text-3xl md:text-4xl text-gradient">
+                <div className="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-gradient">
                   {stat.value}
                 </div>
-                <div className="mt-1 text-sm text-muted-foreground">
+                <div className="mt-1 text-xs sm:text-sm text-muted-foreground">
                   {stat.label}
                 </div>
               </div>
@@ -71,16 +74,9 @@ const Hero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-float">
-        <button
-          onClick={scrollToWork}
-          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <span className="text-xs font-medium tracking-widest uppercase">
-            Scroll
-          </span>
-          <ArrowDown className="w-5 h-5" />
-        </button>
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-float">
+        <span className="text-xs text-muted-foreground">Scroll to explore</span>
+        <ArrowDown className="w-4 h-4 text-muted-foreground" />
       </div>
     </section>
   );
