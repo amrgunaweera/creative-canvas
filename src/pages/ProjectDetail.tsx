@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Quote } from "lucide-react";
 import { projects } from "@/data/projects";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
@@ -101,6 +101,60 @@ const ProjectDetail = () => {
               </p>
             </div>
 
+            {/* Metrics */}
+            {project.metrics && project.metrics.length > 0 && (
+              <div className="py-12 border-y border-border/50">
+                <h2 className="font-display font-bold text-3xl mb-8 text-center">Key Results</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {project.metrics.map((metric, index) => (
+                    <div key={index} className="text-center">
+                      <div className="text-4xl md:text-5xl font-display font-bold text-gradient">
+                        {metric.value}
+                      </div>
+                      <div className="text-muted-foreground text-sm mt-2">{metric.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Process Steps */}
+            {project.processSteps && project.processSteps.length > 0 && (
+              <div>
+                <h2 className="font-display font-bold text-3xl mb-8">Design Process</h2>
+                <div className="space-y-8">
+                  {project.processSteps.map((step, index) => (
+                    <div key={index} className="flex gap-6">
+                      <div className="flex-shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold">
+                          {index + 1}
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
+                        <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Key Features */}
+            {project.keyFeatures && project.keyFeatures.length > 0 && (
+              <div>
+                <h2 className="font-display font-bold text-3xl mb-8">Key Features</h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {project.keyFeatures.map((feature, index) => (
+                    <div key={index} className="p-6 bg-card rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Outcome */}
             <div>
               <h2 className="font-display font-bold text-3xl mb-6">The Outcome</h2>
@@ -108,6 +162,20 @@ const ProjectDetail = () => {
                 {project.outcome}
               </p>
             </div>
+
+            {/* Testimonial */}
+            {project.testimonial && (
+              <div className="relative p-8 bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl border border-border/50">
+                <Quote className="w-10 h-10 text-primary/30 mb-4" />
+                <blockquote className="text-lg md:text-xl leading-relaxed mb-6">
+                  "{project.testimonial.quote}"
+                </blockquote>
+                <div>
+                  <div className="font-semibold">{project.testimonial.author}</div>
+                  <div className="text-sm text-muted-foreground">{project.testimonial.role}</div>
+                </div>
+              </div>
+            )}
 
             {/* Tags */}
             <div className="flex flex-wrap gap-3 pt-8 border-t border-border/50">
