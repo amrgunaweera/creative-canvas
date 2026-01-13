@@ -1,3 +1,18 @@
+export interface ProcessStep {
+  title: string;
+  description: string;
+}
+
+export interface KeyFeature {
+  title: string;
+  description: string;
+}
+
+export interface Metric {
+  value: string;
+  label: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -12,6 +27,14 @@ export interface Project {
   challenge: string;
   solution: string;
   outcome: string;
+  processSteps?: ProcessStep[];
+  keyFeatures?: KeyFeature[];
+  metrics?: Metric[];
+  testimonial?: {
+    quote: string;
+    author: string;
+    role: string;
+  };
 }
 
 export const projects: Project[] = [
@@ -26,9 +49,60 @@ export const projects: Project[] = [
     role: "Lead Product Designer",
     duration: "6 months",
     tools: ["Figma", "Principle", "Maze", "Hotjar"],
-    challenge: "Users struggled with complex financial data, leading to low engagement and frequent support requests. The existing interface was cluttered and didn't prioritize key information.",
-    solution: "Implemented a card-based modular dashboard with progressive disclosure, allowing users to customize their view. Created a robust design system for consistency across 50+ screens.",
-    outcome: "Increased user engagement by 65% and reduced support tickets by 40%. The design system cut development time by 30% for new features.",
+    challenge: "Users struggled with complex financial data, leading to low engagement and frequent support requests. The existing interface was cluttered and didn't prioritize key information. Our research revealed that 78% of users felt overwhelmed within the first 5 minutes of using the platform, and the average session duration was under 3 minutes.",
+    solution: "Implemented a card-based modular dashboard with progressive disclosure, allowing users to customize their view. Created a robust design system for consistency across 50+ screens. We introduced a guided onboarding flow, smart notifications, and AI-powered insights that surfaced relevant information based on user behavior patterns.",
+    outcome: "Increased user engagement by 65% and reduced support tickets by 40%. The design system cut development time by 30% for new features. Average session duration increased to 12 minutes, and user satisfaction scores rose from 3.2 to 4.6 out of 5.",
+    processSteps: [
+      {
+        title: "Discovery & Research",
+        description: "Conducted 25+ user interviews, analyzed 6 months of support tickets, and performed competitive analysis of 12 fintech platforms to identify pain points and opportunities."
+      },
+      {
+        title: "Information Architecture",
+        description: "Restructured the navigation and created a new hierarchy based on user mental models. Developed user flows for 8 key tasks and validated with card sorting exercises."
+      },
+      {
+        title: "Design & Prototyping",
+        description: "Created low-fidelity wireframes, iterated through 3 rounds of usability testing, and developed high-fidelity prototypes with micro-interactions using Principle."
+      },
+      {
+        title: "Design System",
+        description: "Built a comprehensive design system with 200+ components, documented usage guidelines, and established a token-based theming system for scalability."
+      },
+      {
+        title: "Validation & Handoff",
+        description: "Conducted A/B testing with 5,000 users, refined designs based on analytics, and collaborated closely with engineering for pixel-perfect implementation."
+      }
+    ],
+    keyFeatures: [
+      {
+        title: "Smart Dashboard",
+        description: "Customizable widget-based layout that adapts to user preferences and displays personalized insights based on financial goals."
+      },
+      {
+        title: "Unified Portfolio View",
+        description: "Consolidated view of all investments, accounts, and assets with real-time syncing and interactive visualizations."
+      },
+      {
+        title: "Intelligent Alerts",
+        description: "Context-aware notifications that surface important information without overwhelming users, powered by behavioral analysis."
+      },
+      {
+        title: "Goal Tracking",
+        description: "Visual progress indicators for savings goals with predictive analytics showing projected completion dates."
+      }
+    ],
+    metrics: [
+      { value: "65%", label: "Increase in Engagement" },
+      { value: "40%", label: "Reduction in Support Tickets" },
+      { value: "4.6★", label: "User Satisfaction Score" },
+      { value: "12min", label: "Avg. Session Duration" }
+    ],
+    testimonial: {
+      quote: "The redesigned dashboard transformed how our users interact with their finances. The intuitive design and smart features have made complex financial management accessible to everyone.",
+      author: "Sarah Chen",
+      role: "VP of Product, FinanceFlow"
+    }
   },
   {
     id: "healthcare-app",
