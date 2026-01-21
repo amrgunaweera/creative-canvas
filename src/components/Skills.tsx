@@ -54,7 +54,7 @@ const tools = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-16 sm:py-24 md:py-32 bg-card/50 relative">
+    <section id="skills" className="scroll-mt-20 py-16 sm:py-24 md:py-32 bg-card/50 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         {/* Section header */}
         <div className="mb-12 sm:mb-16 md:mb-20">

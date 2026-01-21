@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 
 const About = () => {
   return (
-    <section id="about" className="py-16 sm:py-24 md:py-32 relative">
+    <section id="about" className="scroll-mt-20 py-16 sm:py-24 md:py-32 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
           {/* Image/Visual side */}

@@ -14,6 +14,15 @@ const Projects = () => {
           <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-3 sm:mt-4 max-w-3xl">
             Projects that define my craft
           </h2>
+          <div className="mt-6 sm:mt-8">
+            <Link
+              to="/work"
+              className="inline-flex items-center gap-2 text-sm sm:text-base text-muted-foreground hover:text-foreground transition-colors"
+            >
+              View all work
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
 
         {/* Projects grid */}

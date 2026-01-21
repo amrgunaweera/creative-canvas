@@ -61,7 +61,7 @@ const AboutPage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <Link 
             to="/" 
-            className="inline-flex items-center gap-2 text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors mb-6 sm:mb-8"
+            className="inline-flex items-center gap-2 text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors mb-6 sm:mb-8 line-reveal animate-slide-in"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Home
@@ -69,8 +69,8 @@ const AboutPage = () => {
           
           <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
             {/* Image Side */}
-            <div className="relative order-2 lg:order-1">
-              <div className="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] bg-gradient-to-br from-card to-secondary rounded-2xl sm:rounded-3xl overflow-hidden relative">
+            <div className="relative order-2 lg:order-1 animate-fade-up-delay">
+              <div className="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] bg-gradient-to-br from-card to-secondary rounded-2xl sm:rounded-3xl overflow-hidden relative hover-lift">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
                 
                 <div className="absolute top-4 left-4 right-4 sm:top-8 sm:left-8 sm:right-8">
@@ -109,15 +109,15 @@ const AboutPage = () => {
             </div>
 
             {/* Content Side */}
-            <div className="order-1 lg:order-2">
+            <div className="order-1 lg:order-2 animate-fade-up">
               <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm">
                 About Me
               </span>
-              <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-3 sm:mt-4 leading-tight">
+              <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-3 sm:mt-4 leading-tight animate-fade-up">
                 Designing with purpose, leading with empathy
               </h1>
 
-              <div className="mt-6 sm:mt-8 space-y-4 sm:space-y-6 text-muted-foreground leading-relaxed text-base sm:text-lg">
+              <div className="mt-6 sm:mt-8 space-y-4 sm:space-y-6 text-muted-foreground leading-relaxed text-base sm:text-lg animate-fade-up-delay">
                 <p>
                   I'm a UI/UX Lead with over 8 years of experience crafting digital
                   products that people love to use. My approach combines strategic
@@ -131,7 +131,7 @@ const AboutPage = () => {
                 </p>
               </div>
 
-              <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+              <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 animate-fade-up-delay-2">
                 <Button variant="hero" size="lg" asChild className="w-full sm:w-auto">
                   <a href="mailto:hello@example.com">
                     <Mail className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
@@ -145,7 +145,7 @@ const AboutPage = () => {
                 </Button>
               </div>
 
-              <div className="mt-6 sm:mt-8 flex gap-3 sm:gap-4">
+              <div className="mt-6 sm:mt-8 flex gap-3 sm:gap-4 animate-fade-up-delay-2">
                 <a href="#" className="p-2.5 sm:p-3 rounded-full bg-card border border-border hover:border-primary transition-colors">
                   <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground hover:text-primary" />
                 </a>
@@ -184,7 +184,7 @@ const AboutPage = () => {
       {/* Values Section */}
       <section className="py-16 sm:py-20 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 md:mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 md:mb-16 animate-fade-up">
             <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm">
               My Approach
             </span>
@@ -200,7 +200,7 @@ const AboutPage = () => {
             {values.map((value, index) => (
               <div
                 key={index}
-                className="p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 group"
+                className="p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 group hover-lift"
               >
                 <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-primary/20 transition-colors">
                   <value.icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-primary" />
@@ -262,7 +262,7 @@ const AboutPage = () => {
       {/* Awards Section */}
       <section className="py-16 sm:py-20 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 md:mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 md:mb-16 animate-fade-up">
             <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm">
               Recognition
             </span>
@@ -275,7 +275,7 @@ const AboutPage = () => {
             {awards.map((award, index) => (
               <div
                 key={index}
-                className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-card border border-border text-center hover:border-primary/50 transition-all duration-300"
+                className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-card border border-border text-center hover:border-primary/50 transition-all duration-300 hover-lift"
               >
                 <Award className="w-8 h-8 sm:w-10 sm:h-10 text-primary mx-auto mb-3 sm:mb-4" />
                 <h3 className="font-display font-semibold text-base sm:text-lg mb-1">

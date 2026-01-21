@@ -26,9 +26,7 @@ const Navigation = () => {
 
   const handleNavClick = (item: string) => {
     setIsOpen(false);
-    if (item === "About") {
-      navigate("/about");
-    } else if (isHomePage) {
+    if (isHomePage) {
       const element = document.getElementById(item.toLowerCase());
       element?.scrollIntoView({ behavior: "smooth" });
     } else {

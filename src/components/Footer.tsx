@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="py-6 sm:py-8 border-t border-border">
@@ -10,12 +12,12 @@ const Footer = () => {
             © {new Date().getFullYear()} All rights reserved. Designed with passion.
           </p>
           <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
-            <a href="#" className="hover:text-foreground transition-colors">
+            <Link to="/privacy" className="hover:text-foreground transition-colors">
               Privacy
-            </a>
-            <a href="#" className="hover:text-foreground transition-colors">
+            </Link>
+            <Link to="/terms" className="hover:text-foreground transition-colors">
               Terms
-            </a>
+            </Link>
           </div>
         </div>
       </div>

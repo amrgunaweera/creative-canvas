@@ -8,9 +8,9 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 sm:pt-20">
+    <section className="min-h-screen flex items-center justify-center relative pt-16 sm:pt-20">
       {/* Animated background elements */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-slow" />
         <div className="absolute bottom-1/4 right-1/4 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-accent/10 rounded-full blur-3xl animate-pulse-slow delay-1000" />
       </div>
@@ -29,7 +29,7 @@ const Hero = () => {
           </div>
 
           {/* Main heading */}
-          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight animate-fade-up">
+          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.05] py-1 tracking-tight animate-fade-up">
             <span className="block text-foreground">Crafting</span>
             <span className="block text-gradient">Digital</span>
             <span className="block text-foreground">Experiences</span>
