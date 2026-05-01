@@ -39,19 +39,19 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "fintech-dashboard",
-    title: "Fintech Dashboard",
-    category: "Product Design",
+    id: "contact-center",
+    title: "Contact Center Solution",
+    category: "Product Design & UI Development",
     description: "A comprehensive financial management platform with intuitive data visualization and seamless user flows.",
-    fullDescription: "Designed and led the UX strategy for a modern fintech dashboard that helps users manage their investments, track spending, and achieve financial goals through intuitive interfaces and actionable insights.",
-    tags: ["UI Design", "UX Research", "Design System"],
+    fullDescription: "Designed and led the UX strategy for a next-generation contact center platform that empowers customers with seamless self-service support while equipping agents with intelligent automation tools to streamline workflows, accelerate resolutions, and improve overall customer satisfaction.",
+    tags: ["UI Design", "UX Research", "Design System", "UI Development"],
     color: "from-primary/20 to-accent/20",
-    role: "Lead Product Designer",
-    duration: "6 months",
-    tools: ["Figma", "Principle", "Maze", "Hotjar"],
-    challenge: "Users struggled with complex financial data, leading to low engagement and frequent support requests. The existing interface was cluttered and didn't prioritize key information. Our research revealed that 78% of users felt overwhelmed within the first 5 minutes of using the platform, and the average session duration was under 3 minutes.",
-    solution: "Implemented a card-based modular dashboard with progressive disclosure, allowing users to customize their view. Created a robust design system for consistency across 50+ screens. We introduced a guided onboarding flow, smart notifications, and AI-powered insights that surfaced relevant information based on user behavior patterns.",
-    outcome: "Increased user engagement by 65% and reduced support tickets by 40%. The design system cut development time by 30% for new features. Average session duration increased to 12 minutes, and user satisfaction scores rose from 3.2 to 4.6 out of 5.",
+    role: "Lead UI/UX",
+    duration: "18 months",
+    tools: ["Figma", "Loveable", "Claude", "React", "Angular"],
+    challenge: "Traditional contact centers relied heavily on manual support, leading to slow response times, high call volumes, and inconsistent customer experiences. Customers often lacked effective self-service options, and agents had to manage repetitive tasks without intelligent tools or automated workflows.",
+    solution: "Implemented an AI-assisted self-service experience that guided customers to relevant answers through natural language interactions. Designed an intelligent agent workspace with automated ticket handling, contextual information surfaces, and unified communication channels. Built a scalable design system to ensure consistency across the entire platform, including dashboards, chat interfaces, and workflow tools.",
+    outcome: "Increased self-service adoption and reduced repetitive support tickets. The modular design system accelerated development of new features. Average resolution time for customer inquiries improved, and overall customer satisfaction rose significantly.",
     processSteps: [
       {
         title: "Discovery & Research",
