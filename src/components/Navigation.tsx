@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import amrgLogo from "@/assets/images/projects/contact-center/AMRG_Projects_logo.svg";
 import {
   Sheet,
   SheetContent,
@@ -58,9 +59,9 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16 sm:h-20">
           <a
             href="#"
-            className="font-display font-bold text-xl sm:text-2xl text-gradient"
+            className="flex items-center"
           >
-            Portfolio
+            <img src={amrgLogo} alt="AMRG Projects" className="h-8 sm:h-10 w-auto" />
           </a>
 
           {/* Desktop Navigation */}

@@ -20,7 +20,108 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <style>
+        body, html {
+          margin: 0;
+          padding: 0;
+          background-color: hsl(220, 20%, 8%);
+        }
+        #initial-loader {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: hsl(220, 20%, 8%);
+          z-index: 9999;
+          flex-direction: column;
+          gap: 32px;
+          font-family: 'Syne', 'Inter', system-ui, sans-serif;
+        }
+        
+        .loader-wrapper {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .loader-spinner {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          border: 2px solid transparent;
+          border-top-color: hsl(15, 85%, 65%);
+          border-right-color: hsl(35, 90%, 60%);
+          animation: loader-spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+
+        .loader-spinner-inner {
+          position: absolute;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          border: 2px solid transparent;
+          border-bottom-color: hsl(35, 90%, 60%);
+          border-left-color: hsl(15, 85%, 65%);
+          animation: loader-spin-reverse 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+
+        .loader-glow {
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          background: linear-gradient(135deg, hsl(15, 85%, 65%), hsl(35, 90%, 60%));
+          border-radius: 50%;
+          filter: blur(25px);
+          animation: loader-pulse 2s ease-in-out infinite;
+        }
+
+        .loader-text {
+          color: hsl(45, 20%, 95%);
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: 6px;
+          text-transform: uppercase;
+          background: linear-gradient(135deg, hsl(45, 20%, 95%), hsl(220, 10%, 55%));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: loader-pulse-text 2s ease-in-out infinite;
+        }
+
+        @keyframes loader-spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        @keyframes loader-spin-reverse {
+          0% { transform: rotate(360deg); }
+          100% { transform: rotate(0deg); }
+        }
+
+        @keyframes loader-pulse {
+          0%, 100% { opacity: 0.8; transform: scale(0.9); }
+          50% { opacity: 0.4; transform: scale(1.1); }
+        }
+
+        @keyframes loader-pulse-text {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.6; }
+        }
+      </style>
+      <div id="initial-loader">
+        <div class="loader-wrapper">
+          <div class="loader-glow"></div>
+          <div class="loader-spinner"></div>
+          <div class="loader-spinner-inner"></div>
+        </div>
+        <div class="loader-text">Loading</div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
