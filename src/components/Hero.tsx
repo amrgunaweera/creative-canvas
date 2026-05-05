@@ -1,5 +1,6 @@
 import { Button } from "./ui/button";
 import { ArrowDown, Download } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const Hero = () => {
   const scrollToWork = () => {
@@ -7,31 +8,77 @@ const Hero = () => {
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const heroRef = useRef<HTMLElement>(null);
+  const parallaxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let animationFrameId: number;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!heroRef.current) return;
+
+      // Spotlight coordinates
+      const rect = heroRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      heroRef.current.style.setProperty("--mouse-x", `${x}px`);
+      heroRef.current.style.setProperty("--mouse-y", `${y}px`);
+
+      // Parallax target
+      targetX = (e.clientX - window.innerWidth / 2) * -0.03;
+      targetY = (e.clientY - window.innerHeight / 2) * -0.03;
+    };
+
+    const animate = () => {
+      // Smooth interpolation for parallax
+      currentX += (targetX - currentX) * 0.1;
+      currentY += (targetY - currentY) * 0.1;
+
+      if (parallaxRef.current) {
+        parallaxRef.current.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      }
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    animate();
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
   return (
-    <section className="min-h-screen flex items-center justify-center relative pt-16 sm:pt-20">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-accent/10 rounded-full blur-3xl animate-pulse-slow delay-1000" />
+    <section
+      ref={heroRef}
+      className="min-h-screen flex items-center justify-center relative pt-16 sm:pt-20 overflow-hidden"
+    >
+      {/* Interactive Spotlight */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-50 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle 600px at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(var(--primary) / 0.08), transparent 40%)`
+        }}
+      />
+
+      {/* Animated & Parallax background elements */}
+      <div ref={parallaxRef} className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute top-1/4 left-1/4 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-primary/10 rounded-full blur-3xl animate-blob" />
+        <div className="absolute bottom-1/4 right-1/4 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-accent/10 rounded-full blur-3xl animate-blob" style={{ animationDelay: '2s' }} />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         <div className="max-w-5xl">
-          {/* Status badge */}
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-secondary border border-border mb-6 sm:mb-8 animate-fade-up">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-            </span>
-            <span className="text-xs sm:text-sm font-medium text-muted-foreground">
-              Available for new projects
-            </span>
-          </div>
 
           {/* Main heading */}
           <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.05] py-1 tracking-tight animate-fade-up">
             <span className="block text-foreground">Crafting</span>
-            <span className="block text-gradient">Digital</span>
+            <span className="block text-gradient animate-text-gradient">Digital</span>
             <span className="block text-foreground">Experiences</span>
           </h1>
 
@@ -55,9 +102,9 @@ const Hero = () => {
           {/* Stats */}
           <div className="mt-12 sm:mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 animate-fade-up-delay-2">
             {[
-              { value: "8+", label: "Years Experience" },
-              { value: "50+", label: "Projects Delivered" },
-              { value: "30+", label: "Happy Clients" },
+              { value: "15+", label: "Years Experience" },
+              { value: "200+", label: "Projects Delivered" },
+              { value: "100+", label: "Happy Clients" },
               { value: "12", label: "Design Awards" },
             ].map((stat, index) => (
               <div key={index} className="text-center md:text-left">
@@ -74,10 +121,17 @@ const Hero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-float">
-        <span className="text-xs text-muted-foreground">Scroll to explore</span>
-        <ArrowDown className="w-4 h-4 text-muted-foreground" />
-      </div>
+      <button
+        onClick={scrollToWork}
+        className="absolute right-4 sm:right-8 lg:right-12 bottom-12 sm:bottom-16 flex flex-col items-center gap-6 group cursor-pointer z-20 hidden md:flex animate-fade-up-delay-2"
+      >
+        <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-muted-foreground group-hover:text-primary transition-colors duration-300" style={{ writingMode: 'vertical-rl' }}>
+          Scroll to explore
+        </span>
+        <div className="relative w-[1px] h-16 sm:h-24 bg-border/50 overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full bg-primary animate-scroll-line" />
+        </div>
+      </button>
     </section>
   );
 };

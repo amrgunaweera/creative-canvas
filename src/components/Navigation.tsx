@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-import amrgLogo from "@/assets/images/projects/contact-center/AMRG_Projects_logo.svg";
+import amrgLogo from "@/assets/images/AMRG_Projects_logo.svg";
 import {
   Sheet,
   SheetContent,
@@ -49,20 +49,19 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
           ? "bg-background/80 backdrop-blur-xl border-b border-border/50"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          <a
-            href="#"
+          <Link
+            to="/"
             className="flex items-center"
           >
             <img src={amrgLogo} alt="AMRG Projects" className="h-8 sm:h-10 w-auto" />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">

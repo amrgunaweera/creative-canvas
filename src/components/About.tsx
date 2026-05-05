@@ -46,7 +46,7 @@ const About = () => {
 
             {/* Floating badge */}
             <div className="absolute -top-3 -right-3 sm:-top-6 sm:-right-6 bg-primary text-primary-foreground px-4 sm:px-6 py-2 sm:py-3 rounded-full font-display font-semibold text-sm sm:text-base animate-float">
-              8+ Years
+              15+ Years
             </div>
           </div>
 
@@ -59,7 +59,7 @@ const About = () => {
               Designing with purpose, <span className="text-gradient">building with passion</span>
             </h2>
             <p className="mt-4 sm:mt-6 text-base sm:text-lg text-muted-foreground leading-relaxed">
-              As a UI/UX Lead with over 8 years of experience, I've had the
+              As a UI/UX Lead with over 15 years of experience, I've had the
               privilege of working with startups and Fortune 500 companies
               alike. My approach combines strategic thinking with creative
               execution to deliver experiences that not only look beautiful but
@@ -82,7 +82,7 @@ const About = () => {
                 { label: "Design Systems", value: "Expert" },
                 { label: "User Research", value: "Advanced" },
                 { label: "Prototyping", value: "Expert" },
-                { label: "Leadership", value: "8+ Years" },
+                { label: "Leadership", value: "15+ Years" },
               ].map((item, index) => (
                 <div
                   key={index}

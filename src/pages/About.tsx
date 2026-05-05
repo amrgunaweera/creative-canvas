@@ -104,7 +104,7 @@ const AboutPage = () => {
               </div>
 
               <div className="absolute -top-3 -right-3 sm:-top-6 sm:-right-6 bg-primary text-primary-foreground px-4 sm:px-6 py-2 sm:py-3 rounded-full font-display font-semibold text-sm sm:text-base animate-float">
-                8+ Years
+                15+ Years
               </div>
             </div>
 
@@ -119,7 +119,7 @@ const AboutPage = () => {
 
               <div className="mt-6 sm:mt-8 space-y-4 sm:space-y-6 text-muted-foreground leading-relaxed text-base sm:text-lg animate-fade-up-delay">
                 <p>
-                  I'm a UI/UX Lead with over 8 years of experience crafting digital
+                  I'm a UI/UX Lead with over 15 years of experience crafting digital
                   products that people love to use. My approach combines strategic
                   thinking with creative problem-solving to deliver experiences that
                   drive real business results.

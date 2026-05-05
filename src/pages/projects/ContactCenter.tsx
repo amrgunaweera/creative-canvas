@@ -19,14 +19,19 @@ import screen8 from "@/assets/images/projects/contact-center/screens/Post Call A
 import screen9 from "@/assets/images/projects/contact-center/screens/Post Call Analyser 9.jpg";
 import screen10 from "@/assets/images/projects/contact-center/screens/Post Call Analyser 10.jpg";
 import screen11 from "@/assets/images/projects/contact-center/screens/Post Call Analyser 11.jpg";
-import wireframe1 from "@/assets/images/projects/contact-center/wireframes/Post Call Analyser 1.jpg";
-import wireframe2 from "@/assets/images/projects/contact-center/wireframes/Post Call Analyser 2.jpg";
-import wireframe3 from "@/assets/images/projects/contact-center/wireframes/Post Call Analyser 3.jpg";
-import wireframe4 from "@/assets/images/projects/contact-center/wireframes/Post Call Analyser 4.jpg";
+import wireframeHome from "@/assets/images/projects/contact-center/wireframes/Home.jpg";
+import wireframeCallInsights from "@/assets/images/projects/contact-center/wireframes/Call Insights.jpg";
+import wireframeAgentInsights from "@/assets/images/projects/contact-center/wireframes/Agent Evaluation - Agent Insights.jpg";
+import wireframeSingleCall from "@/assets/images/projects/contact-center/wireframes/Agent Evaluation - Agent Insights - Single call destails.jpg";
+import wireframeAutopilot from "@/assets/images/projects/contact-center/wireframes/Autopilot.jpg";
+import wireframeContentUpload from "@/assets/images/projects/contact-center/wireframes/Content Upload 2 - file select.jpg";
+import wireframeHome1 from "@/assets/images/projects/contact-center/wireframes/Home-1.jpg";
+import wireframeLogin from "@/assets/images/projects/contact-center/wireframes/Login.jpg";
 
 const ContactCenterPage = () => {
   const project = projects.find((p) => p.id === "contact-center");
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [wireframeIndex, setWireframeIndex] = useState<number | null>(null);
 
   const screens = [
     { src: screen1, label: "Post Call Analyzer View 1" },
@@ -40,6 +45,17 @@ const ContactCenterPage = () => {
     { src: screen9, label: "Post Call Analyzer View 9" },
     { src: screen10, label: "Post Call Analyzer View 10" },
     { src: screen11, label: "Post Call Analyzer View 11" },
+  ];
+
+  const wireframes = [
+    { src: wireframeHome, label: "Home Dashboard" },
+    { src: wireframeCallInsights, label: "Call Insights" },
+    { src: wireframeAgentInsights, label: "Agent Insights" },
+    { src: wireframeHome1, label: "Dashboard Overview" },
+    { src: wireframeSingleCall, label: "Single Call Details" },
+    { src: wireframeAutopilot, label: "Autopilot Mode" },
+    { src: wireframeContentUpload, label: "Content Upload" },
+    { src: wireframeLogin, label: "Login Screen" },
   ];
 
   if (!project) return null;
@@ -350,7 +366,7 @@ const ContactCenterPage = () => {
                   {/* Row 1 */}
                   <div className="grid lg:grid-cols-4 gap-6 p-5 sm:p-6 hover:bg-secondary/20 transition-colors">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-1">
                         <Headset className="w-6 h-6" />
                       </div>
                       <div>
@@ -397,7 +413,7 @@ const ContactCenterPage = () => {
                   {/* Row 2 */}
                   <div className="grid lg:grid-cols-4 gap-6 p-5 sm:p-6 hover:bg-secondary/20 transition-colors">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-green-500/10 text-green-600 flex items-center justify-center flex-shrink-0 mt-1">
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-1">
                         <ShieldCheck className="w-6 h-6" />
                       </div>
                       <div>
@@ -446,7 +462,7 @@ const ContactCenterPage = () => {
                   {/* Row 3 */}
                   <div className="grid lg:grid-cols-4 gap-6 p-5 sm:p-6 hover:bg-secondary/20 transition-colors">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-600 flex items-center justify-center flex-shrink-0 mt-1">
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-1">
                         <Briefcase className="w-6 h-6" />
                       </div>
                       <div>
@@ -506,65 +522,65 @@ const ContactCenterPage = () => {
               <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* Persona 1 */}
                 <div className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
 
                   <div className="p-6 sm:p-8 pb-4">
                     <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
-                      <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-blue-500/20 shadow-sm">
+                      <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
                         <img src="https://i.pravatar.cc/150?img=11" alt="Nimal Perera" className="w-full h-full object-cover" />
                       </div>
                       <div>
                         <h5 className="font-bold text-lg text-foreground leading-snug">Nimal Perera</h5>
-                        <div className="text-sm font-medium text-blue-600 mb-0.5">Customer Support Agent</div>
+                        <div className="text-sm font-medium text-primary mb-0.5">Customer Support Agent</div>
                         <div className="text-xs font-medium text-muted-foreground">Age: 26 | Exp: 1-3 years</div>
                       </div>
                     </div>
 
                     <div className="space-y-6 relative z-10">
                       <div>
-                        <div className="text-sm font-bold text-blue-600 mb-3 border-b border-border/50 pb-2">Goals</div>
+                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Improve QA Scores, Be More Efficient</span>
                           </li>
                         </ul>
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-blue-600 mb-3 border-b border-border/50 pb-2">Needs</div>
+                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Instant Feedback</span>
                           </li>
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Clear Tips</span>
                           </li>
                         </ul>
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-blue-600 mb-3 border-b border-border/50 pb-2">Pain Points</div>
+                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Delayed Feedback</span>
                           </li>
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>QA Pressure</span>
                           </li>
                         </ul>
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-blue-600 mb-3 border-b border-border/50 pb-2">System Helps</div>
+                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>AI Call Feedback</span>
                           </li>
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Performance Dashboard</span>
                           </li>
                         </ul>
@@ -575,65 +591,65 @@ const ContactCenterPage = () => {
 
                 {/* Persona 2 */}
                 <div className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
 
                   <div className="p-6 sm:p-8 pb-4">
                     <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
-                      <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-green-500/20 shadow-sm">
+                      <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
                         <img src="https://i.pravatar.cc/150?img=5" alt="Shalini Fernando" className="w-full h-full object-cover" />
                       </div>
                       <div>
                         <h5 className="font-bold text-lg text-foreground leading-snug">Shalini Fernando</h5>
-                        <div className="text-sm font-medium text-green-600 mb-0.5">Contact Center Supervisor</div>
-                        <div className="text-xs font-medium text-muted-foreground">Age: 34 | Exp: 8+ years</div>
+                        <div className="text-sm font-medium text-primary mb-0.5">Contact Center Supervisor</div>
+                        <div className="text-xs font-medium text-muted-foreground">Age: 34 | Exp: 15+ years</div>
                       </div>
                     </div>
 
                     <div className="space-y-6 relative z-10">
                       <div>
-                        <div className="text-sm font-bold text-green-600 mb-3 border-b border-border/50 pb-2">Goals</div>
+                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Ensure Team Quality, Find Skill Gaps</span>
                           </li>
                         </ul>
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-green-600 mb-3 border-b border-border/50 pb-2">Needs</div>
+                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Agent Insights</span>
                           </li>
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Training Tools</span>
                           </li>
                         </ul>
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-green-600 mb-3 border-b border-border/50 pb-2">Pain Points</div>
+                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Manual Reviews</span>
                           </li>
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Inconsistent Performance</span>
                           </li>
                         </ul>
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-green-600 mb-3 border-b border-border/50 pb-2">System Helps</div>
+                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>QA Analytics</span>
                           </li>
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Coaching Insights</span>
                           </li>
                         </ul>
@@ -644,65 +660,65 @@ const ContactCenterPage = () => {
 
                 {/* Persona 3 */}
                 <div className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
 
                   <div className="p-6 sm:p-8 pb-4">
                     <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
-                      <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-[#ea580c]/20 shadow-sm">
+                      <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
                         <img src="https://i.pravatar.cc/150?img=8" alt="Ruwan Jayasinghe" className="w-full h-full object-cover" />
                       </div>
                       <div>
                         <h5 className="font-bold text-lg text-foreground leading-snug">Ruwan Jayasinghe</h5>
-                        <div className="text-sm font-medium text-[#ea580c] mb-0.5">Head of Customer Experience</div>
+                        <div className="text-sm font-medium text-primary mb-0.5">Head of Customer Experience</div>
                         <div className="text-xs font-medium text-muted-foreground">Age: 45 | Exp: 15+ years</div>
                       </div>
                     </div>
 
                     <div className="space-y-6 relative z-10">
                       <div>
-                        <div className="text-sm font-bold text-[#ea580c] mb-3 border-b border-border/50 pb-2">Goals</div>
+                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#ea580c] mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Boost CSAT & NPS, Strategic Decisions</span>
                           </li>
                         </ul>
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-[#ea580c] mb-3 border-b border-border/50 pb-2">Needs</div>
+                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#ea580c] mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Trends & Sentiment</span>
                           </li>
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#ea580c] mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Product Feedback</span>
                           </li>
                         </ul>
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-[#ea580c] mb-3 border-b border-border/50 pb-2">Pain Points</div>
+                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#ea580c] mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Data Overload</span>
                           </li>
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#ea580c] mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Slow Insights</span>
                           </li>
                         </ul>
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-[#ea580c] mb-3 border-b border-border/50 pb-2">System Helps</div>
+                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
                         <ul className="space-y-2">
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#ea580c] mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Trend Reports</span>
                           </li>
                           <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#ea580c] mt-1.5 shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                             <span>Sentiment Analysis</span>
                           </li>
                         </ul>
@@ -918,19 +934,53 @@ const ContactCenterPage = () => {
                     Based on our journey maps, we developed detailed wireframes focusing on the most critical interfaces. Each screen went through multiple rounds of iteration informed by stakeholder feedback.
                   </p>
 
-                  {/* Screenshot Grid - 2x2 */}
-                  <div className="grid sm:grid-cols-2 gap-6">
+                  {/* Screenshot Bento Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[160px] md:auto-rows-[200px] gap-4 sm:gap-6">
                     {[
-                      { label: "Post-Call Analytical Dashboard", src: wireframe1 },
-                      { label: "Real-Time KPI Reports", src: wireframe2 },
-                      { label: "Agent Performance Tracking", src: wireframe3 },
-                      { label: "Sentiment Tracking Module", src: wireframe4 },
+                      { label: "Home Dashboard", src: wireframeHome, span: "md:col-span-2 md:row-span-2" },
+                      { label: "Call Insights", src: wireframeCallInsights, span: "md:col-span-2" },
+                      { label: "Agent Insights", src: wireframeAgentInsights, span: "md:col-span-1" },
+                      { label: "Dashboard Overview", src: wireframeHome1, span: "md:col-span-1" },
+                      { label: "Single Call Details", src: wireframeSingleCall, span: "md:col-span-1" },
+                      { label: "Autopilot Mode", src: wireframeAutopilot, span: "md:col-span-1" },
+                      { label: "Content Upload", src: wireframeContentUpload, span: "md:col-span-1" },
+                      { label: "Login Screen", src: wireframeLogin, span: "md:col-span-1" },
                     ].map((item, i) => (
-                      <div key={i} className="group/wf">
-                        <div className="aspect-[16/10] rounded-2xl border border-border/60 bg-secondary/20 overflow-hidden relative hover:border-primary/40 transition-colors shadow-sm hover:shadow-xl hover:shadow-primary/5">
-                          <img src={item.src} alt={item.label} className="w-full h-full object-cover opacity-90 group-hover/wf:opacity-100 transition-opacity" loading="lazy" />
+                      <div key={i} className={`group/wf relative flex flex-col ${item.span} cursor-pointer`} onClick={() => {
+                        const newScreens = [
+                          { src: wireframeHome, label: "Home Dashboard" },
+                          { src: wireframeCallInsights, label: "Call Insights" },
+                          { src: wireframeAgentInsights, label: "Agent Insights" },
+                          { src: wireframeHome1, label: "Dashboard Overview" },
+                          { src: wireframeSingleCall, label: "Single Call Details" },
+                          { src: wireframeAutopilot, label: "Autopilot Mode" },
+                          { src: wireframeContentUpload, label: "Content Upload" },
+                          { src: wireframeLogin, label: "Login Screen" },
+                        ];
+                        // Hacky way to inject wireframes into the lightbox temporarily, or we could add another state variable.
+                        // Let's add another state variable for the gallery type if we want it clean, but for now we can just 
+                        // open the image. Let's create a separate state for wireframes.
+                        setWireframeIndex(i);
+                      }}>
+                        <div className="w-full h-full rounded-2xl border border-border/60 bg-secondary/20 overflow-hidden relative hover:border-primary/40 transition-all shadow-sm hover:shadow-xl hover:shadow-primary/5">
+                          <img 
+                            src={item.src} 
+                            alt={item.label} 
+                            className="absolute inset-0 w-full h-full object-cover object-top opacity-90 group-hover/wf:opacity-100 transition-transform duration-700 group-hover/wf:scale-105" 
+                            loading="lazy" 
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-0 group-hover/wf:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                              <div className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover/wf:opacity-100 transition-opacity duration-300 translate-y-4 group-hover/wf:translate-y-0">
+                                <Search className="w-5 h-5 text-primary" />
+                              </div>
+                          </div>
+                          <div className="absolute top-4 left-4 z-10">
+                            <span className="px-3 py-1.5 text-xs font-semibold bg-background/90 backdrop-blur-md border border-border/50 rounded-full text-foreground shadow-sm flex items-center gap-2">
+                              <Search className="w-3 h-3 text-primary" />
+                              {item.label}
+                            </span>
+                          </div>
                         </div>
-                        <p className="text-sm font-semibold text-foreground mt-3 text-center group-hover/wf:text-primary transition-colors">{item.label}</p>
                       </div>
                     ))}
                   </div>
@@ -1026,36 +1076,73 @@ const ContactCenterPage = () => {
                   </h4>
 
                   <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
-                    <div className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group flex flex-col justify-between">
-                      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-6 border-b border-border/50 gap-4">
+                    <div className="bg-card border border-border/50 rounded-3xl p-5 sm:p-6 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group flex flex-col justify-start">
+                      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-5 pb-3 border-b border-border/50 gap-4">
                         <div>
                           <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Primary Display</div>
-                          <div className="font-display text-3xl font-bold text-foreground">Syne</div>
+                          <div className="font-display text-2xl font-bold text-foreground" style={{ fontFamily: "'Montserrat', sans-serif" }}>Montserrat</div>
                         </div>
                         <div className="sm:text-right">
                           <div className="text-xs font-medium text-muted-foreground mb-1">Weights</div>
-                          <div className="text-sm font-semibold text-foreground bg-secondary/50 px-3 py-1 rounded-full border border-border/50 inline-block">400, 500, 600, 700, 800</div>
+                          <div className="text-[10px] font-semibold text-foreground bg-secondary/50 px-2 py-0.5 rounded-full border border-border/50 inline-block">400, 500, 600, 700, 800</div>
                         </div>
                       </div>
-                      <div className="font-display text-4xl sm:text-5xl lg:text-6xl text-foreground/80 break-words leading-tight group-hover:text-primary transition-colors">
+                      <div className="text-3xl sm:text-4xl lg:text-5xl text-foreground/80 break-words leading-tight group-hover:text-primary transition-colors" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                         Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
                       </div>
                     </div>
 
-                    <div className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group flex flex-col justify-between">
-                      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-6 border-b border-border/50 gap-4">
+                    <div className="bg-card border border-border/50 rounded-3xl p-5 sm:p-6 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group flex flex-col justify-start">
+                      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-5 pb-3 border-b border-border/50 gap-4">
                         <div>
                           <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Body Text</div>
-                          <div className="font-sans text-3xl font-semibold text-foreground">Inter</div>
+                          <div className="text-2xl font-semibold text-foreground" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Plus Jakarta Sans</div>
                         </div>
                         <div className="sm:text-right">
                           <div className="text-xs font-medium text-muted-foreground mb-1">Weights</div>
-                          <div className="text-sm font-semibold text-foreground bg-secondary/50 px-3 py-1 rounded-full border border-border/50 inline-block">300, 400, 500, 600</div>
+                          <div className="text-[10px] font-semibold text-foreground bg-secondary/50 px-2 py-0.5 rounded-full border border-border/50 inline-block">300, 400, 500, 600, 700</div>
                         </div>
                       </div>
-                      <div className="font-sans text-3xl sm:text-4xl lg:text-5xl text-foreground/80 break-words leading-relaxed group-hover:text-primary transition-colors">
+                      <div className="text-2xl sm:text-3xl lg:text-4xl text-foreground/80 break-words leading-relaxed group-hover:text-primary transition-colors" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                         Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
                       </div>
+                    </div>
+                  </div>
+
+                  {/* Type Scale */}
+                  <div className="mt-8 bg-card border border-border/50 rounded-3xl p-5 sm:p-6 hover:border-primary/50 transition-all group">
+                    <div className="flex justify-between items-end mb-5 pb-3 border-b border-border/50">
+                      <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Type Scale</div>
+                      <div className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">1.2 Minor Third</div>
+                    </div>
+                    <div className="space-y-4">
+                      {[
+                        { label: 'Display', size: '47.78px', rem: '2.986rem', weight: 'Bold' },
+                        { label: 'Heading 1', size: '39.81px', rem: '2.488rem', weight: 'Bold' },
+                        { label: 'Heading 2', size: '33.18px', rem: '2.074rem', weight: 'Semibold' },
+                        { label: 'Heading 3', size: '27.65px', rem: '1.728rem', weight: 'Semibold' },
+                        { label: 'Heading 4', size: '23.04px', rem: '1.440rem', weight: 'Medium' },
+                        { label: 'Heading 5', size: '19.20px', rem: '1.200rem', weight: 'Medium' },
+                        { label: 'Body', size: '16.00px', rem: '1.000rem', weight: 'Regular' },
+                        { label: 'Caption', size: '13.33px', rem: '0.833rem', weight: 'Regular' },
+                      ].map((item, i) => (
+                        <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border/20 pb-4 last:border-0 last:pb-0 gap-3">
+                          <div className="flex-1 overflow-hidden">
+                            <div className="text-foreground truncate leading-none" style={{ 
+                              fontSize: item.size, 
+                              fontWeight: item.weight === 'Bold' ? 700 : item.weight === 'Semibold' ? 600 : item.weight === 'Medium' ? 500 : 400, 
+                              fontFamily: i < 6 ? "'Montserrat', sans-serif" : "'Plus Jakarta Sans', sans-serif" 
+                            }}>
+                              {item.label}
+                            </div>
+                          </div>
+                          <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm font-mono text-muted-foreground shrink-0 items-center">
+                            <span className="w-20 text-foreground">{item.weight}</span>
+                            <span className="w-20">{item.size}</span>
+                            <span className="w-20 text-primary text-right">{item.rem}</span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -1066,63 +1153,136 @@ const ContactCenterPage = () => {
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                       <Palette className="w-5 h-5 text-primary" />
                     </div>
-                    Color Palette
+                    Color Architecture
                   </h4>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-                    {[
-                      { name: "Primary", var: "bg-primary", text: "text-primary-foreground", hex: "hsl(15 85% 65%)" },
-                      { name: "Accent", var: "bg-accent", text: "text-accent-foreground", hex: "hsl(35 90% 60%)" },
-                      { name: "Background", var: "bg-background", text: "text-foreground", hex: "hsl(220 20% 8%)", border: true },
-                      { name: "Surface", var: "bg-secondary", text: "text-foreground", hex: "hsl(220 15% 18%)", border: true },
-                    ].map((color, i) => (
-                      <div key={i} className="group cursor-default bg-card border border-border/50 p-4 sm:p-5 rounded-3xl hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all">
-                        <div className={`h-24 sm:h-32 rounded-2xl ${color.var} ${color.border ? 'border border-border/50' : ''} mb-5 shadow-inner group-hover:scale-[1.02] transition-transform duration-300 relative overflow-hidden`}>
-                          <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    {/* Primary Brand Color - Large Hero Card */}
+                    <div className="lg:col-span-8 group relative overflow-hidden rounded-[2.5rem] bg-card border border-border/50 p-8 sm:p-10 min-h-[280px] sm:min-h-[320px] flex flex-col justify-end shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500">
+                      <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105" style={{ background: 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)' }} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      
+                      {/* Decorative elements */}
+                      <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+
+                      <div className="relative z-10 text-white flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+                        <div>
+                           <div className="text-white/80 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 sm:mb-3">Core Brand</div>
+                           <h5 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-none tracking-tight">Primary</h5>
                         </div>
-                        <div className="px-1">
-                          <div className="font-bold text-foreground text-base sm:text-lg mb-1.5">{color.name}</div>
-                          <div className="text-xs font-mono text-muted-foreground bg-secondary/50 px-2.5 py-1.5 rounded-md inline-block">{color.hex}</div>
+                        <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-4 w-fit">
+                           <div className="font-mono text-xl sm:text-2xl font-medium tracking-wide">#2196F3</div>
+                           <div className="text-white/70 text-xs sm:text-sm text-right mt-1 font-medium">RGB 33, 150, 243</div>
                         </div>
                       </div>
-                    ))}
-                  </div>
+                    </div>
 
-                  <div className="mt-6 sm:mt-8 bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:border-primary/40 hover:shadow-lg transition-all group">
-                    <div className="text-xs font-bold text-foreground mb-4 uppercase tracking-wider text-muted-foreground">Gradient Application</div>
-                    <div className="h-20 sm:h-24 rounded-2xl bg-gradient-to-r from-primary to-accent relative overflow-hidden shadow-inner">
-                      <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
+                    {/* Accent Color */}
+                    <div className="lg:col-span-4 group relative overflow-hidden rounded-[2.5rem] bg-card border border-border/50 p-8 sm:p-10 min-h-[280px] sm:min-h-[320px] flex flex-col justify-end shadow-sm hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500">
+                      <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105" style={{ background: 'linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%)' }} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                      
+                      <div className="relative z-10 text-white flex flex-col justify-between h-full">
+                        <div className="text-white/80 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">Highlight</div>
+                        <div className="mt-auto">
+                           <h5 className="font-display text-4xl sm:text-5xl font-bold mb-5 tracking-tight">Accent</h5>
+                           <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl px-4 py-2 inline-block">
+                             <div className="font-mono text-lg font-medium">#9C27B0</div>
+                           </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Background & Surface */}
+                    <div className="lg:col-span-5 grid grid-cols-2 gap-6">
+                       {[
+                          { name: "Background", color: "#FFFFFF", hex: "#FFFFFF", darkText: true },
+                          { name: "Surface", color: "#424242", hex: "#424242", darkText: false },
+                       ].map((c, i) => (
+                          <div key={i} className="group relative overflow-hidden rounded-[2.5rem] border border-border/50 p-6 sm:p-8 flex flex-col justify-between min-h-[200px] shadow-sm hover:shadow-xl transition-all duration-300" style={{ backgroundColor: c.color }}>
+                            <div className={`absolute inset-0 bg-gradient-to-tr ${c.darkText ? 'from-black/5' : 'from-white/5'} to-transparent opacity-0 group-hover:opacity-100 transition-opacity`} />
+                            <div className={`${c.darkText ? 'text-neutral-800' : 'text-white'} relative z-10`}>
+                              <div className="text-xs font-bold uppercase tracking-widest opacity-60 mb-2">Environment</div>
+                              <div className="font-display text-xl sm:text-2xl font-bold">{c.name}</div>
+                            </div>
+                            <div className={`font-mono text-sm relative z-10 bg-black/5 w-fit px-3 py-1.5 rounded-lg ${c.darkText ? 'text-neutral-600' : 'text-neutral-300 bg-white/10'}`}>
+                               {c.hex}
+                            </div>
+                          </div>
+                       ))}
+                    </div>
+
+                    {/* Gradient & Semantic Palette Container */}
+                    <div className="lg:col-span-7 bg-card border border-border/50 rounded-[2.5rem] p-8 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[200px] shadow-sm hover:shadow-lg transition-all duration-300">
+                       {/* Abstract Background Elements */}
+                       <div className="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none" style={{ background: 'linear-gradient(135deg, #2196F3 0%, #9C27B0 100%)' }} />
+                       <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#2196F3]/20 rounded-full blur-[100px] pointer-events-none" />
+                       <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#9C27B0]/20 rounded-full blur-[100px] pointer-events-none" />
+
+                       <div className="relative z-10 mb-10">
+                         <div className="flex justify-between items-end mb-4">
+                           <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Gradient DNA</div>
+                         </div>
+                         <div className="h-16 w-full rounded-2xl shadow-inner relative overflow-hidden" style={{ background: 'linear-gradient(to right, #2196F3, #9C27B0)' }}>
+                            <div className="absolute inset-0 bg-white/20 translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-1000 ease-in-out cursor-pointer" />
+                         </div>
+                       </div>
+
+                       <div className="relative z-10">
+                         <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-5">Functional States</div>
+                         <div className="flex flex-wrap gap-3 sm:gap-4">
+                            {[
+                              { name: "Success", color: "#4CAF50" },
+                              { name: "Warning", color: "#FFC107" },
+                              { name: "Error", color: "#F44336" },
+                              { name: "Info", color: "#00BCD4" },
+                              { name: "Pending", color: "#9E9E9E" },
+                              { name: "Muted", color: "#BDBDBD" },
+                            ].map((c, i) => (
+                               <div key={i} className="flex items-center gap-3 bg-background border border-border/60 rounded-full py-2 pl-2 pr-4 hover:border-primary/40 hover:shadow-md transition-all cursor-default group">
+                                  <div className="w-6 h-6 rounded-full shadow-inner group-hover:scale-110 transition-transform" style={{ backgroundColor: c.color }} />
+                                  <span className="text-sm font-medium text-foreground">{c.name}</span>
+                               </div>
+                            ))}
+                         </div>
+                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Screenshot Gallery */}
-              <div className="mt-16 sm:mt-20 pt-12 sm:pt-16 border-t border-border/30">
-                <div className="mb-8">
-                  <h4 className="font-display font-bold text-2xl text-foreground flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <ClipboardCheck className="w-5 h-5 text-primary" />
-                    </div>
-                    High-Fidelity Screens
-                  </h4>
-                </div>
-                <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-                  {screens.map((item, i) => (
-                    <div key={i} className="group/vs break-inside-avoid cursor-pointer" onClick={() => setSelectedImageIndex(i)}>
-                      <div className="rounded-2xl border border-border/60 bg-secondary/20 overflow-hidden relative hover:border-primary/40 transition-colors shadow-sm hover:shadow-xl hover:shadow-primary/5">
-                        <img src={item.src} alt={item.label} className="w-full h-auto object-cover" loading="lazy" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover/vs:opacity-100 transition-opacity flex items-end">
-                          <div className="p-6 translate-y-4 group-hover/vs:translate-y-0 transition-transform w-full text-center">
-                            <div className="w-10 h-10 rounded-full bg-primary/20 backdrop-blur-md flex items-center justify-center mx-auto mb-3">
-                              <Search className="w-4 h-4 text-primary" />
+              <div className="mt-16 sm:mt-20 p-8 sm:p-10 lg:p-12 rounded-[2rem] sm:rounded-[3rem] bg-secondary/20 border border-border/50 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
+                
+                <div className="relative z-10">
+                  <div className="mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <h4 className="font-display font-bold text-2xl text-foreground flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <ClipboardCheck className="w-5 h-5 text-primary" />
+                      </div>
+                      High-Fidelity Screens
+                    </h4>
+                    <p className="text-sm text-muted-foreground max-w-xs">A comprehensive view of the final platform interfaces across multiple workflows.</p>
+                  </div>
+                  <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+                    {screens.map((item, i) => (
+                      <div key={i} className="group/vs break-inside-avoid cursor-pointer" onClick={() => setSelectedImageIndex(i)}>
+                        <div className="rounded-2xl border border-border/60 bg-secondary/30 overflow-hidden relative hover:border-primary/40 transition-colors shadow-sm hover:shadow-xl hover:shadow-primary/5">
+                          <img src={item.src} alt={item.label} className="w-full h-auto object-cover" loading="lazy" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover/vs:opacity-100 transition-opacity flex items-end">
+                            <div className="p-6 translate-y-4 group-hover/vs:translate-y-0 transition-transform w-full text-center">
+                              <div className="w-10 h-10 rounded-full bg-primary/20 backdrop-blur-md flex items-center justify-center mx-auto mb-3">
+                                <Search className="w-4 h-4 text-primary" />
+                              </div>
+                              <p className="font-semibold text-foreground text-sm">{item.label}</p>
                             </div>
-                            <p className="font-semibold text-foreground">{item.label}</p>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -1333,7 +1493,7 @@ const ContactCenterPage = () => {
 
       <Footer />
 
-      {/* Lightbox Modal */}
+      {/* Lightbox Modal for High-Fidelity Screens */}
       {selectedImageIndex !== null && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-md p-4 sm:p-8 transition-opacity duration-300"
@@ -1370,6 +1530,49 @@ const ContactCenterPage = () => {
             key={selectedImageIndex}
             src={screens[selectedImageIndex].src}
             alt={screens[selectedImageIndex].label}
+            className="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain border border-border/50 animate-fade-up"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+
+      {/* Lightbox Modal for Wireframes */}
+      {wireframeIndex !== null && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-md p-4 sm:p-8 transition-opacity duration-300"
+          onClick={() => setWireframeIndex(null)}
+        >
+          <button
+            className="absolute top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
+            onClick={() => setWireframeIndex(null)}
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          <button
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
+            onClick={(e) => {
+              e.stopPropagation();
+              setWireframeIndex((prev) => prev !== null ? (prev > 0 ? prev - 1 : wireframes.length - 1) : null);
+            }}
+          >
+            <ArrowLeft className="w-6 h-6" />
+          </button>
+
+          <button
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
+            onClick={(e) => {
+              e.stopPropagation();
+              setWireframeIndex((prev) => prev !== null ? (prev < wireframes.length - 1 ? prev + 1 : 0) : null);
+            }}
+          >
+            <ArrowRight className="w-6 h-6" />
+          </button>
+
+          <img
+            key={wireframeIndex}
+            src={wireframes[wireframeIndex].src}
+            alt={wireframes[wireframeIndex].label}
             className="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain border border-border/50 animate-fade-up"
             onClick={(e) => e.stopPropagation()}
           />

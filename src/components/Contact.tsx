@@ -26,10 +26,10 @@ const Contact = () => {
           {/* Email CTA */}
           <div className="mt-8 sm:mt-12">
             <a
-              href="mailto:hello@yourportfolio.com"
+              href="mailto:amrgunaweera@gmail.com"
               className="group inline-flex items-center gap-2 sm:gap-4 font-display font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground hover:text-primary transition-colors duration-300 break-all sm:break-normal"
             >
-              hello@yourportfolio.com
+              amrgunaweera@gmail.com
               <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
             </a>
           </div>
@@ -37,7 +37,7 @@ const Contact = () => {
           {/* Social links */}
           <div className="mt-10 sm:mt-16 flex justify-center gap-3 sm:gap-4">
             {[
-              { icon: Mail, label: "Email", href: "mailto:hello@yourportfolio.com" },
+              { icon: Mail, label: "Email", href: "mailto:amrgunaweera@gmail.com" },
               { icon: Linkedin, label: "LinkedIn", href: "#" },
               { icon: Twitter, label: "Twitter", href: "#" },
             ].map((social, index) => (
