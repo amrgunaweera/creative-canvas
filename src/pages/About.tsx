@@ -57,22 +57,22 @@ const AboutPage = () => {
       {/* Hero Section */}
       <section className="pt-20 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors mb-6 sm:mb-8 line-reveal animate-slide-in"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Home
           </Link>
-          
+
           <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
             {/* Image Side */}
             <div className="relative order-2 lg:order-1 animate-fade-up-delay">
               <div className="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] bg-gradient-to-br from-card to-secondary rounded-2xl sm:rounded-3xl overflow-hidden relative hover-lift">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
-                
+
                 <div className="absolute top-4 left-4 right-4 sm:top-8 sm:left-8 sm:right-8">
                   <div className="flex gap-1.5 sm:gap-2">
                     <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-primary/60" />
@@ -81,15 +81,12 @@ const AboutPage = () => {
                   </div>
                 </div>
 
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-4 sm:p-8">
-                    <div className="font-display font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-gradient opacity-30">
-                      UX
-                    </div>
-                    <div className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground/20 -mt-2 sm:-mt-4">
-                      LEAD
-                    </div>
-                  </div>
+                <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                  <img
+                    src="/ux_lead_graphic.png"
+                    alt="UX Lead Graphic"
+                    className="w-full h-full object-cover opacity-90 transition-transform duration-700 hover:scale-105"
+                  />
                 </div>
 
                 <div className="absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 sm:right-8 bg-background/90 backdrop-blur-xl rounded-lg sm:rounded-xl p-4 sm:p-6 border border-border/50">

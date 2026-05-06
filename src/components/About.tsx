@@ -11,7 +11,7 @@ const About = () => {
           <div className="relative order-2 lg:order-1">
             <div className="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] bg-gradient-to-br from-card to-secondary rounded-2xl sm:rounded-3xl overflow-hidden relative">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
-              
+
               {/* Decorative elements */}
               <div className="absolute top-4 left-4 right-4 sm:top-8 sm:left-8 sm:right-8">
                 <div className="flex gap-1.5 sm:gap-2">
@@ -21,15 +21,12 @@ const About = () => {
                 </div>
               </div>
 
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center p-4 sm:p-8">
-                  <div className="font-display font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-gradient opacity-30">
-                    UX
-                  </div>
-                  <div className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground/20 -mt-2 sm:-mt-4">
-                    LEAD
-                  </div>
-                </div>
+              <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                <img
+                  src="/ux_lead_graphic.png"
+                  alt="UX Lead Graphic"
+                  className="w-full h-full object-cover opacity-90 transition-transform duration-700 hover:scale-105"
+                />
               </div>
 
               {/* Quote card */}
@@ -42,11 +39,6 @@ const About = () => {
                   — My guiding principle
                 </p>
               </div>
-            </div>
-
-            {/* Floating badge */}
-            <div className="absolute -top-3 -right-3 sm:-top-6 sm:-right-6 bg-primary text-primary-foreground px-4 sm:px-6 py-2 sm:py-3 rounded-full font-display font-semibold text-sm sm:text-base animate-float">
-              15+ Years
             </div>
           </div>
 

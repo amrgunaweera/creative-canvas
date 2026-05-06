@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, BarChart3, Search, MessageSquareText, Database, ClipboardCheck, TrendingUp, ArrowRight, Sparkles, Users, Cog, Headset, ShieldCheck, Briefcase, CheckCircle2, CircleUser, Phone, Bell, FileSearch, MessageCircle, GraduationCap, PhoneForwarded, Trophy, Lightbulb, Award, Type, Palette, X } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { AnimatedSection } from "@/components/AnimatedSection";
 import { projects } from "@/data/projects";
 import senseAILaptop from "@/assets/images/projects/contact-center/pca-mockup.png";
 import personasImage from "@/assets/images/projects/contact-center/personas.png";
@@ -32,6 +33,57 @@ const ContactCenterPage = () => {
   const project = projects.find((p) => p.id === "contact-center");
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const [wireframeIndex, setWireframeIndex] = useState<number | null>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const laptopRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    let targetX = 0;
+    let targetY = 0;
+    let targetMoveX = 0;
+    let targetMoveY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let currentMoveX = 0;
+    let currentMoveY = 0;
+    let rafId: number;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      // Calculate rotation based on distance from center
+      targetX = (e.clientY - centerY) * 0.002;
+      targetY = (e.clientX - centerX) * -0.002;
+      
+      // Calculate translation based on distance from center
+      targetMoveX = (e.clientX - centerX) * 0.01;
+      targetMoveY = (e.clientY - centerY) * 0.01;
+    };
+
+    const animate = () => {
+      // Smooth damping
+      currentX += (targetX - currentX) * 0.03;
+      currentY += (targetY - currentY) * 0.03;
+      currentMoveX += (targetMoveX - currentMoveX) * 0.03;
+      currentMoveY += (targetMoveY - currentMoveY) * 0.03;
+      
+      if (laptopRef.current) {
+        // Combined with existing translate-y-1/2 logic and new parallax translation
+        laptopRef.current.style.transform = `translateY(calc(-50% + ${currentMoveY}px)) translateX(${currentMoveX}px) perspective(1200px) rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+      }
+      rafId = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    animate();
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   const screens = [
     { src: screen1, label: "Post Call Analyzer View 1" },
@@ -64,7 +116,7 @@ const ContactCenterPage = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
 
-      <section className="pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-24 relative overflow-hidden bg-background text-foreground">
+      <section ref={heroRef} className="pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-24 relative overflow-hidden bg-background text-foreground">
         {/* Theme-matched gradient orbs */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-accent/10 blur-[120px]" />
@@ -73,93 +125,94 @@ const ContactCenterPage = () => {
         </div>
 
         {/* Desktop Background Image */}
-        <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none">
+        <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none" style={{ perspective: '1200px' }}>
           <img
+            ref={laptopRef}
             src={senseAILaptop}
             alt="SenseAI Platform"
-            className="absolute right-0 top-[60%] -translate-y-1/2 w-[70%] h-auto object-contain pr-10 xl:pr-16 drop-shadow-2xl opacity-80"
+            className="absolute right-0 top-[60%] -translate-y-1/2 w-[70%] h-auto object-contain pr-10 xl:pr-16 drop-shadow-2xl opacity-80 will-change-transform"
           />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-          <Link
-            to="/work"
-            className="inline-flex items-center gap-2 text-sm sm:text-base text-muted-foreground hover:text-foreground transition-colors mb-8 sm:mb-12"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Work
-          </Link>
+          <AnimatedSection>
+            <Link
+              to="/work"
+              className="inline-flex items-center gap-2 text-sm sm:text-base text-muted-foreground hover:text-foreground transition-colors mb-8 sm:mb-12"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Work
+            </Link>
 
-          <div className="grid lg:grid-cols-12 gap-10">
-            <div className="lg:col-span-7 xl:col-span-6">
-              <span className="text-primary font-bold tracking-widest uppercase text-xs sm:text-sm">
-                {project.category}
-              </span>
-              <h1 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mt-4 leading-tight text-foreground">
-                {project.title}
-              </h1>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground mt-6 leading-relaxed max-w-2xl">
-                {project.fullDescription}
-              </p>
+            <div className="grid lg:grid-cols-12 gap-10">
+              <div className="lg:col-span-7 xl:col-span-6">
+                <span className="text-primary font-bold tracking-widest uppercase text-xs sm:text-sm">
+                  {project.category}
+                </span>
+                <h1 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mt-4 leading-tight text-foreground">
+                  {project.title}
+                </h1>
+                <p className="text-base sm:text-lg md:text-xl text-muted-foreground mt-6 leading-relaxed max-w-2xl">
+                  {project.fullDescription}
+                </p>
 
-              <div className="mt-12 sm:mt-8 flex flex-col sm:flex-row sm:items-center bg-card/80 backdrop-blur-xl rounded-3xl sm:rounded-full border border-border/50 shadow-lg max-w-fit overflow-hidden">
-                <div className="px-6 sm:px-8 py-5">
-                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">
-                    Role
+                <div className="mt-12 sm:mt-8 flex flex-col sm:flex-row sm:items-center bg-card/80 backdrop-blur-xl rounded-3xl sm:rounded-full border border-border/50 shadow-lg max-w-fit overflow-hidden">
+                  <div className="px-6 sm:px-8 py-5">
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">
+                      Role
+                    </div>
+                    <div className="text-sm font-semibold text-foreground whitespace-nowrap">
+                      {project.role}
+                    </div>
                   </div>
-                  <div className="text-sm font-semibold text-foreground whitespace-nowrap">
-                    {project.role}
+
+                  <div className="hidden sm:block w-px h-12 bg-border/50"></div>
+                  <div className="block sm:hidden w-full h-px bg-border/50"></div>
+
+                  <div className="px-6 sm:px-8 py-5">
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">
+                      Duration
+                    </div>
+                    <div className="text-sm font-semibold text-foreground whitespace-nowrap">
+                      {project.duration}
+                    </div>
+                  </div>
+
+                  <div className="hidden sm:block w-px h-12 bg-border/50"></div>
+                  <div className="block sm:hidden w-full h-px bg-border/50"></div>
+
+                  <div className="px-6 sm:px-8 py-5">
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">
+                      Tools
+                    </div>
+                    <div className="text-sm font-semibold text-foreground leading-snug">
+                      {project.tools.join(", ")}
+                    </div>
                   </div>
                 </div>
 
-                <div className="hidden sm:block w-px h-12 bg-border/50"></div>
-                <div className="block sm:hidden w-full h-px bg-border/50"></div>
-
-                <div className="px-6 sm:px-8 py-5">
-                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">
-                    Duration
-                  </div>
-                  <div className="text-sm font-semibold text-foreground whitespace-nowrap">
-                    {project.duration}
-                  </div>
-                </div>
-
-                <div className="hidden sm:block w-px h-12 bg-border/50"></div>
-                <div className="block sm:hidden w-full h-px bg-border/50"></div>
-
-                <div className="px-6 sm:px-8 py-5">
-                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">
-                    Tools
-                  </div>
-                  <div className="text-sm font-semibold text-foreground leading-snug">
-                    {project.tools.join(", ")}
-                  </div>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-4 py-2 bg-secondary/50 backdrop-blur-md border border-border/50 rounded-full text-xs sm:text-sm text-foreground font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-4 py-2 bg-secondary/50 backdrop-blur-md border border-border/50 rounded-full text-xs sm:text-sm text-foreground font-medium"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              {/* Mobile Image */}
+              <div className="lg:hidden mt-4 mb-4">
+                <img
+                  src={senseAILaptop}
+                  alt="SenseAI Platform"
+                  className="w-full h-auto object-contain drop-shadow-2xl"
+                />
               </div>
             </div>
-
-            {/* Mobile Image */}
-            <div className="lg:hidden mt-4 mb-4">
-              <img
-                src={senseAILaptop}
-                alt="SenseAI Platform"
-                className="w-full h-auto object-contain drop-shadow-2xl"
-              />
-            </div>
-          </div>
-
-
+          </AnimatedSection>
         </div>
       </section>
 
@@ -169,8 +222,7 @@ const ContactCenterPage = () => {
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-          {/* Challenge Section */}
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          <AnimatedSection className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             <div className="lg:col-span-4 mt-12">
               <div>
                 <h3 className="font-display font-bold text-5xl uppercase tracking-tight leading-none">
@@ -180,13 +232,6 @@ const ContactCenterPage = () => {
                 <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
                   Only 2% of calls are analyzed due to limited capacity and manual effort, leading to a catastrophic loss of actionable intelligence.
                 </p>
-                {/* <a
-                  href="#"
-                  className="inline-flex items-center gap-2 mt-8 text-xs sm:text-sm font-semibold uppercase tracking-widest text-foreground hover:text-primary transition-colors"
-                >
-                  View Full Report
-                  <ArrowRight className="w-4 h-4" />
-                </a> */}
               </div>
             </div>
             <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
@@ -215,14 +260,14 @@ const ContactCenterPage = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Goals and Objectives Section */}
       <section className="py-16 sm:py-24 border-y border-border/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+          <AnimatedSection className="grid lg:grid-cols-12 gap-8 lg:gap-12">
             <div className="lg:col-span-4 mt-2">
               <h2 className="font-display font-bold text-4xl sm:text-5xl leading-tight">
                 Goals &
@@ -257,7 +302,7 @@ const ContactCenterPage = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -267,7 +312,7 @@ const ContactCenterPage = () => {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-          <div className="max-w-3xl mb-12">
+          <AnimatedSection className="max-w-3xl mb-12">
             <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">
               Deep Dive
             </span>
@@ -278,7 +323,7 @@ const ContactCenterPage = () => {
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
               Our research uncovered that harnessing AI-driven insights is key to elevating telecom interactions. By analyzing the entire customer journey, we identified crucial areas to empower teams and deliver outstanding results, directly informing the Post Call Analyzer's features.
             </p>
-          </div>
+          </AnimatedSection>
 
           <div className="grid lg:grid-cols-3 gap-6 mb-12">
             {[
@@ -286,17 +331,17 @@ const ContactCenterPage = () => {
               { icon: Users, title: "Empowered Agents", desc: "Refine agent training with detailed analytics, providing targeted feedback for consistent, high-quality interactions." },
               { icon: Cog, title: "Smarter Operations", desc: "Automate interaction analysis to reduce manual tasks, streamline processes, and allocate resources effectively." }
             ].map((item, i) => (
-              <div key={i} className="p-6 rounded-2xl bg-secondary/30 border border-border/40 hover:bg-secondary/60 transition-all duration-300 group">
+              <AnimatedSection key={i} delay={i * 100} className="p-6 rounded-2xl bg-secondary/30 border border-border/40 hover:bg-secondary/60 transition-all duration-300 group">
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <item.icon className="w-5 h-5 text-primary" />
                 </div>
                 <h4 className="text-xl font-semibold mb-2">{item.title}</h4>
                 <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
 
-          <div className="mt-16 bg-secondary/20 rounded-3xl p-8 sm:p-12 border border-border/40 relative overflow-hidden">
+          <AnimatedSection className="mt-16 bg-secondary/20 rounded-3xl p-8 sm:p-12 border border-border/40 relative overflow-hidden">
             {/* Subtle inner glow */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] rounded-full pointer-events-none" />
 
@@ -345,9 +390,9 @@ const ContactCenterPage = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </AnimatedSection>
 
-          <div className="grid md:grid-cols-2 gap-8 mt-12 mb-4">
+          <AnimatedSection className="grid md:grid-cols-2 gap-8 mt-12 mb-4">
             <div className="bg-secondary/10 rounded-3xl p-6 sm:p-8 border border-border/40 md:col-span-2">
               <h4 className="font-display font-bold text-2xl mb-4 text-foreground">Stakeholder Pain Points in Call Analysis</h4>
               <p className="text-muted-foreground leading-relaxed mb-8 max-w-3xl">
@@ -510,228 +555,229 @@ const ContactCenterPage = () => {
                 </div>
               </div>
             </div>
+          </AnimatedSection>
 
-            <div className="md:col-span-2 mt-8 pt-12 border-t border-border/50">
-              <div className="max-w-3xl mb-10">
-                <h4 className="font-display font-bold text-2xl mb-4 text-foreground">User Personas</h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  Synthesizing our research, we developed detailed user personas representing the diverse roles interacting with the platform, ensuring features aligned with specific operational workflows.
-                </p>
-              </div>
-
-              <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
-                {/* Persona 1 */}
-                <div className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
-
-                  <div className="p-6 sm:p-8 pb-4">
-                    <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
-                      <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
-                        <img src="https://i.pravatar.cc/150?img=11" alt="Nimal Perera" className="w-full h-full object-cover" />
-                      </div>
-                      <div>
-                        <h5 className="font-bold text-lg text-foreground leading-snug">Nimal Perera</h5>
-                        <div className="text-sm font-medium text-primary mb-0.5">Customer Support Agent</div>
-                        <div className="text-xs font-medium text-muted-foreground">Age: 26 | Exp: 1-3 years</div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-6 relative z-10">
-                      <div>
-                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
-                        <ul className="space-y-2">
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Improve QA Scores, Be More Efficient</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
-                        <ul className="space-y-2">
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Instant Feedback</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Clear Tips</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
-                        <ul className="space-y-2">
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Delayed Feedback</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>QA Pressure</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
-                        <ul className="space-y-2">
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>AI Call Feedback</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Performance Dashboard</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Persona 2 */}
-                <div className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
-
-                  <div className="p-6 sm:p-8 pb-4">
-                    <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
-                      <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
-                        <img src="https://i.pravatar.cc/150?img=5" alt="Shalini Fernando" className="w-full h-full object-cover" />
-                      </div>
-                      <div>
-                        <h5 className="font-bold text-lg text-foreground leading-snug">Shalini Fernando</h5>
-                        <div className="text-sm font-medium text-primary mb-0.5">Contact Center Supervisor</div>
-                        <div className="text-xs font-medium text-muted-foreground">Age: 34 | Exp: 15+ years</div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-6 relative z-10">
-                      <div>
-                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
-                        <ul className="space-y-2">
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Ensure Team Quality, Find Skill Gaps</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
-                        <ul className="space-y-2">
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Agent Insights</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Training Tools</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
-                        <ul className="space-y-2">
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Manual Reviews</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Inconsistent Performance</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
-                        <ul className="space-y-2">
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>QA Analytics</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Coaching Insights</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Persona 3 */}
-                <div className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
-
-                  <div className="p-6 sm:p-8 pb-4">
-                    <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
-                      <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
-                        <img src="https://i.pravatar.cc/150?img=8" alt="Ruwan Jayasinghe" className="w-full h-full object-cover" />
-                      </div>
-                      <div>
-                        <h5 className="font-bold text-lg text-foreground leading-snug">Ruwan Jayasinghe</h5>
-                        <div className="text-sm font-medium text-primary mb-0.5">Head of Customer Experience</div>
-                        <div className="text-xs font-medium text-muted-foreground">Age: 45 | Exp: 15+ years</div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-6 relative z-10">
-                      <div>
-                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
-                        <ul className="space-y-2">
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Boost CSAT & NPS, Strategic Decisions</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
-                        <ul className="space-y-2">
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Trends & Sentiment</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Product Feedback</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
-                        <ul className="space-y-2">
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Data Overload</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Slow Insights</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
-                        <ul className="space-y-2">
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Trend Reports</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                            <span>Sentiment Analysis</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <AnimatedSection className="mt-8 pt-12 border-t border-border/50">
+            <div className="max-w-3xl mb-10">
+              <h4 className="font-display font-bold text-2xl mb-4 text-foreground">User Personas</h4>
+              <p className="text-muted-foreground leading-relaxed">
+                Synthesizing our research, we developed detailed user personas representing the diverse roles interacting with the platform, ensuring features aligned with specific operational workflows.
+              </p>
             </div>
-          </div>
+          </AnimatedSection>
+
+            <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
+              {/* Persona 1 */}
+              <AnimatedSection delay={100} className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+
+                <div className="p-6 sm:p-8 pb-4">
+                  {/* Persona details... */}
+                  <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
+                    <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
+                      <img src="https://i.pravatar.cc/150?img=11" alt="Nimal Perera" className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-lg text-foreground leading-snug">Nimal Perera</h5>
+                      <div className="text-sm font-medium text-primary mb-0.5">Customer Support Agent</div>
+                      <div className="text-xs font-medium text-muted-foreground">Age: 26 | Exp: 1-3 years</div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-6 relative z-10">
+                    <div>
+                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Improve QA Scores, Be More Efficient</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Instant Feedback</span>
+                        </li>
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Clear Tips</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Delayed Feedback</span>
+                        </li>
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>QA Pressure</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>AI Call Feedback</span>
+                        </li>
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Performance Dashboard</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+
+              {/* Persona 2 */}
+              <AnimatedSection delay={200} className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+
+                <div className="p-6 sm:p-8 pb-4">
+                  <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
+                    <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
+                      <img src="https://i.pravatar.cc/150?img=5" alt="Shalini Fernando" className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-lg text-foreground leading-snug">Shalini Fernando</h5>
+                      <div className="text-sm font-medium text-primary mb-0.5">Contact Center Supervisor</div>
+                      <div className="text-xs font-medium text-muted-foreground">Age: 34 | Exp: 15+ years</div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-6 relative z-10">
+                    <div>
+                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Ensure Team Quality, Find Skill Gaps</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Agent Insights</span>
+                        </li>
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Training Tools</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Manual Reviews</span>
+                        </li>
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Inconsistent Performance</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>QA Analytics</span>
+                        </li>
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Coaching Insights</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+
+              {/* Persona 3 */}
+              <AnimatedSection delay={300} className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+
+                <div className="p-6 sm:p-8 pb-4">
+                  <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
+                    <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
+                      <img src="https://i.pravatar.cc/150?img=8" alt="Ruwan Jayasinghe" className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-lg text-foreground leading-snug">Ruwan Jayasinghe</h5>
+                      <div className="text-sm font-medium text-primary mb-0.5">Head of Customer Experience</div>
+                      <div className="text-xs font-medium text-muted-foreground">Age: 45 | Exp: 15+ years</div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-6 relative z-10">
+                    <div>
+                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Boost CSAT & NPS, Strategic Decisions</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Trends & Sentiment</span>
+                        </li>
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Product Feedback</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Data Overload</span>
+                        </li>
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Slow Insights</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Trend Reports</span>
+                        </li>
+                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <span>Sentiment Analysis</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            </div>
 
           {/* Ideation & Design Process Section */}
-          <div className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
+          <AnimatedSection className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
             <div className="mb-10 sm:mb-14 max-w-3xl">
               <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">
                 Process
@@ -744,10 +790,11 @@ const ContactCenterPage = () => {
                 Transforming research into tangible solutions requires meticulous mapping and rapid prototyping. We focused on mapping out user journeys to ensure every touchpoint was intuitive before moving into high-fidelity wireframing.
               </p>
             </div>
+          </AnimatedSection>
 
             {/* User Journey Map - Full Width */}
             <div className="space-y-10">
-              <div className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-secondary/10 border border-border/40 relative overflow-hidden">
+              <AnimatedSection className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-secondary/10 border border-border/40 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/5 blur-[80px] rounded-full pointer-events-none" />
 
@@ -784,9 +831,9 @@ const ContactCenterPage = () => {
                           {/* Emoji Mood Indicator */}
                           <div className="flex justify-center mb-4">
                             <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-sm border-2 transition-transform group-hover/stage:scale-110 ${stage.color === 'green' ? 'bg-green-100 border-green-300' :
-                              stage.color === 'red' ? 'bg-red-100 border-red-300' :
-                                'bg-amber-100 border-amber-300'
-                              }`}>
+                                stage.color === 'red' ? 'bg-red-100 border-red-300' :
+                                  'bg-amber-100 border-amber-300'
+                                }`}>
                               {stage.emoji}
                             </div>
                           </div>
@@ -913,10 +960,10 @@ const ContactCenterPage = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </AnimatedSection>
 
               {/* Wireframes & Prototyping */}
-              <div className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-card border border-border/50 shadow-xl relative overflow-hidden">
+              <AnimatedSection className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-card border border-border/50 shadow-xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
 
                 <div className="relative z-10">
@@ -985,12 +1032,11 @@ const ContactCenterPage = () => {
                     ))}
                   </div>
                 </div>
-              </div>
+              </AnimatedSection>
             </div>
-          </div>
 
           {/* Key Features Designed Section */}
-          <div className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
+          <AnimatedSection className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
             <div className="mb-10 sm:mb-14 text-center max-w-3xl mx-auto">
               <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">
                 Capabilities
@@ -1003,6 +1049,7 @@ const ContactCenterPage = () => {
                 We engineered a suite of actionable intelligence features to transform raw telecommunications data into clear, operational advantages.
               </p>
             </div>
+          </AnimatedSection>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {[
@@ -1037,19 +1084,18 @@ const ContactCenterPage = () => {
                   desc: "Classify calls by context and intent for faster resolution, optimized resource allocation, and prioritized critical cases."
                 }
               ].map((feature, idx) => (
-                <div key={idx} className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:bg-secondary/20 hover:border-primary/30 transition-all duration-300 group">
+                <AnimatedSection key={idx} delay={idx * 100} className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:bg-secondary/20 hover:border-primary/30 transition-all duration-300 group">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
                     <feature.icon className="w-6 h-6 text-primary" />
                   </div>
                   <h4 className="font-display font-bold text-xl mb-3 text-foreground">{feature.title}</h4>
                   <p className="text-muted-foreground text-sm leading-relaxed">{feature.desc}</p>
-                </div>
+                </AnimatedSection>
               ))}
             </div>
-          </div>
 
           {/* Visual Design Section */}
-          <div className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
+          <AnimatedSection className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
             <div className="mb-10 sm:mb-14 max-w-3xl">
               <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">
                 UI & Aesthetics
@@ -1062,12 +1108,13 @@ const ContactCenterPage = () => {
                 The interface was designed to communicate trust, clarity, and efficiency. We established a comprehensive design system tailored to the operational demands of telecom executives and contact center agents.
               </p>
             </div>
+          </AnimatedSection>
 
             <div className="space-y-10">
               {/* Typography & Colors */}
               <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 space-y-12 sm:space-y-16">
                 {/* Typography */}
-                <div>
+                <AnimatedSection>
                   <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                       <Type className="w-5 h-5 text-primary" />
@@ -1145,10 +1192,10 @@ const ContactCenterPage = () => {
                       ))}
                     </div>
                   </div>
-                </div>
+                </AnimatedSection>
 
                 {/* Colors */}
-                <div>
+                <AnimatedSection>
                   <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                       <Palette className="w-5 h-5 text-primary" />
@@ -1248,11 +1295,11 @@ const ContactCenterPage = () => {
                        </div>
                     </div>
                   </div>
-                </div>
+                </AnimatedSection>
               </div>
 
               {/* Screenshot Gallery */}
-              <div className="mt-16 sm:mt-20 p-8 sm:p-10 lg:p-12 rounded-[2rem] sm:rounded-[3rem] bg-secondary/20 border border-border/50 relative overflow-hidden">
+              <AnimatedSection className="mt-16 sm:mt-20 p-8 sm:p-10 lg:p-12 rounded-[2rem] sm:rounded-[3rem] bg-secondary/20 border border-border/50 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
                 
@@ -1284,12 +1331,11 @@ const ContactCenterPage = () => {
                     ))}
                   </div>
                 </div>
-              </div>
+              </AnimatedSection>
             </div>
-          </div>
 
           {/* Testing & Feedback Section */}
-          <div className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
+          <AnimatedSection className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
             <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-4 mt-2">
                 <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">
@@ -1378,10 +1424,10 @@ const ContactCenterPage = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </AnimatedSection>
 
           {/* Solution Section */}
-          <div className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50 relative overflow-hidden">
+          <AnimatedSection className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50 relative overflow-hidden">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[250px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
             <div className="relative z-10 max-w-4xl mx-auto text-center mb-12 sm:mb-16">
@@ -1431,10 +1477,10 @@ const ContactCenterPage = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </AnimatedSection>
 
           {/* Impact & Results Section */}
-          <div className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
+          <AnimatedSection className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
             <div className="mb-10 sm:mb-14 text-center max-w-3xl mx-auto">
               <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">
                 Measurable Outcomes
@@ -1476,17 +1522,17 @@ const ContactCenterPage = () => {
                   icon: Search
                 }
               ].map((item, idx) => (
-                <div key={idx} className="bg-card border border-border/50 rounded-2xl p-6 relative overflow-hidden group hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5">
+                <AnimatedSection key={idx} delay={idx * 100} className="bg-card border border-border/50 rounded-2xl p-6 relative overflow-hidden group hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl -mr-8 -mt-8 transition-transform group-hover:scale-150" />
                   <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-primary/20 transition-all relative z-10">
                     <item.icon className="w-5 h-5 text-primary" />
                   </div>
                   <h4 className="font-bold text-base mb-2 relative z-10 text-foreground">{item.metric}</h4>
                   <p className="text-muted-foreground text-xs leading-relaxed relative z-10">{item.desc}</p>
-                </div>
+                </AnimatedSection>
               ))}
             </div>
-          </div>
+          </AnimatedSection>
 
         </div>
       </section>
