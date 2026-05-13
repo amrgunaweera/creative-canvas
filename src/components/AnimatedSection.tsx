@@ -5,9 +5,10 @@ interface AnimatedSectionProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  style?: React.CSSProperties;
 }
 
-export const AnimatedSection = ({ children, className, delay = 0 }: AnimatedSectionProps) => {
+export const AnimatedSection = ({ children, className, delay = 0, style }: AnimatedSectionProps) => {
   const { ref, isInView } = useInView({ threshold: 0.15 });
 
   return (
@@ -18,7 +19,7 @@ export const AnimatedSection = ({ children, className, delay = 0 }: AnimatedSect
         isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12",
         className
       )}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ ...style, transitionDelay: `${delay}ms` }}
     >
       {children}
     </div>
