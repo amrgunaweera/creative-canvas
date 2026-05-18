@@ -1,134 +1,167 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UI/UX Lead Portfolio | Crafting Digital Experiences</title>
-    <meta name="description" content="UI/UX Lead specializing in creating intuitive, user-centered designs that bridge business goals and human needs. View my portfolio of digital products." />
-    <meta name="author" content="UI/UX Lead" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://yourportfolio.com" />
 
-    <meta property="og:title" content="UI/UX Lead Portfolio | Crafting Digital Experiences" />
-    <meta property="og:description" content="UI/UX Lead specializing in creating intuitive, user-centered designs." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI/UX Lead Portfolio | Crafting Digital Experiences</title>
+  <meta name="description"
+    content="UI/UX Lead specializing in creating intuitive, user-centered designs that bridge business goals and human needs. View my portfolio of digital products." />
+  <meta name="author" content="UI/UX Lead" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://yourportfolio.com" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@yourhandle" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    <!-- Preconnect to external assets for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
-    <!-- Load Google Fonts in parallel rather than blocking inside stylesheet imports -->
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <meta property="og:title" content="UI/UX Lead Portfolio | Crafting Digital Experiences" />
+  <meta property="og:description" content="UI/UX Lead specializing in creating intuitive, user-centered designs." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-    <style>
-      body, html {
-        margin: 0;
-        padding: 0;
-        background-color: hsl(220, 20%, 8%);
-      }
-      #initial-loader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: hsl(220, 20%, 8%);
-        z-index: 9999;
-        flex-direction: column;
-        gap: 32px;
-        font-family: 'Syne', 'Inter', system-ui, sans-serif;
-      }
-      
-      .loader-wrapper {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@yourhandle" />
+  <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  <!-- Preconnect to external assets for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-      .loader-spinner {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        border: 2px solid transparent;
-        border-top-color: hsl(15, 85%, 65%);
-        border-right-color: hsl(35, 90%, 60%);
-        animation: loader-spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-      }
+  <!-- Load Google Fonts in parallel rather than blocking inside stylesheet imports -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
 
-      .loader-spinner-inner {
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 2px solid transparent;
-        border-bottom-color: hsl(35, 90%, 60%);
-        border-left-color: hsl(15, 85%, 65%);
-        animation: loader-spin-reverse 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-      }
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      background-color: hsl(220, 20%, 8%);
+    }
 
-      .loader-glow {
-        position: absolute;
-        width: 40px;
-        height: 40px;
-        background: linear-gradient(135deg, hsl(15, 85%, 65%), hsl(35, 90%, 60%));
-        border-radius: 50%;
-        filter: blur(25px);
-        animation: loader-pulse 2s ease-in-out infinite;
-      }
+    #initial-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: hsl(220, 20%, 8%);
+      z-index: 9999;
+      flex-direction: column;
+      gap: 32px;
+      font-family: 'Syne', 'Inter', system-ui, sans-serif;
+    }
 
-      .loader-text {
-        color: hsl(45, 20%, 95%);
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 6px;
-        text-transform: uppercase;
-        background: linear-gradient(135deg, hsl(45, 20%, 95%), hsl(220, 10%, 55%));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: loader-pulse-text 2s ease-in-out infinite;
-      }
+    .loader-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-      @keyframes loader-spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
+    .loader-spinner {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: hsl(15, 85%, 65%);
+      border-right-color: hsl(35, 90%, 60%);
+      animation: loader-spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    }
 
-      @keyframes loader-spin-reverse {
-        0% { transform: rotate(360deg); }
-        100% { transform: rotate(0deg); }
-      }
+    .loader-spinner-inner {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-bottom-color: hsl(35, 90%, 60%);
+      border-left-color: hsl(15, 85%, 65%);
+      animation: loader-spin-reverse 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    }
 
-      @keyframes loader-pulse {
-        0%, 100% { opacity: 0.8; transform: scale(0.9); }
-        50% { opacity: 0.4; transform: scale(1.1); }
+    .loader-glow {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, hsl(15, 85%, 65%), hsl(35, 90%, 60%));
+      border-radius: 50%;
+      filter: blur(25px);
+      animation: loader-pulse 2s ease-in-out infinite;
+    }
+
+    .loader-text {
+      color: hsl(45, 20%, 95%);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, hsl(45, 20%, 95%), hsl(220, 10%, 55%));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: loader-pulse-text 2s ease-in-out infinite;
+    }
+
+    @keyframes loader-spin {
+      0% {
+        transform: rotate(0deg);
       }
 
-      @keyframes loader-pulse-text {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.6; }
+      100% {
+        transform: rotate(360deg);
       }
-    </style>
-  </head>
+    }
 
-  <body>
-    <div id="root">
-      <div id="initial-loader">
-        <div class="loader-wrapper">
-          <div class="loader-glow"></div>
-          <div class="loader-spinner"></div>
-          <div class="loader-spinner-inner"></div>
-        </div>
-        <div class="loader-text">Loading</div>
+    @keyframes loader-spin-reverse {
+      0% {
+        transform: rotate(360deg);
+      }
+
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes loader-pulse {
+
+      0%,
+      100% {
+        opacity: 0.8;
+        transform: scale(0.9);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(1.1);
+      }
+    }
+
+    @keyframes loader-pulse-text {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.6;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <div id="initial-loader">
+      <div class="loader-wrapper">
+        <div class="loader-glow"></div>
+        <div class="loader-spinner"></div>
+        <div class="loader-spinner-inner"></div>
       </div>
+      <div class="loader-text">Initializing session</div>
     </div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
