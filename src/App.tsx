@@ -14,6 +14,7 @@ import ContactCenterPage from "./pages/projects/ContactCenter";
 import HealthcareAppPage from "./pages/projects/HealthcareApp";
 import EcommercePlatformPage from "./pages/projects/EcommercePlatform";
 import SaasAnalyticsPage from "./pages/projects/SaasAnalytics";
+import ChannelOrchestrationPage from "./pages/projects/ChannelOrchestration";
 import AboutPage from "./pages/About";
 import NotFound from "./pages/NotFound";
 
@@ -61,6 +62,7 @@ const App = () => (
             <Route path="/project/contact-center" element={<ContactCenterPage />} />
             <Route path="/project/healthcare-app" element={<HealthcareAppPage />} />
             <Route path="/project/ecommerce-platform" element={<EcommercePlatformPage />} />
+            <Route path="/project/channel-orchestration" element={<ChannelOrchestrationPage />} />
             <Route path="/project/saas-analytics" element={<SaasAnalyticsPage />} />
             <Route path="/project/:id" element={<ProjectDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
