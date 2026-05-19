@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Layers, MessageSquare, Mic, Code2, Zap, Globe, BarChart3, Users, Bot, Workflow, Smartphone, Mail, Phone, CheckCircle2, Sparkles, Cog, TrendingUp, Shield, Lightbulb, Palette, X } from "lucide-react";
+import { ArrowLeft, Layers, MessageSquare, Mic, Code2, Zap, Globe, BarChart3, Users, Bot, Workflow, Smartphone, Mail, Phone, CheckCircle2, Sparkles, Cog, TrendingUp, Shield, Lightbulb, Palette, X, ChevronLeft, ChevronRight } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -10,9 +10,21 @@ import wireframe1 from "@/assets/images/projects/contact-center/wireframes/Home.
 import wireframe2 from "@/assets/images/projects/contact-center/wireframes/Autopilot.jpg";
 import wireframe3 from "@/assets/images/projects/contact-center/wireframes/Call Insights.jpg";
 
-import hifi1 from "@/assets/images/projects/contact-center/screens/Post Call Analyser 1.jpg";
-import hifi2 from "@/assets/images/projects/contact-center/screens/Post Call Analyser 2.jpg";
-import hifi3 from "@/assets/images/projects/contact-center/screens/Post Call Analyser 3.jpg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+const composeImagesRaw = import.meta.glob('@/assets/images/projects/compose/*.png', { eager: true, import: 'default' });
+const hifiScreens = Object.entries(composeImagesRaw).map(([path, src]: [string, any]) => {
+  const filename = path.split('/').pop()?.replace('.png', '') || '';
+  const parts = filename.split(' - ');
+  const label = parts.length > 2 ? parts.slice(1, -1).join(' - ') : (parts[1] || filename);
+  return { src: src as string, label };
+});
 
 const ChannelOrchestrationPage = () => {
   const project = projects.find((p) => p.id === "channel-orchestration");
@@ -40,11 +52,7 @@ const ChannelOrchestrationPage = () => {
     { src: wireframe3, label: "Channel Configuration" },
   ];
 
-  const hifiScreens = [
-    { src: hifi1, label: "Analytics Overview" },
-    { src: hifi2, label: "Drag-and-Drop Workflow" },
-    { src: hifi3, label: "Unified Agent Workspace" },
-  ];
+
 
   if (!project) return null;
 
@@ -64,32 +72,226 @@ const ChannelOrchestrationPage = () => {
             <Link to="/work" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 sm:mb-12 group">
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to Work
             </Link>
-            <div className="max-w-3xl">
-              <span className="text-primary font-bold tracking-widest uppercase text-xs sm:text-sm">{project.category}</span>
-              <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-4 leading-tight">{project.title}</h1>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground mt-6 leading-relaxed max-w-2xl">{project.fullDescription}</p>
-              <div className="mt-8 flex flex-col sm:flex-row sm:items-center bg-card/80 backdrop-blur-xl rounded-3xl sm:rounded-full border border-border/50 shadow-lg max-w-fit overflow-hidden">
-                <div className="px-6 sm:px-8 py-5">
-                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">Role</div>
-                  <div className="text-sm font-semibold text-foreground whitespace-nowrap">{project.role}</div>
+            <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+              {/* Left Column - Text Content */}
+              <div className="lg:col-span-6">
+                <span className="text-primary font-bold tracking-widest uppercase text-xs sm:text-sm">{project.category}</span>
+                <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-4 leading-tight">{project.title}</h1>
+                <p className="text-base sm:text-lg md:text-xl text-muted-foreground mt-6 leading-relaxed">{project.fullDescription}</p>
+                <div className="mt-8 flex flex-col sm:flex-row sm:items-center bg-card/80 backdrop-blur-xl rounded-3xl sm:rounded-full border border-border/50 shadow-lg max-w-fit overflow-hidden">
+                  <div className="px-6 sm:px-8 py-5">
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">Role</div>
+                    <div className="text-sm font-semibold text-foreground whitespace-nowrap">{project.role}</div>
+                  </div>
+                  <div className="hidden sm:block w-px h-12 bg-border/50" />
+                  <div className="block sm:hidden w-full h-px bg-border/50" />
+                  <div className="px-6 sm:px-8 py-5">
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">Duration</div>
+                    <div className="text-sm font-semibold text-foreground whitespace-nowrap">{project.duration}</div>
+                  </div>
+                  <div className="hidden sm:block w-px h-12 bg-border/50" />
+                  <div className="block sm:hidden w-full h-px bg-border/50" />
+                  <div className="px-6 sm:px-8 py-5">
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">Tools</div>
+                    <div className="text-sm font-semibold text-foreground leading-snug">{project.tools.join(", ")}</div>
+                  </div>
                 </div>
-                <div className="hidden sm:block w-px h-12 bg-border/50" />
-                <div className="block sm:hidden w-full h-px bg-border/50" />
-                <div className="px-6 sm:px-8 py-5">
-                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">Duration</div>
-                  <div className="text-sm font-semibold text-foreground whitespace-nowrap">{project.duration}</div>
-                </div>
-                <div className="hidden sm:block w-px h-12 bg-border/50" />
-                <div className="block sm:hidden w-full h-px bg-border/50" />
-                <div className="px-6 sm:px-8 py-5">
-                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">Tools</div>
-                  <div className="text-sm font-semibold text-foreground leading-snug">{project.tools.join(", ")}</div>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="px-4 py-2 bg-secondary/50 backdrop-blur-md border border-border/50 rounded-full text-xs sm:text-sm text-foreground font-medium">{tag}</span>
+                  ))}
                 </div>
               </div>
-              <div className="mt-8 flex flex-wrap gap-3">
-                {project.tags.map((tag) => (
-                  <span key={tag} className="px-4 py-2 bg-secondary/50 backdrop-blur-md border border-border/50 rounded-full text-xs sm:text-sm text-foreground font-medium">{tag}</span>
-                ))}
+
+              {/* Right Column - Floating Dashboard Composition */}
+              <div className="lg:col-span-6 hidden lg:block">
+                <div className="relative w-full h-[540px]" style={{ perspective: '1200px' }}>
+
+                  {/* Main Dashboard Panel */}
+                  <div
+                    className="absolute top-4 left-0 w-[340px] rounded-2xl bg-[#0f1623]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl overflow-hidden animate-float-slow"
+                    style={{ transform: 'rotateY(8deg) rotateX(-2deg)', transformStyle: 'preserve-3d' }}
+                  >
+                    {/* Dashboard Header */}
+                    <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06]">
+                      <div className="flex gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                      </div>
+                      <span className="text-[10px] text-white/40 font-medium ml-2">Compose Platform</span>
+                    </div>
+                    {/* Dashboard Body */}
+                    <div className="flex">
+                      {/* Sidebar */}
+                      <div className="w-12 border-r border-white/[0.06] py-4 flex flex-col items-center gap-4">
+                        <div className="w-7 h-7 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                          <Layers className="w-3.5 h-3.5 text-blue-400" />
+                        </div>
+                        <div className="w-7 h-7 rounded-lg bg-white/[0.04] flex items-center justify-center">
+                          <MessageSquare className="w-3.5 h-3.5 text-white/30" />
+                        </div>
+                        <div className="w-7 h-7 rounded-lg bg-white/[0.04] flex items-center justify-center">
+                          <Users className="w-3.5 h-3.5 text-white/30" />
+                        </div>
+                        <div className="w-7 h-7 rounded-lg bg-white/[0.04] flex items-center justify-center">
+                          <BarChart3 className="w-3.5 h-3.5 text-white/30" />
+                        </div>
+                        <div className="w-7 h-7 rounded-lg bg-white/[0.04] flex items-center justify-center">
+                          <Cog className="w-3.5 h-3.5 text-white/30" />
+                        </div>
+                      </div>
+                      {/* Content */}
+                      <div className="flex-1 p-4 space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-semibold text-white/70">Active Flows</span>
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 font-medium">12 Live</span>
+                        </div>
+                        {/* Mini flow cards */}
+                        {[
+                          { name: 'WhatsApp Onboarding', status: 'Active', color: 'bg-emerald-500' },
+                          { name: 'IVR Routing Engine', status: 'Active', color: 'bg-blue-500' },
+                          { name: 'SMS Campaign v3', status: 'Draft', color: 'bg-amber-500' },
+                        ].map((flow, i) => (
+                          <div key={i} className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.1] transition-colors">
+                            <div className={`w-2 h-2 rounded-full ${flow.color} shrink-0`} />
+                            <div className="flex-1 min-w-0">
+                              <div className="text-[11px] text-white/80 font-medium truncate">{flow.name}</div>
+                            </div>
+                            <span className="text-[9px] text-white/40 font-medium">{flow.status}</span>
+                          </div>
+                        ))}
+                        {/* Mini chart */}
+                        <div className="pt-2">
+                          <div className="text-[10px] text-white/40 mb-2">API Calls (24h)</div>
+                          <div className="flex items-end gap-1 h-10">
+                            {[35, 52, 40, 68, 55, 78, 62, 85, 72, 90, 65, 80].map((h, i) => (
+                              <div
+                                key={i}
+                                className="flex-1 rounded-sm bg-blue-500/40"
+                                style={{ height: `${h}%` }}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Contact / Profile Card */}
+                  <div
+                    className="absolute top-2 right-0 w-[240px] rounded-2xl bg-card/95 backdrop-blur-xl border border-border/60 shadow-2xl p-5 animate-float-medium"
+                    style={{ transform: 'rotateY(-4deg) rotateX(2deg)', animationDelay: '1s', transformStyle: 'preserve-3d' }}
+                  >
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-5 h-5 rounded-md bg-blue-500/20 flex items-center justify-center">
+                        <Users className="w-3 h-3 text-blue-400" />
+                      </div>
+                      <span className="text-xs font-semibold text-foreground">Customer Profile</span>
+                    </div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <img src="https://i.pravatar.cc/80?img=32" alt="Customer" className="w-11 h-11 rounded-xl object-cover border border-border/50" />
+                      <div>
+                        <div className="text-sm font-bold text-foreground leading-tight">Elena Martinez</div>
+                        <div className="text-[10px] text-muted-foreground mt-0.5">Premium · Since 2021</div>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] text-muted-foreground">Satisfaction</span>
+                        <div className="flex gap-0.5">
+                          {[1,2,3,4,5].map(s => (
+                            <div key={s} className={`w-3 h-3 rounded-sm ${s <= 4 ? 'bg-emerald-500/80' : 'bg-border/60'}`} />
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] text-muted-foreground">Active Channels</span>
+                        <div className="flex -space-x-1">
+                          {['bg-emerald-500', 'bg-blue-500', 'bg-violet-500'].map((c, i) => (
+                            <div key={i} className={`w-4 h-4 rounded-full ${c} border-2 border-card`} />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    <button className="mt-4 w-full text-[11px] font-semibold text-white bg-blue-500 hover:bg-blue-600 transition-colors rounded-lg py-2 px-3">
+                      View Full Profile
+                    </button>
+                  </div>
+
+                  {/* Analytics Mini Card */}
+                  <div
+                    className="absolute bottom-24 right-8 w-[200px] rounded-2xl bg-card/95 backdrop-blur-xl border border-border/60 shadow-xl p-4 animate-float-fast"
+                    style={{ animationDelay: '2s' }}
+                  >
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-5 h-5 rounded-md bg-emerald-500/20 flex items-center justify-center">
+                        <TrendingUp className="w-3 h-3 text-emerald-400" />
+                      </div>
+                      <span className="text-[11px] font-semibold text-foreground">Resolution Rate</span>
+                    </div>
+                    <div className="flex items-end gap-2">
+                      <span className="text-2xl font-bold text-foreground leading-none">94.2%</span>
+                      <span className="text-[10px] font-semibold text-emerald-400 mb-1">↑ 12%</span>
+                    </div>
+                    <div className="mt-3 w-full h-1.5 rounded-full bg-border/50 overflow-hidden">
+                      <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400" style={{ width: '94%' }} />
+                    </div>
+                  </div>
+
+                  {/* Floating Channel Badges */}
+                  <div className="absolute bottom-12 left-8 flex gap-2 animate-float-reverse" style={{ animationDelay: '0.5s' }}>
+                    {[
+                      { icon: MessageSquare, color: 'bg-emerald-500/15 text-emerald-400', label: 'WhatsApp' },
+                      { icon: Phone, color: 'bg-amber-500/15 text-amber-400', label: 'IVR' },
+                      { icon: Mail, color: 'bg-red-500/15 text-red-400', label: 'Email' },
+                    ].map((ch, i) => (
+                      <div key={i} className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-card/90 backdrop-blur-md border border-border/50 shadow-lg">
+                        <div className={`w-5 h-5 rounded-md ${ch.color} flex items-center justify-center`}>
+                          <ch.icon className="w-3 h-3" />
+                        </div>
+                        <span className="text-[10px] font-semibold text-foreground">{ch.label}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* AI Bot Badge */}
+                  <div
+                    className="absolute top-[240px] left-[145px] w-[120px] rounded-xl bg-blue-500/10 backdrop-blur-xl border border-blue-500/20 shadow-xl p-3 animate-float-fast"
+                    style={{ animationDelay: '3s' }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center shadow-lg shadow-blue-500/30">
+                        <Bot className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <div className="text-[10px] font-bold text-blue-400">AI Agent</div>
+                        <div className="text-[9px] text-blue-400/60">Online</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Floating Connection Dots */}
+                  <div className="absolute top-[180px] left-[310px] w-3 h-3 rounded-full bg-blue-500/60 animate-pulse-dot" />
+                  <div className="absolute top-[280px] right-[60px] w-2.5 h-2.5 rounded-full bg-emerald-500/60 animate-pulse-dot" style={{ animationDelay: '0.7s' }} />
+                  <div className="absolute bottom-[170px] left-[340px] w-2 h-2 rounded-full bg-amber-500/60 animate-pulse-dot" style={{ animationDelay: '1.4s' }} />
+
+                  {/* Decorative Connector Lines (SVG) */}
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
+                    <line x1="340" y1="180" x2="380" y2="140" stroke="hsl(var(--primary))" strokeWidth="1" strokeOpacity="0.15" strokeDasharray="4 3" />
+                    <line x1="340" y1="180" x2="350" y2="280" stroke="hsl(217, 91%, 60%)" strokeWidth="1" strokeOpacity="0.12" strokeDasharray="4 3" />
+                    <line x1="380" y1="300" x2="420" y2="350" stroke="hsl(142, 71%, 45%)" strokeWidth="1" strokeOpacity="0.12" strokeDasharray="4 3" />
+                  </svg>
+
+                  {/* Small floating icon accents */}
+                  <div className="absolute top-[100px] right-[245px] w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center animate-float-reverse shadow-lg" style={{ animationDelay: '2.5s' }}>
+                    <Zap className="w-4 h-4 text-primary" />
+                  </div>
+                  <div className="absolute bottom-[60px] right-[220px] w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center animate-float-slow shadow-lg" style={{ animationDelay: '1.8s' }}>
+                    <Workflow className="w-4 h-4 text-violet-400" />
+                  </div>
+
+                </div>
               </div>
             </div>
           </AnimatedSection>
@@ -593,14 +795,14 @@ const ChannelOrchestrationPage = () => {
                   <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
                     <div className="bg-card border border-border/50 rounded-3xl p-8 hover:border-primary/30 transition-colors">
                       <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-6">Display / Headings</div>
-                      <div className="font-display text-5xl sm:text-6xl text-foreground mb-4">Inter</div>
+                      <div className="font-display text-5xl sm:text-6xl text-foreground mb-4">Work Sans</div>
                       <p className="text-sm text-muted-foreground leading-relaxed">
                         Used for primary headings, section titles, and key metric displays. Provides a clean, modern geometric structure that maintains legibility at large sizes.
                       </p>
                     </div>
                     <div className="bg-card border border-border/50 rounded-3xl p-8 hover:border-primary/30 transition-colors">
                       <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-6">Interface / Body</div>
-                      <div className="font-sans text-5xl sm:text-6xl text-foreground mb-4">Roboto</div>
+                      <div className="font-sans text-5xl sm:text-6xl text-foreground mb-4">Geist</div>
                       <p className="text-sm text-muted-foreground leading-relaxed">
                         The workhorse of the UI. Used for dense data tables, node configurations, and general interface text where readability at small sizes is critical.
                       </p>
@@ -672,6 +874,49 @@ const ChannelOrchestrationPage = () => {
                     </div>
                   </div>
                </AnimatedSection>
+
+               {/* Iconography */}
+               <AnimatedSection>
+                  <div className="flex items-center gap-4 mb-8 border-b border-border/50 pb-4 mt-8">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <Layers className="w-5 h-5 text-primary" />
+                    </div>
+                    <h4 className="font-display font-bold text-2xl text-foreground">Iconography</h4>
+                  </div>
+                  
+                  <div className="bg-card border border-border/50 rounded-3xl p-8 hover:border-primary/30 transition-colors">
+                    <div className="flex flex-col lg:flex-row gap-10 items-center">
+                      <div className="lg:w-1/3 w-full">
+                        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-4">Icon Library</div>
+                        <h5 className="font-display text-3xl font-bold text-foreground mb-4">Tabler Icons</h5>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          The platform utilizes the Tabler Icons library to ensure visual consistency and clarity across all interfaces. The icons are drawn on a 24x24 grid with a consistent 2px stroke width, providing a clean, modern, and scalable visual language that pairs perfectly with our typography.
+                        </p>
+                      </div>
+                      <div className="lg:w-2/3 w-full grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+                        {[
+                          { icon: Layers, name: "Layers" },
+                          { icon: Users, name: "Users" },
+                          { icon: Cog, name: "Settings" },
+                          { icon: Workflow, name: "Workflow" },
+                          { icon: MessageSquare, name: "Message" },
+                          { icon: Bot, name: "Bot" },
+                          { icon: Phone, name: "Phone" },
+                          { icon: Globe, name: "Globe" },
+                          { icon: BarChart3, name: "Analytics" },
+                          { icon: Smartphone, name: "Mobile" },
+                          { icon: Shield, name: "Security" },
+                          { icon: Zap, name: "Triggers" }
+                        ].map((item, i) => (
+                           <div key={i} className="flex flex-col items-center justify-center gap-3 p-4 bg-background rounded-2xl border border-border/50 hover:border-primary/50 hover:shadow-sm transition-all group">
+                             <item.icon className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors stroke-[1.5px]" />
+                             <span className="text-[10px] font-medium text-muted-foreground group-hover:text-foreground transition-colors">{item.name}</span>
+                           </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+               </AnimatedSection>
             </div>
          </div>
       </section>
@@ -686,34 +931,42 @@ const ChannelOrchestrationPage = () => {
                  The final visual layer brings the platform to life. We focused on clear data visualization, intuitive interactions, and a clean layout that lets the products shine, using the defined design system.
                </p>
             </AnimatedSection>
+         </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-              {hifiScreens.map((screen, index) => (
-                <AnimatedSection 
-                  key={index} 
-                  className={index === 0 ? 'md:col-span-12' : 'md:col-span-6'}
-                >
-                  <div 
-                    className={`group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in ${
-                      index === 0 ? 'aspect-[16/9]' : 'aspect-video'
-                    }`}
-                    onClick={() => setHifiIndex(index)}
-                  >
-                    <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                    <img 
-                      src={screen.src} 
-                      alt={screen.label}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20">
-                      <h4 className="text-white font-display font-bold text-xl sm:text-2xl translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                        {screen.label}
-                      </h4>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
+         <div className="w-full px-4 sm:px-8 lg:px-12 pb-8 overflow-hidden">
+            <AnimatedSection>
+              <Carousel 
+                opts={{ align: "start", loop: true }}
+                className="w-full relative"
+              >
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {hifiScreens.map((screen, index) => (
+                    <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                      <div className="p-1">
+                        <div 
+                          className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-[16/9] shadow-sm hover:shadow-md transition-shadow"
+                          onClick={() => setHifiIndex(index)}
+                        >
+                          <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                          <img 
+                            src={screen.src} 
+                            alt={screen.label}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20">
+                            <h4 className="text-white font-display font-bold text-lg sm:text-xl translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                              {screen.label}
+                            </h4>
+                          </div>
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border shadow-md" />
+              </Carousel>
+            </AnimatedSection>
          </div>
       </section>
 
@@ -795,15 +1048,32 @@ const ChannelOrchestrationPage = () => {
           >
             <X className="w-6 h-6" />
           </button>
+          
+          <button 
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
+            onClick={(e) => {
+              e.stopPropagation();
+              setWireframeIndex(wireframeIndex === 0 ? wireframes.length - 1 : wireframeIndex - 1);
+            }}
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <button 
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
+            onClick={(e) => {
+              e.stopPropagation();
+              setWireframeIndex(wireframeIndex === wireframes.length - 1 ? 0 : wireframeIndex + 1);
+            }}
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
           <div className="relative max-w-7xl w-full max-h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
             <img 
               src={wireframes[wireframeIndex].src} 
               alt={wireframes[wireframeIndex].label}
               className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
             />
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-center translate-y-full">
-              <h3 className="text-white font-display text-2xl font-bold">{wireframes[wireframeIndex].label}</h3>
-            </div>
           </div>
         </div>
       )}
@@ -820,15 +1090,32 @@ const ChannelOrchestrationPage = () => {
           >
             <X className="w-6 h-6" />
           </button>
+          
+          <button 
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
+            onClick={(e) => {
+              e.stopPropagation();
+              setHifiIndex(hifiIndex === 0 ? hifiScreens.length - 1 : hifiIndex - 1);
+            }}
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <button 
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
+            onClick={(e) => {
+              e.stopPropagation();
+              setHifiIndex(hifiIndex === hifiScreens.length - 1 ? 0 : hifiIndex + 1);
+            }}
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
           <div className="relative max-w-7xl w-full max-h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
             <img 
               src={hifiScreens[hifiIndex].src} 
               alt={hifiScreens[hifiIndex].label}
               className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
             />
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-center translate-y-full">
-              <h3 className="text-white font-display text-2xl font-bold">{hifiScreens[hifiIndex].label}</h3>
-            </div>
           </div>
         </div>
       )}

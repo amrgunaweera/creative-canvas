@@ -161,19 +161,4 @@ export const projects: Project[] = [
       { value: "100%", label: "Context Preservation" }
     ],
   },
-  {
-    id: "saas-analytics",
-    title: "SaaS Analytics",
-    category: "Enterprise UX",
-    description: "Complex data analytics tool simplified through thoughtful information architecture and visual hierarchy.",
-    fullDescription: "Transformed a complex B2B analytics platform into an intuitive tool that empowers teams to derive insights without extensive training.",
-    tags: ["Enterprise", "Data Viz", "Design System"],
-    color: "from-accent/10 to-primary/20",
-    role: "Principal Designer",
-    duration: "10 months",
-    tools: ["Figma", "Storybook", "D3.js", "Mixpanel"],
-    challenge: "Enterprise users needed weeks of training to use the platform. The interface was overwhelming with hundreds of features competing for attention.",
-    solution: "Created a role-based dashboard system with progressive feature disclosure. Built a comprehensive design system with 200+ components and established clear data visualization guidelines.",
-    outcome: "Reduced onboarding time from 3 weeks to 3 days. User satisfaction scores increased by 60%. Won 'Best Enterprise UX' at SaaS Design Awards.",
-  },
 ];
