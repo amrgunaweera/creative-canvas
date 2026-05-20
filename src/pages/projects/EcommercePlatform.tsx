@@ -20,6 +20,8 @@ import wireframeVendor from "@/assets/images/projects/ecommerce/wireframes/vendo
 import hifiCatalog from "@/assets/images/projects/ecommerce/hifi/catalog.png";
 import hifiBundling from "@/assets/images/projects/ecommerce/hifi/bundling.png";
 import hifiVendor from "@/assets/images/projects/ecommerce/hifi/vendor.png";
+import hypermartLogo from "@/assets/images/projects/ecommerce/Wavenet-hypermart-logo-usage.jpg";
+
 
 const EcommercePlatformPage = () => {
   const project = projects.find((p) => p.id === "ecommerce-platform");
@@ -510,6 +512,47 @@ const EcommercePlatformPage = () => {
             </AnimatedSection>
 
             <div className="space-y-16">
+               {/* Logo & Branding */}
+               <AnimatedSection>
+                  <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <Sparkles className="w-5 h-5 text-primary" />
+                    </div>
+                    Logo & Branding
+                  </h4>
+                  
+                  <div className="grid md:grid-cols-12 gap-8 items-center bg-card border border-border/50 rounded-3xl p-8 hover:border-primary/30 transition-colors">
+                    <div className="md:col-span-5">
+                      <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-4">Identity</div>
+                      <h5 className="font-display text-3xl font-bold text-foreground mb-4">The Hypermart Identity</h5>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                        The WaveNet Hypermart visual identity is crafted to inspire trust, authority, and unified scalability. The logo rules establish strict guidelines for margins, minimum size, and co-branding lockups with telecommunication providers.
+                      </p>
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                          <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                          <span>Clear space and placement instructions</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                          <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                          <span>Standardized color specs for digital display</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                          <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                          <span>Co-branding hierarchy guidelines</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="md:col-span-7 rounded-2xl overflow-hidden border border-border/40 bg-background/50 p-2">
+                      <img 
+                        src={hypermartLogo} 
+                        alt="Hypermart Logo Usage Guide" 
+                        className="w-full h-auto rounded-xl object-contain hover:scale-[1.02] transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+               </AnimatedSection>
+
                {/* Typography */}
                <AnimatedSection>
                   <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
