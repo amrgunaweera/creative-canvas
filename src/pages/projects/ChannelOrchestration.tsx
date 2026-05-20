@@ -62,349 +62,192 @@ const ChannelOrchestrationPage = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
 
-      {/* Hero */}
-      <section className="pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-24 relative overflow-hidden">
+      {/* ── Hero ── */}
+      <section className="pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-32 relative overflow-hidden bg-background text-foreground min-h-[90vh] flex items-center">
+        {/* Animated Background Orbs */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-blue-500/10 blur-[120px]" />
-          <div className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px]" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] rounded-full bg-primary/5 blur-[100px]" />
+          <div className="absolute -top-[10%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-blue-500/10 blur-[120px] animate-blob mix-blend-screen" />
+          <div className="absolute top-[20%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-violet-500/15 blur-[120px] animate-blob mix-blend-screen" style={{ animationDelay: '2s' }} />
+          <div className="absolute bottom-[-20%] left-[20%] w-[50vw] h-[50vw] rounded-full bg-indigo-500/10 blur-[120px] animate-blob mix-blend-screen" style={{ animationDelay: '4s' }} />
+          
+          {/* Subtle Grid Pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_10%,transparent_100%)]" />
         </div>
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-          <AnimatedSection>
-            <Link to="/work" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 sm:mb-12 group">
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to Work
-            </Link>
-            <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-              {/* Left Column - Text Content */}
-              <div className="lg:col-span-6">
-                <span className="text-primary font-bold tracking-widest uppercase text-xs sm:text-sm">{project.category}</span>
-                <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-4 leading-tight">{project.title}</h1>
-                <p className="text-base sm:text-lg md:text-xl text-muted-foreground mt-6 leading-relaxed">{project.fullDescription}</p>
-                <div className="mt-8 flex flex-col sm:flex-row sm:items-center bg-card/80 backdrop-blur-xl rounded-3xl sm:rounded-full border border-border/50 shadow-lg max-w-fit overflow-hidden">
-                  <div className="px-6 sm:px-8 py-5">
-                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">Role</div>
-                    <div className="text-sm font-semibold text-foreground whitespace-nowrap">{project.role}</div>
-                  </div>
-                  <div className="hidden sm:block w-px h-12 bg-border/50" />
-                  <div className="block sm:hidden w-full h-px bg-border/50" />
-                  <div className="px-6 sm:px-8 py-5">
-                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">Duration</div>
-                    <div className="text-sm font-semibold text-foreground whitespace-nowrap">{project.duration}</div>
-                  </div>
-                  <div className="hidden sm:block w-px h-12 bg-border/50" />
-                  <div className="block sm:hidden w-full h-px bg-border/50" />
-                  <div className="px-6 sm:px-8 py-5">
-                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">Tools</div>
-                    <div className="text-sm font-semibold text-foreground leading-snug">{project.tools.join(", ")}</div>
-                  </div>
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            {/* Left Column: Content */}
+            <div className="lg:col-span-6 xl:col-span-5 relative z-20">
+              <Link to="/work" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8 sm:mb-10 animate-fade-up">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Work
+              </Link>
+
+              <div className="animate-fade-up-delay">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 text-xs font-bold tracking-widest uppercase mb-6">
+                  <Workflow className="w-3.5 h-3.5" />
+                  {project.category}
                 </div>
-                <div className="mt-8 flex flex-wrap gap-3">
+                
+                <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl leading-[1.1] tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-br from-foreground via-foreground to-foreground/70">
+                  {project.title}
+                </h1>
+                
+                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10">
+                  {project.fullDescription}
+                </p>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+                  {[
+                    { label: "Role", value: project.role },
+                    { label: "Duration", value: project.duration },
+                    { label: "Tools", value: project.tools.join(", ") },
+                  ].map((m) => (
+                    <div key={m.label} className="flex flex-col gap-1 border-l-2 border-blue-500/30 pl-4">
+                      <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{m.label}</span>
+                      <span className="text-sm font-semibold text-foreground">{m.value}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
-                    <span key={tag} className="px-4 py-2 bg-secondary/50 backdrop-blur-md border border-border/50 rounded-full text-xs sm:text-sm text-foreground font-medium">{tag}</span>
+                    <span key={tag} className="px-4 py-2 bg-secondary/50 backdrop-blur-md rounded-full text-xs font-medium text-foreground border border-border/40 hover:border-blue-500/40 transition-colors">
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </div>
+            </div>
 
-              {/* Right Column - Floating Canvas Composition matching the user's reference image */}
-              <div className="lg:col-span-6 hidden lg:block">
-                <div className="relative w-full h-[580px] flex items-center justify-center animate-fade-up-delay-2" style={{ perspective: '1600px' }}>
-                  
-                  {/* Backdrop glowing ambient circles */}
-                  <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-blue-500/10 blur-[80px] pointer-events-none animate-pulse-slow" />
-                  <div className="absolute bottom-1/4 right-1/4 w-[280px] h-[280px] rounded-full bg-primary/10 blur-[90px] pointer-events-none animate-pulse-slow" style={{ animationDelay: '2s' }} />
-
-                  {/* Main Isometric/Tilted Laptop Canvas Frame */}
-                  <div 
-                    className="absolute w-[520px] h-[370px] rounded-2xl bg-card border border-border/80 shadow-2xl overflow-hidden animate-float-slow transition-all duration-500 hover:rotate-y-[6deg]"
-                    style={{ 
-                      transform: 'rotateY(-12deg) rotateX(10deg) rotateZ(-3deg) scale(0.98)', 
-                      transformStyle: 'preserve-3d',
-                      boxShadow: '0 40px 80px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
-                    }}
-                  >
-                    {/* Top Window Bar */}
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/30">
-                      <div className="flex items-center gap-6">
-                        <div className="flex gap-1.5">
-                          <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                        </div>
-                        {/* Title bar elements */}
-                        <div className="flex items-center gap-2 text-white/50 text-[10px] font-semibold">
-                          <ArrowLeft className="w-3 h-3 text-white/40" />
-                          <span>Professional</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-orange-500/80 animate-ping" />
-                        <span className="text-[9px] text-orange-500/80 font-bold uppercase tracking-wider">Live Workspace</span>
-                      </div>
+            {/* Right Column: Creative Animated Visuals - 3D Layers */}
+            <div className="lg:col-span-6 xl:col-span-7 hidden lg:block relative h-[600px] w-full [perspective:1200px] animate-fade-up-delay-2">
+              <div className="absolute inset-0 flex items-center justify-center [transform-style:preserve-3d]">
+                
+                {/* 3D Layer 1: Base Platform Map */}
+                <div 
+                  className="absolute z-10 w-[500px] h-[340px] bg-card/40 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden animate-float-slow"
+                  style={{ transform: 'rotateX(20deg) rotateY(-15deg) rotateZ(5deg) translateZ(-50px)' }}
+                >
+                  <div className="h-12 border-b border-white/10 bg-white/5 flex items-center px-4 justify-between">
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                      <div className="w-3 h-3 rounded-full bg-green-500/80" />
                     </div>
-
-                    {/* Window Workspace Body */}
-                    <div className="flex h-[325px]">
-                      {/* Sidebar */}
-                      <div className="w-12 border-r border-border bg-muted/10 py-5 flex flex-col items-center gap-5 shrink-0">
-                        <div className="w-7 h-7 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shadow-sm shadow-orange-500/10 border border-orange-500/20">
-                          <Home className="w-3.5 h-3.5" />
-                        </div>
-                        <div className="w-7 h-7 rounded-xl bg-white/[0.02] flex items-center justify-center text-white/40 border border-transparent hover:border-white/10 hover:text-white/70 transition-all cursor-pointer">
-                          <FileText className="w-3.5 h-3.5" />
-                        </div>
-                        <div className="w-7 h-7 rounded-xl bg-white/[0.02] flex items-center justify-center text-white/40 border border-transparent hover:border-white/10 hover:text-white/70 transition-all cursor-pointer">
-                          <MessageSquare className="w-3.5 h-3.5" />
-                        </div>
-                        <div className="w-7 h-7 rounded-xl bg-white/[0.02] flex items-center justify-center text-white/40 border border-transparent hover:border-white/10 hover:text-white/70 transition-all cursor-pointer">
-                          <Folder className="w-3.5 h-3.5" />
-                        </div>
-                        <div className="w-7 h-7 rounded-xl bg-white/[0.02] flex items-center justify-center text-white/40 border border-transparent hover:border-white/10 hover:text-white/70 transition-all cursor-pointer">
-                          <Globe className="w-3.5 h-3.5" />
-                        </div>
-                      </div>
-
-                      {/* Main Canvas Area (Grid Background) */}
-                      <div className="flex-1 p-5 relative overflow-hidden bg-[#0a0f18]/30" style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '16px 16px' }}>
-                        
-                        {/* "Scennhers" Top Node Box */}
-                        <div className="w-[180px] p-3 rounded-xl bg-card/60 backdrop-blur-md border border-border/80 shadow-md space-y-2.5">
-                          <div className="flex items-center justify-between">
-                            <span className="text-[10px] font-bold text-white/80 tracking-wide uppercase">Subscriber Flow</span>
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                          </div>
-                          
-                          {/* Mini Avatar and Waveform */}
-                          <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/10 relative overflow-hidden">
-                              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Avatar" className="w-full h-full object-cover" />
-                              <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-amber-500 border border-card" />
-                            </div>
-                            <div className="flex-1 space-y-1">
-                              <div className="h-1.5 w-16 bg-white/10 rounded" />
-                              <div className="h-1 w-10 bg-white/5 rounded" />
-                            </div>
-                          </div>
-
-                          {/* Action Slider */}
-                          <div className="space-y-1 pt-1">
-                            <div className="h-1 w-full bg-white/10 rounded-full relative">
-                              <div className="absolute top-1/2 -translate-y-1/2 left-[30%] w-2 h-2 rounded-full bg-blue-500 shadow shadow-blue-500/50" />
-                              <div className="absolute top-1/2 -translate-y-1/2 left-[70%] w-1.5 h-1.5 rounded-full bg-blue-400" />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* "Mvurplains" Bottom Node Box */}
-                        <div className="absolute bottom-5 left-5 w-[160px] p-3 rounded-xl bg-card/60 backdrop-blur-md border border-border/80 shadow-md space-y-2 pt-2.5">
-                          <div className="h-1.5 w-12 bg-white/30 rounded" />
-                          <div className="h-1 w-20 bg-white/10 rounded" />
-                          <div className="flex items-center justify-between pt-1">
-                            <div className="h-4 w-12 rounded bg-white/5 border border-white/10" />
-                            <div className="px-2 py-1 rounded bg-blue-500 text-[8px] font-bold text-white shadow shadow-blue-500/30 flex items-center justify-center">
-                              Run
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Canvas Flow Connection Path */}
-                        <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
-                          <path d="M 120 70 Q 180 70, 200 120 T 260 160" fill="none" stroke="rgba(59, 130, 246, 0.3)" strokeWidth="1.5" strokeDasharray="3 3" />
-                          <path d="M 90 120 Q 90 220, 220 220" fill="none" stroke="rgba(139, 92, 246, 0.2)" strokeWidth="1.5" />
-                        </svg>
-                      </div>
+                    <div className="flex items-center gap-2">
+                      <Workflow className="w-3 h-3 text-blue-400" />
+                      <div className="px-3 py-1 bg-white/5 rounded-md text-[10px] font-mono text-muted-foreground">Compose Flow Builder</div>
                     </div>
                   </div>
-
-                  {/* Overlapping Dark Flow Map Card (Back Center) */}
-                  <div 
-                    className="absolute w-[220px] h-[160px] rounded-xl bg-slate-950/90 backdrop-blur-xl border border-white/5 shadow-2xl p-4 animate-float-reverse transition-all duration-300 hover:scale-105"
-                    style={{ 
-                      transform: 'translate3d(-20px, 40px, 60px) rotateY(-8deg) rotateX(10deg) rotateZ(-2deg)', 
-                      transformStyle: 'preserve-3d',
-                      zIndex: 20
-                    }}
-                  >
-                    <div className="flex items-center gap-1.5 mb-2.5 pb-1.5 border-b border-white/5">
-                      <Workflow className="w-3.5 h-3.5 text-blue-400" />
-                      <span className="text-[9px] font-bold text-white/50 tracking-wider uppercase">Orchestration Graph</span>
+                  {/* Map Grid Background */}
+                  <div className="w-full h-full p-6 relative overflow-hidden bg-[#0a0f18]/30" style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+                    {/* SVG Connections on base layer */}
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                      <path d="M 100 100 Q 150 50, 250 120 T 400 150" fill="none" stroke="rgba(59, 130, 246, 0.4)" strokeWidth="2" strokeDasharray="4 4" />
+                      <path d="M 100 200 Q 200 250, 300 200" fill="none" stroke="rgba(139, 92, 246, 0.4)" strokeWidth="2" />
+                    </svg>
+                    
+                    {/* Fake Nodes on Base */}
+                    <div className="absolute top-[80px] left-[80px] w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
+                      <MessageSquare className="w-5 h-5 text-blue-400" />
                     </div>
-
-                    {/* Nodes map preview */}
-                    <div className="relative w-full h-[90px] rounded-lg bg-black/40 border border-white/5 overflow-hidden flex items-center justify-center">
-                      <div className="absolute top-3 left-4 w-3 h-3 rounded-full bg-blue-500/20 border border-blue-500/50 flex items-center justify-center">
-                        <div className="w-1 h-1 rounded-full bg-blue-400" />
-                      </div>
-                      <div className="absolute top-12 left-16 w-3 h-3 rounded-full bg-violet-500/20 border border-violet-500/50 flex items-center justify-center">
-                        <div className="w-1 h-1 rounded-full bg-violet-400" />
-                      </div>
-                      <div className="absolute bottom-3 right-5 w-3 h-3 rounded-full bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center">
-                        <div className="w-1 h-1 rounded-full bg-emerald-400" />
-                      </div>
-
-                      {/* Connection Graph Lines */}
-                      <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                        <line x1="22" y1="18" x2="68" y2="54" stroke="rgba(59, 130, 246, 0.4)" strokeWidth="1" />
-                        <line x1="76" y1="54" x2="152" y2="78" stroke="rgba(139, 92, 246, 0.4)" strokeWidth="1" />
-                        <path d="M 22 18 Q 70 10, 152 78" fill="none" stroke="rgba(251, 191, 36, 0.2)" strokeWidth="1" strokeDasharray="2 2" />
-                      </svg>
-
-                      {/* Status pill */}
-                      <div className="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-[7px] text-blue-400 font-bold uppercase tracking-wider">
-                        Active Node
-                      </div>
+                    <div className="absolute top-[100px] left-[230px] w-12 h-12 rounded-xl bg-violet-500/20 border border-violet-500/30 flex items-center justify-center">
+                      <Bot className="w-5 h-5 text-violet-400" />
+                    </div>
+                    <div className="absolute top-[130px] left-[380px] w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+                      <Phone className="w-5 h-5 text-emerald-400" />
+                    </div>
+                    <div className="absolute top-[180px] left-[80px] w-12 h-12 rounded-xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center">
+                      <Mail className="w-5 h-5 text-orange-400" />
+                    </div>
+                    <div className="absolute top-[180px] left-[280px] w-12 h-12 rounded-xl bg-rose-500/20 border border-rose-500/30 flex items-center justify-center">
+                      <Zap className="w-5 h-5 text-rose-400" />
                     </div>
                   </div>
-
-                  {/* Overlapping White Dialog/Modal Card (Front Center) - EXACT MATCH */}
-                  <div 
-                    className="absolute w-[290px] h-[190px] rounded-xl bg-white border border-slate-200 shadow-2xl p-4 animate-float-medium transition-all duration-300 hover:scale-105"
-                    style={{ 
-                      transform: 'translate3d(60px, 30px, 120px) rotateY(-12deg) rotateX(12deg) rotateZ(-3deg)', 
-                      transformStyle: 'preserve-3d',
-                      zIndex: 30,
-                      animationDelay: '1.2s'
-                    }}
-                  >
-                    {/* Title Header */}
-                    <div className="flex items-center gap-1.5 mb-3.5 text-slate-800">
-                      <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center">
-                        <Bot className="w-2.5 h-2.5 text-slate-600" />
-                      </div>
-                      <span className="text-[10px] font-bold tracking-tight text-slate-700">AI Prompt Config</span>
-                    </div>
-
-                    <div className="flex gap-4">
-                      {/* Left Side: Mock Forms, Slider & Buttons */}
-                      <div className="flex-1 space-y-2.5">
-                        {/* Mock Text Fields */}
-                        <div className="space-y-1">
-                          <div className="h-1.5 w-full bg-slate-100 rounded-full" />
-                          <div className="h-1.5 w-[85%] bg-slate-100 rounded-full" />
-                          <div className="h-1.5 w-[60%] bg-slate-100 rounded-full" />
-                        </div>
-
-                        {/* Custom Slider */}
-                        <div className="py-1">
-                          <div className="h-1 w-full bg-slate-100 rounded-full relative">
-                            <div className="absolute top-1/2 -translate-y-1/2 left-[60%] w-2.5 h-2.5 rounded-full bg-blue-500 shadow-sm border border-white cursor-pointer" />
-                          </div>
-                        </div>
-
-                        {/* CTA Buttons */}
-                        <div className="flex items-center gap-2 pt-2.5">
-                          <button className="flex-1 py-1 px-2 rounded-md bg-blue-600 hover:bg-blue-700 text-[8px] font-bold text-white shadow-sm shadow-blue-500/20 transition-all">
-                            Configure
-                          </button>
-                          <button className="flex-1 py-1 px-2 rounded-md bg-emerald-500 hover:bg-emerald-600 text-[8px] font-bold text-white shadow-sm shadow-emerald-500/20 transition-all">
-                            Active
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Right Side: Portrait Image */}
-                      <div className="w-[85px] shrink-0">
-                        <div className="w-[85px] h-[95px] rounded-lg overflow-hidden border border-slate-100 bg-slate-50 shadow-sm relative group/avatar">
-                          <img 
-                            src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" 
-                            alt="AI Persona" 
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover/avatar:scale-110" 
-                          />
-                          <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover/avatar:opacity-100 transition-opacity" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Floating Play Button Accent Card (Top Center) */}
-                  <div 
-                    className="absolute w-[95px] h-[65px] rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-2xl p-2 animate-float-fast flex flex-col justify-between"
-                    style={{ 
-                      transform: 'translate3d(-80px, -110px, 90px) rotateY(-8deg) rotateX(10deg) rotateZ(-1deg)',
-                      zIndex: 25,
-                      animationDelay: '0.4s'
-                    }}
-                  >
-                    <div className="h-1 w-8 bg-white/20 rounded" />
-                    <div className="flex items-center justify-center py-1">
-                      <div className="w-7 h-7 rounded-full bg-blue-500 hover:bg-blue-600 transition-all shadow-md shadow-blue-500/40 flex items-center justify-center cursor-pointer">
-                        <Play className="w-3.5 h-3.5 fill-white text-white translate-x-[1px]" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Connected Logic Nodes (Right Side of Overlay Card) */}
-                  
-                  {/* Notification bubble (White background card) */}
-                  <div
-                    className="absolute w-[130px] rounded-lg bg-white border border-slate-200/90 shadow-xl p-2.5 animate-float-slow flex items-start gap-2"
-                    style={{ 
-                      transform: 'translate3d(230px, -60px, 80px) rotateY(-10deg) rotateX(8deg) rotateZ(-2deg)', 
-                      zIndex: 35,
-                      animationDelay: '1.6s'
-                    }}
-                  >
-                    <div className="w-6 h-6 rounded-md bg-amber-100 flex items-center justify-center shrink-0 relative">
-                      <Bell className="w-3 h-3 text-amber-600" />
-                      <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-rose-500 rounded-full animate-ping" />
-                    </div>
-                    <div className="flex-1 min-w-0 space-y-0.5">
-                      <div className="text-[7.5px] font-bold text-slate-800 uppercase tracking-wider">Alert Trigger</div>
-                      <div className="text-[6.5px] text-slate-400 truncate">Escalated to voice</div>
-                    </div>
-                  </div>
-
-                  {/* Blue Star Node Badge */}
-                  <div
-                    className="absolute w-8 h-8 rounded-lg bg-blue-500/10 backdrop-blur-md border border-blue-500/30 shadow-lg flex items-center justify-center animate-float-medium"
-                    style={{ 
-                      transform: 'translate3d(230px, 50px, 50px) rotateY(-8deg)', 
-                      zIndex: 22,
-                      animationDelay: '0.8s'
-                    }}
-                  >
-                    <Star className="w-4 h-4 text-blue-400 fill-blue-400" />
-                  </div>
-
-                  {/* Red Square Badge with Shape */}
-                  <div
-                    className="absolute w-9 h-9 rounded-xl bg-gradient-to-tr from-rose-500 to-orange-500 border border-white/20 shadow-xl flex items-center justify-center animate-float-fast hover:scale-110 transition-transform cursor-pointer"
-                    style={{ 
-                      transform: 'translate3d(280px, 120px, 40px) rotateY(-10deg) rotateZ(5deg)', 
-                      zIndex: 23,
-                      animationDelay: '2.1s'
-                    }}
-                  >
-                    <Zap className="w-4 h-4 text-white fill-white" />
-                  </div>
-
-                  {/* Yellow key/icon badge */}
-                  <div
-                    className="absolute w-7 h-7 rounded-lg bg-amber-500 border border-white/20 shadow-xl flex items-center justify-center animate-float-reverse cursor-pointer"
-                    style={{ 
-                      transform: 'translate3d(220px, 160px, 30px) rotateY(-8deg) rotateZ(-3deg)', 
-                      zIndex: 21,
-                      animationDelay: '1.4s'
-                    }}
-                  >
-                    <Sparkles className="w-3.5 h-3.5 text-white" />
-                  </div>
-
-                  {/* Animated Connecting lines on the right side of the canvas */}
-                  <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 15 }}>
-                    {/* Connection between Dialog and Notification Alert */}
-                    <path d="M 330 260 C 370 240, 420 180, 440 180" fill="none" stroke="rgba(251, 191, 36, 0.4)" strokeWidth="1" strokeDasharray="3 3" />
-                    {/* Connection between Dialog and Blue Star */}
-                    <path d="M 330 290 Q 380 290, 430 300" fill="none" stroke="rgba(59, 130, 246, 0.4)" strokeWidth="1.2" />
-                    {/* Connection between Blue Star and Red Badge */}
-                    <path d="M 445 320 L 485 365" fill="none" stroke="rgba(244, 63, 94, 0.4)" strokeWidth="1.2" />
-                    {/* Connection between Blue Star and Yellow Badge */}
-                    <path d="M 445 320 L 420 380" fill="none" stroke="rgba(251, 191, 36, 0.4)" strokeWidth="1" strokeDasharray="2 2" />
-                  </svg>
-
                 </div>
+
+                {/* 3D Layer 2: Floating Node Panel */}
+                <div 
+                  className="absolute z-20 right-8 top-16 w-64 p-4 bg-card/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl animate-float-medium group hover-lift"
+                  style={{ transform: 'rotateX(15deg) rotateY(-10deg) rotateZ(2deg) translateZ(40px)' }}
+                >
+                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/5">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg bg-violet-500/20 flex items-center justify-center">
+                        <Bot className="w-4 h-4 text-violet-400" />
+                      </div>
+                      <span className="text-sm font-bold text-foreground">AI Node Config</span>
+                    </div>
+                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  </div>
+                  <div className="space-y-3">
+                    <div className="space-y-1">
+                      <div className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">Prompt Intent</div>
+                      <div className="h-6 w-full bg-white/5 rounded-md border border-white/5 flex items-center px-2">
+                        <div className="h-2 w-3/4 bg-white/20 rounded" />
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <div className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">Fallback Channel</div>
+                      <div className="flex gap-2">
+                        <div className="flex-1 h-6 bg-white/5 rounded-md border border-white/5 flex items-center px-2 gap-1.5">
+                          <MessageSquare className="w-3 h-3 text-blue-400" />
+                          <div className="h-2 w-1/2 bg-white/20 rounded" />
+                        </div>
+                        <div className="flex-1 h-6 bg-white/5 rounded-md border border-white/5 flex items-center px-2 gap-1.5">
+                          <Phone className="w-3 h-3 text-emerald-400" />
+                          <div className="h-2 w-1/2 bg-white/20 rounded" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3D Layer 3: Omnichannel Analytics Card */}
+                <div 
+                  className="absolute z-30 left-0 bottom-20 w-56 p-4 bg-card/70 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl animate-float-fast group hover-lift"
+                  style={{ transform: 'rotateX(25deg) rotateY(-20deg) rotateZ(8deg) translateZ(80px)' }}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center relative overflow-hidden">
+                      <Layers className="w-5 h-5 text-blue-400 relative z-10" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-foreground">Active Channels</div>
+                      <div className="text-xs text-blue-400 font-medium">+14% vs last week</div>
+                    </div>
+                  </div>
+                  <div className="flex gap-1.5 items-end h-12 mt-2">
+                    {[30, 50, 40, 70, 60, 90, 80].map((h, i) => (
+                      <div key={i} className="flex-1 bg-blue-500/40 rounded-sm hover:bg-blue-400 transition-colors" style={{ height: `${h}%` }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* 3D Layer 4: Real-time Alert Notification */}
+                <div 
+                  className="absolute z-40 -top-4 left-1/4 w-48 p-3 bg-rose-500/10 backdrop-blur-md border border-rose-500/20 rounded-xl shadow-lg animate-float-reverse flex items-center gap-3"
+                  style={{ transform: 'rotateX(10deg) rotateY(-5deg) rotateZ(-2deg) translateZ(120px)' }}
+                >
+                  <div className="w-8 h-8 rounded-full bg-rose-500/20 flex items-center justify-center shrink-0">
+                    <Bell className="w-4 h-4 text-rose-400 animate-pulse" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-bold text-rose-400 uppercase tracking-widest">Escalation</div>
+                    <div className="text-xs text-foreground font-medium truncate">Agent Hand-off req.</div>
+                  </div>
+                </div>
+
+                {/* Floating Particles for extra depth */}
+                <div className="absolute top-1/4 right-1/4 w-2 h-2 rounded-full bg-blue-500/50 animate-pulse-dot" style={{ transform: 'translateZ(60px)', animationDelay: '0s' }} />
+                <div className="absolute bottom-1/3 left-1/3 w-3 h-3 rounded-full bg-violet-400/50 animate-pulse-dot" style={{ transform: 'translateZ(100px)', animationDelay: '1s' }} />
+                <div className="absolute top-1/2 right-1/3 w-2 h-2 rounded-full bg-emerald-500/50 animate-pulse-dot" style={{ transform: 'translateZ(30px)', animationDelay: '2s' }} />
               </div>
             </div>
-          </AnimatedSection>
+
+          </div>
         </div>
       </section>
 
@@ -1405,25 +1248,123 @@ const ChannelOrchestrationPage = () => {
         </div>
       </section>
 
-      {/* Metrics */}
-      {project.metrics && (
-        <section className="py-16 sm:py-24 border-t border-border/50 bg-gradient-to-br from-secondary/50 via-background to-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-            <AnimatedSection className="text-center mb-12">
-              <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm">Results</span>
-              <h3 className="font-display font-bold text-3xl sm:text-4xl mt-3">Impact & Outcomes</h3>
-            </AnimatedSection>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {project.metrics.map((m, i) => (
-                <AnimatedSection key={i} delay={i * 100} className="text-center p-6 rounded-2xl bg-card border border-border/50">
-                  <div className="font-display font-bold text-3xl sm:text-4xl text-primary mb-2">{m.value}</div>
-                  <div className="text-sm text-muted-foreground font-medium">{m.label}</div>
-                </AnimatedSection>
-              ))}
+      {/* The Solution / Outcome Section */}
+      <section className="py-16 sm:py-24 border-t border-border/50 bg-gradient-to-br from-secondary/30 via-background to-background relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[250px] bg-orange-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="relative z-10 max-w-4xl mx-auto text-center mb-12 sm:mb-16">
+            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">
+              The Outcome
+            </span>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">
+              The Solution
+            </h3>
+            <div className="w-10 h-[3px] bg-primary mt-6 mb-8 mx-auto" />
+            <p className="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed text-foreground">
+              By prioritizing visual predictability, design consistency, and immediate preview validation, we transformed complex workflow management into a highly intuitive canvas orchestration workspace.
+            </p>
+          </div>
+
+          <div className="relative z-10 grid md:grid-cols-3 gap-6 sm:gap-8">
+            <div className="bg-card border border-border/50 rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden group hover:border-orange-500/30 hover:shadow-lg transition-colors">
+              <div className="absolute inset-0 bg-gradient-to-b from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="w-14 h-14 rounded-2xl bg-orange-500/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-orange-500/20 transition-all relative z-10">
+                <Sparkles className="w-7 h-7 text-orange-500" />
+              </div>
+              <h4 className="font-display font-bold text-xl mb-3 relative z-10 text-foreground">Intuitive Visual Builder</h4>
+              <p className="text-muted-foreground text-sm leading-relaxed relative z-10">
+                A drag-and-drop workspace designed with rich semantic cues and unified color hierarchies to represent multi-channel flows, significantly reducing cognitive load.
+              </p>
+            </div>
+
+            <div className="bg-card border border-border/50 rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden group hover:border-orange-500/30 hover:shadow-lg transition-colors">
+              <div className="absolute inset-0 bg-gradient-to-b from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="w-14 h-14 rounded-2xl bg-orange-500/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-orange-500/20 transition-all relative z-10">
+                <Smartphone className="w-7 h-7 text-orange-500" />
+              </div>
+              <h4 className="font-display font-bold text-xl mb-3 relative z-10 text-foreground">Live Channel Simulator</h4>
+              <p className="text-muted-foreground text-sm leading-relaxed relative z-10">
+                An integrated, device-faithful live preview panel allowing content creators to instantly validate responsiveness and typography layout before deploying.
+              </p>
+            </div>
+
+            <div className="bg-card border border-border/50 rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden group hover:border-orange-500/30 hover:shadow-lg transition-colors">
+              <div className="absolute inset-0 bg-gradient-to-b from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="w-14 h-14 rounded-2xl bg-orange-500/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-orange-500/20 transition-all relative z-10">
+                <BarChart3 className="w-7 h-7 text-orange-500" />
+              </div>
+              <h4 className="font-display font-bold text-xl mb-3 relative z-10 text-foreground">Decluttered Analytics</h4>
+              <p className="text-muted-foreground text-sm leading-relaxed relative z-10">
+                Persona-driven dashboard layers featuring an optimized typography scale and high-contrast visuals, giving immediate oversight on key metrics without visual fatigue.
+              </p>
             </div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
+
+      {/* Impact & Results Section */}
+      <section className="py-16 sm:py-24 border-t border-border/50 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="mb-10 sm:mb-14 text-center max-w-3xl mx-auto">
+            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">
+              Measurable Outcomes
+            </span>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">
+              Impact & Results
+            </h3>
+            <div className="w-10 h-[3px] bg-primary mt-6 mb-6 mx-auto" />
+            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+              Synthesized usability validation and metric tracking demonstrated clear operational improvements across key product indicators.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            {[
+              {
+                metric: "Build Efficiency",
+                value: "60% Faster",
+                desc: "Fluid drag-and-drop structures significantly cut down workspace orchestration times.",
+                icon: Zap
+              },
+              {
+                metric: "Unified Design",
+                value: "100% Adoption",
+                desc: "Strictly enforced component libraries eliminated consistency drifts across complex layouts.",
+                icon: Layers
+              },
+              {
+                metric: "Reduced Errors",
+                value: "-45% Friction",
+                desc: "Interactive validation previews prevented formatting errors during configuration phases.",
+                icon: TrendingUp
+              },
+              {
+                metric: "Cognitive Load",
+                value: "30% Less Fatigue",
+                desc: "Intelligent layout nesting and collapsible drawers kept focal points clear.",
+                icon: Shield
+              },
+              {
+                metric: "Context Preservation",
+                value: "95% Retention",
+                desc: "Visual persistent state management ensured zero context disconnects during editing.",
+                icon: MessageSquare
+              }
+            ].map((item, idx) => (
+              <AnimatedSection key={idx} delay={idx * 100} className="bg-card border border-border/50 rounded-2xl p-6 relative overflow-hidden group hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-orange-500/5">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-full blur-2xl -mr-8 -mt-8 transition-transform group-hover:scale-150" />
+                <div className="w-11 h-11 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-orange-500/20 transition-all relative z-10">
+                  <item.icon className="w-5 h-5 text-orange-500" />
+                </div>
+                <div className="font-display font-bold text-lg text-primary mb-1 relative z-10">{item.value}</div>
+                <h4 className="font-bold text-sm mb-2 relative z-10 text-foreground">{item.metric}</h4>
+                <p className="text-muted-foreground text-xs leading-relaxed relative z-10">{item.desc}</p>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="py-16 sm:py-24 border-t border-border/50">

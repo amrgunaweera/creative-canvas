@@ -3,11 +3,11 @@ import { useRef, useState } from "react";
 import {
   ArrowLeft, Cloud, Server, Package, Globe, Mic,
   Workflow, Coins, Store, Network, Box, Layers, Users, ChevronRight,
-  ShieldCheck, LayoutDashboard, MessageSquareText, Search, Database, 
-  ClipboardCheck, TrendingUp, Sparkles, Cog, Headset, CheckCircle2, 
-  Briefcase, Bell, FileSearch, MessageCircle, GraduationCap, 
+  ShieldCheck, LayoutDashboard, MessageSquareText, Search, Database,
+  ClipboardCheck, TrendingUp, Sparkles, Cog, Headset, CheckCircle2,
+  Briefcase, Bell, FileSearch, MessageCircle, GraduationCap,
   PhoneForwarded, Trophy, Lightbulb, Award, Type, Palette, Phone,
-  AlertCircle, BarChart3, FileText, X, ArrowRight
+  AlertCircle, BarChart3, FileText, X, ArrowRight, ShoppingCart
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -16,10 +16,13 @@ import { projects } from "@/data/projects";
 import wireframeCatalog from "@/assets/images/projects/ecommerce/wireframes/catalog.png";
 import wireframeBundling from "@/assets/images/projects/ecommerce/wireframes/bundling.png";
 import wireframeVendor from "@/assets/images/projects/ecommerce/wireframes/vendor.png";
-
-import hifiCatalog from "@/assets/images/projects/ecommerce/hifi/catalog.png";
-import hifiBundling from "@/assets/images/projects/ecommerce/hifi/bundling.png";
-import hifiVendor from "@/assets/images/projects/ecommerce/hifi/vendor.png";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import hypermartLogo from "@/assets/images/projects/ecommerce/Wavenet-hypermart-logo-usage.jpg";
 
 
@@ -49,13 +52,14 @@ const EcommercePlatformPage = () => {
     { src: wireframeBundling, label: "Bundling Workflow" },
     { src: wireframeVendor, label: "Vendor Dashboard" },
   ];
+  const ecommerceImagesRaw = import.meta.glob('@/assets/images/projects/ecommerce/hifi/*.png', { eager: true, import: 'default' });
+  const hifiScreens = Object.entries(ecommerceImagesRaw).map(([path, src]: [string, any]) => {
+    const filename = path.split('/').pop()?.replace('.png', '') || '';
+    const parts = filename.split(' - ');
+    const label = parts.length > 2 ? parts.slice(1, -1).join(' - ') : (parts[1] || filename);
+    return { src: src as string, label };
+  });
 
-  const hifiScreens = [
-    { src: hifiCatalog, label: "Catalog Interface" },
-    { src: hifiBundling, label: "Bundling Workflow" },
-    { src: hifiVendor, label: "Vendor Analytics Dashboard" },
-  ];
-  
   if (!project) return null;
 
   return (
@@ -63,71 +67,171 @@ const EcommercePlatformPage = () => {
       <Navigation />
 
       {/* ── Hero ── */}
-      <section ref={heroRef} className="pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-24 relative overflow-hidden bg-background text-foreground">
+      <section ref={heroRef} className="pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-32 relative overflow-hidden bg-background text-foreground min-h-[90vh] flex items-center">
+        {/* Animated Background Orbs */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-blue-500/10 blur-[120px]" />
-          <div className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full bg-indigo-500/10 blur-[120px]" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] rounded-full bg-primary/5 blur-[100px]" />
+          <div className="absolute -top-[10%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-primary/20 blur-[120px] animate-blob mix-blend-screen" />
+          <div className="absolute top-[20%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-blue-500/20 blur-[120px] animate-blob mix-blend-screen" style={{ animationDelay: '2s' }} />
+          <div className="absolute bottom-[-20%] left-[20%] w-[50vw] h-[50vw] rounded-full bg-indigo-500/10 blur-[120px] animate-blob mix-blend-screen" style={{ animationDelay: '4s' }} />
+          
+          {/* Subtle Grid Pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_10%,transparent_100%)]" />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-          <AnimatedSection>
-            <Link to="/work" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 sm:mb-12">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Work
-            </Link>
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            {/* Left Column: Content */}
+            <div className="lg:col-span-6 xl:col-span-5 relative z-20">
+              <Link to="/work" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8 sm:mb-10 animate-fade-up">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Work
+              </Link>
 
-            <div className="grid lg:grid-cols-12 gap-10">
-              <div className="lg:col-span-7 xl:col-span-7">
-                <span className="text-primary font-bold tracking-widest uppercase text-xs sm:text-sm">{project.category}</span>
-                <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-4 leading-none">{project.title}</h1>
-                <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
-                <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">{project.fullDescription}</p>
+              <div className="animate-fade-up-delay">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-6">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  {project.category}
+                </div>
+                
+                <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl leading-[1.1] tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-br from-foreground via-foreground to-foreground/70">
+                  {project.title}
+                </h1>
+                
+                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10">
+                  {project.fullDescription}
+                </p>
 
-                <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
                   {[
                     { label: "Role", value: project.role },
                     { label: "Duration", value: project.duration },
                     { label: "Focus", value: "Telecom UX" },
                   ].map((m) => (
-                    <div key={m.label} className="p-4 rounded-2xl bg-card/80 backdrop-blur-xl border border-border/50">
-                      <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1 font-bold">{m.label}</div>
-                      <div className="text-sm font-semibold text-foreground">{m.value}</div>
+                    <div key={m.label} className="flex flex-col gap-1 border-l-2 border-primary/30 pl-4">
+                      <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{m.label}</span>
+                      <span className="text-sm font-semibold text-foreground">{m.value}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
-                    <span key={tag} className="px-4 py-1.5 bg-secondary rounded-full text-xs sm:text-sm text-muted-foreground border border-border/40">{tag}</span>
+                    <span key={tag} className="px-4 py-2 bg-secondary/50 backdrop-blur-md rounded-full text-xs font-medium text-foreground border border-border/40 hover:border-primary/40 transition-colors">
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </div>
+            </div>
 
-              {/* Right Hero Visual (Abstract) */}
-              <div className="lg:col-span-5 xl:col-span-5 hidden lg:flex flex-col justify-center">
-                <div className="relative w-full aspect-square max-w-md mx-auto">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-indigo-500/5 rounded-full blur-3xl animate-pulse" />
-                  <div className="relative z-10 w-full h-full border border-border/50 bg-card/30 backdrop-blur-xl rounded-[2.5rem] p-8 flex flex-col items-center justify-center overflow-hidden shadow-2xl">
-                     <Globe className="w-24 h-24 text-primary/40 mb-6" />
-                     <div className="text-center space-y-4 w-full">
-                       <div className="h-2 w-1/3 bg-primary/20 rounded-full mx-auto" />
-                       <div className="h-2 w-1/2 bg-foreground/10 rounded-full mx-auto" />
-                       <div className="h-2 w-2/5 bg-foreground/10 rounded-full mx-auto" />
-                     </div>
-                     
-                     {/* Orbiting elements */}
-                     <div className="absolute top-1/4 left-1/4 w-12 h-12 bg-card border border-border/50 rounded-xl shadow-lg flex items-center justify-center animate-bounce" style={{ animationDelay: '100ms' }}>
-                        <Cloud className="w-5 h-5 text-blue-400" />
-                     </div>
-                     <div className="absolute bottom-1/4 right-1/4 w-12 h-12 bg-card border border-border/50 rounded-xl shadow-lg flex items-center justify-center animate-bounce" style={{ animationDelay: '300ms' }}>
-                        <Package className="w-5 h-5 text-indigo-400" />
-                     </div>
+            {/* Right Column: Creative Animated Visuals */}
+            <div className="lg:col-span-6 xl:col-span-7 hidden lg:block relative h-[600px] w-full [perspective:1000px] animate-fade-up-delay-2">
+              <div className="absolute inset-0 flex items-center justify-center [transform-style:preserve-3d]">
+                
+                {/* Center Main Dashboard Mockup */}
+                <div className="relative z-20 w-[480px] h-[320px] bg-card/40 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden animate-float-slow">
+                  {/* Glass Header */}
+                  <div className="h-12 border-b border-white/10 bg-white/5 flex items-center px-4 justify-between">
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                      <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                    </div>
+                    <div className="px-3 py-1 bg-white/5 rounded-md text-[10px] font-mono text-muted-foreground">hypermart.app</div>
+                  </div>
+                  {/* Dashboard Content */}
+                  <div className="p-6 grid grid-cols-12 gap-4 h-[calc(100%-3rem)]">
+                    {/* Sidebar */}
+                    <div className="col-span-3 flex flex-col gap-3 border-r border-white/5 pr-4">
+                      <div className="w-full h-8 bg-white/5 rounded-lg animate-pulse" />
+                      <div className="w-3/4 h-4 bg-white/5 rounded mt-4" />
+                      <div className="w-full h-4 bg-white/5 rounded" />
+                      <div className="w-5/6 h-4 bg-white/5 rounded" />
+                      <div className="w-full h-4 bg-white/5 rounded" />
+                    </div>
+                    {/* Main Area */}
+                    <div className="col-span-9 flex flex-col gap-4">
+                      <div className="flex justify-between items-center">
+                        <div className="w-32 h-6 bg-primary/20 rounded-md" />
+                        <div className="w-8 h-8 bg-white/10 rounded-full" />
+                      </div>
+                      {/* Graph Area */}
+                      <div className="flex-1 bg-gradient-to-t from-primary/10 to-transparent rounded-xl border border-primary/20 relative overflow-hidden flex items-end p-4">
+                        <TrendingUp className="absolute top-4 right-4 w-6 h-6 text-primary opacity-50" />
+                        <div className="w-full flex items-end gap-2 h-20">
+                          {[40, 65, 45, 80, 55, 90, 75, 100].map((h, i) => (
+                            <div key={i} className="flex-1 bg-primary/40 rounded-t-sm transition-all duration-1000 hover:bg-primary" style={{ height: `${h}%`, animation: `pulse-slow ${2 + i * 0.2}s infinite` }} />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                {/* Floating Element 1: Revenue Card */}
+                <div className="absolute z-30 -right-4 top-12 w-64 p-4 bg-card/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl animate-float-medium group hover-lift cursor-pointer">
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                      <BarChart3 className="w-5 h-5 text-green-400" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-muted-foreground font-medium">Total Revenue</div>
+                      <div className="text-lg font-bold text-foreground">$124,592.00</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-green-400 font-medium">
+                    <TrendingUp className="w-3 h-3" />
+                    +14.5% this week
+                  </div>
+                </div>
+
+                {/* Floating Element 2: Sales Notification */}
+                <div className="absolute z-30 left-0 bottom-24 w-56 p-3 bg-card/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl animate-float-fast group hover-lift cursor-pointer">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center relative overflow-hidden">
+                      <ShoppingCart className="w-5 h-5 text-blue-400 relative z-10" />
+                      <div className="absolute inset-0 bg-blue-400/20 animate-pulse-slow" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-foreground">New Order</div>
+                      <div className="text-xs text-muted-foreground">Cloud Bundle Pro</div>
+                    </div>
+                    <div className="ml-auto text-xs font-bold text-blue-400">
+                      $499
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Element 3: Product Card */}
+                <div className="absolute z-10 left-12 top-0 w-48 p-4 bg-card/40 backdrop-blur-lg border border-white/5 rounded-3xl shadow-lg animate-float-reverse transform -rotate-6">
+                  <div className="w-full h-24 rounded-xl bg-gradient-to-br from-indigo-500/30 to-purple-500/30 mb-3 flex items-center justify-center">
+                    <Layers className="w-8 h-8 text-indigo-300" />
+                  </div>
+                  <div className="w-24 h-3 bg-white/10 rounded mb-2" />
+                  <div className="w-16 h-3 bg-white/5 rounded" />
+                </div>
+
+                {/* Connecting Lines / Accents */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" style={{ transform: 'translateZ(-10px)' }}>
+                  <path d="M 150 200 Q 250 100 350 250 T 550 150" fill="none" stroke="url(#primary-gradient)" strokeWidth="2" strokeDasharray="6 6" className="opacity-30" />
+                  <defs>
+                    <linearGradient id="primary-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+                      <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="1" />
+                      <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+
+                {/* Floating Particles */}
+                <div className="absolute top-1/4 right-1/4 w-2 h-2 rounded-full bg-primary/50 animate-pulse-dot" style={{ animationDelay: '0s' }} />
+                <div className="absolute bottom-1/3 left-1/3 w-3 h-3 rounded-full bg-blue-400/50 animate-pulse-dot" style={{ animationDelay: '1s' }} />
+                <div className="absolute top-1/2 right-1/3 w-2 h-2 rounded-full bg-indigo-400/50 animate-pulse-dot" style={{ animationDelay: '2s' }} />
               </div>
             </div>
-          </AnimatedSection>
+
+          </div>
         </div>
       </section>
 
@@ -137,13 +241,13 @@ const EcommercePlatformPage = () => {
           <AnimatedSection className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             <div className="lg:col-span-4 mt-2">
               <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Problem Space</span>
-              <h3 className="font-display font-bold text-4xl sm:text-5xl leading-tight">Monetize<br/>Beyond APIs</h3>
+              <h3 className="font-display font-bold text-4xl sm:text-5xl leading-tight">Monetize<br />Beyond APIs</h3>
               <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
               <p className="text-lg text-muted-foreground leading-relaxed">
                 {project.challenge}
               </p>
             </div>
-            
+
             <div className="lg:col-span-8 grid sm:grid-cols-2 gap-5">
               {[
                 { icon: Network, title: "Fragmented Ecosystems", desc: "Telecoms struggle with disconnected platforms for APIs, physical goods, and digital services." },
@@ -152,10 +256,10 @@ const EcommercePlatformPage = () => {
                 { icon: Users, title: "Partner Friction", desc: "Lengthy onboarding processes for vendors and disjointed journeys for enterprise customers." },
               ].map((item, i) => (
                 <div key={i} className="p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/40 transition-colors group relative overflow-hidden">
-                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 transition-transform group-hover:scale-150" />
-                   <item.icon className="w-6 h-6 text-primary mb-4 relative z-10" />
-                   <h4 className="font-bold text-lg mb-2 text-foreground relative z-10">{item.title}</h4>
-                   <p className="text-sm text-muted-foreground leading-relaxed relative z-10">{item.desc}</p>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 transition-transform group-hover:scale-150" />
+                  <item.icon className="w-6 h-6 text-primary mb-4 relative z-10" />
+                  <h4 className="font-bold text-lg mb-2 text-foreground relative z-10">{item.title}</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed relative z-10">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -174,102 +278,102 @@ const EcommercePlatformPage = () => {
               We conducted extensive interviews with telecom operators, enterprise buyers, and independent vendors to understand the friction points in existing API and B2B monetization models.
             </p>
           </AnimatedSection>
-          
+
           <AnimatedSection className="mt-8 pt-8">
             <h4 className="font-display font-bold text-2xl mb-6 text-foreground">Stakeholder Pain Points</h4>
             <div className="bg-card border border-border/50 rounded-2xl overflow-hidden shadow-sm">
-                <div className="hidden lg:grid grid-cols-4 gap-6 p-5 bg-secondary/30 border-b border-border/50 text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                  <div>Stakeholder</div>
-                  <div>Pain Point</div>
-                  <div>Impact</div>
-                  <div className="text-primary">Hypermart Solution</div>
-                </div>
+              <div className="hidden lg:grid grid-cols-4 gap-6 p-5 bg-secondary/30 border-b border-border/50 text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                <div>Stakeholder</div>
+                <div>Pain Point</div>
+                <div>Impact</div>
+                <div className="text-primary">Hypermart Solution</div>
+              </div>
 
-                <div className="divide-y divide-border/50">
-                  <div className="grid lg:grid-cols-4 gap-6 p-5 sm:p-6 hover:bg-secondary/20 transition-colors">
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-1">
-                        <Briefcase className="w-6 h-6" />
-                      </div>
-                      <div>
-                         <div className="font-bold text-foreground text-base mb-1">Telecom Executives</div>
-                      </div>
+              <div className="divide-y divide-border/50">
+                <div className="grid lg:grid-cols-4 gap-6 p-5 sm:p-6 hover:bg-secondary/20 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-1">
+                      <Briefcase className="w-6 h-6" />
                     </div>
-                    <div className="space-y-2">
-                      <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
-                        <li>Over-reliance on API traffic</li>
-                        <li>Stagnant revenue streams</li>
-                      </ul>
-                    </div>
-                    <div className="space-y-2">
-                      <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
-                        <li>Missed XaaS opportunities</li>
-                      </ul>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex gap-2 items-start">
-                         <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                         <span className="text-sm font-medium text-foreground">Cloud reselling & dynamic bundling</span>
-                      </div>
+                    <div>
+                      <div className="font-bold text-foreground text-base mb-1">Telecom Executives</div>
                     </div>
                   </div>
-
-                  <div className="grid lg:grid-cols-4 gap-6 p-5 sm:p-6 hover:bg-secondary/20 transition-colors">
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-1">
-                        <Users className="w-6 h-6" />
-                      </div>
-                      <div>
-                         <div className="font-bold text-foreground text-base mb-1">Vendors & Resellers</div>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
-                        <li>Lengthy onboarding</li>
-                        <li>Lack of independent stores</li>
-                      </ul>
-                    </div>
-                    <div className="space-y-2">
-                      <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
-                        <li>Slow time-to-market</li>
-                      </ul>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex gap-2 items-start">
-                         <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                         <span className="text-sm font-medium text-foreground">Dedicated vendor portals</span>
-                      </div>
-                    </div>
+                  <div className="space-y-2">
+                    <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
+                      <li>Over-reliance on API traffic</li>
+                      <li>Stagnant revenue streams</li>
+                    </ul>
                   </div>
-                  
-                  <div className="grid lg:grid-cols-4 gap-6 p-5 sm:p-6 hover:bg-secondary/20 transition-colors">
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-1">
-                        <Store className="w-6 h-6" />
-                      </div>
-                      <div>
-                         <div className="font-bold text-foreground text-base mb-1">Enterprise Buyers</div>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
-                        <li>Disjointed shopping experiences</li>
-                        <li>Fragmented billing</li>
-                      </ul>
-                    </div>
-                    <div className="space-y-2">
-                      <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
-                        <li>Poor customer experience</li>
-                      </ul>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex gap-2 items-start">
-                         <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                         <span className="text-sm font-medium text-foreground">Unified catalog and single invoice</span>
-                      </div>
+                  <div className="space-y-2">
+                    <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
+                      <li>Missed XaaS opportunities</li>
+                    </ul>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex gap-2 items-start">
+                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <span className="text-sm font-medium text-foreground">Cloud reselling & dynamic bundling</span>
                     </div>
                   </div>
                 </div>
+
+                <div className="grid lg:grid-cols-4 gap-6 p-5 sm:p-6 hover:bg-secondary/20 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-1">
+                      <Users className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-foreground text-base mb-1">Vendors & Resellers</div>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
+                      <li>Lengthy onboarding</li>
+                      <li>Lack of independent stores</li>
+                    </ul>
+                  </div>
+                  <div className="space-y-2">
+                    <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
+                      <li>Slow time-to-market</li>
+                    </ul>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex gap-2 items-start">
+                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <span className="text-sm font-medium text-foreground">Dedicated vendor portals</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid lg:grid-cols-4 gap-6 p-5 sm:p-6 hover:bg-secondary/20 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-1">
+                      <Store className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-foreground text-base mb-1">Enterprise Buyers</div>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
+                      <li>Disjointed shopping experiences</li>
+                      <li>Fragmented billing</li>
+                    </ul>
+                  </div>
+                  <div className="space-y-2">
+                    <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
+                      <li>Poor customer experience</li>
+                    </ul>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex gap-2 items-start">
+                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <span className="text-sm font-medium text-foreground">Unified catalog and single invoice</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </AnimatedSection>
         </div>
@@ -277,575 +381,583 @@ const EcommercePlatformPage = () => {
 
       {/* ── User Personas ── */}
       <section className="py-16 sm:py-24 border-t border-border/50">
-         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-            <AnimatedSection className="max-w-3xl mb-12">
-              <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Audience</span>
-              <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">User Personas</h3>
-              <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
-            </AnimatedSection>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+          <AnimatedSection className="max-w-3xl mb-12">
+            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Audience</span>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">User Personas</h3>
+            <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
+          </AnimatedSection>
 
-            <div className="grid lg:grid-cols-3 gap-6">
-              {[
-                { icon: ShieldCheck, name: "Alex, Telecom Admin", role: "Service Provider Admin", color: "from-primary/10 to-primary/5", border: "border-primary/20", traits: ["Manages high-volume catalogs", "Oversees partner onboarding", "Tracks global revenue KPIs"], goal: "Streamline the orchestration of multi-asset digital services across regions." },
-                { icon: Users, name: "Sarah, Partner Lead", role: "Independent Vendor / Reseller", color: "from-indigo-500/10 to-indigo-500/5", border: "border-indigo-500/20", traits: ["Sells third-party cloud apps", "Needs real-time billing clarity", "Seeks fast time-to-market"], goal: "Onboard new digital assets quickly and manage sales independently via a dedicated portal." },
-                { icon: LayoutDashboard, name: "David, IT Procurement", role: "Enterprise B2B Buyer", color: "from-green-500/10 to-green-500/5", border: "border-green-500/20", traits: ["Procures cloud & IoT solutions", "Demands consolidated invoicing", "Values zero-touch provisioning"], goal: "Discover, bundle, and pay for diverse telecom and cloud assets through a single checkout." },
-              ].map((p, i) => (
-                <AnimatedSection key={i} delay={i * 100} className={`rounded-3xl p-6 sm:p-8 bg-gradient-to-br ${p.color} border ${p.border}`}>
-                  <div className="w-12 h-12 rounded-full bg-background/60 flex items-center justify-center mb-4">
-                    <p.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h5 className="font-bold text-lg text-foreground">{p.name}</h5>
-                  <p className="text-sm text-muted-foreground mb-4">{p.role}</p>
-                  <div className="mb-4">
-                    <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Key traits</div>
-                    <ul className="space-y-1">
-                      {p.traits.map((t) => (
-                        <li key={t} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                          {t}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Goal</div>
-                  <p className="text-sm font-medium text-foreground">{p.goal}</p>
-                </AnimatedSection>
-              ))}
-            </div>
-         </div>
+          <div className="grid lg:grid-cols-3 gap-6">
+            {[
+              { icon: ShieldCheck, name: "Alex, Telecom Admin", role: "Service Provider Admin", color: "from-primary/10 to-primary/5", border: "border-primary/20", traits: ["Manages high-volume catalogs", "Oversees partner onboarding", "Tracks global revenue KPIs"], goal: "Streamline the orchestration of multi-asset digital services across regions." },
+              { icon: Users, name: "Sarah, Partner Lead", role: "Independent Vendor / Reseller", color: "from-indigo-500/10 to-indigo-500/5", border: "border-indigo-500/20", traits: ["Sells third-party cloud apps", "Needs real-time billing clarity", "Seeks fast time-to-market"], goal: "Onboard new digital assets quickly and manage sales independently via a dedicated portal." },
+              { icon: LayoutDashboard, name: "David, IT Procurement", role: "Enterprise B2B Buyer", color: "from-green-500/10 to-green-500/5", border: "border-green-500/20", traits: ["Procures cloud & IoT solutions", "Demands consolidated invoicing", "Values zero-touch provisioning"], goal: "Discover, bundle, and pay for diverse telecom and cloud assets through a single checkout." },
+            ].map((p, i) => (
+              <AnimatedSection key={i} delay={i * 100} className={`rounded-3xl p-6 sm:p-8 bg-gradient-to-br ${p.color} border ${p.border}`}>
+                <div className="w-12 h-12 rounded-full bg-background/60 flex items-center justify-center mb-4">
+                  <p.icon className="w-6 h-6 text-primary" />
+                </div>
+                <h5 className="font-bold text-lg text-foreground">{p.name}</h5>
+                <p className="text-sm text-muted-foreground mb-4">{p.role}</p>
+                <div className="mb-4">
+                  <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Key traits</div>
+                  <ul className="space-y-1">
+                    {p.traits.map((t) => (
+                      <li key={t} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Goal</div>
+                <p className="text-sm font-medium text-foreground">{p.goal}</p>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ── Ideation & Design Process (Journey Map) ── */}
       <section className="py-16 sm:py-24 border-t border-border/50 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-            <AnimatedSection className="max-w-3xl mb-12">
-              <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Process</span>
-              <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Ideation & Design Process</h3>
-              <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                We mapped the B2B buyer's journey to ensure a frictionless transition from product discovery to automated provisioning.
-              </p>
-            </AnimatedSection>
+          <AnimatedSection className="max-w-3xl mb-12">
+            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Process</span>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Ideation & Design Process</h3>
+            <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              We mapped the B2B buyer's journey to ensure a frictionless transition from product discovery to automated provisioning.
+            </p>
+          </AnimatedSection>
 
-            <AnimatedSection className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-secondary/10 border border-border/40 relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
-               <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/5 blur-[80px] rounded-full pointer-events-none" />
+          <AnimatedSection className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-secondary/10 border border-border/40 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/5 blur-[80px] rounded-full pointer-events-none" />
 
-               <div className="relative z-10">
-                 <div className="flex items-center gap-4 mb-8">
-                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                     <Workflow className="w-6 h-6 text-primary" />
-                   </div>
-                   <div>
-                     <h4 className="text-2xl font-display font-bold text-foreground">B2B Buyer Journey Map</h4>
-                     <p className="text-sm text-muted-foreground mt-1">Tracking the emotional arc of an Enterprise Buyer through the Hypermart</p>
-                   </div>
-                 </div>
-                 
-                 <div className="overflow-x-auto pb-4 -mx-2 px-2">
-                    <div className="grid grid-cols-7 gap-3 min-w-[900px]">
-                      {[
-                        { title: "Onboarding", emoji: "😐", color: "amber" },
-                        { title: "Catalog Search", emoji: "😟", color: "red" },
-                        { title: "Bundling", emoji: "😰", color: "red" },
-                        { title: "Smart Search", emoji: "😊", color: "green" },
-                        { title: "Unified Cart", emoji: "😊", color: "green" },
-                        { title: "Zero-Touch", emoji: "😁", color: "green" },
-                        { title: "Management", emoji: "😁", color: "green" },
-                      ].map((stage, i) => (
-                         <div key={i} className="group/stage">
-                           <div className="bg-primary/5 border border-primary/20 text-foreground rounded-xl px-3 py-2.5 text-center mb-4">
-                             <span className="font-bold text-xs sm:text-sm leading-tight block">{stage.title}</span>
-                           </div>
-                           <div className="flex justify-center mb-4">
-                             <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-sm border-2 transition-transform group-hover/stage:scale-110 ${stage.color === 'green' ? 'bg-green-100 border-green-300' :
-                                 stage.color === 'red' ? 'bg-red-100 border-red-300' :
-                                   'bg-amber-100 border-amber-300'
-                               }`}>
-                               {stage.emoji}
-                             </div>
-                           </div>
-                         </div>
+            <div className="relative z-10">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Workflow className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h4 className="text-2xl font-display font-bold text-foreground">B2B Buyer Journey Map</h4>
+                  <p className="text-sm text-muted-foreground mt-1">Tracking the emotional arc of an Enterprise Buyer through the Hypermart</p>
+                </div>
+              </div>
+
+              <div className="overflow-x-auto pb-4 -mx-2 px-2">
+                <div className="grid grid-cols-7 gap-3 min-w-[900px]">
+                  {[
+                    { title: "Onboarding", emoji: "😐", color: "amber" },
+                    { title: "Catalog Search", emoji: "😟", color: "red" },
+                    { title: "Bundling", emoji: "😰", color: "red" },
+                    { title: "Smart Search", emoji: "😊", color: "green" },
+                    { title: "Unified Cart", emoji: "😊", color: "green" },
+                    { title: "Zero-Touch", emoji: "😁", color: "green" },
+                    { title: "Management", emoji: "😁", color: "green" },
+                  ].map((stage, i) => (
+                    <div key={i} className="group/stage">
+                      <div className="bg-primary/5 border border-primary/20 text-foreground rounded-xl px-3 py-2.5 text-center mb-4">
+                        <span className="font-bold text-xs sm:text-sm leading-tight block">{stage.title}</span>
+                      </div>
+                      <div className="flex justify-center mb-4">
+                        <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-sm border-2 transition-transform group-hover/stage:scale-110 ${stage.color === 'green' ? 'bg-green-100 border-green-300' :
+                          stage.color === 'red' ? 'bg-red-100 border-red-300' :
+                            'bg-amber-100 border-amber-300'
+                          }`}>
+                          {stage.emoji}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="relative min-w-[900px] h-8 my-2">
+                  <svg className="w-full h-full" viewBox="0 0 900 32" fill="none" preserveAspectRatio="none">
+                    <path d="M 64 16 Q 128 20, 192 24 Q 256 28, 320 28 Q 384 24, 448 12 Q 512 8, 576 6 Q 640 4, 704 4 Q 768 2, 836 2" stroke="currentColor" className="text-primary/40" strokeWidth="2" strokeDasharray="6 4" fill="none" />
+                  </svg>
+                </div>
+
+                <div className="grid grid-cols-7 gap-3 min-w-[900px]">
+                  {[
+                    { actions: [{ icon: LayoutDashboard, text: "Access disparate legacy portals" }, { icon: Network, text: "Fragmented service discovery" }] },
+                    { actions: [{ icon: FileSearch, text: "Search across multiple vendors" }, { icon: Layers, text: "Difficult to compare pricing" }] },
+                    { actions: [{ icon: Package, text: "Struggle to bundle cloud + telco" }, { icon: AlertCircle, text: "Unclear compatibility" }] },
+                    { actions: [{ icon: Search, text: "Intelligent search across catalog" }, { icon: Sparkles, text: "AI curates optimal services" }] },
+                    { actions: [{ icon: Store, text: "Single cart for multiple vendors" }, { icon: Coins, text: "Pay with wallet & loyalty points" }] },
+                    { actions: [{ icon: Cloud, text: "Automated cloud orchestration" }, { icon: Workflow, text: "No manual IT provisioning" }] },
+                    { actions: [{ icon: FileText, text: "Consolidated single invoice" }, { icon: BarChart3, text: "Real-time usage tracking" }] },
+                  ].map((stage, i) => (
+                    <div key={i} className="space-y-3">
+                      {stage.actions.map((act, j) => (
+                        <div key={j} className="bg-card rounded-xl p-3 border border-border/50 shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-200">
+                          <div className="flex items-start gap-2">
+                            <act.icon className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                            <span className="text-xs font-medium text-muted-foreground leading-snug">{act.text}</span>
+                          </div>
+                        </div>
                       ))}
                     </div>
-                    
-                    <div className="relative min-w-[900px] h-8 my-2">
-                      <svg className="w-full h-full" viewBox="0 0 900 32" fill="none" preserveAspectRatio="none">
-                        <path d="M 64 16 Q 128 20, 192 24 Q 256 28, 320 28 Q 384 24, 448 12 Q 512 8, 576 6 Q 640 4, 704 4 Q 768 2, 836 2" stroke="currentColor" className="text-primary/40" strokeWidth="2" strokeDasharray="6 4" fill="none" />
-                      </svg>
-                    </div>
+                  ))}
+                </div>
+              </div>
 
-                    <div className="grid grid-cols-7 gap-3 min-w-[900px]">
-                       {[
-                         { actions: [{ icon: LayoutDashboard, text: "Access disparate legacy portals" }, { icon: Network, text: "Fragmented service discovery" }] },
-                         { actions: [{ icon: FileSearch, text: "Search across multiple vendors" }, { icon: Layers, text: "Difficult to compare pricing" }] },
-                         { actions: [{ icon: Package, text: "Struggle to bundle cloud + telco" }, { icon: AlertCircle, text: "Unclear compatibility" }] },
-                         { actions: [{ icon: Search, text: "Intelligent search across catalog" }, { icon: Sparkles, text: "AI curates optimal services" }] },
-                         { actions: [{ icon: Store, text: "Single cart for multiple vendors" }, { icon: Coins, text: "Pay with wallet & loyalty points" }] },
-                         { actions: [{ icon: Cloud, text: "Automated cloud orchestration" }, { icon: Workflow, text: "No manual IT provisioning" }] },
-                         { actions: [{ icon: FileText, text: "Consolidated single invoice" }, { icon: BarChart3, text: "Real-time usage tracking" }] },
-                       ].map((stage, i) => (
-                         <div key={i} className="space-y-3">
-                            {stage.actions.map((act, j) => (
-                               <div key={j} className="bg-card rounded-xl p-3 border border-border/50 shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-200">
-                                  <div className="flex items-start gap-2">
-                                     <act.icon className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                                     <span className="text-xs font-medium text-muted-foreground leading-snug">{act.text}</span>
-                                  </div>
-                               </div>
-                            ))}
-                         </div>
-                       ))}
-                    </div>
-                 </div>
+              <div className="grid md:grid-cols-2 gap-6 mt-10">
+                <div className="bg-green-500/10 rounded-2xl p-6 border border-green-500/20">
+                  <h5 className="font-bold text-foreground mb-4 flex items-center gap-2">
+                    <Lightbulb className="w-5 h-5 text-green-600" />
+                    Hypermart Impact Points
+                  </h5>
+                  <ul className="space-y-3">
+                    {[
+                      { label: "Smart Discovery", desc: "Reduces product discovery time by 70%" },
+                      { label: "Zero-Touch", desc: "Automated cloud and asset provisioning" },
+                      { label: "Unified Checkout", desc: "Single invoice across multiple vendors" },
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                        <span><span className="font-semibold text-foreground">{item.label}:</span> {item.desc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-                 <div className="grid md:grid-cols-2 gap-6 mt-10">
-                   <div className="bg-green-500/10 rounded-2xl p-6 border border-green-500/20">
-                     <h5 className="font-bold text-foreground mb-4 flex items-center gap-2">
-                       <Lightbulb className="w-5 h-5 text-green-600" />
-                       Hypermart Impact Points
-                     </h5>
-                     <ul className="space-y-3">
-                       {[
-                                                   { label: "Smart Discovery", desc: "Reduces product discovery time by 70%" },
-                         { label: "Zero-Touch", desc: "Automated cloud and asset provisioning" },
-                         { label: "Unified Checkout", desc: "Single invoice across multiple vendors" },
-                       ].map((item, i) => (
-                         <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                           <div className="w-2 h-2 rounded-full bg-green-500 mt-1.5 shrink-0" />
-                           <span><span className="font-semibold text-foreground">{item.label}:</span> {item.desc}</span>
-                         </li>
-                       ))}
-                     </ul>
-                   </div>
-
-                   <div className="bg-red-500/10 rounded-2xl p-6 border border-red-500/20">
-                     <h5 className="font-bold text-foreground mb-4 flex items-center gap-2">
-                       <CheckCircle2 className="w-5 h-5 text-red-600" />
-                       Pain Points Eliminated
-                     </h5>
-                     <ul className="space-y-3">
-                       {[
-                         { label: "Fragmented Catalogs", desc: "Replaced by unified multi-vendor storefront" },
-                         { label: "Manual Provisioning", desc: "Replaced by instant cloud orchestration" },
-                         { label: "Complex Billing", desc: "Replaced by converged billing and wallet payments" },
-                       ].map((item, i) => (
-                         <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                           <div className="w-2 h-2 rounded-full bg-red-500 mt-1.5 shrink-0" />
-                           <span><span className="font-semibold text-foreground">{item.label}:</span> {item.desc}</span>
-                         </li>
-                       ))}
-                     </ul>
-                   </div>
-                 </div>
-               </div>
-            </AnimatedSection>
+                <div className="bg-red-500/10 rounded-2xl p-6 border border-red-500/20">
+                  <h5 className="font-bold text-foreground mb-4 flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-red-600" />
+                    Pain Points Eliminated
+                  </h5>
+                  <ul className="space-y-3">
+                    {[
+                      { label: "Fragmented Catalogs", desc: "Replaced by unified multi-vendor storefront" },
+                      { label: "Manual Provisioning", desc: "Replaced by instant cloud orchestration" },
+                      { label: "Complex Billing", desc: "Replaced by converged billing and wallet payments" },
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full bg-red-500 mt-1.5 shrink-0" />
+                        <span><span className="font-semibold text-foreground">{item.label}:</span> {item.desc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* ── Wireframes & Prototyping ── */}
       <section className="py-16 sm:py-24 border-t border-border/50 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-            <AnimatedSection className="max-w-3xl mb-12">
-              <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Prototyping</span>
-              <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Wireframes & Prototyping</h3>
-              <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Based on our journey maps, we developed detailed wireframes focusing on the most critical interfaces. Each screen went through multiple rounds of iteration informed by stakeholder feedback.
-              </p>
-            </AnimatedSection>
+          <AnimatedSection className="max-w-3xl mb-12">
+            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Prototyping</span>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Wireframes & Prototyping</h3>
+            <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Based on our journey maps, we developed detailed wireframes focusing on the most critical interfaces. Each screen went through multiple rounds of iteration informed by stakeholder feedback.
+            </p>
+          </AnimatedSection>
 
-            <AnimatedSection className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-card border border-border/50 shadow-xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
+          <AnimatedSection className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-card border border-border/50 shadow-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
 
-                <div className="relative z-10">
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <ClipboardCheck className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-display font-bold text-foreground">Core Workflows</h4>
-                      <p className="text-sm text-muted-foreground mt-1">Iterative design cycles for the marketplace</p>
-                    </div>
-                  </div>
+            <div className="relative z-10">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <ClipboardCheck className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h4 className="text-2xl font-display font-bold text-foreground">Core Workflows</h4>
+                  <p className="text-sm text-muted-foreground mt-1">Iterative design cycles for the marketplace</p>
+                </div>
+              </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-                    {wireframes.map((item, i) => (
-                      <div key={i} className={`group/wf relative flex flex-col cursor-pointer`} onClick={() => setWireframeIndex(i)}>
-                        <div className="w-full h-[250px] md:h-[300px] rounded-2xl border border-border/60 bg-secondary/20 overflow-hidden relative hover:border-primary/40 transition-all shadow-sm hover:shadow-xl hover:shadow-primary/5">
-                          <img 
-                            src={item.src} 
-                            alt={item.label} 
-                            className="absolute inset-0 w-full h-full object-cover object-top opacity-90 group-hover/wf:opacity-100 transition-transform duration-700 group-hover/wf:scale-105" 
-                            loading="lazy" 
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-0 group-hover/wf:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                              <div className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover/wf:opacity-100 transition-opacity duration-300 translate-y-4 group-hover/wf:translate-y-0">
-                                <Search className="w-5 h-5 text-primary" />
-                              </div>
-                          </div>
-                          <div className="absolute top-4 left-4 z-10">
-                            <span className="px-3 py-1.5 text-xs font-semibold bg-background/90 backdrop-blur-md border border-border/50 rounded-full text-foreground shadow-sm flex items-center gap-2">
-                              <Search className="w-3 h-3 text-primary" />
-                              {item.label}
-                            </span>
-                          </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                {wireframes.map((item, i) => (
+                  <div key={i} className={`group/wf relative flex flex-col cursor-pointer`} onClick={() => setWireframeIndex(i)}>
+                    <div className="w-full h-[250px] md:h-[300px] rounded-2xl border border-border/60 bg-secondary/20 overflow-hidden relative hover:border-primary/40 transition-all shadow-sm hover:shadow-xl hover:shadow-primary/5">
+                      <img
+                        src={item.src}
+                        alt={item.label}
+                        className="absolute inset-0 w-full h-full object-cover object-top opacity-90 group-hover/wf:opacity-100 transition-transform duration-700 group-hover/wf:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-0 group-hover/wf:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover/wf:opacity-100 transition-opacity duration-300 translate-y-4 group-hover/wf:translate-y-0">
+                          <Search className="w-5 h-5 text-primary" />
                         </div>
                       </div>
-                    ))}
+                      <div className="absolute top-4 left-4 z-10">
+                        <span className="px-3 py-1.5 text-xs font-semibold bg-background/90 backdrop-blur-md border border-border/50 rounded-full text-foreground shadow-sm flex items-center gap-2">
+                          <Search className="w-3 h-3 text-primary" />
+                          {item.label}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-            </AnimatedSection>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* ── Visual Design (Typography & Colors) ── */}
       <section className="py-16 sm:py-24 border-t border-border/50 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-            <AnimatedSection className="max-w-3xl mb-12">
-              <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">UI & Aesthetics</span>
-              <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Visual Design</h3>
-              <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                The design system was built to reflect a modern, premium telecom enterprise application, utilizing high-contrast data visualizations and a trust-inspiring color palette.
-              </p>
+          <AnimatedSection className="max-w-3xl mb-12">
+            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">UI & Aesthetics</span>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Visual Design</h3>
+            <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              The design system was built to reflect a modern, premium telecom enterprise application, utilizing high-contrast data visualizations and a trust-inspiring color palette.
+            </p>
+          </AnimatedSection>
+
+          <div className="space-y-16">
+            {/* Logo & Branding */}
+            <AnimatedSection>
+              <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-primary" />
+                </div>
+                Logo & Branding
+              </h4>
+
+              <div className="grid md:grid-cols-12 gap-8 items-center bg-card border border-border/50 rounded-3xl p-8 hover:border-primary/30 transition-colors">
+                <div className="md:col-span-5">
+                  <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-4">Identity</div>
+                  <h5 className="font-display text-3xl font-bold text-foreground mb-4">The Hypermart Identity</h5>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                    The WaveNet Hypermart visual identity is crafted to inspire trust, authority, and unified scalability. The logo rules establish strict guidelines for margins, minimum size, and co-branding lockups with telecommunication providers.
+                  </p>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                      <span>Clear space and placement instructions</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                      <span>Standardized color specs for digital display</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                      <span>Co-branding hierarchy guidelines</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="md:col-span-7 rounded-2xl overflow-hidden border border-border/40 bg-background/50 p-2">
+                  <img
+                    src={hypermartLogo}
+                    alt="Hypermart Logo Usage Guide"
+                    className="w-full h-auto rounded-xl object-contain hover:scale-[1.02] transition-transform duration-500"
+                  />
+                </div>
+              </div>
             </AnimatedSection>
 
-            <div className="space-y-16">
-               {/* Logo & Branding */}
-               <AnimatedSection>
-                  <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Sparkles className="w-5 h-5 text-primary" />
-                    </div>
-                    Logo & Branding
-                  </h4>
-                  
-                  <div className="grid md:grid-cols-12 gap-8 items-center bg-card border border-border/50 rounded-3xl p-8 hover:border-primary/30 transition-colors">
-                    <div className="md:col-span-5">
-                      <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-4">Identity</div>
-                      <h5 className="font-display text-3xl font-bold text-foreground mb-4">The Hypermart Identity</h5>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                        The WaveNet Hypermart visual identity is crafted to inspire trust, authority, and unified scalability. The logo rules establish strict guidelines for margins, minimum size, and co-branding lockups with telecommunication providers.
-                      </p>
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                          <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-                          <span>Clear space and placement instructions</span>
-                        </div>
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                          <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-                          <span>Standardized color specs for digital display</span>
-                        </div>
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                          <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-                          <span>Co-branding hierarchy guidelines</span>
+            {/* Typography */}
+            <AnimatedSection>
+              <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Type className="w-5 h-5 text-primary" />
+                </div>
+                Typography
+              </h4>
+              <div className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:border-primary/50 transition-all mb-8">
+                <div className="flex justify-between items-end mb-6 pb-4 border-b border-border/50">
+                  <div>
+                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Universal Interface Font</div>
+                    <div className="text-2xl font-bold text-foreground" style={{ fontFamily: "'Poppins', sans-serif" }}>Poppins</div>
+                  </div>
+                </div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl text-foreground/80 break-words leading-relaxed group-hover:text-primary transition-colors" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                  Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
+                </div>
+              </div>
+
+              {/* Type Scale Card */}
+              <div className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:border-primary/50 transition-all group">
+                <div className="flex justify-between items-end mb-8 pb-4 border-b border-border/50">
+                  <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Type Scale</div>
+                  <div className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">1.2 Minor Third</div>
+                </div>
+                <div className="space-y-6">
+                  {[
+                    { label: 'Display', size: '47.78px', rem: '2.986rem', weight: 'Bold' },
+                    { label: 'Heading 1', size: '39.81px', rem: '2.488rem', weight: 'Bold' },
+                    { label: 'Heading 2', size: '33.18px', rem: '2.074rem', weight: 'Semibold' },
+                    { label: 'Heading 3', size: '27.65px', rem: '1.728rem', weight: 'Semibold' },
+                    { label: 'Heading 4', size: '23.04px', rem: '1.440rem', weight: 'Medium' },
+                    { label: 'Heading 5', size: '19.20px', rem: '1.200rem', weight: 'Medium' },
+                    { label: 'Body', size: '16.00px', rem: '1.000rem', weight: 'Regular' },
+                    { label: 'Caption', size: '13.33px', rem: '0.833rem', weight: 'Regular' },
+                  ].map((item, i) => (
+                    <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border/20 pb-4 last:border-0 last:pb-0 gap-3">
+                      <div className="flex-1 overflow-hidden">
+                        <div className="text-foreground truncate leading-none" style={{
+                          fontSize: item.size,
+                          fontWeight: item.weight === 'Bold' ? 700 : item.weight === 'Semibold' ? 600 : item.weight === 'Medium' ? 500 : 400,
+                          fontFamily: "'Poppins', sans-serif"
+                        }}>
+                          {item.label}
                         </div>
                       </div>
+                      <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm font-mono text-muted-foreground shrink-0 items-center">
+                        <span className="w-20 text-foreground">{item.weight}</span>
+                        <span className="w-20">{item.size}</span>
+                        <span className="w-20 text-primary text-right">{item.rem}</span>
+                      </div>
                     </div>
-                    <div className="md:col-span-7 rounded-2xl overflow-hidden border border-border/40 bg-background/50 p-2">
-                      <img 
-                        src={hypermartLogo} 
-                        alt="Hypermart Logo Usage Guide" 
-                        className="w-full h-auto rounded-xl object-contain hover:scale-[1.02] transition-transform duration-500"
-                      />
-                    </div>
-                  </div>
-               </AnimatedSection>
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
 
-               {/* Typography */}
-               <AnimatedSection>
-                  <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Type className="w-5 h-5 text-primary" />
-                    </div>
-                    Typography
-                  </h4>
-                  <div className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:border-primary/50 transition-all mb-8">
-                     <div className="flex justify-between items-end mb-6 pb-4 border-b border-border/50">
-                        <div>
-                          <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Universal Interface Font</div>
-                          <div className="text-2xl font-bold text-foreground" style={{ fontFamily: "'Poppins', sans-serif" }}>Poppins</div>
-                        </div>
-                     </div>
-                     <div className="text-2xl sm:text-3xl lg:text-4xl text-foreground/80 break-words leading-relaxed group-hover:text-primary transition-colors" style={{ fontFamily: "'Poppins', sans-serif" }}>
-                        Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
-                     </div>
+            {/* Colors */}
+            <AnimatedSection>
+              {/* Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-10">
+                <h4 className="font-display font-bold text-2xl text-foreground flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Palette className="w-5 h-5 text-primary" />
                   </div>
+                  Color Architecture
+                </h4>
+                {/* Theme Switcher */}
+                <div className="flex items-center gap-2 p-2 bg-card border border-border/60 rounded-2xl shadow-sm">
+                  <span className="text-xs font-semibold px-2 text-muted-foreground hidden sm:block">Customer Theme</span>
+                  <div className="w-px h-5 bg-border/60 hidden sm:block" />
+                  {customerThemes.map((theme) => (
+                    <button
+                      key={theme.name}
+                      onClick={() => setActiveBrandColor(theme)}
+                      title={theme.name}
+                      className={`relative w-9 h-9 rounded-xl transition-all duration-300 flex items-center justify-center ${activeBrandColor.name === theme.name ? 'ring-2 ring-offset-2 ring-offset-card scale-110' : 'hover:scale-105 opacity-70 hover:opacity-100'}`}
+                      style={{ backgroundColor: theme.primary, ['--tw-ring-color' as string]: theme.primary }}
+                    >
+                      {activeBrandColor.name === theme.name && (
+                        <div className="w-2.5 h-2.5 rounded-full bg-white/90 shadow-sm" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-                  {/* Type Scale Card */}
-                  <div className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:border-primary/50 transition-all group">
-                    <div className="flex justify-between items-end mb-8 pb-4 border-b border-border/50">
-                      <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Type Scale</div>
-                      <div className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">1.2 Minor Third</div>
+              {/* Bento Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+                {/* Hero Swatch — large */}
+                <div className="lg:col-span-5 relative overflow-hidden rounded-3xl min-h-[320px] flex flex-col justify-between p-8 shadow-lg group">
+                  <div className="absolute inset-0 transition-all duration-700" style={{ background: `linear-gradient(145deg, ${activeBrandColor.secondary} 0%, ${activeBrandColor.primary} 55%, ${activeBrandColor.accent} 100%)` }} />
+                  {/* decorative circle */}
+                  <div className="absolute -top-16 -right-16 w-52 h-52 rounded-full opacity-20 transition-all duration-700" style={{ backgroundColor: activeBrandColor.accent }} />
+                  <div className="relative z-10">
+                    <span className="text-white/60 text-[10px] font-bold uppercase tracking-[0.25em]">Active Theme</span>
+                    <div className="text-white text-2xl font-bold mt-1">{activeBrandColor.name}</div>
+                  </div>
+                  <div className="relative z-10">
+                    <div className="text-white/60 text-xs font-semibold uppercase tracking-widest mb-3">Brand Palette</div>
+                    <div className="flex gap-3">
+                      {[activeBrandColor.primary, activeBrandColor.accent, activeBrandColor.focus, activeBrandColor.secondary].map((c, i) => (
+                        <div key={i} className="w-10 h-10 rounded-xl border-2 border-white/30 shadow-md" style={{ backgroundColor: c }} title={c} />
+                      ))}
                     </div>
-                    <div className="space-y-6">
-                      {[
-                        { label: 'Display', size: '47.78px', rem: '2.986rem', weight: 'Bold' },
-                        { label: 'Heading 1', size: '39.81px', rem: '2.488rem', weight: 'Bold' },
-                        { label: 'Heading 2', size: '33.18px', rem: '2.074rem', weight: 'Semibold' },
-                        { label: 'Heading 3', size: '27.65px', rem: '1.728rem', weight: 'Semibold' },
-                        { label: 'Heading 4', size: '23.04px', rem: '1.440rem', weight: 'Medium' },
-                        { label: 'Heading 5', size: '19.20px', rem: '1.200rem', weight: 'Medium' },
-                        { label: 'Body', size: '16.00px', rem: '1.000rem', weight: 'Regular' },
-                        { label: 'Caption', size: '13.33px', rem: '0.833rem', weight: 'Regular' },
-                      ].map((item, i) => (
-                        <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border/20 pb-4 last:border-0 last:pb-0 gap-3">
-                          <div className="flex-1 overflow-hidden">
-                            <div className="text-foreground truncate leading-none" style={{ 
-                              fontSize: item.size, 
-                              fontWeight: item.weight === 'Bold' ? 700 : item.weight === 'Semibold' ? 600 : item.weight === 'Medium' ? 500 : 400, 
-                              fontFamily: "'Poppins', sans-serif" 
-                            }}>
-                              {item.label}
-                            </div>
-                          </div>
-                          <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm font-mono text-muted-foreground shrink-0 items-center">
-                            <span className="w-20 text-foreground">{item.weight}</span>
-                            <span className="w-20">{item.size}</span>
-                            <span className="w-20 text-primary text-right">{item.rem}</span>
-                          </div>
+                    <div className="font-mono text-white/80 text-sm mt-4 uppercase">{activeBrandColor.primary}</div>
+                  </div>
+                </div>
+
+                {/* Right column: 3 stacked colour cards */}
+                <div className="lg:col-span-7 grid grid-rows-3 gap-5">
+                  {[
+                    { label: "Core Brand Primary", role: "Buttons, links, CTAs", grad: `linear-gradient(135deg, ${activeBrandColor.secondary} 0%, ${activeBrandColor.primary} 100%)`, hex: activeBrandColor.primary },
+                    { label: "Highlight / Accent", role: "Badges, highlights, icons", grad: `linear-gradient(135deg, ${activeBrandColor.primary} 0%, ${activeBrandColor.accent} 100%)`, hex: activeBrandColor.accent },
+                    { label: "Primary Focus", role: "Hover, active & focus states", grad: `linear-gradient(135deg, ${activeBrandColor.focus} 0%, ${activeBrandColor.secondary} 100%)`, hex: activeBrandColor.focus },
+                  ].map((card, i) => (
+                    <div key={i} className="relative overflow-hidden rounded-2xl flex items-center gap-5 p-5 shadow-sm group hover:shadow-lg transition-all duration-500" style={{ background: card.grad }}>
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-10 bg-white transition-opacity duration-300" />
+                      <div className="w-12 h-12 rounded-xl border-2 border-white/30 shrink-0 shadow-md" style={{ backgroundColor: card.hex }} />
+                      <div className="flex-1 min-w-0">
+                        <div className="text-white font-bold text-sm truncate">{card.label}</div>
+                        <div className="text-white/70 text-xs mt-0.5 truncate">{card.role}</div>
+                      </div>
+                      <div className="font-mono text-white/80 text-sm uppercase shrink-0 hidden sm:block">{card.hex}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom row: Border & Text color palettes */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+                {[
+                  {
+                    label: "Border Colors",
+                    swatches: [
+                      { name: "Light", hex: "#F8FAFC" },
+                      { name: "Medium", hex: "#E2E8F0" },
+                      { name: "Dark", hex: "#94A3B8" },
+                    ]
+                  },
+                  {
+                    label: "Text Colors",
+                    swatches: [
+                      { name: "Headings", hex: "#1E293B" },
+                      { name: "Paragraph", hex: "#334155" },
+                      { name: "Muted", hex: "#94A3B8" },
+                    ]
+                  }
+                ].map((group, gi) => (
+                  <div key={gi} className="bg-card border border-border/50 rounded-3xl p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300">
+                    <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-5">{group.label}</div>
+                    <div className="flex gap-3">
+                      {group.swatches.map((s, si) => (
+                        <div key={si} className="flex-1 group/swatch cursor-default">
+                          <div
+                            className="w-full h-16 rounded-xl border border-border/60 mb-3 group-hover/swatch:scale-105 group-hover/swatch:-translate-y-1 transition-all duration-300 shadow-sm"
+                            style={{ backgroundColor: s.hex }}
+                          />
+                          <div className="text-xs font-semibold text-foreground truncate">{s.name}</div>
+                          <div className="text-[10px] font-mono text-muted-foreground uppercase">{s.hex}</div>
                         </div>
                       ))}
                     </div>
                   </div>
-               </AnimatedSection>
-
-               {/* Colors */}
-               <AnimatedSection>
-                  {/* Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-10">
-                    <h4 className="font-display font-bold text-2xl text-foreground flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                        <Palette className="w-5 h-5 text-primary" />
-                      </div>
-                      Color Architecture
-                    </h4>
-                    {/* Theme Switcher */}
-                    <div className="flex items-center gap-2 p-2 bg-card border border-border/60 rounded-2xl shadow-sm">
-                       <span className="text-xs font-semibold px-2 text-muted-foreground hidden sm:block">Customer Theme</span>
-                       <div className="w-px h-5 bg-border/60 hidden sm:block" />
-                       {customerThemes.map((theme) => (
-                         <button
-                           key={theme.name}
-                           onClick={() => setActiveBrandColor(theme)}
-                           title={theme.name}
-                           className={`relative w-9 h-9 rounded-xl transition-all duration-300 flex items-center justify-center ${activeBrandColor.name === theme.name ? 'ring-2 ring-offset-2 ring-offset-card scale-110' : 'hover:scale-105 opacity-70 hover:opacity-100'}`}
-                           style={{ backgroundColor: theme.primary, ['--tw-ring-color' as string]: theme.primary }}
-                         >
-                           {activeBrandColor.name === theme.name && (
-                             <div className="w-2.5 h-2.5 rounded-full bg-white/90 shadow-sm" />
-                           )}
-                         </button>
-                       ))}
-                    </div>
-                  </div>
-
-                  {/* Bento Grid */}
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-
-                    {/* Hero Swatch — large */}
-                    <div className="lg:col-span-5 relative overflow-hidden rounded-3xl min-h-[320px] flex flex-col justify-between p-8 shadow-lg group">
-                      <div className="absolute inset-0 transition-all duration-700" style={{ background: `linear-gradient(145deg, ${activeBrandColor.secondary} 0%, ${activeBrandColor.primary} 55%, ${activeBrandColor.accent} 100%)` }} />
-                      {/* decorative circle */}
-                      <div className="absolute -top-16 -right-16 w-52 h-52 rounded-full opacity-20 transition-all duration-700" style={{ backgroundColor: activeBrandColor.accent }} />
-                      <div className="relative z-10">
-                        <span className="text-white/60 text-[10px] font-bold uppercase tracking-[0.25em]">Active Theme</span>
-                        <div className="text-white text-2xl font-bold mt-1">{activeBrandColor.name}</div>
-                      </div>
-                      <div className="relative z-10">
-                        <div className="text-white/60 text-xs font-semibold uppercase tracking-widest mb-3">Brand Palette</div>
-                        <div className="flex gap-3">
-                          {[activeBrandColor.primary, activeBrandColor.accent, activeBrandColor.focus, activeBrandColor.secondary].map((c, i) => (
-                            <div key={i} className="w-10 h-10 rounded-xl border-2 border-white/30 shadow-md" style={{ backgroundColor: c }} title={c} />
-                          ))}
-                        </div>
-                        <div className="font-mono text-white/80 text-sm mt-4 uppercase">{activeBrandColor.primary}</div>
-                      </div>
-                    </div>
-
-                    {/* Right column: 3 stacked colour cards */}
-                    <div className="lg:col-span-7 grid grid-rows-3 gap-5">
-                      {[
-                        { label: "Core Brand Primary", role: "Buttons, links, CTAs", grad: `linear-gradient(135deg, ${activeBrandColor.secondary} 0%, ${activeBrandColor.primary} 100%)`, hex: activeBrandColor.primary },
-                        { label: "Highlight / Accent", role: "Badges, highlights, icons", grad: `linear-gradient(135deg, ${activeBrandColor.primary} 0%, ${activeBrandColor.accent} 100%)`, hex: activeBrandColor.accent },
-                        { label: "Primary Focus", role: "Hover, active & focus states", grad: `linear-gradient(135deg, ${activeBrandColor.focus} 0%, ${activeBrandColor.secondary} 100%)`, hex: activeBrandColor.focus },
-                      ].map((card, i) => (
-                        <div key={i} className="relative overflow-hidden rounded-2xl flex items-center gap-5 p-5 shadow-sm group hover:shadow-lg transition-all duration-500" style={{ background: card.grad }}>
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-10 bg-white transition-opacity duration-300" />
-                          <div className="w-12 h-12 rounded-xl border-2 border-white/30 shrink-0 shadow-md" style={{ backgroundColor: card.hex }} />
-                          <div className="flex-1 min-w-0">
-                            <div className="text-white font-bold text-sm truncate">{card.label}</div>
-                            <div className="text-white/70 text-xs mt-0.5 truncate">{card.role}</div>
-                          </div>
-                          <div className="font-mono text-white/80 text-sm uppercase shrink-0 hidden sm:block">{card.hex}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Bottom row: Border & Text color palettes */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
-                    {[
-                      {
-                        label: "Border Colors",
-                        swatches: [
-                          { name: "Light", hex: "#F8FAFC" },
-                          { name: "Medium", hex: "#E2E8F0" },
-                          { name: "Dark", hex: "#94A3B8" },
-                        ]
-                      },
-                      {
-                        label: "Text Colors",
-                        swatches: [
-                          { name: "Headings", hex: "#1E293B" },
-                          { name: "Paragraph", hex: "#334155" },
-                          { name: "Muted", hex: "#94A3B8" },
-                        ]
-                      }
-                    ].map((group, gi) => (
-                      <div key={gi} className="bg-card border border-border/50 rounded-3xl p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300">
-                        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-5">{group.label}</div>
-                        <div className="flex gap-3">
-                          {group.swatches.map((s, si) => (
-                            <div key={si} className="flex-1 group/swatch cursor-default">
-                              <div
-                                className="w-full h-16 rounded-xl border border-border/60 mb-3 group-hover/swatch:scale-105 group-hover/swatch:-translate-y-1 transition-all duration-300 shadow-sm"
-                                style={{ backgroundColor: s.hex }}
-                              />
-                              <div className="text-xs font-semibold text-foreground truncate">{s.name}</div>
-                              <div className="text-[10px] font-mono text-muted-foreground uppercase">{s.hex}</div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-               </AnimatedSection>
-            </div>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
       {/* ── High-Fidelity Screens ── */}
       <section className="py-16 sm:py-24 border-t border-border/50 relative bg-secondary/5">
-         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-            <AnimatedSection className="mb-12 md:mb-16 max-w-2xl">
-               <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Final UI</span>
-               <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl mb-6">High-Fidelity Screens</h3>
-               <p className="text-muted-foreground text-lg leading-relaxed">
-                 The final visual layer brings the platform to life. We focused on clear data visualization, intuitive interactions, and a clean layout that lets the products shine, using the defined design system.
-               </p>
-            </AnimatedSection>
-            
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-              {hifiScreens.map((screen, index) => (
-                <AnimatedSection 
-                  key={index} 
-                  className={index === 0 ? 'md:col-span-12' : 'md:col-span-6'}
-                >
-                  <div 
-                    className={`group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in ${
-                      index === 0 ? 'aspect-[16/9]' : 'aspect-video'
-                    }`}
-                    onClick={() => setHifiIndex(index)}
-                  >
-                    <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                    <img 
-                      src={screen.src} 
-                      alt={screen.label}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20">
-                      <h4 className="text-white font-display font-bold text-xl sm:text-2xl translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                        {screen.label}
-                      </h4>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+          <AnimatedSection className="mb-12 md:mb-16 max-w-2xl">
+            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Final UI</span>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl mb-6">High-Fidelity Developed Screens</h3>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              The final visual layer brings the platform to life. We focused on clear data visualization, intuitive interactions, and a clean layout that lets the products shine, using the defined design system.
+            </p>
+          </AnimatedSection>
+        </div>
+
+        <div className="w-full px-4 sm:px-8 lg:px-12 pb-8 overflow-hidden">
+          <AnimatedSection>
+            <Carousel
+              opts={{ align: "start", loop: true }}
+              className="w-full relative"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {hifiScreens.map((screen, index) => (
+                  <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                    <div className="p-1">
+                      <div
+                        className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-[16/9] shadow-sm hover:shadow-md transition-shadow"
+                        onClick={() => setHifiIndex(index)}
+                      >
+                        <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                        <img
+                          src={screen.src}
+                          alt={screen.label}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20">
+                          <h4 className="text-white font-display font-bold text-lg sm:text-xl translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                            {screen.label}
+                          </h4>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
-         </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border shadow-md" />
+              <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border shadow-md" />
+            </Carousel>
+          </AnimatedSection>
+        </div>
       </section>
 
       {/* ── Testing & Feedback ── */}
       <section className="py-16 sm:py-24 border-t border-border/50 relative overflow-hidden">
-         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/3 rounded-full blur-[120px] pointer-events-none" />
-         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/3 rounded-full blur-[120px] pointer-events-none" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
 
-            {/* Header */}
-            <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
-               <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Validation</span>
-               <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Testing & Feedback</h3>
-               <div className="w-10 h-[3px] bg-primary mt-6 mb-6 mx-auto" />
-               <p className="text-lg text-muted-foreground leading-relaxed">
-                 Iterative validation with global telecom partners refined every layer of the marketplace — from pricing models to vendor autonomy.
-               </p>
-            </AnimatedSection>
+          {/* Header */}
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Validation</span>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Testing & Feedback</h3>
+            <div className="w-10 h-[3px] bg-primary mt-6 mb-6 mx-auto" />
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Iterative validation with global telecom partners refined every layer of the marketplace — from pricing models to vendor autonomy.
+            </p>
+          </AnimatedSection>
 
-            {/* Timeline cards */}
-            <div className="space-y-6 max-w-4xl mx-auto">
-               {[
-                 {
-                   num: "01",
-                   icon: Coins,
-                   title: "Monetization Strategy Validation",
-                   insight: "Flexibility drives adoption",
-                   body: "Testing various monetization models (subscription, pay-per-use) with global telecoms confirmed that flexibility is key to digital growth. We optimized the platform to support end-to-end monetization, allowing providers to tailor pricing strategies to specific market segments and partner needs.",
-                 },
-                 {
-                   num: "02",
-                   icon: Box,
-                   title: "Multi-Asset & Cloud Bundling",
-                   insight: "Unified catalog, diverse assets",
-                   body: "Initial feedback from telecom partners on the EaaS model highlighted the need for intuitive bundling of diverse assets. We refined the subscription and content manager, allowing seamless grouping of digital services (APIs, Cloud, VPNs) with physical assets (IoT devices, Routers) and multi-cloud solutions into unified offerings.",
-                 },
-                 {
-                   num: "03",
-                   icon: Store,
-                   title: "Vendor & Partner Ecosystem",
-                   insight: "Autonomy within unity",
-                   body: "Testing multi-store capabilities showed that vendors needed more autonomy while maintaining a unified shopping experience for end-users. We enhanced the reseller and admin portals, streamlining partner onboarding and providing advanced invoicing and consolidated cloud service payment systems.",
-                 },
-               ].map((card, i) => (
-                 <AnimatedSection key={i} delay={i * 120} className="group">
-                   <div className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:border-primary/30 hover:shadow-lg transition-all relative overflow-hidden">
-                     {/* Background number */}
-                     <span className="absolute top-6 right-8 font-display text-[5rem] sm:text-[7rem] font-bold text-border/30 leading-none pointer-events-none select-none group-hover:text-primary/10 transition-colors">{card.num}</span>
+          {/* Timeline cards */}
+          <div className="space-y-6 max-w-4xl mx-auto">
+            {[
+              {
+                num: "01",
+                icon: Coins,
+                title: "Monetization Strategy Validation",
+                insight: "Flexibility drives adoption",
+                body: "Testing various monetization models (subscription, pay-per-use) with global telecoms confirmed that flexibility is key to digital growth. We optimized the platform to support end-to-end monetization, allowing providers to tailor pricing strategies to specific market segments and partner needs.",
+              },
+              {
+                num: "02",
+                icon: Box,
+                title: "Multi-Asset & Cloud Bundling",
+                insight: "Unified catalog, diverse assets",
+                body: "Initial feedback from telecom partners on the EaaS model highlighted the need for intuitive bundling of diverse assets. We refined the subscription and content manager, allowing seamless grouping of digital services (APIs, Cloud, VPNs) with physical assets (IoT devices, Routers) and multi-cloud solutions into unified offerings.",
+              },
+              {
+                num: "03",
+                icon: Store,
+                title: "Vendor & Partner Ecosystem",
+                insight: "Autonomy within unity",
+                body: "Testing multi-store capabilities showed that vendors needed more autonomy while maintaining a unified shopping experience for end-users. We enhanced the reseller and admin portals, streamlining partner onboarding and providing advanced invoicing and consolidated cloud service payment systems.",
+              },
+            ].map((card, i) => (
+              <AnimatedSection key={i} delay={i * 120} className="group">
+                <div className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:border-primary/30 hover:shadow-lg transition-all relative overflow-hidden">
+                  {/* Background number */}
+                  <span className="absolute top-6 right-8 font-display text-[5rem] sm:text-[7rem] font-bold text-border/30 leading-none pointer-events-none select-none group-hover:text-primary/10 transition-colors">{card.num}</span>
 
-                     <div className="relative z-10 flex flex-col sm:flex-row items-start gap-5">
-                       <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                         <card.icon className="w-6 h-6 text-primary" />
-                       </div>
-                       <div className="flex-1">
-                         <div className="flex flex-wrap items-center gap-3 mb-3">
-                           <h4 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">{card.title}</h4>
-                           <span className="text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary whitespace-nowrap">{card.insight}</span>
-                         </div>
-                         <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{card.body}</p>
-                       </div>
-                     </div>
-                   </div>
-                 </AnimatedSection>
-               ))}
-            </div>
-
-            {/* Summary stat strip */}
-            <AnimatedSection delay={500} className="mt-14">
-              <div className="grid grid-cols-3 border border-border/50 rounded-2xl overflow-hidden max-w-3xl mx-auto">
-                {[
-                  { value: "3", label: "Validation rounds" },
-                  { value: "12+", label: "Telecom partners" },
-                  { value: "40+", label: "Iterations shipped" },
-                ].map((stat, i) => (
-                  <div key={i} className={`p-6 sm:p-8 text-center ${i < 2 ? 'border-r border-border/50' : ''}`}>
-                    <div className="font-display text-3xl sm:text-4xl font-bold text-primary mb-1">{stat.value}</div>
-                    <div className="text-xs sm:text-sm text-muted-foreground font-medium">{stat.label}</div>
+                  <div className="relative z-10 flex flex-col sm:flex-row items-start gap-5">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <card.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-center gap-3 mb-3">
+                        <h4 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">{card.title}</h4>
+                        <span className="text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary whitespace-nowrap">{card.insight}</span>
+                      </div>
+                      <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{card.body}</p>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </AnimatedSection>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
 
-         </div>
+          {/* Summary stat strip */}
+          <AnimatedSection delay={500} className="mt-14">
+            <div className="grid grid-cols-3 border border-border/50 rounded-2xl overflow-hidden max-w-3xl mx-auto">
+              {[
+                { value: "3", label: "Validation rounds" },
+                { value: "12+", label: "Telecom partners" },
+                { value: "40+", label: "Iterations shipped" },
+              ].map((stat, i) => (
+                <div key={i} className={`p-6 sm:p-8 text-center ${i < 2 ? 'border-r border-border/50' : ''}`}>
+                  <div className="font-display text-3xl sm:text-4xl font-bold text-primary mb-1">{stat.value}</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground font-medium">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+
+        </div>
       </section>
 
       {/* ── Solution: Full Stack & Integration ── */}
@@ -1031,52 +1143,52 @@ const EcommercePlatformPage = () => {
 
       {/* ── Outcomes / Impact ── */}
       <section className="py-16 sm:py-24 border-t border-border/50 relative overflow-hidden">
-         <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
-         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
 
-            {/* Stat strip */}
-            <AnimatedSection>
-              <div className="grid grid-cols-2 md:grid-cols-4 border border-border/50 rounded-3xl overflow-hidden mb-16">
-                {project.metrics?.map((metric, i) => (
-                  <div key={i} className={`p-8 sm:p-10 text-center ${i < (project.metrics?.length ?? 0) - 1 ? 'border-b md:border-b-0 md:border-r border-border/50' : ''}`}>
-                    <div className="font-display text-4xl sm:text-5xl font-bold text-primary mb-2">{metric.value}</div>
-                    <div className="text-sm text-muted-foreground font-medium">{metric.label}</div>
+          {/* Stat strip */}
+          <AnimatedSection>
+            <div className="grid grid-cols-2 md:grid-cols-4 border border-border/50 rounded-3xl overflow-hidden mb-16">
+              {project.metrics?.map((metric, i) => (
+                <div key={i} className={`p-8 sm:p-10 text-center ${i < (project.metrics?.length ?? 0) - 1 ? 'border-b md:border-b-0 md:border-r border-border/50' : ''}`}>
+                  <div className="font-display text-4xl sm:text-5xl font-bold text-primary mb-2">{metric.value}</div>
+                  <div className="text-sm text-muted-foreground font-medium">{metric.label}</div>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+
+          {/* Outcome narrative */}
+          <AnimatedSection delay={200} className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            <div className="lg:col-span-5">
+              <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Outcomes</span>
+              <h3 className="font-display font-bold text-3xl sm:text-4xl leading-tight">Measurable Business Impact</h3>
+              <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                {project.outcome}
+              </p>
+            </div>
+
+            <div className="lg:col-span-7 grid gap-6">
+              {[
+                { label: "XaaS Enabled", desc: "Transitioned from simple APIs to full Everything-as-a-Service capabilities, enabling telecoms to monetize any digital or physical asset through a single unified platform." },
+                { label: "Multi-Cloud Commerce", desc: "Resell AWS, Azure, and Google Cloud through built-in orchestration, minimizing infrastructure costs while opening entirely new revenue streams." },
+                { label: "Zero-Touch Delivery", desc: "Fully automated onboarding, provisioning, and billing workflows — reducing operational overhead and accelerating time-to-revenue." },
+              ].map((item, i) => (
+                <AnimatedSection key={i} delay={(i + 3) * 100} className="flex gap-5 p-6 rounded-2xl border border-border/50 bg-card hover:border-primary/30 transition-colors group">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
+                    <ChevronRight className="w-5 h-5 text-primary" />
                   </div>
-                ))}
-              </div>
-            </AnimatedSection>
+                  <div>
+                    <h4 className="font-bold text-foreground mb-1">{item.label}</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </AnimatedSection>
 
-            {/* Outcome narrative */}
-            <AnimatedSection delay={200} className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-              <div className="lg:col-span-5">
-                <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Outcomes</span>
-                <h3 className="font-display font-bold text-3xl sm:text-4xl leading-tight">Measurable Business Impact</h3>
-                <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  {project.outcome}
-                </p>
-              </div>
-
-              <div className="lg:col-span-7 grid gap-6">
-                {[
-                  { label: "XaaS Enabled", desc: "Transitioned from simple APIs to full Everything-as-a-Service capabilities, enabling telecoms to monetize any digital or physical asset through a single unified platform." },
-                  { label: "Multi-Cloud Commerce", desc: "Resell AWS, Azure, and Google Cloud through built-in orchestration, minimizing infrastructure costs while opening entirely new revenue streams." },
-                  { label: "Zero-Touch Delivery", desc: "Fully automated onboarding, provisioning, and billing workflows — reducing operational overhead and accelerating time-to-revenue." },
-                ].map((item, i) => (
-                  <AnimatedSection key={i} delay={(i + 3) * 100} className="flex gap-5 p-6 rounded-2xl border border-border/50 bg-card hover:border-primary/30 transition-colors group">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
-                      <ChevronRight className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-foreground mb-1">{item.label}</h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-                    </div>
-                  </AnimatedSection>
-                ))}
-              </div>
-            </AnimatedSection>
-
-         </div>
+        </div>
       </section>
 
       <Footer />

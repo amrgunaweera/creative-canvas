@@ -24,72 +24,177 @@ const HealthcareAppPage = () => {
       <Navigation />
 
       {/* ── Hero ── */}
-      <section className="pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-24 relative overflow-hidden bg-background text-foreground">
+      <section className="pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-32 relative overflow-hidden bg-background text-foreground min-h-[90vh] flex items-center">
+        {/* Animated Background Orbs */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-red-500/8 blur-[120px]" />
-          <div className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px]" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] rounded-full bg-primary/5 blur-[100px]" />
+          <div className="absolute -top-[10%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-red-500/10 blur-[120px] animate-blob mix-blend-screen" />
+          <div className="absolute top-[20%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-primary/15 blur-[120px] animate-blob mix-blend-screen" style={{ animationDelay: '2s' }} />
+          <div className="absolute bottom-[-20%] left-[20%] w-[50vw] h-[50vw] rounded-full bg-rose-500/10 blur-[120px] animate-blob mix-blend-screen" style={{ animationDelay: '4s' }} />
+          
+          {/* Subtle Grid Pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_10%,transparent_100%)]" />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-          <AnimatedSection>
-            <Link to="/work" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 sm:mb-12">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Work
-            </Link>
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            {/* Left Column: Content */}
+            <div className="lg:col-span-6 xl:col-span-5 relative z-20">
+              <Link to="/work" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8 sm:mb-10 animate-fade-up">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Work
+              </Link>
 
-            <div className="grid lg:grid-cols-12 gap-10">
-              <div className="lg:col-span-7 xl:col-span-6">
-                <span className="text-primary font-bold tracking-widest uppercase text-xs sm:text-sm">{project.category}</span>
-                <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-4 leading-none">{project.title}</h1>
-                <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
-                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl">{project.fullDescription}</p>
+              <div className="animate-fade-up-delay">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-bold tracking-widest uppercase mb-6">
+                  <HeartPulse className="w-3.5 h-3.5" />
+                  {project.category}
+                </div>
+                
+                <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl leading-[1.1] tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-br from-foreground via-foreground to-foreground/70">
+                  {project.title}
+                </h1>
+                
+                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10">
+                  {project.fullDescription}
+                </p>
 
-                <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
                   {[
                     { label: "Role", value: project.role },
                     { label: "Duration", value: project.duration },
                     { label: "Tools", value: project.tools.join(", ") },
                   ].map((m) => (
-                    <div key={m.label} className="p-4 rounded-2xl bg-card border border-border/50">
-                      <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">{m.label}</div>
-                      <div className="text-sm font-semibold text-foreground">{m.value}</div>
+                    <div key={m.label} className="flex flex-col gap-1 border-l-2 border-red-500/30 pl-4">
+                      <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{m.label}</span>
+                      <span className="text-sm font-semibold text-foreground">{m.value}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
-                    <span key={tag} className="px-4 py-1.5 bg-secondary rounded-full text-xs sm:text-sm text-muted-foreground border border-border/40">{tag}</span>
+                    <span key={tag} className="px-4 py-2 bg-secondary/50 backdrop-blur-md rounded-full text-xs font-medium text-foreground border border-border/40 hover:border-red-500/40 transition-colors">
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </div>
+            </div>
 
-              {/* Right bento */}
-              <div className="lg:col-span-5 xl:col-span-6 grid grid-cols-2 gap-4 content-start">
-                <div className="col-span-2 h-48 rounded-3xl bg-gradient-to-br from-red-500/15 via-primary/15 to-primary/5 border border-border/40 flex items-center justify-center relative overflow-hidden">
-                  <Ambulance className="w-20 h-20 text-primary/25" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-transparent to-background/40" />
-                  <div className="absolute bottom-4 left-5">
-                    <div className="text-xs text-muted-foreground font-medium tracking-widest uppercase">Mediwave · MediRescue</div>
-                    <div className="text-sm font-semibold text-foreground mt-0.5">Transforming the Golden Hour</div>
+            {/* Right Column: Creative Animated Visuals */}
+            <div className="lg:col-span-6 xl:col-span-7 hidden lg:block relative h-[600px] w-full [perspective:1000px] animate-fade-up-delay-2">
+              <div className="absolute inset-0 flex items-center justify-center [transform-style:preserve-3d]">
+                
+                {/* Center Main Medical Dashboard Mockup */}
+                <div className="relative z-20 w-[480px] h-[320px] bg-card/40 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden animate-float-slow">
+                  {/* Glass Header */}
+                  <div className="h-12 border-b border-white/10 bg-white/5 flex items-center px-4 justify-between">
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                      <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Wifi className="w-3 h-3 text-green-400 animate-pulse" />
+                      <div className="px-3 py-1 bg-white/5 rounded-md text-[10px] font-mono text-muted-foreground">MediRescue Live</div>
+                    </div>
+                  </div>
+                  {/* Dashboard Content */}
+                  <div className="p-6 grid grid-cols-12 gap-4 h-[calc(100%-3rem)]">
+                    {/* Map Sidebar */}
+                    <div className="col-span-4 flex flex-col gap-3 border-r border-white/5 pr-4 relative overflow-hidden rounded-l-xl">
+                      <div className="absolute inset-0 bg-primary/5 flex items-center justify-center opacity-50">
+                        <Map className="w-24 h-24 text-primary/20" />
+                      </div>
+                      <div className="relative z-10 w-full h-8 bg-card/60 backdrop-blur-md rounded-lg flex items-center px-3 border border-white/5">
+                        <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse mr-2" />
+                        <span className="text-[10px] text-foreground font-mono">Unit 42 - En Route</span>
+                      </div>
+                      <div className="relative z-10 w-3/4 h-4 bg-white/10 rounded mt-auto" />
+                      <div className="relative z-10 w-full h-4 bg-white/10 rounded" />
+                    </div>
+                    {/* Main Area: Patient Vitals */}
+                    <div className="col-span-8 flex flex-col gap-4">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <div className="text-xs text-muted-foreground uppercase tracking-widest font-bold">John Doe • 45 Y/O</div>
+                          <div className="w-32 h-6 bg-red-500/20 rounded-md mt-1" />
+                        </div>
+                        <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center border border-white/5">
+                          <Activity className="w-5 h-5 text-red-400" />
+                        </div>
+                      </div>
+                      {/* Vitals EKG Graph Area */}
+                      <div className="flex-1 bg-gradient-to-r from-red-500/10 to-transparent rounded-xl border border-red-500/20 relative overflow-hidden flex items-center justify-center">
+                        <svg className="absolute w-[200%] h-full left-0 animate-[text-gradient_3s_linear_infinite]" viewBox="0 0 200 100" preserveAspectRatio="none">
+                          <path d="M 0 50 L 20 50 L 30 20 L 45 80 L 60 50 L 100 50 L 120 50 L 130 20 L 145 80 L 160 50 L 200 50" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                {[
-                  { icon: Ambulance, label: "Ambulances", value: "322+" },
-                  { icon: Clock, label: "Avg Response", value: "15m 32s" },
-                  { icon: TrendingUp, label: "Lives Impacted", value: "2M+" },
-                  { icon: Globe, label: "Global Reach", value: "GLOMO '24" },
-                ].map((item) => (
-                  <div key={item.label} className="p-4 rounded-2xl bg-card border border-border/50 flex flex-col gap-2">
-                    <item.icon className="w-5 h-5 text-primary" />
-                    <div className="text-xs uppercase tracking-widest text-muted-foreground">{item.label}</div>
-                    <div className="text-lg font-bold text-foreground">{item.value}</div>
+
+                {/* Floating Element 1: Vitals Card */}
+                <div className="absolute z-30 -right-4 top-12 w-56 p-4 bg-card/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl animate-float-medium group hover-lift cursor-pointer">
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+                      <HeartPulse className="w-5 h-5 text-red-400 animate-pulse-slow" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-muted-foreground font-medium">Heart Rate</div>
+                      <div className="text-lg font-bold text-foreground">112 <span className="text-xs font-normal text-muted-foreground">bpm</span></div>
+                    </div>
                   </div>
-                ))}
+                  <div className="flex items-center gap-2 text-xs text-red-400 font-medium">
+                    <Activity className="w-3 h-3" />
+                    Elevated
+                  </div>
+                </div>
+
+                {/* Floating Element 2: ETA Notification */}
+                <div className="absolute z-30 left-0 bottom-24 w-52 p-3 bg-card/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl animate-float-fast group hover-lift cursor-pointer">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center relative overflow-hidden">
+                      <Ambulance className="w-5 h-5 text-amber-400 relative z-10" />
+                      <div className="absolute inset-0 bg-amber-400/20 animate-pulse-slow" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-foreground">ETA to ED</div>
+                      <div className="text-xs text-amber-400 font-medium">4 mins 30 secs</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Element 3: Doctor Avatar / Consult */}
+                <div className="absolute z-10 left-12 top-0 w-48 p-4 bg-card/40 backdrop-blur-lg border border-white/5 rounded-3xl shadow-lg animate-float-reverse transform -rotate-6">
+                  <div className="w-full h-24 rounded-xl bg-gradient-to-br from-blue-500/30 to-indigo-500/30 mb-3 flex items-center justify-center">
+                    <Stethoscope className="w-8 h-8 text-blue-300" />
+                  </div>
+                  <div className="w-24 h-3 bg-white/10 rounded mb-2" />
+                  <div className="w-16 h-3 bg-white/5 rounded" />
+                </div>
+
+                {/* Connecting Lines / Accents */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" style={{ transform: 'translateZ(-10px)' }}>
+                  <path d="M 150 200 Q 250 100 350 250 T 550 150" fill="none" stroke="url(#red-gradient)" strokeWidth="2" strokeDasharray="6 6" className="opacity-30" />
+                  <defs>
+                    <linearGradient id="red-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="hsl(0 84.2% 60.2%)" stopOpacity="0" />
+                      <stop offset="50%" stopColor="hsl(0 84.2% 60.2%)" stopOpacity="1" />
+                      <stop offset="100%" stopColor="hsl(0 84.2% 60.2%)" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+
+                {/* Floating Particles */}
+                <div className="absolute top-1/4 right-1/4 w-2 h-2 rounded-full bg-red-500/50 animate-pulse-dot" style={{ animationDelay: '0s' }} />
+                <div className="absolute bottom-1/3 left-1/3 w-3 h-3 rounded-full bg-amber-400/50 animate-pulse-dot" style={{ animationDelay: '1s' }} />
+                <div className="absolute top-1/2 right-1/3 w-2 h-2 rounded-full bg-primary/50 animate-pulse-dot" style={{ animationDelay: '2s' }} />
               </div>
             </div>
-          </AnimatedSection>
+
+          </div>
         </div>
       </section>
 
