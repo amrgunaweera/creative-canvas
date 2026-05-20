@@ -8,7 +8,9 @@ import {
   ArrowRight, Palette, Type, Eye, Grid3X3, Contrast,
 } from "lucide-react";
 import healthcareMockup from "@/assets/images/projects/healthcare/Mockup.jpg";
+import mediwaveLogo from "@/assets/images/projects/healthcare/mediwave-logo-usage.jpg";
 import Navigation from "@/components/Navigation";
+
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { projects } from "@/data/projects";
@@ -907,6 +909,47 @@ const HealthcareAppPage = () => {
             <p className="text-lg text-muted-foreground leading-relaxed">
               The MediRescue design system was engineered for extreme environments — high-contrast readability in bright sunlight and low-light conditions, glove-friendly touch targets, and a visual language that communicates urgency without inducing panic.
             </p>
+          </AnimatedSection>
+
+          {/* Logo & Branding */}
+          <AnimatedSection className="mb-12">
+            <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <HeartPulse className="w-5 h-5 text-primary" />
+              </div>
+              Logo & Branding
+            </h4>
+            
+            <div className="grid md:grid-cols-12 gap-8 items-center bg-card border border-border/50 rounded-3xl p-8 hover:border-primary/30 transition-colors">
+              <div className="md:col-span-5">
+                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-4">Identity</div>
+                <h5 className="font-display text-3xl font-bold text-foreground mb-4">The MediWave Identity</h5>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                  The MediWave branding is engineered to communicate urgency, safety, and clinical excellence. The logo guidelines define strict exclusion zones, secondary lockups, and high-visibility color choices for sirens and emergency screens.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                    <span>Urgent care color specifications (hex / RGB)</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                    <span>Exclusion zones to prevent crowding by other UI elements</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                    <span>Consistent scaling guidelines for physical hardware decals</span>
+                  </div>
+                </div>
+              </div>
+              <div className="md:col-span-7 rounded-2xl overflow-hidden border border-border/40 bg-background/50 p-2">
+                <img 
+                  src={mediwaveLogo} 
+                  alt="MediWave Logo Usage Guide" 
+                  className="w-full h-auto rounded-xl object-contain hover:scale-[1.02] transition-transform duration-500"
+                />
+              </div>
+            </div>
           </AnimatedSection>
 
           {/* Typography */}

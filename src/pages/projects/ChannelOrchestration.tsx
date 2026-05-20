@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Layers, MessageSquare, Mic, Code2, Zap, Globe, BarChart3, Users, Bot, Workflow, Smartphone, Mail, Phone, CheckCircle2, Sparkles, Cog, TrendingUp, Shield, Lightbulb, Palette, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, Layers, MessageSquare, Mic, Code2, Zap, Globe, BarChart3, Users, Bot, Workflow, Smartphone, Mail, Phone, CheckCircle2, Sparkles, Cog, TrendingUp, Shield, Lightbulb, Palette, X, ChevronLeft, ChevronRight, Play, Bell, Folder, Home, FileText, Star } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -9,6 +9,8 @@ import { projects } from "@/data/projects";
 import wireframe1 from "@/assets/images/projects/contact-center/wireframes/Home.jpg";
 import wireframe2 from "@/assets/images/projects/contact-center/wireframes/Autopilot.jpg";
 import wireframe3 from "@/assets/images/projects/contact-center/wireframes/Call Insights.jpg";
+import composeLogo from "@/assets/images/projects/compose/Compose-logo-usage.jpg";
+
 
 import {
   Carousel,
@@ -18,7 +20,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-const composeImagesRaw = import.meta.glob('@/assets/images/projects/compose/*.png', { eager: true, import: 'default' });
+const composeImagesRaw = import.meta.glob('@/assets/images/projects/compose/screens/*.png', { eager: true, import: 'default' });
 const hifiScreens = Object.entries(composeImagesRaw).map(([path, src]: [string, any]) => {
   const filename = path.split('/').pop()?.replace('.png', '') || '';
   const parts = filename.split(' - ');
@@ -103,193 +105,301 @@ const ChannelOrchestrationPage = () => {
                 </div>
               </div>
 
-              {/* Right Column - Floating Dashboard Composition */}
+              {/* Right Column - Floating Canvas Composition matching the user's reference image */}
               <div className="lg:col-span-6 hidden lg:block">
-                <div className="relative w-full h-[540px]" style={{ perspective: '1200px' }}>
+                <div className="relative w-full h-[580px] flex items-center justify-center animate-fade-up-delay-2" style={{ perspective: '1600px' }}>
+                  
+                  {/* Backdrop glowing ambient circles */}
+                  <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-blue-500/10 blur-[80px] pointer-events-none animate-pulse-slow" />
+                  <div className="absolute bottom-1/4 right-1/4 w-[280px] h-[280px] rounded-full bg-primary/10 blur-[90px] pointer-events-none animate-pulse-slow" style={{ animationDelay: '2s' }} />
 
-                  {/* Main Dashboard Panel */}
-                  <div
-                    className="absolute top-4 left-0 w-[340px] rounded-2xl bg-[#0f1623]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl overflow-hidden animate-float-slow"
-                    style={{ transform: 'rotateY(8deg) rotateX(-2deg)', transformStyle: 'preserve-3d' }}
+                  {/* Main Isometric/Tilted Laptop Canvas Frame */}
+                  <div 
+                    className="absolute w-[520px] h-[370px] rounded-2xl bg-card border border-border/80 shadow-2xl overflow-hidden animate-float-slow transition-all duration-500 hover:rotate-y-[6deg]"
+                    style={{ 
+                      transform: 'rotateY(-12deg) rotateX(10deg) rotateZ(-3deg) scale(0.98)', 
+                      transformStyle: 'preserve-3d',
+                      boxShadow: '0 40px 80px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+                    }}
                   >
-                    {/* Dashboard Header */}
-                    <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06]">
-                      <div className="flex gap-1.5">
-                        <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                    {/* Top Window Bar */}
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/30">
+                      <div className="flex items-center gap-6">
+                        <div className="flex gap-1.5">
+                          <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                        </div>
+                        {/* Title bar elements */}
+                        <div className="flex items-center gap-2 text-white/50 text-[10px] font-semibold">
+                          <ArrowLeft className="w-3 h-3 text-white/40" />
+                          <span>Professional</span>
+                        </div>
                       </div>
-                      <span className="text-[10px] text-white/40 font-medium ml-2">Compose Platform</span>
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-2 rounded-full bg-orange-500/80 animate-ping" />
+                        <span className="text-[9px] text-orange-500/80 font-bold uppercase tracking-wider">Live Workspace</span>
+                      </div>
                     </div>
-                    {/* Dashboard Body */}
-                    <div className="flex">
+
+                    {/* Window Workspace Body */}
+                    <div className="flex h-[325px]">
                       {/* Sidebar */}
-                      <div className="w-12 border-r border-white/[0.06] py-4 flex flex-col items-center gap-4">
-                        <div className="w-7 h-7 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                          <Layers className="w-3.5 h-3.5 text-blue-400" />
+                      <div className="w-12 border-r border-border bg-muted/10 py-5 flex flex-col items-center gap-5 shrink-0">
+                        <div className="w-7 h-7 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shadow-sm shadow-orange-500/10 border border-orange-500/20">
+                          <Home className="w-3.5 h-3.5" />
                         </div>
-                        <div className="w-7 h-7 rounded-lg bg-white/[0.04] flex items-center justify-center">
-                          <MessageSquare className="w-3.5 h-3.5 text-white/30" />
+                        <div className="w-7 h-7 rounded-xl bg-white/[0.02] flex items-center justify-center text-white/40 border border-transparent hover:border-white/10 hover:text-white/70 transition-all cursor-pointer">
+                          <FileText className="w-3.5 h-3.5" />
                         </div>
-                        <div className="w-7 h-7 rounded-lg bg-white/[0.04] flex items-center justify-center">
-                          <Users className="w-3.5 h-3.5 text-white/30" />
+                        <div className="w-7 h-7 rounded-xl bg-white/[0.02] flex items-center justify-center text-white/40 border border-transparent hover:border-white/10 hover:text-white/70 transition-all cursor-pointer">
+                          <MessageSquare className="w-3.5 h-3.5" />
                         </div>
-                        <div className="w-7 h-7 rounded-lg bg-white/[0.04] flex items-center justify-center">
-                          <BarChart3 className="w-3.5 h-3.5 text-white/30" />
+                        <div className="w-7 h-7 rounded-xl bg-white/[0.02] flex items-center justify-center text-white/40 border border-transparent hover:border-white/10 hover:text-white/70 transition-all cursor-pointer">
+                          <Folder className="w-3.5 h-3.5" />
                         </div>
-                        <div className="w-7 h-7 rounded-lg bg-white/[0.04] flex items-center justify-center">
-                          <Cog className="w-3.5 h-3.5 text-white/30" />
+                        <div className="w-7 h-7 rounded-xl bg-white/[0.02] flex items-center justify-center text-white/40 border border-transparent hover:border-white/10 hover:text-white/70 transition-all cursor-pointer">
+                          <Globe className="w-3.5 h-3.5" />
                         </div>
                       </div>
-                      {/* Content */}
-                      <div className="flex-1 p-4 space-y-3">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-semibold text-white/70">Active Flows</span>
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 font-medium">12 Live</span>
-                        </div>
-                        {/* Mini flow cards */}
-                        {[
-                          { name: 'WhatsApp Onboarding', status: 'Active', color: 'bg-emerald-500' },
-                          { name: 'IVR Routing Engine', status: 'Active', color: 'bg-blue-500' },
-                          { name: 'SMS Campaign v3', status: 'Draft', color: 'bg-amber-500' },
-                        ].map((flow, i) => (
-                          <div key={i} className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.1] transition-colors">
-                            <div className={`w-2 h-2 rounded-full ${flow.color} shrink-0`} />
-                            <div className="flex-1 min-w-0">
-                              <div className="text-[11px] text-white/80 font-medium truncate">{flow.name}</div>
+
+                      {/* Main Canvas Area (Grid Background) */}
+                      <div className="flex-1 p-5 relative overflow-hidden bg-[#0a0f18]/30" style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '16px 16px' }}>
+                        
+                        {/* "Scennhers" Top Node Box */}
+                        <div className="w-[180px] p-3 rounded-xl bg-card/60 backdrop-blur-md border border-border/80 shadow-md space-y-2.5">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-bold text-white/80 tracking-wide uppercase">Subscriber Flow</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                          </div>
+                          
+                          {/* Mini Avatar and Waveform */}
+                          <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/10 relative overflow-hidden">
+                              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Avatar" className="w-full h-full object-cover" />
+                              <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-amber-500 border border-card" />
                             </div>
-                            <span className="text-[9px] text-white/40 font-medium">{flow.status}</span>
+                            <div className="flex-1 space-y-1">
+                              <div className="h-1.5 w-16 bg-white/10 rounded" />
+                              <div className="h-1 w-10 bg-white/5 rounded" />
+                            </div>
                           </div>
-                        ))}
-                        {/* Mini chart */}
-                        <div className="pt-2">
-                          <div className="text-[10px] text-white/40 mb-2">API Calls (24h)</div>
-                          <div className="flex items-end gap-1 h-10">
-                            {[35, 52, 40, 68, 55, 78, 62, 85, 72, 90, 65, 80].map((h, i) => (
-                              <div
-                                key={i}
-                                className="flex-1 rounded-sm bg-blue-500/40"
-                                style={{ height: `${h}%` }}
-                              />
-                            ))}
+
+                          {/* Action Slider */}
+                          <div className="space-y-1 pt-1">
+                            <div className="h-1 w-full bg-white/10 rounded-full relative">
+                              <div className="absolute top-1/2 -translate-y-1/2 left-[30%] w-2 h-2 rounded-full bg-blue-500 shadow shadow-blue-500/50" />
+                              <div className="absolute top-1/2 -translate-y-1/2 left-[70%] w-1.5 h-1.5 rounded-full bg-blue-400" />
+                            </div>
                           </div>
                         </div>
+
+                        {/* "Mvurplains" Bottom Node Box */}
+                        <div className="absolute bottom-5 left-5 w-[160px] p-3 rounded-xl bg-card/60 backdrop-blur-md border border-border/80 shadow-md space-y-2 pt-2.5">
+                          <div className="h-1.5 w-12 bg-white/30 rounded" />
+                          <div className="h-1 w-20 bg-white/10 rounded" />
+                          <div className="flex items-center justify-between pt-1">
+                            <div className="h-4 w-12 rounded bg-white/5 border border-white/10" />
+                            <div className="px-2 py-1 rounded bg-blue-500 text-[8px] font-bold text-white shadow shadow-blue-500/30 flex items-center justify-center">
+                              Run
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Canvas Flow Connection Path */}
+                        <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
+                          <path d="M 120 70 Q 180 70, 200 120 T 260 160" fill="none" stroke="rgba(59, 130, 246, 0.3)" strokeWidth="1.5" strokeDasharray="3 3" />
+                          <path d="M 90 120 Q 90 220, 220 220" fill="none" stroke="rgba(139, 92, 246, 0.2)" strokeWidth="1.5" />
+                        </svg>
                       </div>
                     </div>
                   </div>
 
-                  {/* Contact / Profile Card */}
-                  <div
-                    className="absolute top-2 right-0 w-[240px] rounded-2xl bg-card/95 backdrop-blur-xl border border-border/60 shadow-2xl p-5 animate-float-medium"
-                    style={{ transform: 'rotateY(-4deg) rotateX(2deg)', animationDelay: '1s', transformStyle: 'preserve-3d' }}
+                  {/* Overlapping Dark Flow Map Card (Back Center) */}
+                  <div 
+                    className="absolute w-[220px] h-[160px] rounded-xl bg-slate-950/90 backdrop-blur-xl border border-white/5 shadow-2xl p-4 animate-float-reverse transition-all duration-300 hover:scale-105"
+                    style={{ 
+                      transform: 'translate3d(-20px, 40px, 60px) rotateY(-8deg) rotateX(10deg) rotateZ(-2deg)', 
+                      transformStyle: 'preserve-3d',
+                      zIndex: 20
+                    }}
                   >
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-5 h-5 rounded-md bg-blue-500/20 flex items-center justify-center">
-                        <Users className="w-3 h-3 text-blue-400" />
-                      </div>
-                      <span className="text-xs font-semibold text-foreground">Customer Profile</span>
+                    <div className="flex items-center gap-1.5 mb-2.5 pb-1.5 border-b border-white/5">
+                      <Workflow className="w-3.5 h-3.5 text-blue-400" />
+                      <span className="text-[9px] font-bold text-white/50 tracking-wider uppercase">Orchestration Graph</span>
                     </div>
-                    <div className="flex items-center gap-3 mb-4">
-                      <img src="https://i.pravatar.cc/80?img=32" alt="Customer" className="w-11 h-11 rounded-xl object-cover border border-border/50" />
-                      <div>
-                        <div className="text-sm font-bold text-foreground leading-tight">Elena Martinez</div>
-                        <div className="text-[10px] text-muted-foreground mt-0.5">Premium · Since 2021</div>
+
+                    {/* Nodes map preview */}
+                    <div className="relative w-full h-[90px] rounded-lg bg-black/40 border border-white/5 overflow-hidden flex items-center justify-center">
+                      <div className="absolute top-3 left-4 w-3 h-3 rounded-full bg-blue-500/20 border border-blue-500/50 flex items-center justify-center">
+                        <div className="w-1 h-1 rounded-full bg-blue-400" />
+                      </div>
+                      <div className="absolute top-12 left-16 w-3 h-3 rounded-full bg-violet-500/20 border border-violet-500/50 flex items-center justify-center">
+                        <div className="w-1 h-1 rounded-full bg-violet-400" />
+                      </div>
+                      <div className="absolute bottom-3 right-5 w-3 h-3 rounded-full bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center">
+                        <div className="w-1 h-1 rounded-full bg-emerald-400" />
+                      </div>
+
+                      {/* Connection Graph Lines */}
+                      <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                        <line x1="22" y1="18" x2="68" y2="54" stroke="rgba(59, 130, 246, 0.4)" strokeWidth="1" />
+                        <line x1="76" y1="54" x2="152" y2="78" stroke="rgba(139, 92, 246, 0.4)" strokeWidth="1" />
+                        <path d="M 22 18 Q 70 10, 152 78" fill="none" stroke="rgba(251, 191, 36, 0.2)" strokeWidth="1" strokeDasharray="2 2" />
+                      </svg>
+
+                      {/* Status pill */}
+                      <div className="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-[7px] text-blue-400 font-bold uppercase tracking-wider">
+                        Active Node
                       </div>
                     </div>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] text-muted-foreground">Satisfaction</span>
-                        <div className="flex gap-0.5">
-                          {[1,2,3,4,5].map(s => (
-                            <div key={s} className={`w-3 h-3 rounded-sm ${s <= 4 ? 'bg-emerald-500/80' : 'bg-border/60'}`} />
-                          ))}
+                  </div>
+
+                  {/* Overlapping White Dialog/Modal Card (Front Center) - EXACT MATCH */}
+                  <div 
+                    className="absolute w-[290px] h-[190px] rounded-xl bg-white border border-slate-200 shadow-2xl p-4 animate-float-medium transition-all duration-300 hover:scale-105"
+                    style={{ 
+                      transform: 'translate3d(60px, 30px, 120px) rotateY(-12deg) rotateX(12deg) rotateZ(-3deg)', 
+                      transformStyle: 'preserve-3d',
+                      zIndex: 30,
+                      animationDelay: '1.2s'
+                    }}
+                  >
+                    {/* Title Header */}
+                    <div className="flex items-center gap-1.5 mb-3.5 text-slate-800">
+                      <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center">
+                        <Bot className="w-2.5 h-2.5 text-slate-600" />
+                      </div>
+                      <span className="text-[10px] font-bold tracking-tight text-slate-700">AI Prompt Config</span>
+                    </div>
+
+                    <div className="flex gap-4">
+                      {/* Left Side: Mock Forms, Slider & Buttons */}
+                      <div className="flex-1 space-y-2.5">
+                        {/* Mock Text Fields */}
+                        <div className="space-y-1">
+                          <div className="h-1.5 w-full bg-slate-100 rounded-full" />
+                          <div className="h-1.5 w-[85%] bg-slate-100 rounded-full" />
+                          <div className="h-1.5 w-[60%] bg-slate-100 rounded-full" />
+                        </div>
+
+                        {/* Custom Slider */}
+                        <div className="py-1">
+                          <div className="h-1 w-full bg-slate-100 rounded-full relative">
+                            <div className="absolute top-1/2 -translate-y-1/2 left-[60%] w-2.5 h-2.5 rounded-full bg-blue-500 shadow-sm border border-white cursor-pointer" />
+                          </div>
+                        </div>
+
+                        {/* CTA Buttons */}
+                        <div className="flex items-center gap-2 pt-2.5">
+                          <button className="flex-1 py-1 px-2 rounded-md bg-blue-600 hover:bg-blue-700 text-[8px] font-bold text-white shadow-sm shadow-blue-500/20 transition-all">
+                            Configure
+                          </button>
+                          <button className="flex-1 py-1 px-2 rounded-md bg-emerald-500 hover:bg-emerald-600 text-[8px] font-bold text-white shadow-sm shadow-emerald-500/20 transition-all">
+                            Active
+                          </button>
                         </div>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] text-muted-foreground">Active Channels</span>
-                        <div className="flex -space-x-1">
-                          {['bg-emerald-500', 'bg-blue-500', 'bg-violet-500'].map((c, i) => (
-                            <div key={i} className={`w-4 h-4 rounded-full ${c} border-2 border-card`} />
-                          ))}
+
+                      {/* Right Side: Portrait Image */}
+                      <div className="w-[85px] shrink-0">
+                        <div className="w-[85px] h-[95px] rounded-lg overflow-hidden border border-slate-100 bg-slate-50 shadow-sm relative group/avatar">
+                          <img 
+                            src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" 
+                            alt="AI Persona" 
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover/avatar:scale-110" 
+                          />
+                          <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover/avatar:opacity-100 transition-opacity" />
                         </div>
                       </div>
                     </div>
-                    <button className="mt-4 w-full text-[11px] font-semibold text-white bg-blue-500 hover:bg-blue-600 transition-colors rounded-lg py-2 px-3">
-                      View Full Profile
-                    </button>
                   </div>
 
-                  {/* Analytics Mini Card */}
-                  <div
-                    className="absolute bottom-24 right-8 w-[200px] rounded-2xl bg-card/95 backdrop-blur-xl border border-border/60 shadow-xl p-4 animate-float-fast"
-                    style={{ animationDelay: '2s' }}
+                  {/* Floating Play Button Accent Card (Top Center) */}
+                  <div 
+                    className="absolute w-[95px] h-[65px] rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-2xl p-2 animate-float-fast flex flex-col justify-between"
+                    style={{ 
+                      transform: 'translate3d(-80px, -110px, 90px) rotateY(-8deg) rotateX(10deg) rotateZ(-1deg)',
+                      zIndex: 25,
+                      animationDelay: '0.4s'
+                    }}
                   >
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="w-5 h-5 rounded-md bg-emerald-500/20 flex items-center justify-center">
-                        <TrendingUp className="w-3 h-3 text-emerald-400" />
+                    <div className="h-1 w-8 bg-white/20 rounded" />
+                    <div className="flex items-center justify-center py-1">
+                      <div className="w-7 h-7 rounded-full bg-blue-500 hover:bg-blue-600 transition-all shadow-md shadow-blue-500/40 flex items-center justify-center cursor-pointer">
+                        <Play className="w-3.5 h-3.5 fill-white text-white translate-x-[1px]" />
                       </div>
-                      <span className="text-[11px] font-semibold text-foreground">Resolution Rate</span>
-                    </div>
-                    <div className="flex items-end gap-2">
-                      <span className="text-2xl font-bold text-foreground leading-none">94.2%</span>
-                      <span className="text-[10px] font-semibold text-emerald-400 mb-1">↑ 12%</span>
-                    </div>
-                    <div className="mt-3 w-full h-1.5 rounded-full bg-border/50 overflow-hidden">
-                      <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400" style={{ width: '94%' }} />
                     </div>
                   </div>
 
-                  {/* Floating Channel Badges */}
-                  <div className="absolute bottom-12 left-8 flex gap-2 animate-float-reverse" style={{ animationDelay: '0.5s' }}>
-                    {[
-                      { icon: MessageSquare, color: 'bg-emerald-500/15 text-emerald-400', label: 'WhatsApp' },
-                      { icon: Phone, color: 'bg-amber-500/15 text-amber-400', label: 'IVR' },
-                      { icon: Mail, color: 'bg-red-500/15 text-red-400', label: 'Email' },
-                    ].map((ch, i) => (
-                      <div key={i} className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-card/90 backdrop-blur-md border border-border/50 shadow-lg">
-                        <div className={`w-5 h-5 rounded-md ${ch.color} flex items-center justify-center`}>
-                          <ch.icon className="w-3 h-3" />
-                        </div>
-                        <span className="text-[10px] font-semibold text-foreground">{ch.label}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* AI Bot Badge */}
+                  {/* Connected Logic Nodes (Right Side of Overlay Card) */}
+                  
+                  {/* Notification bubble (White background card) */}
                   <div
-                    className="absolute top-[240px] left-[145px] w-[120px] rounded-xl bg-blue-500/10 backdrop-blur-xl border border-blue-500/20 shadow-xl p-3 animate-float-fast"
-                    style={{ animationDelay: '3s' }}
+                    className="absolute w-[130px] rounded-lg bg-white border border-slate-200/90 shadow-xl p-2.5 animate-float-slow flex items-start gap-2"
+                    style={{ 
+                      transform: 'translate3d(230px, -60px, 80px) rotateY(-10deg) rotateX(8deg) rotateZ(-2deg)', 
+                      zIndex: 35,
+                      animationDelay: '1.6s'
+                    }}
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                        <Bot className="w-4 h-4 text-white" />
-                      </div>
-                      <div>
-                        <div className="text-[10px] font-bold text-blue-400">AI Agent</div>
-                        <div className="text-[9px] text-blue-400/60">Online</div>
-                      </div>
+                    <div className="w-6 h-6 rounded-md bg-amber-100 flex items-center justify-center shrink-0 relative">
+                      <Bell className="w-3 h-3 text-amber-600" />
+                      <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-rose-500 rounded-full animate-ping" />
+                    </div>
+                    <div className="flex-1 min-w-0 space-y-0.5">
+                      <div className="text-[7.5px] font-bold text-slate-800 uppercase tracking-wider">Alert Trigger</div>
+                      <div className="text-[6.5px] text-slate-400 truncate">Escalated to voice</div>
                     </div>
                   </div>
 
-                  {/* Floating Connection Dots */}
-                  <div className="absolute top-[180px] left-[310px] w-3 h-3 rounded-full bg-blue-500/60 animate-pulse-dot" />
-                  <div className="absolute top-[280px] right-[60px] w-2.5 h-2.5 rounded-full bg-emerald-500/60 animate-pulse-dot" style={{ animationDelay: '0.7s' }} />
-                  <div className="absolute bottom-[170px] left-[340px] w-2 h-2 rounded-full bg-amber-500/60 animate-pulse-dot" style={{ animationDelay: '1.4s' }} />
+                  {/* Blue Star Node Badge */}
+                  <div
+                    className="absolute w-8 h-8 rounded-lg bg-blue-500/10 backdrop-blur-md border border-blue-500/30 shadow-lg flex items-center justify-center animate-float-medium"
+                    style={{ 
+                      transform: 'translate3d(230px, 50px, 50px) rotateY(-8deg)', 
+                      zIndex: 22,
+                      animationDelay: '0.8s'
+                    }}
+                  >
+                    <Star className="w-4 h-4 text-blue-400 fill-blue-400" />
+                  </div>
 
-                  {/* Decorative Connector Lines (SVG) */}
-                  <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
-                    <line x1="340" y1="180" x2="380" y2="140" stroke="hsl(var(--primary))" strokeWidth="1" strokeOpacity="0.15" strokeDasharray="4 3" />
-                    <line x1="340" y1="180" x2="350" y2="280" stroke="hsl(217, 91%, 60%)" strokeWidth="1" strokeOpacity="0.12" strokeDasharray="4 3" />
-                    <line x1="380" y1="300" x2="420" y2="350" stroke="hsl(142, 71%, 45%)" strokeWidth="1" strokeOpacity="0.12" strokeDasharray="4 3" />
+                  {/* Red Square Badge with Shape */}
+                  <div
+                    className="absolute w-9 h-9 rounded-xl bg-gradient-to-tr from-rose-500 to-orange-500 border border-white/20 shadow-xl flex items-center justify-center animate-float-fast hover:scale-110 transition-transform cursor-pointer"
+                    style={{ 
+                      transform: 'translate3d(280px, 120px, 40px) rotateY(-10deg) rotateZ(5deg)', 
+                      zIndex: 23,
+                      animationDelay: '2.1s'
+                    }}
+                  >
+                    <Zap className="w-4 h-4 text-white fill-white" />
+                  </div>
+
+                  {/* Yellow key/icon badge */}
+                  <div
+                    className="absolute w-7 h-7 rounded-lg bg-amber-500 border border-white/20 shadow-xl flex items-center justify-center animate-float-reverse cursor-pointer"
+                    style={{ 
+                      transform: 'translate3d(220px, 160px, 30px) rotateY(-8deg) rotateZ(-3deg)', 
+                      zIndex: 21,
+                      animationDelay: '1.4s'
+                    }}
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-white" />
+                  </div>
+
+                  {/* Animated Connecting lines on the right side of the canvas */}
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 15 }}>
+                    {/* Connection between Dialog and Notification Alert */}
+                    <path d="M 330 260 C 370 240, 420 180, 440 180" fill="none" stroke="rgba(251, 191, 36, 0.4)" strokeWidth="1" strokeDasharray="3 3" />
+                    {/* Connection between Dialog and Blue Star */}
+                    <path d="M 330 290 Q 380 290, 430 300" fill="none" stroke="rgba(59, 130, 246, 0.4)" strokeWidth="1.2" />
+                    {/* Connection between Blue Star and Red Badge */}
+                    <path d="M 445 320 L 485 365" fill="none" stroke="rgba(244, 63, 94, 0.4)" strokeWidth="1.2" />
+                    {/* Connection between Blue Star and Yellow Badge */}
+                    <path d="M 445 320 L 420 380" fill="none" stroke="rgba(251, 191, 36, 0.4)" strokeWidth="1" strokeDasharray="2 2" />
                   </svg>
-
-                  {/* Small floating icon accents */}
-                  <div className="absolute top-[100px] right-[245px] w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center animate-float-reverse shadow-lg" style={{ animationDelay: '2.5s' }}>
-                    <Zap className="w-4 h-4 text-primary" />
-                  </div>
-                  <div className="absolute bottom-[60px] right-[220px] w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center animate-float-slow shadow-lg" style={{ animationDelay: '1.8s' }}>
-                    <Workflow className="w-4 h-4 text-violet-400" />
-                  </div>
 
                 </div>
               </div>
@@ -410,8 +520,8 @@ const ChannelOrchestrationPage = () => {
                   { icon: Globe, title: "Multilingual NLP Support", desc: "Equip CX apps with accurate, automated support in multiple languages using advanced natural language processing." },
                 ].map((item, i) => (
                   <div key={i} className={`bg-card hover:bg-card/80 transition-colors rounded-2xl p-6 border border-border/50 shadow-sm hover:shadow-md group ${i % 2 === 1 ? 'sm:mt-8' : ''}`}>
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:-translate-y-1 transition-transform duration-300">
-                      <item.icon className="w-5 h-5 text-primary" />
+                    <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center mb-5 group-hover:-translate-y-1 transition-transform duration-300">
+                      <item.icon className="w-5 h-5 text-orange-500" />
                     </div>
                     <strong className="text-foreground block text-lg mb-2">{item.title}</strong>
                     <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
@@ -423,94 +533,110 @@ const ChannelOrchestrationPage = () => {
         </div>
       </section>
 
-      {/* Channel Integration Map */}
-      <section className="py-16 sm:py-24 border-t border-border/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+      {/* Omnichannel & AI Automation */}
+      <section className="py-16 sm:py-24 border-t border-border/50 relative overflow-hidden bg-gradient-to-b from-background via-secondary/10 to-background">
+        <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <AnimatedSection className="max-w-3xl mb-12">
-            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Integration</span>
-            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Seamless Channel Integration</h3>
+            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Omnichannel & AI Engine</span>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Unified Channels & AI Automation</h3>
             <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-              A unified approach connecting legacy systems with cutting-edge digital applications, enabling rapid transformation without losing existing investments.
+              Unifying legacy communications with digital channels and powering them with state-of-the-art conversational voice and text AI.
             </p>
           </AnimatedSection>
 
-          <AnimatedSection>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {[
-                { icon: MessageSquare, label: "SMS", color: "bg-blue-500/10 text-blue-500" },
-                { icon: Phone, label: "USSD", color: "bg-purple-500/10 text-purple-500" },
-                { icon: Mic, label: "IVR", color: "bg-amber-500/10 text-amber-500" },
-                { icon: Mail, label: "Email", color: "bg-red-500/10 text-red-500" },
-                { icon: MessageSquare, label: "Live Chat", color: "bg-green-500/10 text-green-500" },
-                { icon: Globe, label: "Webchat", color: "bg-cyan-500/10 text-cyan-500" },
-                { icon: MessageSquare, label: "WhatsApp", color: "bg-emerald-500/10 text-emerald-500" },
-                { icon: MessageSquare, label: "Messenger", color: "bg-blue-600/10 text-blue-600" },
-                { icon: MessageSquare, label: "Telegram", color: "bg-sky-500/10 text-sky-500" },
-                { icon: MessageSquare, label: "Viber", color: "bg-violet-500/10 text-violet-500" },
-                { icon: MessageSquare, label: "Instagram", color: "bg-pink-500/10 text-pink-500" },
-                { icon: Layers, label: "Custom API", color: "bg-primary/10 text-primary" },
-              ].map((ch, i) => (
-                <div key={i} className="p-5 rounded-2xl bg-card border border-border/50 flex flex-col items-center gap-3 hover:border-primary/40 hover:shadow-md transition-all group">
-                  <div className={`w-12 h-12 rounded-xl ${ch.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                    <ch.icon className="w-5 h-5" />
-                  </div>
-                  <span className="text-sm font-semibold text-foreground">{ch.label}</span>
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+            {/* Left side: Channel Integration Grid */}
+            <AnimatedSection className="lg:col-span-6 h-full flex flex-col">
+              <div className="p-6 sm:p-8 rounded-3xl bg-card border border-border/50 h-full flex flex-col justify-between">
+                <div>
+                  <h4 className="font-display font-bold text-xl sm:text-2xl mb-2">Seamless Channel Integration</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                    Connect legacy protocols with modern chat networks to route interactions dynamically.
+                  </p>
                 </div>
-              ))}
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                  {[
+                    { icon: MessageSquare, label: "SMS", color: "bg-orange-500/10 text-orange-500" },
+                    { icon: Phone, label: "USSD", color: "bg-orange-500/10 text-orange-500" },
+                    { icon: Mic, label: "IVR", color: "bg-orange-500/10 text-orange-500" },
+                    { icon: Mail, label: "Email", color: "bg-orange-500/10 text-orange-500" },
+                    { icon: MessageSquare, label: "Live Chat", color: "bg-orange-500/10 text-orange-500" },
+                    { icon: Globe, label: "Webchat", color: "bg-orange-500/10 text-orange-500" },
+                    { icon: MessageSquare, label: "WhatsApp", color: "bg-orange-500/10 text-orange-500" },
+                    { icon: MessageSquare, label: "Messenger", color: "bg-orange-500/10 text-orange-500" },
+                    { icon: MessageSquare, label: "Telegram", color: "bg-orange-500/10 text-orange-500" },
+                    { icon: MessageSquare, label: "Viber", color: "bg-orange-500/10 text-orange-500" },
+                    { icon: MessageSquare, label: "Instagram", color: "bg-orange-500/10 text-orange-500" },
+                    { icon: Layers, label: "Custom API", color: "bg-orange-500/10 text-orange-500" },
+                  ].map((ch, i) => (
+                    <div key={i} className="p-3.5 rounded-xl bg-secondary/30 border border-border/40 flex flex-col items-center gap-2 hover:border-orange-500/40 hover:bg-secondary/50 hover:shadow-sm transition-all group cursor-default">
+                      <div className={`w-9 h-9 rounded-lg ${ch.color} flex items-center justify-center group-hover:scale-105 transition-transform`}>
+                        <ch.icon className="w-4 h-4" />
+                      </div>
+                      <span className="text-[11px] font-bold text-foreground text-center truncate w-full">{ch.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
+ 
+            {/* Right side: Voice & Text AI Cards */}
+            <div className="lg:col-span-6 flex flex-col gap-6">
+              {/* Voice Card */}
+              <AnimatedSection delay={50} className="flex-1 flex flex-col h-full">
+                <div className="p-6 sm:p-8 rounded-3xl bg-card border border-border/50 relative overflow-hidden group hover:shadow-lg transition-all h-full flex flex-col justify-between">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-full blur-2xl -mr-8 -mt-8" />
+                  <div>
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                        <Mic className="w-6 h-6 text-orange-500" />
+                      </div>
+                      <h4 className="font-display font-bold text-xl sm:text-2xl">Voice Automation</h4>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                      Advanced voice AI agents that handle natural conversations, customer interruptions, and seamless handoffs with empathy and context.
+                    </p>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-2">
+                    {["Context-aware interruption", "Emotional tone detection", "Seamless call-to-digital"].map((f, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-orange-500 shrink-0" />
+                        <span className="text-[12px] font-medium text-foreground">{f}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </AnimatedSection>
+ 
+              {/* Text Card */}
+              <AnimatedSection delay={100} className="flex-1 flex flex-col h-full">
+                <div className="p-6 sm:p-8 rounded-3xl bg-card border border-border/50 relative overflow-hidden group hover:shadow-lg transition-all h-full flex flex-col justify-between">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-full blur-2xl -mr-8 -mt-8" />
+                  <div>
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                        <MessageSquare className="w-6 h-6 text-orange-500" />
+                      </div>
+                      <h4 className="font-display font-bold text-xl sm:text-2xl">Text Automation</h4>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                      Dynamic text conversations powered by LLM agents that listen, understand intent, and deliver personalized responses across your customer's favorite apps.
+                    </p>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-2">
+                    {["Natural language understanding", "Personalized responses", "Cross-channel threading"].map((f, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-orange-500 shrink-0" />
+                        <span className="text-[12px] font-medium text-foreground">{f}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </AnimatedSection>
             </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Voice & Text AI */}
-      <section className="py-16 sm:py-24 border-t border-border/50 relative overflow-hidden">
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-          <AnimatedSection className="max-w-3xl mb-12">
-            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">AI Capabilities</span>
-            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Voice & Text AI Automation</h3>
-            <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
-          </AnimatedSection>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <AnimatedSection className="p-8 rounded-3xl bg-card border border-border/50 relative overflow-hidden group hover:shadow-lg transition-all">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl -mr-10 -mt-10" />
-              <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6">
-                <Mic className="w-7 h-7 text-blue-500" />
-              </div>
-              <h4 className="font-display font-bold text-2xl mb-4">Voice Automation</h4>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                Advanced voice AI agents that deliver seamless communication across channels. Built to handle customer interruptions with context and empathy, ensuring smooth transitions and effortlessly resuming previous conversations.
-              </p>
-              <div className="space-y-3">
-                {["Context-aware interruption handling", "Emotional tone detection", "Seamless call-to-digital handoff"].map((f, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-blue-500 shrink-0" />
-                    <span className="text-sm font-medium text-foreground">{f}</span>
-                  </div>
-                ))}
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={100} className="p-8 rounded-3xl bg-card border border-border/50 relative overflow-hidden group hover:shadow-lg transition-all">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl -mr-10 -mt-10" />
-              <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-6">
-                <MessageSquare className="w-7 h-7 text-emerald-500" />
-              </div>
-              <h4 className="font-display font-bold text-2xl mb-4">Text Automation</h4>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                Dynamic, human-like text conversations powered by AI agents that intuitively listen, understand context, and deliver personalized responses tailored to individual needs across preferred channels.
-              </p>
-              <div className="space-y-3">
-                {["Natural language understanding", "Personalized response generation", "Cross-channel conversation threading"].map((f, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span className="text-sm font-medium text-foreground">{f}</span>
-                  </div>
-                ))}
-              </div>
-            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -546,22 +672,22 @@ const ChannelOrchestrationPage = () => {
                   <div>
                     <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
                     <ul className="space-y-2">
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Unify customer experience</span></li>
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Deploy flows without IT delay</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Unify customer experience</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Deploy flows without IT delay</span></li>
                     </ul>
                   </div>
                   <div>
                     <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
                     <ul className="space-y-2">
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Fragmented management tools</span></li>
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Slow time-to-market</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Fragmented management tools</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Slow time-to-market</span></li>
                     </ul>
                   </div>
                   <div>
                     <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
                     <ul className="space-y-2">
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Drag-and-drop builder</span></li>
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Unified analytics dashboard</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Drag-and-drop builder</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Unified analytics dashboard</span></li>
                     </ul>
                   </div>
                 </div>
@@ -586,22 +712,22 @@ const ChannelOrchestrationPage = () => {
                   <div>
                     <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
                     <ul className="space-y-2">
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Connect legacy systems securely</span></li>
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Maintain system reliability</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Connect legacy systems securely</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Maintain system reliability</span></li>
                     </ul>
                   </div>
                   <div>
                     <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
                     <ul className="space-y-2">
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Custom integrations for each app</span></li>
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>API maintenance overhead</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Custom integrations for each app</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>API maintenance overhead</span></li>
                     </ul>
                   </div>
                   <div>
                     <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
                     <ul className="space-y-2">
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Single orchestration API layer</span></li>
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Pre-built channel connectors</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Single orchestration API layer</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Pre-built channel connectors</span></li>
                     </ul>
                   </div>
                 </div>
@@ -626,22 +752,22 @@ const ChannelOrchestrationPage = () => {
                   <div>
                     <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
                     <ul className="space-y-2">
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Resolve issues on first contact</span></li>
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Use preferred channels (WhatsApp/Web)</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Resolve issues on first contact</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Use preferred channels (WhatsApp/Web)</span></li>
                     </ul>
                   </div>
                   <div>
                     <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
                     <ul className="space-y-2">
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Repeating info when switching channels</span></li>
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Inconsistent bot interactions</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Repeating info when switching channels</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Inconsistent bot interactions</span></li>
                     </ul>
                   </div>
                   <div>
                     <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
                     <ul className="space-y-2">
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Seamless context preservation</span></li>
-                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" /><span>Intelligent, human-like AI responses</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Seamless context preservation</span></li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" /><span>Intelligent, human-like AI responses</span></li>
                     </ul>
                   </div>
                 </div>
@@ -668,8 +794,8 @@ const ChannelOrchestrationPage = () => {
             
             <div className="relative z-10">
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Workflow className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                  <Workflow className="w-6 h-6 text-orange-500" />
                 </div>
                 <div>
                   <h4 className="text-2xl font-display font-bold text-foreground">Cross-Channel Context Handoff</h4>
@@ -703,7 +829,7 @@ const ChannelOrchestrationPage = () => {
                 {/* Connecting Line */}
                 <div className="relative min-w-[800px] h-8 my-2">
                   <svg className="w-full h-full" viewBox="0 0 800 32" fill="none" preserveAspectRatio="none">
-                    <path d="M 80 24 Q 160 24, 240 16 Q 320 8, 400 12 Q 480 16, 560 8 Q 640 4, 720 4" stroke="currentColor" className="text-primary/40" strokeWidth="2" strokeDasharray="6 4" fill="none" />
+                    <path d="M 80 24 Q 160 24, 240 16 Q 320 8, 400 12 Q 480 16, 560 8 Q 640 4, 720 4" stroke="currentColor" className="text-orange-500/40" strokeWidth="2" strokeDasharray="6 4" fill="none" />
                   </svg>
                 </div>
 
@@ -720,7 +846,7 @@ const ChannelOrchestrationPage = () => {
                       {stage.actions.map((action, j) => (
                         <div key={j} className="bg-background rounded-xl p-3 border border-border/50 shadow-sm">
                           <div className="flex items-start gap-2">
-                            <action.icon className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                            <action.icon className="w-4 h-4 text-orange-500 shrink-0 mt-0.5" />
                             <span className="text-xs font-medium text-muted-foreground leading-snug">{action.text}</span>
                           </div>
                         </div>
@@ -770,6 +896,130 @@ const ChannelOrchestrationPage = () => {
         </div>
       </section>
 
+      {/* ── Key Features Designed ── */}
+      <section className="py-16 sm:py-24 border-t border-border/50 bg-secondary/5 relative">
+        <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative">
+          <AnimatedSection className="mb-16 max-w-3xl">
+            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Architectural Blueprint</span>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl mb-6">Key Features Designed</h3>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              We translated Global WaveNet's robust AI Orchestration and Digital Channel Integration capabilities into high-fidelity user flows, focusing on developer speed, real-time analytics, and visual low-code logic.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {/* Feature 1: Low-Code AI Builder */}
+            <AnimatedSection className="group relative bg-card border border-border/50 hover:border-orange-500/50 hover:shadow-2xl hover:shadow-orange-500/5 rounded-3xl p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Workflow className="w-6 h-6 text-orange-500" />
+                </div>
+                <h4 className="font-display text-xl font-bold text-foreground mb-3 group-hover:text-orange-500 transition-colors">Low-Code AI Orchestrator</h4>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Designed a drag-and-drop visual logic canvas enabling teams to orchestrate and deploy complex AI workflows without writing extensive code, dramatically speeding up time-to-market.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50">
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Visual Nodes</span>
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Draggable Canvas</span>
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Zero-Code Deploy</span>
+              </div>
+            </AnimatedSection>
+
+            {/* Feature 2: Omnichannel Channel Integration */}
+            <AnimatedSection className="group relative bg-card border border-border/50 hover:border-orange-500/50 hover:shadow-2xl hover:shadow-orange-500/5 rounded-3xl p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between" delay={100}>
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Globe className="w-6 h-6 text-orange-500" />
+                </div>
+                <h4 className="font-display text-xl font-bold text-foreground mb-3 group-hover:text-orange-500 transition-colors">Unified Omnichannel Connectivity</h4>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Structured interfaces to bridge legacy channels (SMS, USSD, IVR, Email) with modern messaging channels (WhatsApp, Live Chat, Telegram, Instagram, Messenger, Viber) in one cohesive workspace.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50">
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Legacy + Digital</span>
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Unified Inbox</span>
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Multi-Channel Routing</span>
+              </div>
+            </AnimatedSection>
+
+            {/* Feature 3: Conversational Voice & Text AI */}
+            <AnimatedSection className="group relative bg-card border border-border/50 hover:border-orange-500/50 hover:shadow-2xl hover:shadow-orange-500/5 rounded-3xl p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between" delay={200}>
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Bot className="w-6 h-6 text-orange-500" />
+                </div>
+                <h4 className="font-display text-xl font-bold text-foreground mb-3 group-hover:text-orange-500 transition-colors">Voice & Text Automation</h4>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Crafted UX flows for advanced voice and text AI agents that maintain conversational continuity, handle interruptions with empathy, and deliver highly contextual, personalized responses.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50">
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">NLP Engine</span>
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Interrupt Handling</span>
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Empathy-Aware</span>
+              </div>
+            </AnimatedSection>
+
+            {/* Feature 4: Centralized Orchestration Dashboard */}
+            <AnimatedSection className="group relative bg-card border border-border/50 hover:border-orange-500/50 hover:shadow-2xl hover:shadow-orange-500/5 rounded-3xl p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between" delay={300}>
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <BarChart3 className="w-6 h-6 text-orange-500" />
+                </div>
+                <h4 className="font-display text-xl font-bold text-foreground mb-3 group-hover:text-orange-500 transition-colors">Real-Time Analytics Dashboard</h4>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Designed real-time monitoring interfaces for API health, system resource usage, developer activity logs, and unified customer journey analytics across disparate communication nodes.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50">
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">API Monitoring</span>
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Customer Journeys</span>
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Live Diagnostics</span>
+              </div>
+            </AnimatedSection>
+
+            {/* Feature 5: AI Workflow Automation */}
+            <AnimatedSection className="group relative bg-card border border-border/50 hover:border-orange-500/50 hover:shadow-2xl hover:shadow-orange-500/5 rounded-3xl p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between" delay={400}>
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Zap className="w-6 h-6 text-orange-500" />
+                </div>
+                <h4 className="font-display text-xl font-bold text-foreground mb-3 group-hover:text-orange-500 transition-colors">AI Workflow Automation</h4>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Automated repetitive operations like API generation, microservice configuration, and deployments to achieve 5x faster development cycles and minimize developer overhead.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50">
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Auto-API Generation</span>
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Microservices</span>
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Continuous Sync</span>
+              </div>
+            </AnimatedSection>
+
+            {/* Feature 6: Pre-Built Use Case Templates */}
+            <AnimatedSection className="group relative bg-card border border-border/50 hover:border-orange-500/50 hover:shadow-2xl hover:shadow-orange-500/5 rounded-3xl p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between" delay={500}>
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Lightbulb className="w-6 h-6 text-orange-500" />
+                </div>
+                <h4 className="font-display text-xl font-bold text-foreground mb-3 group-hover:text-orange-500 transition-colors">Ready-to-Use Templates</h4>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  Created an extensive system of UI templates for common telco and customer service use cases (e.g. self-service, ticketing, upselling campaigns) that boost time-to-market by 3x.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50">
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Pre-Configured Flows</span>
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Multi-Language NLP</span>
+                <span className="text-[10px] bg-secondary px-2.5 py-1 rounded-full text-foreground/80 font-medium">Instant Spin Up</span>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
       {/* ── Visual Design & UI System ── */}
       <section className="py-16 sm:py-24 border-t border-border/50 relative overflow-hidden bg-gradient-to-br from-background via-secondary/10 to-background">
          <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2" />
@@ -783,11 +1033,52 @@ const ChannelOrchestrationPage = () => {
             </AnimatedSection>
 
             <div className="space-y-16">
+                {/* Logo & Branding */}
+                <AnimatedSection>
+                  <div className="flex items-center gap-4 mb-8 border-b border-border/50 pb-4">
+                    <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                      <Sparkles className="w-5 h-5 text-orange-500" />
+                    </div>
+                    <h4 className="font-display font-bold text-2xl text-foreground">Logo & Branding</h4>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-12 gap-8 items-center bg-card border border-border/50 rounded-3xl p-8 hover:border-primary/30 transition-colors">
+                    <div className="md:col-span-5">
+                      <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-4">Identity</div>
+                      <h5 className="font-display text-3xl font-bold text-foreground mb-4">The Compose Logo</h5>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                        The Compose visual identity represents omnichannel fluidity, connection, and low-code simplicity. The logo uses geometric precision and consistent spacing guidelines to maintain integrity across print, web, and UI applications.
+                      </p>
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                           <CheckCircle2 className="w-4 h-4 text-orange-500 shrink-0" />
+                          <span>Strict exclusion zone guidelines</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                           <CheckCircle2 className="w-4 h-4 text-orange-500 shrink-0" />
+                          <span>Optimized for dark mode background environments</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                           <CheckCircle2 className="w-4 h-4 text-orange-500 shrink-0" />
+                          <span>Scalable SVG and pixel-perfect fallback options</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="md:col-span-7 rounded-2xl overflow-hidden border border-border/40 bg-background/50 p-2">
+                      <img 
+                        src={composeLogo} 
+                        alt="Compose Logo Usage Guide" 
+                        className="w-full h-auto rounded-xl object-contain hover:scale-[1.02] transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+               </AnimatedSection>
+ 
                {/* Typography */}
                <AnimatedSection>
                   <div className="flex items-center gap-4 mb-8 border-b border-border/50 pb-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <span className="font-serif italic text-primary text-xl">T</span>
+                    <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                      <span className="font-serif italic text-orange-500 text-xl">T</span>
                     </div>
                     <h4 className="font-display font-bold text-2xl text-foreground">Typography System</h4>
                   </div>
@@ -809,13 +1100,13 @@ const ChannelOrchestrationPage = () => {
                     </div>
                   </div>
                </AnimatedSection>
-
+ 
                {/* Colors */}
                <AnimatedSection>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8 border-b border-border/50 pb-4">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                        <Palette className="w-5 h-5 text-primary" />
+                      <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                        <Palette className="w-5 h-5 text-orange-500" />
                       </div>
                       <h4 className="font-display font-bold text-2xl text-foreground">Color Architecture</h4>
                     </div>
@@ -878,8 +1169,8 @@ const ChannelOrchestrationPage = () => {
                {/* Iconography */}
                <AnimatedSection>
                   <div className="flex items-center gap-4 mb-8 border-b border-border/50 pb-4 mt-8">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Layers className="w-5 h-5 text-primary" />
+                    <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                      <Layers className="w-5 h-5 text-orange-500" />
                     </div>
                     <h4 className="font-display font-bold text-2xl text-foreground">Iconography</h4>
                   </div>
@@ -908,8 +1199,8 @@ const ChannelOrchestrationPage = () => {
                           { icon: Shield, name: "Security" },
                           { icon: Zap, name: "Triggers" }
                         ].map((item, i) => (
-                           <div key={i} className="flex flex-col items-center justify-center gap-3 p-4 bg-background rounded-2xl border border-border/50 hover:border-primary/50 hover:shadow-sm transition-all group">
-                             <item.icon className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors stroke-[1.5px]" />
+                           <div key={i} className="flex flex-col items-center justify-center gap-3 p-4 bg-background rounded-2xl border border-border/50 hover:border-orange-500/50 hover:shadow-sm transition-all group">
+                             <item.icon className="w-6 h-6 text-muted-foreground group-hover:text-orange-500 transition-colors stroke-[1.5px]" />
                              <span className="text-[10px] font-medium text-muted-foreground group-hover:text-foreground transition-colors">{item.name}</span>
                            </div>
                         ))}
@@ -970,6 +1261,122 @@ const ChannelOrchestrationPage = () => {
          </div>
       </section>
 
+      {/* ── Testing & Feedback ── */}
+      <section className="py-16 sm:py-24 border-t border-border/50 bg-secondary/20 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-orange-500/3 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+          <AnimatedSection className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+
+            {/* Left: Section Header */}
+            <div className="lg:col-span-4 mt-2">
+              <span className="text-orange-500 font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">
+                Validation
+              </span>
+              <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">
+                Testing &<br />Feedback
+              </h3>
+              <div className="w-10 h-[3px] bg-orange-500 mt-6 mb-6" />
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pr-4">
+                Every design decision was validated through structured UAT sessions, real operator pilots, and continuous feedback loops with telecom teams — ensuring the platform genuinely improves CX workflows at scale.
+              </p>
+            </div>
+
+            {/* Right: Testing Cards */}
+            <div className="lg:col-span-8 space-y-6">
+
+              {/* UAT Sessions */}
+              <div className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 relative overflow-hidden group hover:border-orange-500/50 transition-colors">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/5 rounded-full blur-3xl -mr-12 -mt-12 transition-transform group-hover:scale-150" />
+                <div className="flex items-start gap-5 relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <Users className="w-6 h-6 text-orange-500" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold mb-2 text-foreground">Operator UAT Sessions</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Conducted structured user acceptance testing with CX teams and contact center supervisors from three tier-1 telecom operators. Sessions uncovered friction in flow authoring, channel-switching latency expectations, and AI confidence display requirements that directly shaped the final node canvas design.
+                    </p>
+                    <div className="mt-4 grid sm:grid-cols-3 gap-3">
+                      {[
+                        { metric: "3", label: "Telecom Operators" },
+                        { metric: "40+", label: "CX Agents Tested" },
+                        { metric: "6 Weeks", label: "Pilot Duration" },
+                      ].map((s, i) => (
+                        <div key={i} className="bg-secondary/30 rounded-xl px-4 py-3 border border-border/30 text-center">
+                          <div className="text-lg font-display font-bold text-orange-500">{s.metric}</div>
+                          <div className="text-xs text-muted-foreground">{s.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Stakeholder Feedback Loop */}
+              <div className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 relative overflow-hidden group hover:border-orange-500/50 transition-colors">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/5 rounded-full blur-3xl -mr-12 -mt-12 transition-transform group-hover:scale-150" />
+                <div className="flex items-start gap-5 relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <MessageSquare className="w-6 h-6 text-orange-500" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold mb-3 text-foreground">Stakeholder Feedback Themes</h4>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      Feedback from product owners, CX directors, and integration engineers was synthesised into three core design improvement themes:
+                    </p>
+                    <div className="grid sm:grid-cols-3 gap-4">
+                      {[
+                        { label: "Flow Readability", detail: "Supervisors needed to scan complex AI flows at a glance — we redesigned node labels, grouping, and minimap density." },
+                        { label: "Channel Context", detail: "Agents switching from voice to chat expected preserved intent — we added cross-channel context inheritance to the AI engine." },
+                        { label: "Confidence Transparency", detail: "Teams wanted to know why the AI chose a response — we exposed confidence scores and intent reasoning inline." },
+                      ].map((item, i) => (
+                        <div key={i} className="bg-secondary/30 rounded-xl p-4 border border-border/30">
+                          <div className="text-sm font-semibold text-foreground mb-1">{item.label}</div>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{item.detail}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Key Design Iterations */}
+              <div className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 relative overflow-hidden group hover:border-orange-500/50 transition-colors">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/5 rounded-full blur-3xl -mr-12 -mt-12 transition-transform group-hover:scale-150" />
+                <div className="flex items-start gap-5 relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <TrendingUp className="w-6 h-6 text-orange-500" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold mb-2 text-foreground">Key Design Iterations</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Based on UAT insights, we shipped three major design iterations before go-live:
+                    </p>
+                    <ul className="mt-4 space-y-3">
+                      <li className="flex items-start gap-3 text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0 mt-2" />
+                        <span><strong className="text-foreground">Canvas Node Redesign</strong> — Replaced generic connector blocks with labelled, colour-coded channel nodes after testing revealed agents couldn't distinguish SMS from WhatsApp paths in complex flows.</span>
+                      </li>
+                      <li className="flex items-start gap-3 text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0 mt-2" />
+                        <span><strong className="text-foreground">AI Response Preview Panel</strong> — Introduced a live response simulator in the flow editor after QA teams reported deploying untested bot responses to production environments.</span>
+                      </li>
+                      <li className="flex items-start gap-3 text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0 mt-2" />
+                        <span><strong className="text-foreground">Role-Based Dashboard Defaults</strong> — Rebuilt the analytics home screen with persona-specific defaults after discovering supervisors and agents had conflicting metric priorities.</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Use Cases */}
       <section className="py-16 sm:py-24 border-t border-border/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
@@ -986,9 +1393,9 @@ const ChannelOrchestrationPage = () => {
               { icon: TrendingUp, title: "Personalized Upsell Campaigns", desc: "Send personalized upgrade offers based on customer usage or behavior via email, SMS, in-app messages, or push notifications driven by AI insights." },
               { icon: Shield, title: "Real-Time Order Tracking", desc: "Provide real-time order updates across channels (email, SMS, mobile app, WhatsApp), allowing customers to track shipments or report issues seamlessly." },
             ].map((uc, i) => (
-              <AnimatedSection key={i} delay={i * 100} className="p-6 sm:p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/30 hover:shadow-md transition-all group">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:-translate-y-1 transition-transform">
-                  <uc.icon className="w-5 h-5 text-primary" />
+              <AnimatedSection key={i} delay={i * 100} className="p-6 sm:p-8 rounded-2xl bg-card border border-border/50 hover:border-orange-500/30 hover:shadow-md transition-all group">
+                <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center mb-5 group-hover:-translate-y-1 transition-transform">
+                  <uc.icon className="w-5 h-5 text-orange-500" />
                 </div>
                 <h4 className="font-semibold text-lg mb-2">{uc.title}</h4>
                 <p className="text-sm text-muted-foreground leading-relaxed">{uc.desc}</p>
@@ -1022,7 +1429,7 @@ const ChannelOrchestrationPage = () => {
       <section className="py-16 sm:py-24 border-t border-border/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <AnimatedSection className="max-w-3xl mx-auto text-center">
-            <Lightbulb className="w-10 h-10 text-primary mx-auto mb-6" />
+            <Lightbulb className="w-10 h-10 text-orange-500 mx-auto mb-6" />
             <h3 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl mb-4">Interested in this project?</h3>
             <p className="text-muted-foreground text-lg mb-8">
               Let's discuss how unified channel orchestration and AI-driven CX platforms can transform your customer engagement strategy.
