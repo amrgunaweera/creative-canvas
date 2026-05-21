@@ -1,6 +1,7 @@
 import { Button } from "./ui/button";
 import { ArrowDown, Download } from "lucide-react";
 import { useEffect, useRef } from "react";
+import resumePdf from "@/assets/cv/Mishan Gunaweera - UI UX Lead.pdf";
 
 const Hero = () => {
   const scrollToWork = () => {
@@ -123,9 +124,11 @@ const Hero = () => {
                 <Button variant="hero" size="lg" onClick={scrollToWork} className="w-full sm:w-auto">
                   Explore My Work
                 </Button>
-                <Button variant="outline_hero" size="lg" className="w-full sm:w-auto">
-                  <Download className="mr-2 h-4 w-4" />
-                  Download Resume
+                <Button variant="outline_hero" size="lg" asChild className="w-full sm:w-auto">
+                  <a href={resumePdf} target="_blank" rel="noopener noreferrer">
+                    <Download className="mr-2 h-4 w-4" />
+                    Download Resume
+                  </a>
                 </Button>
               </div>
 
@@ -135,7 +138,7 @@ const Hero = () => {
                   { value: "15+", label: "Years Experience" },
                   { value: "200+", label: "Projects Delivered" },
                   { value: "100+", label: "Happy Clients" },
-                  { value: "12", label: "Design Awards" },
+                  { value: "1000+", label: "Current Users" },
                 ].map((stat, index) => (
                   <div key={index} className="text-center md:text-left">
                     <div className="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-gradient">
@@ -218,16 +221,16 @@ const Hero = () => {
                   <circle cx="250" cy="200" r="2" />
                   <circle cx="400" cy="200" r="1.5" />
                   <circle cx="500" cy="100" r="2.5" />
-                  
+
                   <circle cx="200" cy="500" r="2" />
                   <circle cx="300" cy="600" r="2.5" />
                   <circle cx="600" cy="600" r="1.5" />
                   <circle cx="700" cy="500" r="2" />
-                  
+
                   <circle cx="200" cy="250" r="2" />
                   <circle cx="300" cy="500" r="3" />
                   <circle cx="500" cy="300" r="2" />
-                  
+
                   <circle cx="100" cy="700" r="1.5" />
                   <circle cx="500" cy="700" r="2" />
                   <circle cx="400" cy="600" r="1.5" />
@@ -251,7 +254,7 @@ const Hero = () => {
                   <path className="circuit-path-fast" stroke="#fff" strokeWidth="1" fill="none" strokeLinecap="round" strokeLinejoin="round" d="M 0 300 L 100 300 L 150 250 L 350 250 L 400 300 L 800 300" />
                   <path className="circuit-path-fast" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" d="M 200 800 L 200 600 L 300 500 L 500 500 L 600 400 L 800 400" />
                   <path className="circuit-path-fast" stroke="hsl(var(--primary))" strokeWidth="1" fill="none" strokeLinecap="round" strokeLinejoin="round" d="M 0 700 L 100 700 L 200 600 L 400 600 L 500 700 L 800 700" />
-                  
+
                   {/* Glowing active nodes */}
                   <circle cx="350" cy="250" r="2.5" fill="#fff" className="animate-pulse drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
                   <circle cx="500" cy="500" r="2" fill="#fff" className="animate-pulse drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" style={{ animationDelay: '0.5s' }} />
@@ -261,7 +264,7 @@ const Hero = () => {
                 </g>
 
                 {/* --- FLOATING UI ELEMENTS (Mouse Parallax) --- */}
-                
+
                 {/* Deep floating UI */}
                 <g ref={panel1Ref} className="origin-center will-change-transform blur-[4px]">
                   <g transform="translate(150, 150) scale(0.8)" opacity="0.6">
@@ -287,7 +290,7 @@ const Hero = () => {
                     <text x="55" y="45" fill="#fff" fontSize="8" fontFamily="monospace">TARGET: LOCK</text>
                     <circle cx="50" cy="50" r="2" fill="#fff" className="animate-pulse" />
                   </g>
-                  
+
                   <g transform="translate(100, 600) scale(0.8)" opacity="0.5">
                     <rect x="0" y="0" width="80" height="80" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.5" />
                     <path d="M 0 20 L 80 20" stroke="hsl(var(--primary))" strokeWidth="0.5" />

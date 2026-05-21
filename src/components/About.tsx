@@ -72,9 +72,9 @@ const About = () => {
             <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {[
                 { label: "Design Systems", value: "Expert" },
-                { label: "User Research", value: "Advanced" },
-                { label: "Prototyping", value: "Expert" },
-                { label: "Leadership", value: "15+ Years" },
+                { label: "Design Thinking", value: "Advanced" },
+                { label: "Leadership", value: "5+ Years" },
+                { label: "Industry Experience", value: "15+ Years" },
               ].map((item, index) => (
                 <div
                   key={index}

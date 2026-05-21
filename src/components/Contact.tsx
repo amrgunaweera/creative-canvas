@@ -1,4 +1,61 @@
-import { Mail, Linkedin, Twitter, ArrowUpRight } from "lucide-react";
+import React from "react";
+import { ArrowUpRight } from "lucide-react";
+
+const Mail = (props: React.ComponentPropsWithoutRef<"svg">) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" />
+    <path d="M3 7l9 6l9 -6" />
+  </svg>
+);
+
+const Behance = (props: React.ComponentPropsWithoutRef<"svg">) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M3 18v-12h4.5a3 3 0 0 1 0 6a3 3 0 0 1 0 6h-4.5" />
+    <path d="M3 12l4.5 0" />
+    <path d="M14 13h7a3.5 3.5 0 0 0 -7 0v2a3.5 3.5 0 0 0 6.64 1" />
+    <path d="M16 6l3 0" />
+  </svg>
+);
+
+const LinkedIn = (props: React.ComponentPropsWithoutRef<"svg">) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M8 11v5" />
+    <path d="M8 8v.01" />
+    <path d="M12 16v-5" />
+    <path d="M16 16v-3a2 2 0 1 0 -4 0" />
+    <path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10" />
+  </svg>
+);
 
 const Contact = () => {
   return (
@@ -38,16 +95,17 @@ const Contact = () => {
           <div className="mt-10 sm:mt-16 flex justify-center gap-3 sm:gap-4">
             {[
               { icon: Mail, label: "Email", href: "mailto:amrgunaweera@gmail.com" },
-              { icon: Linkedin, label: "LinkedIn", href: "#" },
-              { icon: Twitter, label: "Twitter", href: "#" },
+              { icon: LinkedIn, label: "LinkedIn", href: "https://www.linkedin.com/in/mishan-randika/" },
+              { icon: Behance, label: "Behance", href: "https://www.behance.net/mishanrandika" },
             ].map((social, index) => (
               <a
                 key={index}
                 href={social.href}
                 className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 group"
                 aria-label={social.label}
+                target="_blank"
               >
-                <social.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                <social.icon className="w-5 h-5 sm:w-6 sm:h-6" />
               </a>
             ))}
           </div>

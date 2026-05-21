@@ -9,10 +9,10 @@ const Footer = () => {
           <Link to="/" className="flex items-center">
             <img src={amrgLogo} alt="AMRG Projects" className="h-6 sm:h-8 w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
           </Link>
-          <p className="text-xs sm:text-sm text-muted-foreground text-center">
+          <p className="text-xs text-muted-foreground text-center">
             © {new Date().getFullYear()} All rights reserved. Designed with passion.
           </p>
-          <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
+          <div className="flex gap-4 sm:gap-6 text-xs text-muted-foreground">
             <Link to="/privacy" className="hover:text-foreground transition-colors">
               Privacy
             </Link>

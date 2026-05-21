@@ -1,28 +1,54 @@
-import { Quote, Award, Users, Lightbulb, Target, Mail, Linkedin, Twitter, ArrowLeft } from "lucide-react";
+import { Quote, Award, Users, Lightbulb, Target, Mail, Linkedin, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import resumePdf from "@/assets/cv/Mishan Gunaweera - UI UX Lead.pdf";
+
+const Behance = (props: React.ComponentPropsWithoutRef<"svg">) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M3 18v-12h4.5a3 3 0 0 1 0 6a3 3 0 0 1 0 6h-4.5" />
+    <path d="M3 12l4.5 0" />
+    <path d="M14 13h7a3.5 3.5 0 0 0 -7 0v2a3.5 3.5 0 0 0 6.64 1" />
+    <path d="M16 6l3 0" />
+  </svg>
+);
 
 const AboutPage = () => {
   const experiences = [
     {
-      role: "Design Lead",
-      company: "TechCorp Inc.",
-      period: "2021 - Present",
-      description: "Leading a team of 8 designers, establishing design systems, and driving product strategy for enterprise SaaS solutions.",
+      role: "UI/UX Lead",
+      company: "Global Wavenet (Pvt) Ltd",
+      period: "2024 - Present",
+      description: "Leading a team of 5 designers, establishing design systems, and driving product strategy for enterprise SaaS solutions.",
     },
     {
-      role: "Senior UX Designer",
-      company: "StartupHub",
-      period: "2018 - 2021",
+      role: "Associate UI/UX Lead",
+      company: "Global Wavenet (Pvt) Ltd",
+      period: "2021 - 2024",
       description: "Redesigned core product experience resulting in 40% increase in user engagement and 25% reduction in churn.",
     },
     {
-      role: "UX Designer",
-      company: "Digital Agency Co.",
-      period: "2016 - 2018",
-      description: "Crafted experiences for Fortune 500 clients across fintech, healthcare, and e-commerce sectors.",
+      role: "UX/UI Engineer",
+      company: "Global Wavenet (Pvt) Ltd",
+      period: "2018 - 2021",
+      description: "Crafted experiences for Enterprise & Global clients.",
+    },
+    {
+      role: "UX/UI Engineer",
+      company: "KeenEye Solutions",
+      period: "2015 - 2018",
+      description: "Crafted experiences for Enterprise & Local Clients.",
     },
   ];
 
@@ -45,9 +71,9 @@ const AboutPage = () => {
   ];
 
   const awards = [
-    { title: "Design Excellence Award", org: "AIGA", year: "2023" },
-    { title: "Best Mobile Experience", org: "Webby Awards", year: "2022" },
-    { title: "UX Design of the Year", org: "Awwwards", year: "2021" },
+    { title: "National ICT Awards - Merit under research category", org: "NBQSA", year: "2019" },
+    { title: "Gold Award Winner - Travel and Tourism", org: "Best Web Sri Lanka", year: "2014" },
+    { title: "Silver Winner - Open Category", org: "Best Web Sri Lanka", year: "2013" },
   ];
 
   return (
@@ -130,24 +156,43 @@ const AboutPage = () => {
 
               <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 animate-fade-up-delay-2">
                 <Button variant="hero" size="lg" asChild className="w-full sm:w-auto">
-                  <a href="mailto:hello@example.com">
+                  <a href="mailto:amrgunaweera@gmail.com">
                     <Mail className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                     Get in Touch
                   </a>
                 </Button>
                 <Button variant="outline_hero" size="lg" asChild className="w-full sm:w-auto">
-                  <a href="/resume.pdf" target="_blank">
+                  <a href={resumePdf} target="_blank" rel="noopener noreferrer">
                     Download Resume
                   </a>
                 </Button>
               </div>
 
               <div className="mt-6 sm:mt-8 flex gap-3 sm:gap-4 animate-fade-up-delay-2">
-                <a href="#" className="p-2.5 sm:p-3 rounded-full bg-card border border-border hover:border-primary transition-colors">
+                <a
+                  href="mailto:amrgunaweera@gmail.com"
+                  className="p-2.5 sm:p-3 rounded-full bg-card border border-border hover:border-primary transition-colors"
+                  aria-label="Email"
+                >
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground hover:text-primary" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/mishan-randika/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 sm:p-3 rounded-full bg-card border border-border hover:border-primary transition-colors"
+                  aria-label="LinkedIn"
+                >
                   <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground hover:text-primary" />
                 </a>
-                <a href="#" className="p-2.5 sm:p-3 rounded-full bg-card border border-border hover:border-primary transition-colors">
-                  <Twitter className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground hover:text-primary" />
+                <a
+                  href="https://www.behance.net/mishanrandika"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 sm:p-3 rounded-full bg-card border border-border hover:border-primary transition-colors"
+                  aria-label="Behance"
+                >
+                  <Behance className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground hover:text-primary" />
                 </a>
               </div>
             </div>
@@ -160,10 +205,10 @@ const AboutPage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {[
-              { label: "Based in", value: "San Francisco, CA" },
-              { label: "Specialization", value: "Product Design" },
-              { label: "Current Role", value: "Design Lead" },
-              { label: "Education", value: "HCI Masters" },
+              { label: "Based in", value: "Colombo, Sri Lanka" },
+              { label: "Specialization", value: "UI/UX Design & Development" },
+              { label: "Current Role", value: "UI/UX Lead" },
+              { label: "Education", value: "BSc in Computing" },
             ].map((item, index) => (
               <div key={index} className="text-center md:text-left">
                 <div className="text-xs text-muted-foreground uppercase tracking-wider">
