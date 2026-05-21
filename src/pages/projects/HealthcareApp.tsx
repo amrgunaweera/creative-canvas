@@ -5,7 +5,7 @@ import {
   Zap, Globe, Clock, Users, Layers, Wifi, BrainCircuit, Target,
   Pen, Layout, Smartphone, Monitor, Stethoscope,
   HeartPulse, Phone, Bell, Navigation2, ClipboardCheck, Lightbulb,
-  ArrowRight, Palette, Type, Eye, Grid3X3, Contrast,
+  ArrowRight, Palette, Type, Eye, Grid3X3, Contrast, ArrowDown, ArrowUp,
 } from "lucide-react";
 import healthcareMockup from "@/assets/images/projects/healthcare/Mockup.jpg";
 import mediwaveLogo from "@/assets/images/projects/healthcare/mediwave-logo-usage.jpg";
@@ -30,14 +30,14 @@ const HealthcareAppPage = () => {
           <div className="absolute -top-[10%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-red-500/10 blur-[120px] animate-blob mix-blend-screen" />
           <div className="absolute top-[20%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-primary/15 blur-[120px] animate-blob mix-blend-screen" style={{ animationDelay: '2s' }} />
           <div className="absolute bottom-[-20%] left-[20%] w-[50vw] h-[50vw] rounded-full bg-rose-500/10 blur-[120px] animate-blob mix-blend-screen" style={{ animationDelay: '4s' }} />
-          
+
           {/* Subtle Grid Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_10%,transparent_100%)]" />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            
+
             {/* Left Column: Content */}
             <div className="lg:col-span-6 xl:col-span-5 relative z-20">
               <Link to="/work" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8 sm:mb-10 animate-fade-up">
@@ -50,11 +50,11 @@ const HealthcareAppPage = () => {
                   <HeartPulse className="w-3.5 h-3.5" />
                   {project.category}
                 </div>
-                
+
                 <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl leading-[1.1] tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-br from-foreground via-foreground to-foreground/70">
                   {project.title}
                 </h1>
-                
+
                 <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10">
                   {project.fullDescription}
                 </p>
@@ -85,7 +85,7 @@ const HealthcareAppPage = () => {
             {/* Right Column: Creative Animated Visuals */}
             <div className="lg:col-span-6 xl:col-span-7 hidden lg:block relative h-[600px] w-full [perspective:1000px] animate-fade-up-delay-2">
               <div className="absolute inset-0 flex items-center justify-center [transform-style:preserve-3d]">
-                
+
                 {/* Center Main Medical Dashboard Mockup */}
                 <div className="relative z-20 w-[480px] h-[320px] bg-card/40 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden animate-float-slow">
                   {/* Glass Header */}
@@ -97,7 +97,7 @@ const HealthcareAppPage = () => {
                     </div>
                     <div className="flex items-center gap-2">
                       <Wifi className="w-3 h-3 text-green-400 animate-pulse" />
-                      <div className="px-3 py-1 bg-white/5 rounded-md text-[10px] font-mono text-muted-foreground">MediRescue Live</div>
+                      <div className="px-3 py-1 bg-white/5 rounded-md text-[10px] font-mono text-muted-foreground">MediWave Live</div>
                     </div>
                   </div>
                   {/* Dashboard Content */}
@@ -405,7 +405,7 @@ const HealthcareAppPage = () => {
                   </div>
                   <div>
                     <h4 className="text-2xl font-display font-bold text-foreground">Paramedic Response Journey Map</h4>
-                    <p className="text-sm text-muted-foreground mt-1">Tracking the emotional arc of an EMT through a MediRescue-powered response</p>
+                    <p className="text-sm text-muted-foreground mt-1">Tracking the emotional arc of an EMT through a MediWave-powered response</p>
                   </div>
                 </div>
 
@@ -422,13 +422,18 @@ const HealthcareAppPage = () => {
                       { title: "Handoff", emoji: "😁", color: "green" },
                     ].map((stage, i) => (
                       <div key={i} className="group/stage">
-                        <div className="bg-red-400 text-red-900 rounded-xl px-3 py-2.5 text-center mb-4">
+                        <div className={`rounded-xl px-3 py-2.5 text-center mb-4 border transition-colors ${stage.color === "green"
+                            ? "bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400"
+                            : stage.color === "red"
+                              ? "bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-400"
+                              : "bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400"
+                          }`}>
                           <span className="font-bold text-xs sm:text-sm leading-tight block">{stage.title}</span>
                         </div>
                         <div className="flex justify-center mb-4">
                           <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-sm border-2 transition-transform group-hover/stage:scale-110 ${stage.color === 'green' ? 'bg-green-100 border-green-300' :
-                              stage.color === 'red' ? 'bg-red-100 border-red-300' :
-                                'bg-amber-100 border-amber-300'
+                            stage.color === 'red' ? 'bg-red-100 border-red-300' :
+                              'bg-amber-100 border-amber-300'
                             }`}>
                             {stage.emoji}
                           </div>
@@ -509,7 +514,7 @@ const HealthcareAppPage = () => {
                   <div className="bg-green-500/10 rounded-2xl p-6 border border-green-500/20">
                     <h5 className="font-bold text-foreground mb-4 flex items-center gap-2">
                       <Lightbulb className="w-5 h-5 text-green-600" />
-                      MediRescue Impact Points
+                      MediWave Impact Points
                     </h5>
                     <ul className="space-y-3">
                       {[
@@ -563,74 +568,252 @@ const HealthcareAppPage = () => {
                 </div>
 
                 <p className="text-muted-foreground leading-relaxed mb-8 max-w-3xl">
-                  Each product in the MediRescue suite was designed to serve a specific persona while sharing a common data layer. This architecture ensures that clinical data flows seamlessly from the ambulance to the emergency department.
+                  Each product in the MediWave suite was designed to serve a specific persona while sharing a common data layer. This architecture ensures that clinical data flows seamlessly from the ambulance to the emergency department.
                 </p>
 
-                {/* Architecture Grid */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  {[
-                    {
-                      product: "Smart EMS",
-                      icon: Mic2,
-                      persona: "Marcus, EMT",
-                      tagColor: "text-amber-400 bg-amber-500/10 border-amber-500/20",
-                      screens: ["Voice Recording Interface", "SOAP Report Generator", "CHART Format Preview", "Offline Sync Manager"],
-                    },
-                    {
-                      product: "Connected Ambulance",
-                      icon: Wifi,
-                      persona: "Marcus, EMT + Dr. Rajan",
-                      tagColor: "text-blue-400 bg-blue-500/10 border-blue-500/20",
-                      screens: ["HoloLens AR Overlay", "Video Consultation View", "Vital Signs Dashboard", "Remote Instruction Panel"],
-                    },
-                    {
-                      product: "ePCR",
-                      icon: FileText,
-                      persona: "Marcus, EMT → Dr. Rajan",
-                      tagColor: "text-purple-400 bg-purple-500/10 border-purple-500/20",
-                      screens: ["Patient Intake Form", "Vitals Entry (one-handed)", "Pre-Arrival Summary", "Offline Data Queue"],
-                    },
-                    {
-                      product: "ERMS",
-                      icon: Map,
-                      persona: "Priya, EMS Director",
-                      tagColor: "text-green-400 bg-green-500/10 border-green-500/20",
-                      screens: ["GIS Fleet Map", "Dispatch Assignment Panel", "Incident Monitor", "KPI Analytics Dashboard"],
-                    },
-                  ].map((item, i) => (
-                    <AnimatedSection key={i} delay={i * 80} className="bg-secondary/30 rounded-2xl p-6 border border-border/40 hover:border-primary/30 transition-all group">
-                      <div className="flex items-start gap-4 mb-5">
-                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                          <item.icon className="w-5 h-5 text-primary" />
+                {/* Flowchart Layout */}
+                <div className="space-y-6">
+                  {/* Row 1: ERMS -> ePCR <-> Smart EMS */}
+                  <div className="flex flex-col lg:flex-row items-stretch justify-between gap-6 relative">
+
+                    {/* Node 1: ERMS */}
+                    <div className="w-full lg:w-[30%] flex flex-col justify-between bg-secondary/30 rounded-2xl p-6 border border-border/40 hover:border-green-500/40 transition-all group relative">
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-green-500/5 rounded-full blur-xl pointer-events-none" />
+                      <div>
+                        <div className="flex items-start gap-4 mb-5">
+                          <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                            <Map className="w-5 h-5 text-green-500" />
+                          </div>
+                          <div>
+                            <h5 className="font-bold text-lg text-foreground">ERMS</h5>
+                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full border text-green-400 bg-green-500/10 border-green-500/20">Priya, EMS Director</span>
+                          </div>
                         </div>
-                        <div>
-                          <h5 className="font-bold text-lg text-foreground">{item.product}</h5>
-                          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${item.tagColor}`}>{item.persona}</span>
-                        </div>
+                        <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
+                          GIS-based emergency response management coordinating and assigning nearest active units.
+                        </p>
                       </div>
                       <div className="grid grid-cols-2 gap-2">
-                        {item.screens.map((screen, j) => (
-                          <div key={j} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-background/60 border border-border/30">
-                            <Smartphone className="w-3.5 h-3.5 text-primary/60 shrink-0" />
-                            <span className="text-xs text-muted-foreground font-medium">{screen}</span>
+                        {[
+                          { name: "GIS Fleet Map", icon: Map },
+                          { name: "Dispatch Panel", icon: Layout },
+                          { name: "Incident Monitor", icon: Activity },
+                          { name: "KPI Analytics", icon: BarChart3 },
+                        ].map((screen, j) => (
+                          <div key={j} className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-background/60 border border-border/30">
+                            <screen.icon className="w-3 h-3 text-green-500/60 shrink-0" />
+                            <span className="text-[11px] text-muted-foreground font-medium truncate">{screen.name}</span>
                           </div>
                         ))}
                       </div>
-                    </AnimatedSection>
-                  ))}
-                </div>
+                    </div>
 
-                {/* Shared Data Layer */}
-                <div className="mt-6 bg-primary/5 rounded-2xl p-5 border border-primary/20">
-                  <div className="flex items-center gap-3 mb-3">
-                    <BrainCircuit className="w-5 h-5 text-primary" />
-                    <h5 className="font-bold text-sm text-foreground">Shared Data Layer</h5>
+                    {/* Connector 1: ERMS -> ePCR */}
+                    <div className="hidden lg:flex flex-col items-center justify-center w-[5%] self-center text-primary relative">
+                      <div className="absolute left-[-24px] right-[-24px] top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-r from-green-500/30 to-purple-500/30 -z-10" />
+                      <div className="p-2 bg-background border border-border/40 rounded-full shadow-sm text-green-500 hover:text-purple-500 transition-colors animate-pulse">
+                        <ArrowRight className="w-5 h-5" />
+                      </div>
+                      <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest text-center mt-2 bg-background px-1 whitespace-nowrap">Dispatch</span>
+                    </div>
+                    <div className="lg:hidden flex flex-col items-center justify-center my-2 text-primary">
+                      <div className="h-6 w-[2px] bg-gradient-to-b from-green-500/30 to-purple-500/30" />
+                      <div className="p-1.5 bg-background border border-border/40 rounded-full shadow-sm text-green-500">
+                        <ArrowDown className="w-4 h-4" />
+                      </div>
+                      <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Dispatch Details</span>
+                    </div>
+
+                    {/* Node 2: ePCR */}
+                    <div className="w-full lg:w-[30%] flex flex-col justify-between bg-secondary/30 rounded-2xl p-6 border border-border/40 hover:border-purple-500/40 transition-all group relative">
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 rounded-full blur-xl pointer-events-none" />
+                      <div>
+                        <div className="flex items-start gap-4 mb-5">
+                          <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                            <FileText className="w-5 h-5 text-purple-500" />
+                          </div>
+                          <div>
+                            <h5 className="font-bold text-lg text-foreground">ePCR</h5>
+                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full border text-purple-400 bg-purple-500/10 border-purple-500/20">Marcus, EMT</span>
+                          </div>
+                        </div>
+                        <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
+                          Intake app optimized for one-handed operation inside moving ambulances.
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        {[
+                          { name: "Patient Intake Form", icon: FileText },
+                          { name: "Vitals Entry", icon: Activity },
+                          { name: "Pre-Arrival Summary", icon: ClipboardCheck },
+                          { name: "Offline Data Queue", icon: Layers },
+                        ].map((screen, j) => (
+                          <div key={j} className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-background/60 border border-border/30">
+                            <screen.icon className="w-3 h-3 text-purple-500/60 shrink-0" />
+                            <span className="text-[11px] text-muted-foreground font-medium truncate">{screen.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Connector 2: ePCR <-> Smart EMS */}
+                    <div className="hidden lg:flex flex-col items-center justify-center w-[5%] self-center text-primary relative">
+                      <div className="absolute left-[-24px] right-[-24px] top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-r from-purple-500/30 to-amber-500/30 -z-10" />
+                      <div className="p-2 bg-background border border-border/40 rounded-full shadow-sm text-purple-400 hover:text-amber-400 transition-colors flex gap-0.5 animate-pulse">
+                        <ArrowLeft className="w-3.5 h-3.5" />
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest text-center mt-2 bg-background px-1 whitespace-nowrap">Sync Notes</span>
+                    </div>
+                    <div className="lg:hidden flex flex-col items-center justify-center my-2 text-primary">
+                      <div className="h-6 w-[2px] bg-gradient-to-b from-purple-500/30 to-amber-500/30" />
+                      <div className="p-1.5 bg-background border border-border/40 rounded-full shadow-sm text-purple-400 flex flex-col items-center gap-0.5">
+                        <ArrowUp className="w-3 h-3" />
+                        <ArrowDown className="w-3 h-3" />
+                      </div>
+                      <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Sync Notes</span>
+                    </div>
+
+                    {/* Node 3: Smart EMS */}
+                    <div className="w-full lg:w-[30%] flex flex-col justify-between bg-secondary/30 rounded-2xl p-6 border border-border/40 hover:border-amber-500/40 transition-all group relative">
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-full blur-xl pointer-events-none" />
+                      <div>
+                        <div className="flex items-start gap-4 mb-5">
+                          <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                            <Mic2 className="w-5 h-5 text-amber-500" />
+                          </div>
+                          <div>
+                            <h5 className="font-bold text-lg text-foreground">Smart EMS</h5>
+                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full border text-amber-400 bg-amber-500/10 border-amber-500/20">Marcus, EMT</span>
+                          </div>
+                        </div>
+                        <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
+                          AI-powered hands-free voice transcriber to record and generate clinical reports en route.
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        {[
+                          { name: "Voice Interface", icon: Mic2 },
+                          { name: "SOAP Generator", icon: BrainCircuit },
+                          { name: "CHART Preview", icon: FileText },
+                          { name: "Clinical Notes Editor", icon: Pen },
+                        ].map((screen, j) => (
+                          <div key={j} className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-background/60 border border-border/30">
+                            <screen.icon className="w-3 h-3 text-amber-500/60 shrink-0" />
+                            <span className="text-[11px] text-muted-foreground font-medium truncate">{screen.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {["Patient Records", "Vital Signs Stream", "GPS & Fleet Data", "Voice Transcripts", "Clinical Reports", "Incident Logs", "HIPAA Encryption", "Offline Sync Queue"].map((item) => (
-                      <span key={item} className="px-3 py-1.5 rounded-full bg-background/60 border border-border/40 text-xs text-muted-foreground font-medium">{item}</span>
-                    ))}
+
+                  {/* Desktop Connecting SVG from ePCR & Smart EMS to Connected Ambulance */}
+                  <div className="hidden lg:flex justify-center items-center h-20 w-full relative">
+                    <svg className="w-full h-full text-border" viewBox="0 0 1000 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Left vertical drop from ePCR */}
+                      <path d="M 500 0 L 500 50" stroke="url(#epcr-grad)" strokeWidth="2.5" strokeDasharray="6 4" />
+                      {/* Right vertical drop and bend from Smart EMS */}
+                      <path d="M 850 0 L 850 30 Q 850 50 500 50" stroke="url(#smartems-grad)" strokeWidth="2.5" strokeDasharray="6 4" />
+                      {/* Merged vertical drop down */}
+                      <path d="M 500 50 L 500 80" stroke="url(#merge-grad)" strokeWidth="3" className="animate-pulse" />
+
+                      <defs>
+                        <linearGradient id="epcr-grad" x1="500" y1="0" x2="500" y2="50" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stopColor="#7C3AED" />
+                          <stop offset="100%" stopColor="#2196F3" />
+                        </linearGradient>
+                        <linearGradient id="smartems-grad" x1="850" y1="0" x2="500" y2="50" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stopColor="#F59E0B" />
+                          <stop offset="100%" stopColor="#2196F3" />
+                        </linearGradient>
+                        <linearGradient id="merge-grad" x1="500" y1="50" x2="500" y2="80" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stopColor="#2196F3" />
+                          <stop offset="100%" stopColor="#60a5fa" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <div className="absolute top-[38px] left-1/2 -translate-x-1/2 px-4 py-1.5 bg-background border border-primary/20 rounded-full text-[10.5px] font-bold text-primary shadow-sm hover:scale-105 transition-transform duration-300">
+                      Live Telemetry & AI Notes Feed
+                    </div>
                   </div>
+
+                  {/* Mobile Connector */}
+                  <div className="lg:hidden flex flex-col items-center justify-center my-4 text-primary">
+                    <div className="h-8 w-[2px] bg-gradient-to-b from-amber-500/30 to-blue-500/30" />
+                    <div className="p-1.5 bg-background border border-border/40 rounded-full shadow-sm text-blue-500">
+                      <ArrowDown className="w-4 h-4" />
+                    </div>
+                    <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Live Telemetry & AI Feed</span>
+                  </div>
+
+                  {/* Row 2: Connected Ambulance */}
+                  <div className="flex justify-center">
+                    <div className="w-full lg:w-[45%] bg-secondary/30 rounded-2xl p-6 border border-border/40 hover:border-blue-500/40 transition-all group relative">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-xl pointer-events-none" />
+                      <div className="flex items-start gap-4 mb-5">
+                        <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                          <Wifi className="w-5 h-5 text-blue-500" />
+                        </div>
+                        <div>
+                          <h5 className="font-bold text-lg text-foreground">Connected Ambulance</h5>
+                          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full border text-blue-400 bg-blue-500/10 border-blue-500/20">Marcus, EMT + Dr. Rajan</span>
+                        </div>
+                      </div>
+                      <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
+                        HoloLens AR video consult en route matching field EMTs with hospital ED specialists in real-time.
+                      </p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {[
+                          { name: "HoloLens AR Overlay", icon: Eye },
+                          { name: "Video Consultation View", icon: Monitor },
+                          { name: "Vitals Dashboard", icon: Activity },
+                          { name: "Remote Instruction Panel", icon: Layout },
+                        ].map((screen, j) => (
+                          <div key={j} className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-background/60 border border-border/30">
+                            <screen.icon className="w-3 h-3 text-blue-500/60 shrink-0" />
+                            <span className="text-[11px] text-muted-foreground font-medium truncate">{screen.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Connector 3: Connected Ambulance -> Hospital Shared Data Layer */}
+                  <div className="hidden lg:flex justify-center items-center h-16 w-full relative">
+                    <svg className="w-16 h-full text-blue-500/30" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M 32 0 L 32 64" stroke="currentColor" strokeWidth="2.5" strokeDasharray="6 4" className="text-blue-500 animate-pulse" />
+                      <path d="M 26 56 L 32 64 L 38 56" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <div className="absolute top-1/2 left-[55%] -translate-y-1/2 px-3 py-1 bg-background border border-border/40 rounded-full text-[10px] font-bold text-muted-foreground whitespace-nowrap">
+                      Pre-arrival Triage Trigger
+                    </div>
+                  </div>
+
+                  <div className="lg:hidden flex flex-col items-center justify-center my-4 text-primary">
+                    <div className="h-8 w-[2px] bg-gradient-to-b from-blue-500/30 to-primary/30" />
+                    <div className="p-1.5 bg-background border border-border/40 rounded-full shadow-sm text-primary">
+                      <ArrowDown className="w-4 h-4" />
+                    </div>
+                    <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Pre-arrival Triage Trigger</span>
+                  </div>
+
+                  {/* Shared Data Layer */}
+                  <div className="bg-primary/5 rounded-2xl p-5 border border-primary/20 hover:bg-primary/10 transition-colors duration-300">
+                    <div className="flex items-center gap-3 mb-3">
+                      <BrainCircuit className="w-5 h-5 text-primary" />
+                      <h5 className="font-bold text-sm text-foreground">Shared Data Layer (Unified Core Engine)</h5>
+                    </div>
+                    <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
+                      Encrypted core data engine facilitating real-time coordination, patient record transfers, and offline-first queue synchronization.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {["Patient Records", "Vital Signs Stream", "GPS & Fleet Data", "Voice Transcripts", "Clinical Reports", "Incident Logs", "HIPAA Encryption", "Offline Sync Queue"].map((item) => (
+                        <span key={item} className="px-3 py-1.5 rounded-full bg-background/60 border border-border/40 text-xs text-muted-foreground font-medium hover:border-primary/40 transition-colors duration-200">{item}</span>
+                      ))}
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </AnimatedSection>
@@ -674,217 +857,7 @@ const HealthcareAppPage = () => {
             </div>
           </AnimatedSection>
 
-          {/* Wireframe Screens — Code-based representations */}
-          <AnimatedSection className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-card border border-border/50 shadow-xl relative overflow-hidden mb-10">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
 
-            <div className="relative z-10">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Layout className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="text-2xl font-display font-bold text-foreground">Key Screen Wireframes</h4>
-                  <p className="text-sm text-muted-foreground mt-1">Critical interfaces designed for high-stress emergency contexts</p>
-                </div>
-              </div>
-
-              <p className="text-muted-foreground leading-relaxed mb-8 max-w-3xl">
-                Each wireframe was designed with 48px minimum touch targets, high-contrast readability, and one-handed operation in mind. Below are the core screens across the MediRescue suite.
-              </p>
-
-              {/* Wireframe Bento Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {[
-                  {
-                    product: "Smart EMS",
-                    screen: "Voice Recording",
-                    tagColor: "text-amber-400 bg-amber-500/10 border-amber-500/20",
-                    elements: [
-                      { type: "header", label: "Active Recording" },
-                      { type: "waveform", label: "Audio Waveform" },
-                      { type: "badge", label: "SOAP Format" },
-                      { type: "text", label: "Real-time Transcription" },
-                    ],
-                    span: "lg:col-span-1",
-                  },
-                  {
-                    product: "Connected Ambulance",
-                    screen: "AR Consultation",
-                    tagColor: "text-blue-400 bg-blue-500/10 border-blue-500/20",
-                    elements: [
-                      { type: "header", label: "Live Video Feed" },
-                      { type: "video", label: "HoloLens AR Overlay" },
-                      { type: "vitals", label: "Vitals Stream" },
-                      { type: "badge", label: "5G Connected" },
-                    ],
-                    span: "lg:col-span-2",
-                  },
-                  {
-                    product: "ePCR",
-                    screen: "Patient Intake",
-                    tagColor: "text-purple-400 bg-purple-500/10 border-purple-500/20",
-                    elements: [
-                      { type: "header", label: "Patient Record" },
-                      { type: "form", label: "Vitals Entry" },
-                      { type: "form", label: "Medications" },
-                      { type: "badge", label: "Offline Ready" },
-                    ],
-                    span: "lg:col-span-1",
-                  },
-                  {
-                    product: "ERMS",
-                    screen: "Fleet Dashboard",
-                    tagColor: "text-green-400 bg-green-500/10 border-green-500/20",
-                    elements: [
-                      { type: "header", label: "Dispatch Control" },
-                      { type: "map", label: "GIS Fleet Map" },
-                      { type: "list", label: "Active Incidents" },
-                      { type: "badge", label: "322 Units" },
-                    ],
-                    span: "lg:col-span-2",
-                  },
-                  {
-                    product: "Smart EMS",
-                    screen: "Report Preview",
-                    tagColor: "text-amber-400 bg-amber-500/10 border-amber-500/20",
-                    elements: [
-                      { type: "header", label: "Generated Report" },
-                      { type: "text", label: "CHART Summary" },
-                      { type: "form", label: "Clinical Notes" },
-                      { type: "badge", label: "Auto-filled" },
-                    ],
-                    span: "lg:col-span-1",
-                  },
-                  {
-                    product: "ePCR",
-                    screen: "Pre-Arrival Summary",
-                    tagColor: "text-purple-400 bg-purple-500/10 border-purple-500/20",
-                    elements: [
-                      { type: "header", label: "Transmission Ready" },
-                      { type: "vitals", label: "Patient Vitals" },
-                      { type: "text", label: "ETA & Condition" },
-                      { type: "badge", label: "HIPAA Encrypted" },
-                    ],
-                    span: "lg:col-span-1",
-                  },
-                  {
-                    product: "ERMS",
-                    screen: "KPI Analytics",
-                    tagColor: "text-green-400 bg-green-500/10 border-green-500/20",
-                    elements: [
-                      { type: "header", label: "Analytics" },
-                      { type: "chart", label: "Response Times" },
-                      { type: "list", label: "Regional Stats" },
-                      { type: "badge", label: "Real-time" },
-                    ],
-                    span: "lg:col-span-1",
-                  },
-                ].map((wf, i) => (
-                  <AnimatedSection key={i} delay={i * 60} className={`${wf.span} group`}>
-                    <div className="h-full rounded-2xl border border-border/60 bg-secondary/20 p-4 sm:p-5 hover:border-primary/40 transition-all shadow-sm hover:shadow-xl hover:shadow-primary/5 relative overflow-hidden">
-                      {/* Top bar */}
-                      <div className="flex items-center justify-between mb-4">
-                        <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${wf.tagColor}`}>{wf.product}</span>
-                        <span className="text-[10px] text-muted-foreground/60 font-mono uppercase tracking-wider">{wf.screen}</span>
-                      </div>
-
-                      {/* Wireframe skeleton elements */}
-                      <div className="space-y-3">
-                        {wf.elements.map((el, j) => (
-                          <div key={j}>
-                            {el.type === "header" && (
-                              <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                                  <div className="w-4 h-4 rounded bg-primary/30" />
-                                </div>
-                                <div>
-                                  <div className="h-2.5 w-24 bg-foreground/15 rounded-full" />
-                                  <div className="h-1.5 w-16 bg-foreground/8 rounded-full mt-1.5" />
-                                </div>
-                              </div>
-                            )}
-                            {el.type === "waveform" && (
-                              <div className="flex items-end gap-[3px] h-10 px-2">
-                                {Array.from({ length: 20 }).map((_, k) => (
-                                  <div key={k} className="flex-1 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors" style={{ height: `${Math.random() * 100}%`, minHeight: '4px' }} />
-                                ))}
-                              </div>
-                            )}
-                            {el.type === "video" && (
-                              <div className="h-24 sm:h-32 rounded-xl bg-gradient-to-br from-blue-500/10 to-primary/5 border border-border/30 flex items-center justify-center relative">
-                                <Monitor className="w-8 h-8 text-primary/20" />
-                                <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                                <span className="absolute bottom-2 left-3 text-[10px] text-muted-foreground/60">{el.label}</span>
-                              </div>
-                            )}
-                            {el.type === "vitals" && (
-                              <div className="flex gap-2">
-                                {["HR", "SpO₂", "BP"].map((v) => (
-                                  <div key={v} className="flex-1 bg-background/60 rounded-lg p-2 border border-border/30 text-center">
-                                    <div className="text-[9px] text-muted-foreground/60 uppercase">{v}</div>
-                                    <div className="text-xs font-bold text-foreground/60 mt-0.5">{v === "HR" ? "88" : v === "SpO₂" ? "97%" : "120/80"}</div>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                            {el.type === "form" && (
-                              <div className="space-y-2">
-                                <div className="text-[10px] text-muted-foreground/50 uppercase tracking-wider">{el.label}</div>
-                                <div className="h-7 rounded-lg bg-background/40 border border-border/30 px-2 flex items-center">
-                                  <div className="h-1.5 w-2/3 bg-foreground/8 rounded-full" />
-                                </div>
-                              </div>
-                            )}
-                            {el.type === "map" && (
-                              <div className="h-28 sm:h-36 rounded-xl bg-gradient-to-br from-green-500/5 to-primary/5 border border-border/30 relative overflow-hidden">
-                                <div className="absolute inset-0 opacity-20">
-                                  {Array.from({ length: 6 }).map((_, k) => (
-                                    <div key={k} className="absolute w-2 h-2 rounded-full bg-primary animate-pulse" style={{ top: `${20 + Math.random() * 60}%`, left: `${10 + Math.random() * 80}%`, animationDelay: `${k * 0.5}s` }} />
-                                  ))}
-                                </div>
-                                <Navigation2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 text-primary/15" />
-                                <span className="absolute bottom-2 left-3 text-[10px] text-muted-foreground/60">{el.label}</span>
-                              </div>
-                            )}
-                            {el.type === "chart" && (
-                              <div className="flex items-end gap-2 h-16 px-1">
-                                {[40, 65, 50, 80, 70, 90, 60, 75].map((h, k) => (
-                                  <div key={k} className="flex-1 bg-primary/15 rounded-t group-hover:bg-primary/30 transition-colors" style={{ height: `${h}%` }} />
-                                ))}
-                              </div>
-                            )}
-                            {el.type === "list" && (
-                              <div className="space-y-1.5">
-                                {[1, 2, 3].map((n) => (
-                                  <div key={n} className="flex items-center gap-2 p-1.5 rounded-lg bg-background/40 border border-border/20">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-primary/40 shrink-0" />
-                                    <div className="h-1.5 rounded-full bg-foreground/8" style={{ width: `${50 + Math.random() * 40}%` }} />
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                            {el.type === "text" && (
-                              <div className="space-y-1.5 px-1">
-                                <div className="h-1.5 w-full bg-foreground/8 rounded-full" />
-                                <div className="h-1.5 w-4/5 bg-foreground/6 rounded-full" />
-                                <div className="h-1.5 w-3/5 bg-foreground/4 rounded-full" />
-                              </div>
-                            )}
-                            {el.type === "badge" && (
-                              <div className="flex justify-end pt-1">
-                                <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-primary/5 border border-primary/10 text-primary/60">{el.label}</span>
-                              </div>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </AnimatedSection>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
 
           {/* Design Iteration Summary */}
           <AnimatedSection className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -913,7 +886,7 @@ const HealthcareAppPage = () => {
 
           <AnimatedSection className="mb-12 max-w-3xl">
             <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Solution</span>
-            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">The MediRescue Suite</h3>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">The MediWave Suite</h3>
             <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
             <p className="text-lg text-muted-foreground leading-relaxed">
               {project.solution}
@@ -1012,7 +985,7 @@ const HealthcareAppPage = () => {
             <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Visual Design</h3>
             <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
             <p className="text-lg text-muted-foreground leading-relaxed">
-              The MediRescue design system was engineered for extreme environments — high-contrast readability in bright sunlight and low-light conditions, glove-friendly touch targets, and a visual language that communicates urgency without inducing panic.
+              The MediWave design system was engineered for extreme environments — high-contrast readability in bright sunlight and low-light conditions, glove-friendly touch targets, and a visual language that communicates urgency without inducing panic.
             </p>
           </AnimatedSection>
 
@@ -1024,7 +997,7 @@ const HealthcareAppPage = () => {
               </div>
               Logo & Branding
             </h4>
-            
+
             <div className="grid md:grid-cols-12 gap-8 items-center bg-card border border-border/50 rounded-3xl p-8 hover:border-primary/30 transition-colors">
               <div className="md:col-span-5">
                 <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-4">Identity</div>
@@ -1048,9 +1021,9 @@ const HealthcareAppPage = () => {
                 </div>
               </div>
               <div className="md:col-span-7 rounded-2xl overflow-hidden border border-border/40 bg-background/50 p-2">
-                <img 
-                  src={mediwaveLogo} 
-                  alt="MediWave Logo Usage Guide" 
+                <img
+                  src={mediwaveLogo}
+                  alt="MediWave Logo Usage Guide"
                   className="w-full h-auto rounded-xl object-contain hover:scale-[1.02] transition-transform duration-500"
                 />
               </div>
@@ -1071,14 +1044,14 @@ const HealthcareAppPage = () => {
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-5 pb-3 border-b border-border/50 gap-4">
                   <div>
                     <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Display / Headlines</div>
-                    <div className="font-display text-2xl font-bold text-foreground">Syne</div>
+                    <div className="text-2xl font-bold text-foreground" style={{ fontFamily: "'Poppins', sans-serif" }}>Poppins</div>
                   </div>
                   <div className="sm:text-right">
                     <div className="text-xs font-medium text-muted-foreground mb-1">Weights</div>
                     <div className="text-[10px] font-semibold text-foreground bg-secondary/50 px-2 py-0.5 rounded-full border border-border/50 inline-block">500, 600, 700, 800</div>
                   </div>
                 </div>
-                <div className="text-3xl sm:text-4xl lg:text-5xl text-foreground/80 break-words leading-tight group-hover:text-primary transition-colors font-display">
+                <div className="text-3xl sm:text-4xl lg:text-5xl text-foreground/80 break-words leading-tight group-hover:text-primary transition-colors" style={{ fontFamily: "'Poppins', sans-serif" }}>
                   Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
                 </div>
               </div>
@@ -1121,7 +1094,7 @@ const HealthcareAppPage = () => {
                       <div className="text-foreground truncate leading-none" style={{
                         fontSize: item.size,
                         fontWeight: item.weight === "Bold" ? 700 : item.weight === "Semibold" ? 600 : item.weight === "Medium" ? 500 : 400,
-                        fontFamily: i < 4 ? "var(--font-display)" : "'Inter', sans-serif",
+                        fontFamily: i < 4 ? "'Poppins', sans-serif" : "'Inter', sans-serif",
                       }}>
                         {item.label}
                       </div>
@@ -1269,7 +1242,7 @@ const HealthcareAppPage = () => {
               <div className="rounded-2xl border border-border/60 bg-secondary/30 overflow-hidden relative shadow-lg hover:shadow-xl transition-all">
                 <img
                   src={healthcareMockup}
-                  alt="MediRescue Platform — Connected Ambulance vitals dashboard, live camera feeds, and ePCR patient details interface"
+                  alt="MediWave Platform — Connected Ambulance vitals dashboard, live camera feeds, and ePCR patient details interface"
                   className="w-full h-auto object-cover"
                   loading="lazy"
                 />
@@ -1452,9 +1425,9 @@ const HealthcareAppPage = () => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: Ambulance, metric: "322+", desc: "Ambulances powered by MediRescue across Sri Lanka's 1990 Suwa Seriya fleet" },
+              { icon: Ambulance, metric: "322+", desc: "Ambulances powered by MediWave across Sri Lanka's 1990 Suwa Seriya fleet" },
               { icon: Clock, metric: "15m 32s", desc: "Average island-wide response time — faster than many developed nations" },
-              { icon: Users, metric: "2M+", desc: "Total patients transported and treated across the MediRescue global footprint" },
+              { icon: Users, metric: "2M+", desc: "Total patients transported and treated across the MediWave global footprint" },
               { icon: Globe, metric: "GLOMO '24", desc: "Global Mobile Awards Finalist for Best Mobile Innovation for Connected Health" },
             ].map((item, idx) => (
               <AnimatedSection key={idx} delay={idx * 100} className="relative bg-card border border-border/50 rounded-3xl p-6 sm:p-8 text-center hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all group overflow-hidden">
@@ -1467,26 +1440,6 @@ const HealthcareAppPage = () => {
               </AnimatedSection>
             ))}
           </div>
-
-          {/* Testimonial */}
-          <AnimatedSection className="mt-12 bg-secondary/30 border border-border/50 rounded-3xl p-8 sm:p-10 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-            <div className="relative z-10 max-w-3xl">
-              <div className="text-4xl text-primary mb-4 font-serif leading-none">"</div>
-              <p className="text-lg sm:text-xl text-foreground font-medium leading-relaxed mb-6">
-                This technology, coupled with AI, frees practitioners from the burden of paperwork, enabling them to focus on what they do best — save lives.
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Users className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <div className="font-bold text-foreground">Donnie Woodyard Jr.</div>
-                  <div className="text-sm text-muted-foreground">30-year veteran paramedic · EMS Advisor</div>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
 
           {/* Learnings */}
           <AnimatedSection className="mt-8 grid lg:grid-cols-2 gap-8">

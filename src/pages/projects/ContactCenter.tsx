@@ -52,11 +52,11 @@ const ContactCenterPage = () => {
       const rect = heroRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      
+
       // Calculate rotation based on distance from center
       targetX = (e.clientY - centerY) * 0.002;
       targetY = (e.clientX - centerX) * -0.002;
-      
+
       // Calculate translation based on distance from center
       targetMoveX = (e.clientX - centerX) * 0.01;
       targetMoveY = (e.clientY - centerY) * 0.01;
@@ -68,7 +68,7 @@ const ContactCenterPage = () => {
       currentY += (targetY - currentY) * 0.03;
       currentMoveX += (targetMoveX - currentMoveX) * 0.03;
       currentMoveY += (targetMoveY - currentMoveY) * 0.03;
-      
+
       if (laptopRef.current) {
         // Combined with existing translate-y-1/2 logic and new parallax translation
         laptopRef.current.style.transform = `translateY(calc(-50% + ${currentMoveY}px)) translateX(${currentMoveX}px) perspective(1200px) rotateX(${currentX}deg) rotateY(${currentY}deg)`;
@@ -130,7 +130,7 @@ const ContactCenterPage = () => {
             ref={laptopRef}
             src={senseAILaptop}
             alt="SenseAI Platform"
-            className="absolute right-0 top-[60%] -translate-y-1/2 w-[70%] h-auto object-contain pr-10 xl:pr-16 drop-shadow-2xl opacity-80 will-change-transform"
+            className="absolute right-0 top-[60%] -translate-y-1/2 w-[70%] h-auto object-contain pr-10 xl:pr-16 drop-shadow-2xl will-change-transform"
           />
         </div>
 
@@ -566,215 +566,215 @@ const ContactCenterPage = () => {
             </div>
           </AnimatedSection>
 
-            <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
-              {/* Persona 1 */}
-              <AnimatedSection delay={100} className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+          <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
+            {/* Persona 1 */}
+            <AnimatedSection delay={100} className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
 
-                <div className="p-6 sm:p-8 pb-4">
-                  {/* Persona details... */}
-                  <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
-                    <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
-                      <img src="https://i.pravatar.cc/150?img=11" alt="Nimal Perera" className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <h5 className="font-bold text-lg text-foreground leading-snug">Nimal Perera</h5>
-                      <div className="text-sm font-medium text-primary mb-0.5">Customer Support Agent</div>
-                      <div className="text-xs font-medium text-muted-foreground">Age: 26 | Exp: 1-3 years</div>
-                    </div>
+              <div className="p-6 sm:p-8 pb-4">
+                {/* Persona details... */}
+                <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
+                  <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
+                    <img src="https://i.pravatar.cc/150?img=11" alt="Nimal Perera" className="w-full h-full object-cover" />
                   </div>
-
-                  <div className="space-y-6 relative z-10">
-                    <div>
-                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Improve QA Scores, Be More Efficient</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Instant Feedback</span>
-                        </li>
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Clear Tips</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Delayed Feedback</span>
-                        </li>
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>QA Pressure</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>AI Call Feedback</span>
-                        </li>
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Performance Dashboard</span>
-                        </li>
-                      </ul>
-                    </div>
+                  <div>
+                    <h5 className="font-bold text-lg text-foreground leading-snug">Nimal Perera</h5>
+                    <div className="text-sm font-medium text-primary mb-0.5">Customer Support Agent</div>
+                    <div className="text-xs font-medium text-muted-foreground">Age: 26 | Exp: 1-3 years</div>
                   </div>
                 </div>
-              </AnimatedSection>
 
-              {/* Persona 2 */}
-              <AnimatedSection delay={200} className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
-
-                <div className="p-6 sm:p-8 pb-4">
-                  <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
-                    <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
-                      <img src="https://i.pravatar.cc/150?img=5" alt="Shalini Fernando" className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <h5 className="font-bold text-lg text-foreground leading-snug">Shalini Fernando</h5>
-                      <div className="text-sm font-medium text-primary mb-0.5">Contact Center Supervisor</div>
-                      <div className="text-xs font-medium text-muted-foreground">Age: 34 | Exp: 15+ years</div>
-                    </div>
+                <div className="space-y-6 relative z-10">
+                  <div>
+                    <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Improve QA Scores, Be More Efficient</span>
+                      </li>
+                    </ul>
                   </div>
-
-                  <div className="space-y-6 relative z-10">
-                    <div>
-                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Ensure Team Quality, Find Skill Gaps</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Agent Insights</span>
-                        </li>
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Training Tools</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Manual Reviews</span>
-                        </li>
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Inconsistent Performance</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>QA Analytics</span>
-                        </li>
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Coaching Insights</span>
-                        </li>
-                      </ul>
-                    </div>
+                  <div>
+                    <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Instant Feedback</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Clear Tips</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Delayed Feedback</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>QA Pressure</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>AI Call Feedback</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Performance Dashboard</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-              </AnimatedSection>
+              </div>
+            </AnimatedSection>
 
-              {/* Persona 3 */}
-              <AnimatedSection delay={300} className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+            {/* Persona 2 */}
+            <AnimatedSection delay={200} className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
 
-                <div className="p-6 sm:p-8 pb-4">
-                  <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
-                    <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
-                      <img src="https://i.pravatar.cc/150?img=8" alt="Ruwan Jayasinghe" className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <h5 className="font-bold text-lg text-foreground leading-snug">Ruwan Jayasinghe</h5>
-                      <div className="text-sm font-medium text-primary mb-0.5">Head of Customer Experience</div>
-                      <div className="text-xs font-medium text-muted-foreground">Age: 45 | Exp: 15+ years</div>
-                    </div>
+              <div className="p-6 sm:p-8 pb-4">
+                <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
+                  <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
+                    <img src="https://i.pravatar.cc/150?img=5" alt="Shalini Fernando" className="w-full h-full object-cover" />
                   </div>
-
-                  <div className="space-y-6 relative z-10">
-                    <div>
-                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Boost CSAT & NPS, Strategic Decisions</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Trends & Sentiment</span>
-                        </li>
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Product Feedback</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Data Overload</span>
-                        </li>
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Slow Insights</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Trend Reports</span>
-                        </li>
-                        <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                          <span>Sentiment Analysis</span>
-                        </li>
-                      </ul>
-                    </div>
+                  <div>
+                    <h5 className="font-bold text-lg text-foreground leading-snug">Shalini Fernando</h5>
+                    <div className="text-sm font-medium text-primary mb-0.5">Contact Center Supervisor</div>
+                    <div className="text-xs font-medium text-muted-foreground">Age: 34 | Exp: 15+ years</div>
                   </div>
                 </div>
-              </AnimatedSection>
-            </div>
+
+                <div className="space-y-6 relative z-10">
+                  <div>
+                    <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Ensure Team Quality, Find Skill Gaps</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Agent Insights</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Training Tools</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Manual Reviews</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Inconsistent Performance</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>QA Analytics</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Coaching Insights</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Persona 3 */}
+            <AnimatedSection delay={300} className="bg-card rounded-3xl border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+
+              <div className="p-6 sm:p-8 pb-4">
+                <div className="flex items-center gap-4 mb-6 relative z-10 border-b border-border/50 pb-6">
+                  <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-primary/20 shadow-sm">
+                    <img src="https://i.pravatar.cc/150?img=8" alt="Ruwan Jayasinghe" className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h5 className="font-bold text-lg text-foreground leading-snug">Ruwan Jayasinghe</h5>
+                    <div className="text-sm font-medium text-primary mb-0.5">Head of Customer Experience</div>
+                    <div className="text-xs font-medium text-muted-foreground">Age: 45 | Exp: 15+ years</div>
+                  </div>
+                </div>
+
+                <div className="space-y-6 relative z-10">
+                  <div>
+                    <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Goals</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Boost CSAT & NPS, Strategic Decisions</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Needs</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Trends & Sentiment</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Product Feedback</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">Pain Points</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Data Overload</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Slow Insights</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-primary mb-3 border-b border-border/50 pb-2">System Helps</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Trend Reports</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm font-medium text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span>Sentiment Analysis</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
 
           {/* Ideation & Design Process Section */}
           <AnimatedSection className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
@@ -792,248 +792,248 @@ const ContactCenterPage = () => {
             </div>
           </AnimatedSection>
 
-            {/* User Journey Map - Full Width */}
-            <div className="space-y-10">
-              <AnimatedSection className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-secondary/10 border border-border/40 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/5 blur-[80px] rounded-full pointer-events-none" />
+          {/* User Journey Map - Full Width */}
+          <div className="space-y-10">
+            <AnimatedSection className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-secondary/10 border border-border/40 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/5 blur-[80px] rounded-full pointer-events-none" />
 
-                <div className="relative z-10">
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Search className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-display font-bold text-foreground">Agent Experience Journey Map</h4>
-                      <p className="text-sm text-muted-foreground mt-1">Tracking the emotional arc of a support agent through the Sense AI workflow</p>
-                    </div>
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Search className="w-6 h-6 text-primary" />
                   </div>
-
-                  {/* Journey Stages - Horizontal Scroll on Mobile */}
-                  <div className="overflow-x-auto pb-4 -mx-2 px-2">
-                    <div className="grid grid-cols-7 gap-3 min-w-[900px]">
-                      {/* Stage Headers */}
-                      {[
-                        { title: "Receive Call", emoji: "😐", mood: "neutral", color: "amber" },
-                        { title: "Real-Time Alerts", emoji: "😊", mood: "positive", color: "green" },
-                        { title: "Call Review", emoji: "😟", mood: "negative", color: "red" },
-                        { title: "Feedback Review", emoji: "😞", mood: "low", color: "red" },
-                        { title: "Coaching Session", emoji: "😐", mood: "neutral", color: "amber" },
-                        { title: "Next Call", emoji: "😊", mood: "positive", color: "green" },
-                        { title: "Score Trending Up", emoji: "😁", mood: "high", color: "green" },
-                      ].map((stage, i) => (
-                        <div key={i} className="group/stage">
-                          {/* Header Bar */}
-                          <div className="bg-amber-400 text-amber-900 rounded-xl px-3 py-2.5 text-center mb-4">
-                            <span className="font-bold text-xs sm:text-sm leading-tight block">{stage.title}</span>
-                          </div>
-
-                          {/* Emoji Mood Indicator */}
-                          <div className="flex justify-center mb-4">
-                            <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-sm border-2 transition-transform group-hover/stage:scale-110 ${stage.color === 'green' ? 'bg-green-100 border-green-300' :
-                                stage.color === 'red' ? 'bg-red-100 border-red-300' :
-                                  'bg-amber-100 border-amber-300'
-                                }`}>
-                              {stage.emoji}
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Connecting Sentiment Line */}
-                    <div className="relative min-w-[900px] h-8 my-2">
-                      <svg className="w-full h-full" viewBox="0 0 900 32" fill="none" preserveAspectRatio="none">
-                        <path d="M 64 20 Q 128 8, 192 8 Q 256 8, 320 24 Q 384 28, 448 28 Q 512 24, 576 16 Q 640 8, 704 8 Q 768 4, 836 4" stroke="currentColor" className="text-primary/40" strokeWidth="2" strokeDasharray="6 4" fill="none" />
-                      </svg>
-                    </div>
-
-                    {/* Stage Details */}
-                    <div className="grid grid-cols-7 gap-3 min-w-[900px]">
-                      {[
-                        {
-                          actions: [
-                            { icon: Phone, text: "Receive Call" },
-                            { icon: Database, text: "Sense AI starts analyzing interaction" },
-                          ]
-                        },
-                        {
-                          actions: [
-                            { icon: Bell, text: "Gets live feedback & alerts" },
-                            { icon: Lightbulb, text: "Tip: Adjust your tone & slow down" },
-                          ]
-                        },
-                        {
-                          actions: [
-                            { icon: FileSearch, text: "Views AI score & analysis" },
-                            { icon: ClipboardCheck, text: "Sees call breakdown & transcripts" },
-                          ]
-                        },
-                        {
-                          actions: [
-                            { icon: MessageCircle, text: "Feedback on tone and resolution" },
-                            { icon: Lightbulb, text: "Checks specific suggestions from Sense AI" },
-                          ]
-                        },
-                        {
-                          actions: [
-                            { icon: GraduationCap, text: "Soundbite: \"Try empathizing more.\"" },
-                            { icon: TrendingUp, text: "Skill Trend: Average empathy below peers" },
-                          ]
-                        },
-                        {
-                          actions: [
-                            { icon: PhoneForwarded, text: "Applies coaching to next interaction" },
-                            { icon: Sparkles, text: "AI detects improved empathy signals" },
-                          ]
-                        },
-                        {
-                          actions: [
-                            { icon: TrendingUp, text: "Employee ratings trending up" },
-                            { icon: BarChart3, text: "Total Sales: $1,200 → +$1,500" },
-                          ]
-                        },
-                      ].map((stage, i) => (
-                        <div key={i} className="space-y-3">
-                          {stage.actions.map((action, j) => (
-                            <div key={j} className="bg-card rounded-xl p-3 border border-border/50 shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-200">
-                              <div className="flex items-start gap-2">
-                                <action.icon className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                                <span className="text-xs font-medium text-muted-foreground leading-snug">{action.text}</span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Bottom Summary Cards */}
-                  <div className="grid md:grid-cols-2 gap-6 mt-10">
-                    {/* Improvement Insights */}
-                    <div className="bg-green-500/10 rounded-2xl p-6 border border-green-500/20">
-                      <h5 className="font-bold text-foreground mb-4 flex items-center gap-2">
-                        <Lightbulb className="w-5 h-5 text-green-600" />
-                        Improvement Insights
-                      </h5>
-                      <ul className="space-y-3">
-                        <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <div className="w-2 h-2 rounded-full bg-green-500 mt-1.5 shrink-0" />
-                          <span><span className="font-semibold text-foreground">Soundbite:</span> "Try empathizing more."</span>
-                        </li>
-                        <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <div className="w-2 h-2 rounded-full bg-green-500 mt-1.5 shrink-0" />
-                          <span><span className="font-semibold text-foreground">Skill Trend:</span> Average empathy below peers</span>
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* Agent Experience Progress */}
-                    <div className="bg-amber-500/10 rounded-2xl p-6 border border-amber-500/20">
-                      <h5 className="font-bold text-foreground mb-4 flex items-center gap-2">
-                        <Trophy className="w-5 h-5 text-amber-600" />
-                        Agent Experience Progress
-                      </h5>
-                      <ul className="space-y-3">
-                        <li className="flex items-center justify-between text-sm">
-                          <span className="flex items-center gap-2 text-muted-foreground">
-                            <TrendingUp className="w-4 h-4 text-green-500" />
-                            Improved Empathy Score
-                          </span>
-                          <span className="text-green-600 font-bold">↑</span>
-                        </li>
-                        <li className="flex items-center justify-between text-sm">
-                          <span className="flex items-center gap-2 text-muted-foreground">
-                            <BarChart3 className="w-4 h-4 text-primary" />
-                            Agent Leaderboard Rank
-                          </span>
-                          <span className="text-amber-600 font-bold">🏅</span>
-                        </li>
-                        <li className="flex items-center justify-between text-sm">
-                          <span className="flex items-center gap-2 text-muted-foreground">
-                            <Award className="w-4 h-4 text-amber-500" />
-                            Performance Bonus Earned
-                          </span>
-                          <span className="text-amber-600 font-bold">🏆</span>
-                        </li>
-                      </ul>
-                    </div>
+                  <div>
+                    <h4 className="text-2xl font-display font-bold text-foreground">Agent Experience Journey Map</h4>
+                    <p className="text-sm text-muted-foreground mt-1">Tracking the emotional arc of a support agent through the Sense AI workflow</p>
                   </div>
                 </div>
-              </AnimatedSection>
 
-              {/* Wireframes & Prototyping */}
-              <AnimatedSection className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-card border border-border/50 shadow-xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
-
-                <div className="relative z-10">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <ClipboardCheck className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-display font-bold text-foreground">Wireframes & Prototyping</h4>
-                      <p className="text-sm text-muted-foreground mt-1">Iterative design cycles for the most critical interfaces</p>
-                    </div>
-                  </div>
-
-                  <p className="text-muted-foreground leading-relaxed mb-8 max-w-3xl">
-                    Based on our journey maps, we developed detailed wireframes focusing on the most critical interfaces. Each screen went through multiple rounds of iteration informed by stakeholder feedback.
-                  </p>
-
-                  {/* Screenshot Bento Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[160px] md:auto-rows-[200px] gap-4 sm:gap-6">
+                {/* Journey Stages - Horizontal Scroll on Mobile */}
+                <div className="overflow-x-auto pb-4 -mx-2 px-2">
+                  <div className="grid grid-cols-7 gap-3 min-w-[900px]">
+                    {/* Stage Headers */}
                     {[
-                      { label: "Home Dashboard", src: wireframeHome, span: "md:col-span-2 md:row-span-2" },
-                      { label: "Call Insights", src: wireframeCallInsights, span: "md:col-span-2" },
-                      { label: "Agent Insights", src: wireframeAgentInsights, span: "md:col-span-1" },
-                      { label: "Dashboard Overview", src: wireframeHome1, span: "md:col-span-1" },
-                      { label: "Single Call Details", src: wireframeSingleCall, span: "md:col-span-1" },
-                      { label: "Autopilot Mode", src: wireframeAutopilot, span: "md:col-span-1" },
-                      { label: "Content Upload", src: wireframeContentUpload, span: "md:col-span-1" },
-                      { label: "Login Screen", src: wireframeLogin, span: "md:col-span-1" },
-                    ].map((item, i) => (
-                      <div key={i} className={`group/wf relative flex flex-col ${item.span} cursor-pointer`} onClick={() => {
-                        const newScreens = [
-                          { src: wireframeHome, label: "Home Dashboard" },
-                          { src: wireframeCallInsights, label: "Call Insights" },
-                          { src: wireframeAgentInsights, label: "Agent Insights" },
-                          { src: wireframeHome1, label: "Dashboard Overview" },
-                          { src: wireframeSingleCall, label: "Single Call Details" },
-                          { src: wireframeAutopilot, label: "Autopilot Mode" },
-                          { src: wireframeContentUpload, label: "Content Upload" },
-                          { src: wireframeLogin, label: "Login Screen" },
-                        ];
-                        // Hacky way to inject wireframes into the lightbox temporarily, or we could add another state variable.
-                        // Let's add another state variable for the gallery type if we want it clean, but for now we can just 
-                        // open the image. Let's create a separate state for wireframes.
-                        setWireframeIndex(i);
-                      }}>
-                        <div className="w-full h-full rounded-2xl border border-border/60 bg-secondary/20 overflow-hidden relative hover:border-primary/40 transition-all shadow-sm hover:shadow-xl hover:shadow-primary/5">
-                          <img 
-                            src={item.src} 
-                            alt={item.label} 
-                            className="absolute inset-0 w-full h-full object-cover object-top opacity-90 group-hover/wf:opacity-100 transition-transform duration-700 group-hover/wf:scale-105" 
-                            loading="lazy" 
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-0 group-hover/wf:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                              <div className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover/wf:opacity-100 transition-opacity duration-300 translate-y-4 group-hover/wf:translate-y-0">
-                                <Search className="w-5 h-5 text-primary" />
-                              </div>
-                          </div>
-                          <div className="absolute top-4 left-4 z-10">
-                            <span className="px-3 py-1.5 text-xs font-semibold bg-background/90 backdrop-blur-md border border-border/50 rounded-full text-foreground shadow-sm flex items-center gap-2">
-                              <Search className="w-3 h-3 text-primary" />
-                              {item.label}
-                            </span>
+                      { title: "Receive Call", emoji: "😐", mood: "neutral", color: "amber" },
+                      { title: "Real-Time Alerts", emoji: "😊", mood: "positive", color: "green" },
+                      { title: "Call Review", emoji: "😟", mood: "negative", color: "red" },
+                      { title: "Feedback Review", emoji: "😞", mood: "low", color: "red" },
+                      { title: "Coaching Session", emoji: "😐", mood: "neutral", color: "amber" },
+                      { title: "Next Call", emoji: "😊", mood: "positive", color: "green" },
+                      { title: "Score Trending Up", emoji: "😁", mood: "high", color: "green" },
+                    ].map((stage, i) => (
+                      <div key={i} className="group/stage">
+                        {/* Header Bar */}
+                        <div className="bg-amber-400 text-amber-900 rounded-xl px-3 py-2.5 text-center mb-4">
+                          <span className="font-bold text-xs sm:text-sm leading-tight block">{stage.title}</span>
+                        </div>
+
+                        {/* Emoji Mood Indicator */}
+                        <div className="flex justify-center mb-4">
+                          <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-sm border-2 transition-transform group-hover/stage:scale-110 ${stage.color === 'green' ? 'bg-green-100 border-green-300' :
+                            stage.color === 'red' ? 'bg-red-100 border-red-300' :
+                              'bg-amber-100 border-amber-300'
+                            }`}>
+                            {stage.emoji}
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
+
+                  {/* Connecting Sentiment Line */}
+                  <div className="relative min-w-[900px] h-8 my-2">
+                    <svg className="w-full h-full" viewBox="0 0 900 32" fill="none" preserveAspectRatio="none">
+                      <path d="M 64 20 Q 128 8, 192 8 Q 256 8, 320 24 Q 384 28, 448 28 Q 512 24, 576 16 Q 640 8, 704 8 Q 768 4, 836 4" stroke="currentColor" className="text-primary/40" strokeWidth="2" strokeDasharray="6 4" fill="none" />
+                    </svg>
+                  </div>
+
+                  {/* Stage Details */}
+                  <div className="grid grid-cols-7 gap-3 min-w-[900px]">
+                    {[
+                      {
+                        actions: [
+                          { icon: Phone, text: "Receive Call" },
+                          { icon: Database, text: "Sense AI starts analyzing interaction" },
+                        ]
+                      },
+                      {
+                        actions: [
+                          { icon: Bell, text: "Gets live feedback & alerts" },
+                          { icon: Lightbulb, text: "Tip: Adjust your tone & slow down" },
+                        ]
+                      },
+                      {
+                        actions: [
+                          { icon: FileSearch, text: "Views AI score & analysis" },
+                          { icon: ClipboardCheck, text: "Sees call breakdown & transcripts" },
+                        ]
+                      },
+                      {
+                        actions: [
+                          { icon: MessageCircle, text: "Feedback on tone and resolution" },
+                          { icon: Lightbulb, text: "Checks specific suggestions from Sense AI" },
+                        ]
+                      },
+                      {
+                        actions: [
+                          { icon: GraduationCap, text: "Soundbite: \"Try empathizing more.\"" },
+                          { icon: TrendingUp, text: "Skill Trend: Average empathy below peers" },
+                        ]
+                      },
+                      {
+                        actions: [
+                          { icon: PhoneForwarded, text: "Applies coaching to next interaction" },
+                          { icon: Sparkles, text: "AI detects improved empathy signals" },
+                        ]
+                      },
+                      {
+                        actions: [
+                          { icon: TrendingUp, text: "Employee ratings trending up" },
+                          { icon: BarChart3, text: "Total Sales: $1,200 → +$1,500" },
+                        ]
+                      },
+                    ].map((stage, i) => (
+                      <div key={i} className="space-y-3">
+                        {stage.actions.map((action, j) => (
+                          <div key={j} className="bg-card rounded-xl p-3 border border-border/50 shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-200">
+                            <div className="flex items-start gap-2">
+                              <action.icon className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                              <span className="text-xs font-medium text-muted-foreground leading-snug">{action.text}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </AnimatedSection>
-            </div>
+
+                {/* Bottom Summary Cards */}
+                <div className="grid md:grid-cols-2 gap-6 mt-10">
+                  {/* Improvement Insights */}
+                  <div className="bg-green-500/10 rounded-2xl p-6 border border-green-500/20">
+                    <h5 className="font-bold text-foreground mb-4 flex items-center gap-2">
+                      <Lightbulb className="w-5 h-5 text-green-600" />
+                      Improvement Insights
+                    </h5>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                        <span><span className="font-semibold text-foreground">Soundbite:</span> "Try empathizing more."</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                        <span><span className="font-semibold text-foreground">Skill Trend:</span> Average empathy below peers</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Agent Experience Progress */}
+                  <div className="bg-amber-500/10 rounded-2xl p-6 border border-amber-500/20">
+                    <h5 className="font-bold text-foreground mb-4 flex items-center gap-2">
+                      <Trophy className="w-5 h-5 text-amber-600" />
+                      Agent Experience Progress
+                    </h5>
+                    <ul className="space-y-3">
+                      <li className="flex items-center justify-between text-sm">
+                        <span className="flex items-center gap-2 text-muted-foreground">
+                          <TrendingUp className="w-4 h-4 text-green-500" />
+                          Improved Empathy Score
+                        </span>
+                        <span className="text-green-600 font-bold">↑</span>
+                      </li>
+                      <li className="flex items-center justify-between text-sm">
+                        <span className="flex items-center gap-2 text-muted-foreground">
+                          <BarChart3 className="w-4 h-4 text-primary" />
+                          Agent Leaderboard Rank
+                        </span>
+                        <span className="text-amber-600 font-bold">🏅</span>
+                      </li>
+                      <li className="flex items-center justify-between text-sm">
+                        <span className="flex items-center gap-2 text-muted-foreground">
+                          <Award className="w-4 h-4 text-amber-500" />
+                          Performance Bonus Earned
+                        </span>
+                        <span className="text-amber-600 font-bold">🏆</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Wireframes & Prototyping */}
+            <AnimatedSection className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-card border border-border/50 shadow-xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <ClipboardCheck className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="text-2xl font-display font-bold text-foreground">Wireframes & Prototyping</h4>
+                    <p className="text-sm text-muted-foreground mt-1">Iterative design cycles for the most critical interfaces</p>
+                  </div>
+                </div>
+
+                <p className="text-muted-foreground leading-relaxed mb-8 max-w-3xl">
+                  Based on our journey maps, we developed detailed wireframes focusing on the most critical interfaces. Each screen went through multiple rounds of iteration informed by stakeholder feedback.
+                </p>
+
+                {/* Screenshot Bento Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[160px] md:auto-rows-[200px] gap-4 sm:gap-6">
+                  {[
+                    { label: "Home Dashboard", src: wireframeHome, span: "md:col-span-2 md:row-span-2" },
+                    { label: "Call Insights", src: wireframeCallInsights, span: "md:col-span-2" },
+                    { label: "Agent Insights", src: wireframeAgentInsights, span: "md:col-span-1" },
+                    { label: "Dashboard Overview", src: wireframeHome1, span: "md:col-span-1" },
+                    { label: "Single Call Details", src: wireframeSingleCall, span: "md:col-span-1" },
+                    { label: "Autopilot Mode", src: wireframeAutopilot, span: "md:col-span-1" },
+                    { label: "Content Upload", src: wireframeContentUpload, span: "md:col-span-1" },
+                    { label: "Login Screen", src: wireframeLogin, span: "md:col-span-1" },
+                  ].map((item, i) => (
+                    <div key={i} className={`group/wf relative flex flex-col ${item.span} cursor-pointer`} onClick={() => {
+                      const newScreens = [
+                        { src: wireframeHome, label: "Home Dashboard" },
+                        { src: wireframeCallInsights, label: "Call Insights" },
+                        { src: wireframeAgentInsights, label: "Agent Insights" },
+                        { src: wireframeHome1, label: "Dashboard Overview" },
+                        { src: wireframeSingleCall, label: "Single Call Details" },
+                        { src: wireframeAutopilot, label: "Autopilot Mode" },
+                        { src: wireframeContentUpload, label: "Content Upload" },
+                        { src: wireframeLogin, label: "Login Screen" },
+                      ];
+                      // Hacky way to inject wireframes into the lightbox temporarily, or we could add another state variable.
+                      // Let's add another state variable for the gallery type if we want it clean, but for now we can just 
+                      // open the image. Let's create a separate state for wireframes.
+                      setWireframeIndex(i);
+                    }}>
+                      <div className="w-full h-full rounded-2xl border border-border/60 bg-secondary/20 overflow-hidden relative hover:border-primary/40 transition-all shadow-sm hover:shadow-xl hover:shadow-primary/5">
+                        <img
+                          src={item.src}
+                          alt={item.label}
+                          className="absolute inset-0 w-full h-full object-cover object-top opacity-90 group-hover/wf:opacity-100 transition-transform duration-700 group-hover/wf:scale-105"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-0 group-hover/wf:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover/wf:opacity-100 transition-opacity duration-300 translate-y-4 group-hover/wf:translate-y-0">
+                            <Search className="w-5 h-5 text-primary" />
+                          </div>
+                        </div>
+                        <div className="absolute top-4 left-4 z-10">
+                          <span className="px-3 py-1.5 text-xs font-semibold bg-background/90 backdrop-blur-md border border-border/50 rounded-full text-foreground shadow-sm flex items-center gap-2">
+                            <Search className="w-3 h-3 text-primary" />
+                            {item.label}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
 
           {/* Key Features Designed Section */}
           <AnimatedSection className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
@@ -1051,48 +1051,48 @@ const ContactCenterPage = () => {
             </div>
           </AnimatedSection>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {[
-                {
-                  icon: MessageSquareText,
-                  title: "Speech-to-Text Conversion",
-                  desc: "Convert spoken conversations into accurate, structured text for detailed analysis, ensuring no crucial detail is overlooked."
-                },
-                {
-                  icon: BarChart3,
-                  title: "Sentiment Analysis",
-                  desc: "Gauge emotional tones to assess customer satisfaction, frustration, or engagement, enabling proactive issue resolution."
-                },
-                {
-                  icon: Search,
-                  title: "Categorization & Summarization",
-                  desc: "Automatically categorize calls and generate concise summaries, saving time for managers to streamline follow-up actions."
-                },
-                {
-                  icon: ClipboardCheck,
-                  title: "KPI Extraction",
-                  desc: "Extract key metrics like resolution time, satisfaction scores, and agent performance on-demand to achieve performance targets."
-                },
-                {
-                  icon: TrendingUp,
-                  title: "Trend & Root Cause Analysis",
-                  desc: "Detect recurring trends across calls, pinpointing common bottlenecks, and apply root cause analysis for continuous improvement."
-                },
-                {
-                  icon: Database,
-                  title: "Case Classification",
-                  desc: "Classify calls by context and intent for faster resolution, optimized resource allocation, and prioritized critical cases."
-                }
-              ].map((feature, idx) => (
-                <AnimatedSection key={idx} delay={idx * 100} className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:bg-secondary/20 hover:border-primary/30 transition-all duration-300 group">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
-                    <feature.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h4 className="font-display font-bold text-xl mb-3 text-foreground">{feature.title}</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{feature.desc}</p>
-                </AnimatedSection>
-              ))}
-            </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {[
+              {
+                icon: MessageSquareText,
+                title: "Speech-to-Text Conversion",
+                desc: "Convert spoken conversations into accurate, structured text for detailed analysis, ensuring no crucial detail is overlooked."
+              },
+              {
+                icon: BarChart3,
+                title: "Sentiment Analysis",
+                desc: "Gauge emotional tones to assess customer satisfaction, frustration, or engagement, enabling proactive issue resolution."
+              },
+              {
+                icon: Search,
+                title: "Categorization & Summarization",
+                desc: "Automatically categorize calls and generate concise summaries, saving time for managers to streamline follow-up actions."
+              },
+              {
+                icon: ClipboardCheck,
+                title: "KPI Extraction",
+                desc: "Extract key metrics like resolution time, satisfaction scores, and agent performance on-demand to achieve performance targets."
+              },
+              {
+                icon: TrendingUp,
+                title: "Trend & Root Cause Analysis",
+                desc: "Detect recurring trends across calls, pinpointing common bottlenecks, and apply root cause analysis for continuous improvement."
+              },
+              {
+                icon: Database,
+                title: "Case Classification",
+                desc: "Classify calls by context and intent for faster resolution, optimized resource allocation, and prioritized critical cases."
+              }
+            ].map((feature, idx) => (
+              <AnimatedSection key={idx} delay={idx * 100} className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:bg-secondary/20 hover:border-primary/30 transition-all duration-300 group">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
+                  <feature.icon className="w-6 h-6 text-primary" />
+                </div>
+                <h4 className="font-display font-bold text-xl mb-3 text-foreground">{feature.title}</h4>
+                <p className="text-muted-foreground text-sm leading-relaxed">{feature.desc}</p>
+              </AnimatedSection>
+            ))}
+          </div>
 
           {/* Visual Design Section */}
           <AnimatedSection className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
@@ -1110,229 +1110,229 @@ const ContactCenterPage = () => {
             </div>
           </AnimatedSection>
 
-            <div className="space-y-10">
-              {/* Typography & Colors */}
-              <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 space-y-12 sm:space-y-16">
-                {/* Typography */}
-                <AnimatedSection>
-                  <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Type className="w-5 h-5 text-primary" />
-                    </div>
-                    Typography
-                  </h4>
+          <div className="space-y-10">
+            {/* Typography & Colors */}
+            <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 space-y-12 sm:space-y-16">
+              {/* Typography */}
+              <AnimatedSection>
+                <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Type className="w-5 h-5 text-primary" />
+                  </div>
+                  Typography
+                </h4>
 
-                  <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
-                    <div className="bg-card border border-border/50 rounded-3xl p-5 sm:p-6 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group flex flex-col justify-start">
-                      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-5 pb-3 border-b border-border/50 gap-4">
-                        <div>
-                          <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Primary Display</div>
-                          <div className="font-display text-2xl font-bold text-foreground" style={{ fontFamily: "'Montserrat', sans-serif" }}>Montserrat</div>
-                        </div>
-                        <div className="sm:text-right">
-                          <div className="text-xs font-medium text-muted-foreground mb-1">Weights</div>
-                          <div className="text-[10px] font-semibold text-foreground bg-secondary/50 px-2 py-0.5 rounded-full border border-border/50 inline-block">400, 500, 600, 700, 800</div>
-                        </div>
+                <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+                  <div className="bg-card border border-border/50 rounded-3xl p-5 sm:p-6 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group flex flex-col justify-start">
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-5 pb-3 border-b border-border/50 gap-4">
+                      <div>
+                        <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Primary Display</div>
+                        <div className="font-display text-2xl font-bold text-foreground" style={{ fontFamily: "'Montserrat', sans-serif" }}>Montserrat</div>
                       </div>
-                      <div className="text-3xl sm:text-4xl lg:text-5xl text-foreground/80 break-words leading-tight group-hover:text-primary transition-colors" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-                        Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
+                      <div className="sm:text-right">
+                        <div className="text-xs font-medium text-muted-foreground mb-1">Weights</div>
+                        <div className="text-[10px] font-semibold text-foreground bg-secondary/50 px-2 py-0.5 rounded-full border border-border/50 inline-block">400, 500, 600, 700, 800</div>
                       </div>
                     </div>
-
-                    <div className="bg-card border border-border/50 rounded-3xl p-5 sm:p-6 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group flex flex-col justify-start">
-                      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-5 pb-3 border-b border-border/50 gap-4">
-                        <div>
-                          <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Body Text</div>
-                          <div className="text-2xl font-semibold text-foreground" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Plus Jakarta Sans</div>
-                        </div>
-                        <div className="sm:text-right">
-                          <div className="text-xs font-medium text-muted-foreground mb-1">Weights</div>
-                          <div className="text-[10px] font-semibold text-foreground bg-secondary/50 px-2 py-0.5 rounded-full border border-border/50 inline-block">300, 400, 500, 600, 700</div>
-                        </div>
-                      </div>
-                      <div className="text-2xl sm:text-3xl lg:text-4xl text-foreground/80 break-words leading-relaxed group-hover:text-primary transition-colors" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                        Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
-                      </div>
+                    <div className="text-3xl sm:text-4xl lg:text-5xl text-foreground/80 break-words leading-tight group-hover:text-primary transition-colors" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                      Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
                     </div>
                   </div>
 
-                  {/* Type Scale */}
-                  <div className="mt-8 bg-card border border-border/50 rounded-3xl p-5 sm:p-6 hover:border-primary/50 transition-all group">
-                    <div className="flex justify-between items-end mb-5 pb-3 border-b border-border/50">
-                      <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Type Scale</div>
-                      <div className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">1.2 Minor Third</div>
-                    </div>
-                    <div className="space-y-4">
-                      {[
-                        { label: 'Display', size: '47.78px', rem: '2.986rem', weight: 'Bold' },
-                        { label: 'Heading 1', size: '39.81px', rem: '2.488rem', weight: 'Bold' },
-                        { label: 'Heading 2', size: '33.18px', rem: '2.074rem', weight: 'Semibold' },
-                        { label: 'Heading 3', size: '27.65px', rem: '1.728rem', weight: 'Semibold' },
-                        { label: 'Heading 4', size: '23.04px', rem: '1.440rem', weight: 'Medium' },
-                        { label: 'Heading 5', size: '19.20px', rem: '1.200rem', weight: 'Medium' },
-                        { label: 'Body', size: '16.00px', rem: '1.000rem', weight: 'Regular' },
-                        { label: 'Caption', size: '13.33px', rem: '0.833rem', weight: 'Regular' },
-                      ].map((item, i) => (
-                        <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border/20 pb-4 last:border-0 last:pb-0 gap-3">
-                          <div className="flex-1 overflow-hidden">
-                            <div className="text-foreground truncate leading-none" style={{ 
-                              fontSize: item.size, 
-                              fontWeight: item.weight === 'Bold' ? 700 : item.weight === 'Semibold' ? 600 : item.weight === 'Medium' ? 500 : 400, 
-                              fontFamily: i < 6 ? "'Montserrat', sans-serif" : "'Plus Jakarta Sans', sans-serif" 
-                            }}>
-                              {item.label}
-                            </div>
-                          </div>
-                          <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm font-mono text-muted-foreground shrink-0 items-center">
-                            <span className="w-20 text-foreground">{item.weight}</span>
-                            <span className="w-20">{item.size}</span>
-                            <span className="w-20 text-primary text-right">{item.rem}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </AnimatedSection>
-
-                {/* Colors */}
-                <AnimatedSection>
-                  <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Palette className="w-5 h-5 text-primary" />
-                    </div>
-                    Color Architecture
-                  </h4>
-
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    {/* Primary Brand Color - Large Hero Card */}
-                    <div className="lg:col-span-8 group relative overflow-hidden rounded-[2.5rem] bg-card border border-border/50 p-8 sm:p-10 min-h-[280px] sm:min-h-[320px] flex flex-col justify-end shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500">
-                      <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105" style={{ background: 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)' }} />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      
-                      {/* Decorative elements */}
-                      <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-
-                      <div className="relative z-10 text-white flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-                        <div>
-                           <div className="text-white/80 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 sm:mb-3">Core Brand</div>
-                           <h5 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-none tracking-tight">Primary</h5>
-                        </div>
-                        <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-4 w-fit">
-                           <div className="font-mono text-xl sm:text-2xl font-medium tracking-wide">#2196F3</div>
-                           <div className="text-white/70 text-xs sm:text-sm text-right mt-1 font-medium">RGB 33, 150, 243</div>
-                        </div>
+                  <div className="bg-card border border-border/50 rounded-3xl p-5 sm:p-6 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group flex flex-col justify-start">
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-5 pb-3 border-b border-border/50 gap-4">
+                      <div>
+                        <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Body Text</div>
+                        <div className="text-2xl font-semibold text-foreground" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Plus Jakarta Sans</div>
+                      </div>
+                      <div className="sm:text-right">
+                        <div className="text-xs font-medium text-muted-foreground mb-1">Weights</div>
+                        <div className="text-[10px] font-semibold text-foreground bg-secondary/50 px-2 py-0.5 rounded-full border border-border/50 inline-block">300, 400, 500, 600, 700</div>
                       </div>
                     </div>
+                    <div className="text-2xl sm:text-3xl lg:text-4xl text-foreground/80 break-words leading-relaxed group-hover:text-primary transition-colors" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                      Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
+                    </div>
+                  </div>
+                </div>
 
-                    {/* Accent Color */}
-                    <div className="lg:col-span-4 group relative overflow-hidden rounded-[2.5rem] bg-card border border-border/50 p-8 sm:p-10 min-h-[280px] sm:min-h-[320px] flex flex-col justify-end shadow-sm hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500">
-                      <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105" style={{ background: 'linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%)' }} />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                      
-                      <div className="relative z-10 text-white flex flex-col justify-between h-full">
-                        <div className="text-white/80 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">Highlight</div>
-                        <div className="mt-auto">
-                           <h5 className="font-display text-4xl sm:text-5xl font-bold mb-5 tracking-tight">Accent</h5>
-                           <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl px-4 py-2 inline-block">
-                             <div className="font-mono text-lg font-medium">#9C27B0</div>
-                           </div>
+                {/* Type Scale */}
+                <div className="mt-8 bg-card border border-border/50 rounded-3xl p-5 sm:p-6 hover:border-primary/50 transition-all group">
+                  <div className="flex justify-between items-end mb-5 pb-3 border-b border-border/50">
+                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Type Scale</div>
+                    <div className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">1.2 Minor Third</div>
+                  </div>
+                  <div className="space-y-4">
+                    {[
+                      { label: 'Display', size: '47.78px', rem: '2.986rem', weight: 'Bold' },
+                      { label: 'Heading 1', size: '39.81px', rem: '2.488rem', weight: 'Bold' },
+                      { label: 'Heading 2', size: '33.18px', rem: '2.074rem', weight: 'Semibold' },
+                      { label: 'Heading 3', size: '27.65px', rem: '1.728rem', weight: 'Semibold' },
+                      { label: 'Heading 4', size: '23.04px', rem: '1.440rem', weight: 'Medium' },
+                      { label: 'Heading 5', size: '19.20px', rem: '1.200rem', weight: 'Medium' },
+                      { label: 'Body', size: '16.00px', rem: '1.000rem', weight: 'Regular' },
+                      { label: 'Caption', size: '13.33px', rem: '0.833rem', weight: 'Regular' },
+                    ].map((item, i) => (
+                      <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border/20 pb-4 last:border-0 last:pb-0 gap-3">
+                        <div className="flex-1 overflow-hidden">
+                          <div className="text-foreground truncate leading-none" style={{
+                            fontSize: item.size,
+                            fontWeight: item.weight === 'Bold' ? 700 : item.weight === 'Semibold' ? 600 : item.weight === 'Medium' ? 500 : 400,
+                            fontFamily: i < 6 ? "'Montserrat', sans-serif" : "'Plus Jakarta Sans', sans-serif"
+                          }}>
+                            {item.label}
+                          </div>
                         </div>
-                      </div>
-                    </div>
-
-                    {/* Background & Surface */}
-                    <div className="lg:col-span-5 grid grid-cols-2 gap-6">
-                       {[
-                          { name: "Background", color: "#FFFFFF", hex: "#FFFFFF", darkText: true },
-                          { name: "Surface", color: "#424242", hex: "#424242", darkText: false },
-                       ].map((c, i) => (
-                          <div key={i} className="group relative overflow-hidden rounded-[2.5rem] border border-border/50 p-6 sm:p-8 flex flex-col justify-between min-h-[200px] shadow-sm hover:shadow-xl transition-all duration-300" style={{ backgroundColor: c.color }}>
-                            <div className={`absolute inset-0 bg-gradient-to-tr ${c.darkText ? 'from-black/5' : 'from-white/5'} to-transparent opacity-0 group-hover:opacity-100 transition-opacity`} />
-                            <div className={`${c.darkText ? 'text-neutral-800' : 'text-white'} relative z-10`}>
-                              <div className="text-xs font-bold uppercase tracking-widest opacity-60 mb-2">Environment</div>
-                              <div className="font-display text-xl sm:text-2xl font-bold">{c.name}</div>
-                            </div>
-                            <div className={`font-mono text-sm relative z-10 bg-black/5 w-fit px-3 py-1.5 rounded-lg ${c.darkText ? 'text-neutral-600' : 'text-neutral-300 bg-white/10'}`}>
-                               {c.hex}
-                            </div>
-                          </div>
-                       ))}
-                    </div>
-
-                    {/* Gradient & Semantic Palette Container */}
-                    <div className="lg:col-span-7 bg-card border border-border/50 rounded-[2.5rem] p-8 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[200px] shadow-sm hover:shadow-lg transition-all duration-300">
-                       {/* Abstract Background Elements */}
-                       <div className="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none" style={{ background: 'linear-gradient(135deg, #2196F3 0%, #9C27B0 100%)' }} />
-                       <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#2196F3]/20 rounded-full blur-[100px] pointer-events-none" />
-                       <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#9C27B0]/20 rounded-full blur-[100px] pointer-events-none" />
-
-                       <div className="relative z-10 mb-10">
-                         <div className="flex justify-between items-end mb-4">
-                           <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Gradient DNA</div>
-                         </div>
-                         <div className="h-16 w-full rounded-2xl shadow-inner relative overflow-hidden" style={{ background: 'linear-gradient(to right, #2196F3, #9C27B0)' }}>
-                            <div className="absolute inset-0 bg-white/20 translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-1000 ease-in-out cursor-pointer" />
-                         </div>
-                       </div>
-
-                       <div className="relative z-10">
-                         <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-5">Functional States</div>
-                         <div className="flex flex-wrap gap-3 sm:gap-4">
-                            {[
-                              { name: "Success", color: "#4CAF50" },
-                              { name: "Warning", color: "#FFC107" },
-                              { name: "Error", color: "#F44336" },
-                              { name: "Info", color: "#00BCD4" },
-                              { name: "Pending", color: "#9E9E9E" },
-                              { name: "Muted", color: "#BDBDBD" },
-                            ].map((c, i) => (
-                               <div key={i} className="flex items-center gap-3 bg-background border border-border/60 rounded-full py-2 pl-2 pr-4 hover:border-primary/40 hover:shadow-md transition-all cursor-default group">
-                                  <div className="w-6 h-6 rounded-full shadow-inner group-hover:scale-110 transition-transform" style={{ backgroundColor: c.color }} />
-                                  <span className="text-sm font-medium text-foreground">{c.name}</span>
-                               </div>
-                            ))}
-                         </div>
-                       </div>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              </div>
-
-              {/* Screenshot Gallery */}
-              <AnimatedSection className="mt-16 sm:mt-20 p-8 sm:p-10 lg:p-12 rounded-[2rem] sm:rounded-[3rem] bg-secondary/20 border border-border/50 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
-                
-                <div className="relative z-10">
-                  <div className="mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <h4 className="font-display font-bold text-2xl text-foreground flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                        <ClipboardCheck className="w-5 h-5 text-primary" />
-                      </div>
-                      High-Fidelity Screens
-                    </h4>
-                    <p className="text-sm text-muted-foreground max-w-xs">A comprehensive view of the final platform interfaces across multiple workflows.</p>
-                  </div>
-                  <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-                    {screens.map((item, i) => (
-                      <div key={i} className="group/vs break-inside-avoid cursor-pointer" onClick={() => setSelectedImageIndex(i)}>
-                        <div className="rounded-2xl border border-border/60 bg-secondary/30 overflow-hidden relative hover:border-primary/40 transition-colors shadow-sm hover:shadow-xl hover:shadow-primary/5">
-                          <img src={item.src} alt={item.label} className="w-full h-auto object-cover" loading="lazy" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover/vs:opacity-100 transition-opacity flex items-end">
-                            <div className="p-6 translate-y-4 group-hover/vs:translate-y-0 transition-transform w-full text-center">
-                              <div className="w-10 h-10 rounded-full bg-primary/20 backdrop-blur-md flex items-center justify-center mx-auto mb-3">
-                                <Search className="w-4 h-4 text-primary" />
-                              </div>
-                              <p className="font-semibold text-foreground text-sm">{item.label}</p>
-                            </div>
-                          </div>
+                        <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm font-mono text-muted-foreground shrink-0 items-center">
+                          <span className="w-20 text-foreground">{item.weight}</span>
+                          <span className="w-20">{item.size}</span>
+                          <span className="w-20 text-primary text-right">{item.rem}</span>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
               </AnimatedSection>
+
+              {/* Colors */}
+              <AnimatedSection>
+                <h4 className="font-display font-bold text-2xl mb-8 text-foreground flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Palette className="w-5 h-5 text-primary" />
+                  </div>
+                  Color Architecture
+                </h4>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                  {/* Primary Brand Color - Large Hero Card */}
+                  <div className="lg:col-span-8 group relative overflow-hidden rounded-[2.5rem] bg-card border border-border/50 p-8 sm:p-10 min-h-[280px] sm:min-h-[320px] flex flex-col justify-end shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500">
+                    <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105" style={{ background: 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)' }} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                    {/* Decorative elements */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+
+                    <div className="relative z-10 text-white flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+                      <div>
+                        <div className="text-white/80 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 sm:mb-3">Core Brand</div>
+                        <h5 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-none tracking-tight">Primary</h5>
+                      </div>
+                      <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-4 w-fit">
+                        <div className="font-mono text-xl sm:text-2xl font-medium tracking-wide">#2196F3</div>
+                        <div className="text-white/70 text-xs sm:text-sm text-right mt-1 font-medium">RGB 33, 150, 243</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Accent Color */}
+                  <div className="lg:col-span-4 group relative overflow-hidden rounded-[2.5rem] bg-card border border-border/50 p-8 sm:p-10 min-h-[280px] sm:min-h-[320px] flex flex-col justify-end shadow-sm hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500">
+                    <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105" style={{ background: 'linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%)' }} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+
+                    <div className="relative z-10 text-white flex flex-col justify-between h-full">
+                      <div className="text-white/80 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">Highlight</div>
+                      <div className="mt-auto">
+                        <h5 className="font-display text-4xl sm:text-5xl font-bold mb-5 tracking-tight">Accent</h5>
+                        <div className="bg-black/30 backdrop-blur-md border border-white/20 rounded-xl px-4 py-2 inline-block">
+                          <div className="font-mono text-lg font-medium">#9C27B0</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Background & Surface */}
+                  <div className="lg:col-span-5 grid grid-cols-2 gap-6">
+                    {[
+                      { name: "Background", color: "#FFFFFF", hex: "#FFFFFF", darkText: true },
+                      { name: "Surface", color: "#424242", hex: "#424242", darkText: false },
+                    ].map((c, i) => (
+                      <div key={i} className="group relative overflow-hidden rounded-[2.5rem] border border-border/50 p-6 sm:p-8 flex flex-col justify-between min-h-[200px] shadow-sm hover:shadow-xl transition-all duration-300" style={{ backgroundColor: c.color }}>
+                        <div className={`absolute inset-0 bg-gradient-to-tr ${c.darkText ? 'from-black/5' : 'from-white/5'} to-transparent opacity-0 group-hover:opacity-100 transition-opacity`} />
+                        <div className={`${c.darkText ? 'text-neutral-800' : 'text-white'} relative z-10`}>
+                          <div className="text-xs font-bold uppercase tracking-widest opacity-60 mb-2">Environment</div>
+                          <div className="font-display text-xl sm:text-2xl font-bold">{c.name}</div>
+                        </div>
+                        <div className={`font-mono text-sm relative z-10 bg-black/5 w-fit px-3 py-1.5 rounded-lg ${c.darkText ? 'text-neutral-600' : 'text-neutral-300 bg-white/10'}`}>
+                          {c.hex}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Gradient & Semantic Palette Container */}
+                  <div className="lg:col-span-7 bg-card border border-border/50 rounded-[2.5rem] p-8 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[200px] shadow-sm hover:shadow-lg transition-all duration-300">
+                    {/* Abstract Background Elements */}
+                    <div className="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none" style={{ background: 'linear-gradient(135deg, #2196F3 0%, #9C27B0 100%)' }} />
+                    <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#2196F3]/20 rounded-full blur-[100px] pointer-events-none" />
+                    <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#9C27B0]/20 rounded-full blur-[100px] pointer-events-none" />
+
+                    <div className="relative z-10 mb-10">
+                      <div className="flex justify-between items-end mb-4">
+                        <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Gradient DNA</div>
+                      </div>
+                      <div className="h-16 w-full rounded-2xl shadow-inner relative overflow-hidden" style={{ background: 'linear-gradient(to right, #2196F3, #9C27B0)' }}>
+                        <div className="absolute inset-0 bg-white/20 translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-1000 ease-in-out cursor-pointer" />
+                      </div>
+                    </div>
+
+                    <div className="relative z-10">
+                      <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-5">Functional States</div>
+                      <div className="flex flex-wrap gap-3 sm:gap-4">
+                        {[
+                          { name: "Success", color: "#4CAF50" },
+                          { name: "Warning", color: "#FFC107" },
+                          { name: "Error", color: "#F44336" },
+                          { name: "Info", color: "#00BCD4" },
+                          { name: "Pending", color: "#9E9E9E" },
+                          { name: "Muted", color: "#BDBDBD" },
+                        ].map((c, i) => (
+                          <div key={i} className="flex items-center gap-3 bg-background border border-border/60 rounded-full py-2 pl-2 pr-4 hover:border-primary/40 hover:shadow-md transition-all cursor-default group">
+                            <div className="w-6 h-6 rounded-full shadow-inner group-hover:scale-110 transition-transform" style={{ backgroundColor: c.color }} />
+                            <span className="text-sm font-medium text-foreground">{c.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
             </div>
+
+            {/* Screenshot Gallery */}
+            <AnimatedSection className="mt-16 sm:mt-20 p-8 sm:p-10 lg:p-12 rounded-[2rem] sm:rounded-[3rem] bg-secondary/20 border border-border/50 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
+
+              <div className="relative z-10">
+                <div className="mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <h4 className="font-display font-bold text-2xl text-foreground flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <ClipboardCheck className="w-5 h-5 text-primary" />
+                    </div>
+                    High-Fidelity Screens
+                  </h4>
+                  <p className="text-sm text-muted-foreground max-w-xs">A comprehensive view of the final platform interfaces across multiple workflows.</p>
+                </div>
+                <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+                  {screens.map((item, i) => (
+                    <div key={i} className="group/vs break-inside-avoid cursor-pointer" onClick={() => setSelectedImageIndex(i)}>
+                      <div className="rounded-2xl border border-border/60 bg-secondary/30 overflow-hidden relative hover:border-primary/40 transition-colors shadow-sm hover:shadow-xl hover:shadow-primary/5">
+                        <img src={item.src} alt={item.label} className="w-full h-auto object-cover" loading="lazy" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover/vs:opacity-100 transition-opacity flex items-end">
+                          <div className="p-6 translate-y-4 group-hover/vs:translate-y-0 transition-transform w-full text-center">
+                            <div className="w-10 h-10 rounded-full bg-primary/20 backdrop-blur-md flex items-center justify-center mx-auto mb-3">
+                              <Search className="w-4 h-4 text-primary" />
+                            </div>
+                            <p className="font-semibold text-foreground text-sm">{item.label}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
 
           {/* Testing & Feedback Section */}
           <AnimatedSection className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-border/50">
