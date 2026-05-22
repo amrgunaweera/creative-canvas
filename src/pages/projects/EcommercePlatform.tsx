@@ -7,7 +7,7 @@ import {
   ClipboardCheck, TrendingUp, Sparkles, Cog, Headset, CheckCircle2,
   Briefcase, Bell, FileSearch, MessageCircle, GraduationCap,
   PhoneForwarded, Trophy, Lightbulb, Award, Type, Palette, Phone,
-  AlertCircle, BarChart3, FileText, X, ArrowRight, ShoppingCart
+  AlertCircle, BarChart3, FileText, X, ArrowRight, ShoppingCart, ArrowDown
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -241,7 +241,7 @@ const EcommercePlatformPage = () => {
           <AnimatedSection className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             <div className="lg:col-span-4 mt-2">
               <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Problem Space</span>
-              <h3 className="font-display font-bold text-4xl sm:text-5xl leading-tight">Monetize<br />Beyond APIs</h3>
+              <h3 className="font-display font-bold text-4xl sm:text-5xl leading-tight">Fragmented<br />Experiences</h3>
               <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
               <p className="text-lg text-muted-foreground leading-relaxed">
                 {project.challenge}
@@ -250,10 +250,10 @@ const EcommercePlatformPage = () => {
 
             <div className="lg:col-span-8 grid sm:grid-cols-2 gap-5">
               {[
-                { icon: Network, title: "Fragmented Ecosystems", desc: "Telecoms struggle with disconnected platforms for APIs, physical goods, and digital services." },
-                { icon: Store, title: "Limited Monetization", desc: "Traditional systems are often limited to basic API calls, missing out on massive XaaS (Everything-as-a-Service) opportunities." },
-                { icon: Server, title: "Multi-Cloud Complexity", desc: "No native support for seamless multi-cloud orchestration and cloud commerce reselling." },
-                { icon: Users, title: "Partner Friction", desc: "Lengthy onboarding processes for vendors and disjointed journeys for enterprise customers." },
+                { icon: Network, title: "Siloed Interfaces", desc: "Each product line — APIs, cloud, physical goods — lived in its own disconnected portal with inconsistent navigation, branding, and interaction patterns." },
+                { icon: Store, title: "Broken Buyer Journeys", desc: "Enterprise customers had to navigate multiple storefronts, compare pricing across disjointed systems, and manage separate checkouts for bundled services." },
+                { icon: Server, title: "No Unified Catalog UX", desc: "Operators lacked a single browsable catalog that surfaces digital assets, physical goods, and cloud services with coherent filtering and search." },
+                { icon: Users, title: "Vendor Onboarding Friction", desc: "Partners had no self-service portal. Onboarding required manual coordination, slowing time-to-market and creating inconsistent vendor experiences." },
               ].map((item, i) => (
                 <div key={i} className="p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/40 transition-colors group relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 transition-transform group-hover:scale-150" />
@@ -275,7 +275,7 @@ const EcommercePlatformPage = () => {
             <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Research & Discovery</h3>
             <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
             <p className="text-lg text-muted-foreground leading-relaxed">
-              We conducted extensive interviews with telecom operators, enterprise buyers, and independent vendors to understand the friction points in existing API and B2B monetization models.
+              Conducted contextual interviews with telecom admins, enterprise procurement teams, and independent vendors across APAC, EMEA, and Latin America. Mapped existing workflows, audited competitor marketplace UIs, and ran card-sorting exercises to validate information architecture for the unified catalog.
             </p>
           </AnimatedSection>
 
@@ -301,19 +301,19 @@ const EcommercePlatformPage = () => {
                   </div>
                   <div className="space-y-2">
                     <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
-                      <li>Over-reliance on API traffic</li>
-                      <li>Stagnant revenue streams</li>
+                      <li>Multiple disconnected dashboards</li>
+                      <li>No unified product catalog UI</li>
                     </ul>
                   </div>
                   <div className="space-y-2">
                     <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
-                      <li>Missed XaaS opportunities</li>
+                      <li>Slow onboarding of new asset types</li>
                     </ul>
                   </div>
                   <div className="space-y-2">
                     <div className="flex gap-2 items-start">
                       <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm font-medium text-foreground">Cloud reselling & dynamic bundling</span>
+                      <span className="text-sm font-medium text-foreground">Unified admin dashboard with multi-asset catalog</span>
                     </div>
                   </div>
                 </div>
@@ -329,19 +329,19 @@ const EcommercePlatformPage = () => {
                   </div>
                   <div className="space-y-2">
                     <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
-                      <li>Lengthy onboarding</li>
-                      <li>Lack of independent stores</li>
+                      <li>No self-service portal for product listing</li>
+                      <li>Manual onboarding with inconsistent UX</li>
                     </ul>
                   </div>
                   <div className="space-y-2">
                     <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
-                      <li>Slow time-to-market</li>
+                      <li>Weeks to list new products</li>
                     </ul>
                   </div>
                   <div className="space-y-2">
                     <div className="flex gap-2 items-start">
                       <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm font-medium text-foreground">Dedicated vendor portals</span>
+                      <span className="text-sm font-medium text-foreground">Self-service vendor portal with guided onboarding</span>
                     </div>
                   </div>
                 </div>
@@ -357,19 +357,19 @@ const EcommercePlatformPage = () => {
                   </div>
                   <div className="space-y-2">
                     <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
-                      <li>Disjointed shopping experiences</li>
-                      <li>Fragmented billing</li>
+                      <li>Multiple checkout flows for bundled services</li>
+                      <li>Inconsistent pricing and billing views</li>
                     </ul>
                   </div>
                   <div className="space-y-2">
                     <ul className="text-sm text-muted-foreground space-y-2 list-disc list-outside ml-4">
-                      <li>Poor customer experience</li>
+                      <li>Cart abandonment and purchase confusion</li>
                     </ul>
                   </div>
                   <div className="space-y-2">
                     <div className="flex gap-2 items-start">
                       <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm font-medium text-foreground">Unified catalog and single invoice</span>
+                      <span className="text-sm font-medium text-foreground">Unified cart, single checkout, and consolidated invoice</span>
                     </div>
                   </div>
                 </div>
@@ -390,9 +390,9 @@ const EcommercePlatformPage = () => {
 
           <div className="grid lg:grid-cols-3 gap-6">
             {[
-              { icon: ShieldCheck, name: "Alex, Telecom Admin", role: "Service Provider Admin", color: "from-primary/10 to-primary/5", border: "border-primary/20", traits: ["Manages high-volume catalogs", "Oversees partner onboarding", "Tracks global revenue KPIs"], goal: "Streamline the orchestration of multi-asset digital services across regions." },
-              { icon: Users, name: "Sarah, Partner Lead", role: "Independent Vendor / Reseller", color: "from-indigo-500/10 to-indigo-500/5", border: "border-indigo-500/20", traits: ["Sells third-party cloud apps", "Needs real-time billing clarity", "Seeks fast time-to-market"], goal: "Onboard new digital assets quickly and manage sales independently via a dedicated portal." },
-              { icon: LayoutDashboard, name: "David, IT Procurement", role: "Enterprise B2B Buyer", color: "from-green-500/10 to-green-500/5", border: "border-green-500/20", traits: ["Procures cloud & IoT solutions", "Demands consolidated invoicing", "Values zero-touch provisioning"], goal: "Discover, bundle, and pay for diverse telecom and cloud assets through a single checkout." },
+              { icon: ShieldCheck, name: "Alex, Telecom Admin", role: "Service Provider Admin", color: "from-primary/10 to-primary/5", border: "border-primary/20", traits: ["Manages multi-asset catalogs daily", "Configures white-label storefronts", "Monitors partner and revenue KPIs"], goal: "A single admin dashboard to orchestrate catalogs, onboard partners, and track performance across all asset types without switching tools." },
+              { icon: Users, name: "Sarah, Partner Lead", role: "Independent Vendor / Reseller", color: "from-indigo-500/10 to-indigo-500/5", border: "border-indigo-500/20", traits: ["Lists and manages third-party products", "Needs real-time sales visibility", "Demands fast self-service onboarding"], goal: "A dedicated vendor portal with guided onboarding, independent storefront management, and transparent billing — without relying on admin support." },
+              { icon: LayoutDashboard, name: "David, IT Procurement", role: "Enterprise B2B Buyer", color: "from-green-500/10 to-green-500/5", border: "border-green-500/20", traits: ["Procures bundled cloud & IoT solutions", "Expects unified cart and checkout", "Values zero-touch provisioning"], goal: "A single storefront to discover, compare, bundle, and pay for diverse telecom and cloud assets — with one checkout and one invoice." },
             ].map((p, i) => (
               <AnimatedSection key={i} delay={i * 100} className={`rounded-3xl p-6 sm:p-8 bg-gradient-to-br ${p.color} border ${p.border}`}>
                 <div className="w-12 h-12 rounded-full bg-background/60 flex items-center justify-center mb-4">
@@ -427,7 +427,7 @@ const EcommercePlatformPage = () => {
             <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Ideation & Design Process</h3>
             <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
             <p className="text-lg text-muted-foreground leading-relaxed">
-              We mapped the B2B buyer's journey to ensure a frictionless transition from product discovery to automated provisioning.
+              Mapped the enterprise buyer's end-to-end journey — from product discovery to zero-touch provisioning — to pinpoint UX friction and design intentional moments of delight.
             </p>
           </AnimatedSection>
 
@@ -481,13 +481,13 @@ const EcommercePlatformPage = () => {
 
                 <div className="grid grid-cols-7 gap-3 min-w-[900px]">
                   {[
-                    { actions: [{ icon: LayoutDashboard, text: "Access disparate legacy portals" }, { icon: Network, text: "Fragmented service discovery" }] },
-                    { actions: [{ icon: FileSearch, text: "Search across multiple vendors" }, { icon: Layers, text: "Difficult to compare pricing" }] },
-                    { actions: [{ icon: Package, text: "Struggle to bundle cloud + telco" }, { icon: AlertCircle, text: "Unclear compatibility" }] },
-                    { actions: [{ icon: Search, text: "Intelligent search across catalog" }, { icon: Sparkles, text: "AI curates optimal services" }] },
-                    { actions: [{ icon: Store, text: "Single cart for multiple vendors" }, { icon: Coins, text: "Pay with wallet & loyalty points" }] },
-                    { actions: [{ icon: Cloud, text: "Automated cloud orchestration" }, { icon: Workflow, text: "No manual IT provisioning" }] },
-                    { actions: [{ icon: FileText, text: "Consolidated single invoice" }, { icon: BarChart3, text: "Real-time usage tracking" }] },
+                    { actions: [{ icon: LayoutDashboard, text: "Navigate separate legacy portals" }, { icon: Network, text: "No unified entry point for services" }] },
+                    { actions: [{ icon: FileSearch, text: "Browse disconnected vendor catalogs" }, { icon: Layers, text: "Inconsistent product detail pages" }] },
+                    { actions: [{ icon: Package, text: "Manual cross-referencing for bundles" }, { icon: AlertCircle, text: "No compatibility or pairing guidance" }] },
+                    { actions: [{ icon: Search, text: "AI-powered search across unified catalog" }, { icon: Sparkles, text: "Contextual recommendations surface" }] },
+                    { actions: [{ icon: Store, text: "Single cart for multi-vendor items" }, { icon: Coins, text: "Wallet and loyalty payments integrated" }] },
+                    { actions: [{ icon: Cloud, text: "Automated cloud provisioning on checkout" }, { icon: Workflow, text: "Zero manual IT configuration" }] },
+                    { actions: [{ icon: FileText, text: "One consolidated invoice" }, { icon: BarChart3, text: "Real-time usage and spend tracking" }] },
                   ].map((stage, i) => (
                     <div key={i} className="space-y-3">
                       {stage.actions.map((act, j) => (
@@ -511,9 +511,9 @@ const EcommercePlatformPage = () => {
                   </h5>
                   <ul className="space-y-3">
                     {[
-                      { label: "Smart Discovery", desc: "Reduces product discovery time by 70%" },
-                      { label: "Zero-Touch", desc: "Automated cloud and asset provisioning" },
-                      { label: "Unified Checkout", desc: "Single invoice across multiple vendors" },
+                      { label: "Unified Catalog", desc: "Single browsable interface for all asset types" },
+                      { label: "Zero-Touch Flows", desc: "Automated provisioning eliminates manual steps" },
+                      { label: "Single Checkout", desc: "One cart, one invoice across all vendors" },
                     ].map((item, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
                         <div className="w-2 h-2 rounded-full bg-green-500 mt-1.5 shrink-0" />
@@ -530,9 +530,9 @@ const EcommercePlatformPage = () => {
                   </h5>
                   <ul className="space-y-3">
                     {[
-                      { label: "Fragmented Catalogs", desc: "Replaced by unified multi-vendor storefront" },
-                      { label: "Manual Provisioning", desc: "Replaced by instant cloud orchestration" },
-                      { label: "Complex Billing", desc: "Replaced by converged billing and wallet payments" },
+                      { label: "Siloed Portals", desc: "Replaced by a unified multi-portal design system" },
+                      { label: "Manual Onboarding", desc: "Replaced by guided self-service vendor flows" },
+                      { label: "Fragmented Checkout", desc: "Replaced by single-cart, single-invoice experience" },
                     ].map((item, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
                         <div className="w-2 h-2 rounded-full bg-red-500 mt-1.5 shrink-0" />
@@ -555,7 +555,7 @@ const EcommercePlatformPage = () => {
             <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Wireframes & Prototyping</h3>
             <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Based on our journey maps, we developed detailed wireframes focusing on the most critical interfaces. Each screen went through multiple rounds of iteration informed by stakeholder feedback.
+              Translated journey map insights into detailed wireframes for the most critical user flows — catalog browsing, dynamic bundling, and vendor dashboard management. Each screen went through multiple iteration cycles informed by stakeholder workshops and usability testing.
             </p>
           </AnimatedSection>
 
@@ -837,7 +837,7 @@ const EcommercePlatformPage = () => {
             <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Final UI</span>
             <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl mb-6">High-Fidelity Developed Screens</h3>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              The final visual layer brings the platform to life. We focused on clear data visualization, intuitive interactions, and a clean layout that lets the products shine, using the defined design system.
+              The final visual layer brings the marketplace to life. Every screen was crafted using the Poppins-based design system with white-label theming, ensuring consistency across operator brands while maintaining clear data visualization and intuitive interaction patterns.
             </p>
           </AnimatedSection>
         </div>
@@ -890,7 +890,7 @@ const EcommercePlatformPage = () => {
             <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Testing & Feedback</h3>
             <div className="w-10 h-[3px] bg-primary mt-6 mb-6 mx-auto" />
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Iterative validation with global telecom partners refined every layer of the marketplace — from pricing models to vendor autonomy.
+              Iterative usability testing with global telecom partners refined every design layer — from catalog navigation patterns to vendor portal autonomy and checkout flow optimization.
             </p>
           </AnimatedSection>
 
@@ -900,23 +900,23 @@ const EcommercePlatformPage = () => {
               {
                 num: "01",
                 icon: Coins,
-                title: "Monetization Strategy Validation",
-                insight: "Flexibility drives adoption",
-                body: "Testing various monetization models (subscription, pay-per-use) with global telecoms confirmed that flexibility is key to digital growth. We optimized the platform to support end-to-end monetization, allowing providers to tailor pricing strategies to specific market segments and partner needs.",
+                title: "Catalog & Discovery UX Validation",
+                insight: "Search patterns drive adoption",
+                body: "Usability testing of the unified catalog revealed that enterprise buyers relied heavily on filtering by asset type and provider. We redesigned the search and filter architecture to support faceted browsing across APIs, cloud services, and physical goods — reducing product discovery time by 70% and significantly improving task completion rates.",
               },
               {
                 num: "02",
                 icon: Box,
-                title: "Multi-Asset & Cloud Bundling",
-                insight: "Unified catalog, diverse assets",
-                body: "Initial feedback from telecom partners on the EaaS model highlighted the need for intuitive bundling of diverse assets. We refined the subscription and content manager, allowing seamless grouping of digital services (APIs, Cloud, VPNs) with physical assets (IoT devices, Routers) and multi-cloud solutions into unified offerings.",
+                title: "Bundling Workflow Iteration",
+                insight: "Visual pairing reduces confusion",
+                body: "Initial testing of the dynamic bundling engine showed that users struggled to understand compatibility between digital services and physical assets. We introduced visual compatibility indicators, guided bundling wizards, and contextual pairing suggestions — reducing bundle configuration errors and streamlining the path from selection to checkout.",
               },
               {
                 num: "03",
                 icon: Store,
-                title: "Vendor & Partner Ecosystem",
-                insight: "Autonomy within unity",
-                body: "Testing multi-store capabilities showed that vendors needed more autonomy while maintaining a unified shopping experience for end-users. We enhanced the reseller and admin portals, streamlining partner onboarding and providing advanced invoicing and consolidated cloud service payment systems.",
+                title: "Vendor Portal Autonomy",
+                insight: "Self-service is non-negotiable",
+                body: "Testing the multi-store capabilities with reseller partners showed that vendors required full autonomy over their storefronts while maintaining visual consistency with the operator brand. We enhanced the vendor portal with self-service product listing, independent analytics dashboards, and role-based access — all wrapped in the white-label design system.",
               },
             ].map((card, i) => (
               <AnimatedSection key={i} delay={i * 120} className="group">
@@ -946,8 +946,8 @@ const EcommercePlatformPage = () => {
             <div className="grid grid-cols-3 border border-border/50 rounded-2xl overflow-hidden max-w-3xl mx-auto">
               {[
                 { value: "3", label: "Validation rounds" },
-                { value: "12+", label: "Telecom partners" },
-                { value: "40+", label: "Iterations shipped" },
+                { value: "5+", label: "Telecom partners" },
+                { value: "50+", label: "Iterations shipped" },
               ].map((stat, i) => (
                 <div key={i} className={`p-6 sm:p-8 text-center ${i < 2 ? 'border-r border-border/50' : ''}`}>
                   <div className="font-display text-3xl sm:text-4xl font-bold text-primary mb-1">{stat.value}</div>
@@ -967,53 +967,141 @@ const EcommercePlatformPage = () => {
 
           {/* Centered header */}
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Platform Architecture</span>
-            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Full-stack integration framework</h3>
+            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Information Architecture</span>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl leading-tight">Multi-portal design framework</h3>
             <div className="w-10 h-[3px] bg-primary mt-6 mb-6 mx-auto" />
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Monetize beyond APIs with a multi-asset marketplace featuring a unified catalog of digital and physical goods &mdash; supported by a robust ecosystem for agile monetization.
+              Structured the marketplace into four distinct yet cohesive portals — each designed for specific user workflows while sharing a unified design system, navigation patterns, and visual language.
             </p>
           </AnimatedSection>
 
-          {/* Asset strip — numbered horizontal cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border/50 rounded-3xl overflow-hidden mb-12">
-            {[
-              { icon: Box, num: "01", title: "Digital assets", desc: "FTTH, Data Centers, IoT Platforms, SDN, Gateways, Firewalls." },
-              { icon: Layers, num: "02", title: "Digital services", desc: "LBS, VPNs, Cloud Services, Mobile Apps, Video Streaming." },
-              { icon: Package, num: "03", title: "Physical assets", desc: "IoT Devices, Mobile Phones, Routers, Switches, and more." },
-              { icon: Cloud, num: "04", title: "Cloud orchestration", desc: "Monetize Data Center and Public Cloud reselling." },
-            ].map((item, i) => (
-              <AnimatedSection key={i} delay={i * 80} className="bg-card p-8 flex flex-col group hover:bg-secondary/30 transition-colors">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <item.icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <span className="font-display text-3xl font-bold text-border/80 group-hover:text-primary/20 transition-colors">{item.num}</span>
-                </div>
-                <h4 className="font-bold text-lg mb-2 text-foreground">{item.title}</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-              </AnimatedSection>
-            ))}
-          </div>
+          {/* Architecture Flow Diagram (Desktop) */}
+          <AnimatedSection delay={200} className="relative max-w-5xl mx-auto mb-20 hidden md:block py-8 mt-12">
+            <div className="absolute inset-0 flex flex-col items-center justify-between py-20 pointer-events-none z-0">
+              <div className="w-px h-32 bg-gradient-to-b from-primary/0 via-primary/30 to-primary/0" />
+              <div className="w-px h-32 bg-gradient-to-b from-primary/0 via-primary/30 to-primary/0" />
+            </div>
 
-          {/* Business System Portals */}
-          <AnimatedSection delay={400} className="grid md:grid-cols-3 gap-6">
-            {[
-              { icon: ShieldCheck, title: "Service provider admin portal", desc: "Full control over marketplace configuration, security, and compliance." },
-              { icon: Users, title: "Reseller portal", desc: "Empower partners to manage their own sub-catalogs and sales channels." },
-              { icon: LayoutDashboard, title: "Customer admin portal", desc: "Self-service management for enterprise buyers and subscriptions." },
-            ].map((portal, i) => (
-              <div key={i} className="flex items-start gap-5 p-6 rounded-2xl border border-border/50 bg-card hover:border-primary/30 transition-colors group">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
-                  <portal.icon className="w-5 h-5 text-primary" />
+            {/* Level 1: Portals */}
+            <div className="grid grid-cols-3 gap-6 mb-16 relative z-10">
+              {[
+                { icon: ShieldCheck, title: "Service Provider Portal", desc: "Global catalog management, compliance & revenue KPIs", color: "text-primary", border: "border-primary/30", bg: "bg-primary/5", line: "bg-primary" },
+                { icon: Users, title: "Reseller Portal", desc: "Self-service storefront & independent product listing", color: "text-indigo-500", border: "border-indigo-500/30", bg: "bg-indigo-500/5", line: "bg-indigo-500" },
+                { icon: LayoutDashboard, title: "Customer Portal", desc: "Unified discovery, bundling & single checkout", color: "text-green-500", border: "border-green-500/30", bg: "bg-green-500/5", line: "bg-green-500" },
+              ].map((portal, i) => (
+                <div key={i} className={`bg-card border ${portal.border} rounded-2xl p-6 text-center shadow-lg relative overflow-hidden group hover:-translate-y-1 transition-transform`}>
+                  <div className={`absolute top-0 left-0 w-full h-1 ${portal.line} opacity-80`} />
+                  <div className={`w-12 h-12 mx-auto rounded-full ${portal.bg} flex items-center justify-center mb-4`}>
+                    <portal.icon className={`w-6 h-6 ${portal.color}`} />
+                  </div>
+                  <h4 className="font-bold text-foreground mb-2">{portal.title}</h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{portal.desc}</p>
                 </div>
-                <div>
-                  <h4 className="font-bold text-foreground mb-1">{portal.title}</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{portal.desc}</p>
-                </div>
+              ))}
+            </div>
+
+            {/* Down Connector */}
+            <div className="flex justify-center mb-6 relative z-0 -mt-10">
+              <div className="w-[66%] h-12 border-b-2 border-l-2 border-r-2 border-primary/20 rounded-b-2xl" />
+            </div>
+            <div className="flex justify-center mb-6 relative z-0 -mt-8">
+              <ArrowDown className="w-6 h-6 text-primary/50 animate-bounce" />
+            </div>
+
+            {/* Level 2: Core Engine */}
+            <div className="bg-card border border-primary/30 rounded-3xl p-8 text-center max-w-2xl mx-auto mb-16 relative z-10 shadow-[0_0_40px_-15px_rgba(var(--primary),0.3)]">
+              <div className="flex justify-center gap-6 mb-5">
+                <Database className="w-8 h-8 text-primary" />
+                <Workflow className="w-8 h-8 text-primary" />
+                <Coins className="w-8 h-8 text-primary" />
               </div>
-            ))}
+              <h4 className="font-display font-bold text-2xl mb-3 text-foreground">Unified Marketplace Engine</h4>
+              <p className="text-sm text-muted-foreground px-8">Single multi-asset catalog, dynamic bundling logic, converged billing integration, and multi-cloud orchestration.</p>
+            </div>
+
+            {/* Down Connector */}
+            <div className="flex justify-center mb-6 relative z-0 -mt-10">
+              <ArrowDown className="w-6 h-6 text-primary/50 animate-bounce" />
+            </div>
+            <div className="flex justify-center mb-6 relative z-0 -mt-12">
+              <div className="w-[75%] h-12 border-t-2 border-l-2 border-r-2 border-primary/20 rounded-t-2xl" />
+            </div>
+
+            {/* Level 3: Assets */}
+            <div className="grid grid-cols-4 gap-4 relative z-10 -mt-8">
+              {[
+                { icon: Box, title: "Digital Assets", label: "APIs, FTTH, SDN" },
+                { icon: Layers, title: "Digital Services", label: "VPNs, Video, Apps" },
+                { icon: Package, title: "Physical Assets", label: "IoT, Routers, Hardware" },
+                { icon: Cloud, title: "Cloud Services", label: "AWS, Azure, GCP" },
+              ].map((asset, i) => (
+                <div key={i} className="bg-background border border-border/50 rounded-xl p-5 flex flex-col items-center text-center hover:border-primary/30 transition-colors">
+                  <asset.icon className="w-6 h-6 text-muted-foreground mb-3" />
+                  <span className="font-semibold text-sm mb-1 text-foreground">{asset.title}</span>
+                  <span className="text-[10px] text-muted-foreground">{asset.label}</span>
+                </div>
+              ))}
+            </div>
           </AnimatedSection>
+
+          {/* Mobile Fallback (Cards) */}
+          <div className="md:hidden space-y-6 mb-12">
+            <AnimatedSection>
+              <h4 className="font-display font-bold text-lg mb-4 text-foreground border-b border-border/50 pb-2">1. Access Portals</h4>
+              <div className="grid gap-3">
+                {[
+                  { icon: ShieldCheck, title: "Service Provider Portal", desc: "Global catalog management & compliance" },
+                  { icon: Users, title: "Reseller Portal", desc: "Self-service storefront & product listing" },
+                  { icon: LayoutDashboard, title: "Customer Portal", desc: "Unified discovery & checkout" },
+                ].map((portal, i) => (
+                  <div key={i} className="bg-card border border-border/50 rounded-xl p-4 flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <portal.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-sm text-foreground mb-1">{portal.title}</h5>
+                      <p className="text-xs text-muted-foreground">{portal.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection className="flex justify-center py-2">
+              <ArrowDown className="w-5 h-5 text-primary/50" />
+            </AnimatedSection>
+
+            <AnimatedSection>
+              <h4 className="font-display font-bold text-lg mb-4 text-foreground border-b border-border/50 pb-2">2. Marketplace Engine</h4>
+              <div className="bg-primary/5 border border-primary/20 rounded-xl p-5 text-center shadow-inner">
+                <Database className="w-6 h-6 text-primary mx-auto mb-3" />
+                <h5 className="font-bold text-sm text-foreground mb-2">Unified Engine</h5>
+                <p className="text-xs text-muted-foreground">Single multi-asset catalog, dynamic bundling, and converged billing.</p>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection className="flex justify-center py-2">
+              <ArrowDown className="w-5 h-5 text-primary/50" />
+            </AnimatedSection>
+
+            <AnimatedSection>
+              <h4 className="font-display font-bold text-lg mb-4 text-foreground border-b border-border/50 pb-2">3. Managed Assets</h4>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { icon: Box, title: "Digital Assets", label: "APIs, FTTH" },
+                  { icon: Layers, title: "Digital Services", label: "VPNs, Video" },
+                  { icon: Package, title: "Physical Assets", label: "IoT, Routers" },
+                  { icon: Cloud, title: "Cloud Services", label: "AWS, Azure" },
+                ].map((asset, i) => (
+                  <div key={i} className="bg-card border border-border/50 rounded-xl p-3 flex flex-col items-center text-center">
+                    <asset.icon className="w-5 h-5 text-muted-foreground mb-2" />
+                    <span className="font-semibold text-xs mb-1 text-foreground">{asset.title}</span>
+                    <span className="text-[10px] text-muted-foreground">{asset.label}</span>
+                  </div>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
 
         </div>
       </section>
@@ -1024,23 +1112,23 @@ const EcommercePlatformPage = () => {
           <AnimatedSection className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left intro */}
             <div className="lg:col-span-4 lg:sticky lg:top-32">
-              <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Core Capabilities</span>
-              <h3 className="font-display font-bold text-3xl sm:text-4xl leading-tight">Discover Wavenet's full-stack B2B/B2B2X Marketplace</h3>
+              <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Design Solutions</span>
+              <h3 className="font-display font-bold text-3xl sm:text-4xl leading-tight">Key UX capabilities designed for Hypermart</h3>
               <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
               <p className="text-muted-foreground leading-relaxed">
-                Dynamic bundling, multi-asset monetization, and seamless integration to scale and grow new revenue streams.
+                Each feature was designed with specific user workflows in mind — enabling intuitive bundling, seamless onboarding, and cohesive multi-vendor experiences.
               </p>
             </div>
 
             {/* Right grid */}
             <div className="lg:col-span-8 grid sm:grid-cols-2 gap-6">
               {[
-                { icon: Package, title: "Advanced bundling", desc: "Intuitive subscription and content management tools to bundle digital services and physical assets." },
-                { icon: Users, title: "Partner ecosystem", desc: "Streamlined partner onboarding to expand your sales channels through reseller networks." },
-                { icon: Store, title: "Multi-store ready", desc: "Enable vendors to sell independently while maintaining a unified shopping experience." },
-                { icon: Coins, title: "Invoicing & payments", desc: "Powerful self-service billing with integrated wallet payments and loyalty points." },
-                { icon: Cloud, title: "Cloud monetization", desc: "Create new revenue streams by reselling multi-cloud services (AWS, Azure, GCP)." },
-                { icon: Workflow, title: "API Marketplace", desc: "Full-service developer portal with flexible monetization strategies and usage tracking." },
+                { icon: Package, title: "Dynamic bundling UX", desc: "Designed guided wizards with visual compatibility indicators for bundling digital services, cloud, and physical assets." },
+                { icon: Users, title: "Partner onboarding flows", desc: "Created step-by-step self-service onboarding with progress tracking and contextual help for new vendors." },
+                { icon: Store, title: "Multi-store architecture", desc: "Designed vendor storefronts with brand customization while maintaining marketplace-wide navigation consistency." },
+                { icon: Coins, title: "Unified checkout & billing", desc: "Single-cart experience with integrated wallet payments, loyalty points, and consolidated invoicing." },
+                { icon: Cloud, title: "Cloud provisioning dashboard", desc: "Real-time provisioning status views with automated orchestration for AWS, Azure, and GCP services." },
+                { icon: Workflow, title: "AI voice navigation", desc: "Industry-first conversational interface guiding customers from product discovery through checkout and support." },
               ].map((feature, i) => (
                 <AnimatedSection key={i} delay={i * 80} className="p-6 rounded-2xl border border-border/50 bg-card hover:border-primary/30 hover:shadow-md transition-all group">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -1146,23 +1234,11 @@ const EcommercePlatformPage = () => {
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
 
-          {/* Stat strip */}
-          <AnimatedSection>
-            <div className="grid grid-cols-2 md:grid-cols-4 border border-border/50 rounded-3xl overflow-hidden mb-16">
-              {project.metrics?.map((metric, i) => (
-                <div key={i} className={`p-8 sm:p-10 text-center ${i < (project.metrics?.length ?? 0) - 1 ? 'border-b md:border-b-0 md:border-r border-border/50' : ''}`}>
-                  <div className="font-display text-4xl sm:text-5xl font-bold text-primary mb-2">{metric.value}</div>
-                  <div className="text-sm text-muted-foreground font-medium">{metric.label}</div>
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
-
           {/* Outcome narrative */}
-          <AnimatedSection delay={200} className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+          <AnimatedSection delay={200} className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start mb-16">
             <div className="lg:col-span-5">
               <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Outcomes</span>
-              <h3 className="font-display font-bold text-3xl sm:text-4xl leading-tight">Measurable Business Impact</h3>
+              <h3 className="font-display font-bold text-3xl sm:text-4xl leading-tight">Impact & Results</h3>
               <div className="w-10 h-[3px] bg-primary mt-6 mb-6" />
               <p className="text-lg text-muted-foreground leading-relaxed">
                 {project.outcome}
@@ -1171,9 +1247,9 @@ const EcommercePlatformPage = () => {
 
             <div className="lg:col-span-7 grid gap-6">
               {[
-                { label: "XaaS Enabled", desc: "Transitioned from simple APIs to full Everything-as-a-Service capabilities, enabling telecoms to monetize any digital or physical asset through a single unified platform." },
-                { label: "Multi-Cloud Commerce", desc: "Resell AWS, Azure, and Google Cloud through built-in orchestration, minimizing infrastructure costs while opening entirely new revenue streams." },
-                { label: "Zero-Touch Delivery", desc: "Fully automated onboarding, provisioning, and billing workflows — reducing operational overhead and accelerating time-to-revenue." },
+                { label: "Unified Multi-Portal Experience", desc: "Designed four cohesive portals (admin, vendor, reseller, buyer) sharing a single design system — ensuring brand consistency while serving distinct user workflows across global telecom operators." },
+                { label: "White-Label Design System", desc: "Built a scalable, token-based design system with Poppins typography and modular components that adapts to any operator brand, enabling 3x faster deployment for new marketplace instances." },
+                { label: "Zero-Touch Provisioning UX", desc: "Designed fully automated onboarding and provisioning flows that eliminate manual configuration steps — reducing operational overhead and delivering instant service activation at checkout." },
               ].map((item, i) => (
                 <AnimatedSection key={i} delay={(i + 3) * 100} className="flex gap-5 p-6 rounded-2xl border border-border/50 bg-card hover:border-primary/30 transition-colors group">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
