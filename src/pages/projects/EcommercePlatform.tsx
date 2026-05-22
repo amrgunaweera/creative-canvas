@@ -849,13 +849,13 @@ const EcommercePlatformPage = () => {
               >
                 <CarouselContent className="-ml-2 md:-ml-4">
                   {hifiScreens.map((screen, index) => (
-                    <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                    <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/2">
                       <div className="p-1">
                         <div
                           className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-[16/9] shadow-sm hover:shadow-md transition-shadow"
                           onClick={() => setHifiIndex(index)}
                         >
-                          <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+
                           <img
                             src={screen.src}
                             alt={screen.label}
@@ -1180,7 +1180,7 @@ const EcommercePlatformPage = () => {
             key={wireframeIndex}
             src={wireframes[wireframeIndex].src}
             alt={wireframes[wireframeIndex].label}
-            className="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain border border-border/50 animate-fade-up"
+            className="max-w-full max-h-[95vh] rounded-xl shadow-2xl object-contain border border-border/50 animate-fade-up"
             onClick={(e) => e.stopPropagation()}
           />
         </div>
@@ -1223,7 +1223,7 @@ const EcommercePlatformPage = () => {
             key={hifiIndex}
             src={hifiScreens[hifiIndex].src}
             alt={hifiScreens[hifiIndex].label}
-            className="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain border border-border/50 animate-fade-up"
+            className="max-w-full max-h-[95vh] rounded-xl shadow-2xl object-contain border border-border/50 animate-fade-up"
             onClick={(e) => e.stopPropagation()}
           />
         </div>

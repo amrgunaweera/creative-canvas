@@ -4,6 +4,13 @@ import { ArrowLeft, BarChart3, Search, MessageSquareText, Database, ClipboardChe
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { projects } from "@/data/projects";
 import senseAILaptop from "@/assets/images/projects/contact-center/pca-mockup.png";
 import personasImage from "@/assets/images/projects/contact-center/personas.png";
@@ -981,55 +988,49 @@ const ContactCenterPage = () => {
                   Based on our journey maps, we developed detailed wireframes focusing on the most critical interfaces. Each screen went through multiple rounds of iteration informed by stakeholder feedback.
                 </p>
 
-                {/* Screenshot Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[160px] md:auto-rows-[200px] gap-4 sm:gap-6">
-                  {[
-                    { label: "Home Dashboard", src: wireframeHome, span: "md:col-span-2 md:row-span-2" },
-                    { label: "Call Insights", src: wireframeCallInsights, span: "md:col-span-2" },
-                    { label: "Agent Insights", src: wireframeAgentInsights, span: "md:col-span-1" },
-                    { label: "Dashboard Overview", src: wireframeHome1, span: "md:col-span-1" },
-                    { label: "Single Call Details", src: wireframeSingleCall, span: "md:col-span-1" },
-                    { label: "Autopilot Mode", src: wireframeAutopilot, span: "md:col-span-1" },
-                    { label: "Content Upload", src: wireframeContentUpload, span: "md:col-span-1" },
-                    { label: "Login Screen", src: wireframeLogin, span: "md:col-span-1" },
-                  ].map((item, i) => (
-                    <div key={i} className={`group/wf relative flex flex-col ${item.span} cursor-pointer`} onClick={() => {
-                      const newScreens = [
-                        { src: wireframeHome, label: "Home Dashboard" },
-                        { src: wireframeCallInsights, label: "Call Insights" },
-                        { src: wireframeAgentInsights, label: "Agent Insights" },
-                        { src: wireframeHome1, label: "Dashboard Overview" },
-                        { src: wireframeSingleCall, label: "Single Call Details" },
-                        { src: wireframeAutopilot, label: "Autopilot Mode" },
-                        { src: wireframeContentUpload, label: "Content Upload" },
-                        { src: wireframeLogin, label: "Login Screen" },
-                      ];
-                      // Hacky way to inject wireframes into the lightbox temporarily, or we could add another state variable.
-                      // Let's add another state variable for the gallery type if we want it clean, but for now we can just 
-                      // open the image. Let's create a separate state for wireframes.
-                      setWireframeIndex(i);
-                    }}>
-                      <div className="w-full h-full rounded-2xl border border-border/60 bg-secondary/20 overflow-hidden relative hover:border-primary/40 transition-all shadow-sm hover:shadow-xl hover:shadow-primary/5">
-                        <img
-                          src={item.src}
-                          alt={item.label}
-                          className="absolute inset-0 w-full h-full object-cover object-top opacity-90 group-hover/wf:opacity-100 transition-transform duration-700 group-hover/wf:scale-105"
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-0 group-hover/wf:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                          <div className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover/wf:opacity-100 transition-opacity duration-300 translate-y-4 group-hover/wf:translate-y-0">
-                            <Search className="w-5 h-5 text-primary" />
+                {/* Wireframe Carousel */}
+                <div className="w-full pb-4 overflow-hidden">
+                  <Carousel
+                    opts={{ align: "start", loop: true }}
+                    className="w-full relative"
+                  >
+                    <CarouselContent className="-ml-2 md:-ml-4">
+                      {[
+                        { label: "Home Dashboard", src: wireframeHome },
+                        { label: "Call Insights", src: wireframeCallInsights },
+                        { label: "Agent Insights", src: wireframeAgentInsights },
+                        { label: "Dashboard Overview", src: wireframeHome1 },
+                        { label: "Single Call Details", src: wireframeSingleCall },
+                        { label: "Autopilot Mode", src: wireframeAutopilot },
+                        { label: "Content Upload", src: wireframeContentUpload },
+                        { label: "Login Screen", src: wireframeLogin },
+                      ].map((item, i) => (
+                        <CarouselItem key={i} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/2">
+                          <div className="p-1">
+                            <div
+                              className="group/wf relative rounded-[2rem] overflow-hidden border border-border/60 bg-card cursor-zoom-in aspect-video shadow-sm hover:shadow-md transition-shadow"
+                              onClick={() => setWireframeIndex(i)}
+                            >
+
+                              <img
+                                src={item.src}
+                                alt={item.label}
+                                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/wf:scale-105"
+                                loading="lazy"
+                              />
+                              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20">
+                                <h4 className="text-white font-display font-bold text-base sm:text-lg translate-y-4 opacity-0 group-hover/wf:translate-y-0 group-hover/wf:opacity-100 transition-all duration-300">
+                                  {item.label}
+                                </h4>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div className="absolute top-4 left-4 z-10">
-                          <span className="px-3 py-1.5 text-xs font-semibold bg-background/90 backdrop-blur-md border border-border/50 rounded-full text-foreground shadow-sm flex items-center gap-2">
-                            <Search className="w-3 h-3 text-primary" />
-                            {item.label}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                    <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                  </Carousel>
                 </div>
               </div>
             </AnimatedSection>
@@ -1313,22 +1314,39 @@ const ContactCenterPage = () => {
                   </h4>
                   <p className="text-sm text-muted-foreground max-w-xs">A comprehensive view of the final platform interfaces across multiple workflows.</p>
                 </div>
-                <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-                  {screens.map((item, i) => (
-                    <div key={i} className="group/vs break-inside-avoid cursor-pointer" onClick={() => setSelectedImageIndex(i)}>
-                      <div className="rounded-2xl border border-border/60 bg-secondary/30 overflow-hidden relative hover:border-primary/40 transition-colors shadow-sm hover:shadow-xl hover:shadow-primary/5">
-                        <img src={item.src} alt={item.label} className="w-full h-auto object-cover" loading="lazy" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover/vs:opacity-100 transition-opacity flex items-end">
-                          <div className="p-6 translate-y-4 group-hover/vs:translate-y-0 transition-transform w-full text-center">
-                            <div className="w-10 h-10 rounded-full bg-primary/20 backdrop-blur-md flex items-center justify-center mx-auto mb-3">
-                              <Search className="w-4 h-4 text-primary" />
+                <div className="w-full pb-4 overflow-hidden">
+                  <Carousel
+                    opts={{ align: "start", loop: true }}
+                    className="w-full relative"
+                  >
+                    <CarouselContent className="-ml-2 md:-ml-4">
+                      {screens.map((item, i) => (
+                        <CarouselItem key={i} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/2">
+                          <div className="p-1">
+                            <div
+                              className="group/vs relative rounded-[2rem] overflow-hidden border border-border/60 bg-card cursor-zoom-in aspect-video shadow-sm hover:shadow-md transition-shadow"
+                              onClick={() => setSelectedImageIndex(i)}
+                            >
+
+                              <img
+                                src={item.src}
+                                alt={item.label}
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover/vs:scale-105"
+                                loading="lazy"
+                              />
+                              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20">
+                                <h4 className="text-white font-display font-bold text-base sm:text-lg translate-y-4 opacity-0 group-hover/vs:translate-y-0 group-hover/vs:opacity-100 transition-all duration-300">
+                                  {item.label}
+                                </h4>
+                              </div>
                             </div>
-                            <p className="font-semibold text-foreground text-sm">{item.label}</p>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                    <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                  </Carousel>
                 </div>
               </div>
             </AnimatedSection>
@@ -1576,7 +1594,7 @@ const ContactCenterPage = () => {
             key={selectedImageIndex}
             src={screens[selectedImageIndex].src}
             alt={screens[selectedImageIndex].label}
-            className="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain border border-border/50 animate-fade-up"
+            className="max-w-full max-h-[95vh] rounded-xl shadow-2xl object-contain border border-border/50 animate-fade-up"
             onClick={(e) => e.stopPropagation()}
           />
         </div>
@@ -1619,7 +1637,7 @@ const ContactCenterPage = () => {
             key={wireframeIndex}
             src={wireframes[wireframeIndex].src}
             alt={wireframes[wireframeIndex].label}
-            className="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain border border-border/50 animate-fade-up"
+            className="max-w-full max-h-[95vh] rounded-xl shadow-2xl object-contain border border-border/50 animate-fade-up"
             onClick={(e) => e.stopPropagation()}
           />
         </div>

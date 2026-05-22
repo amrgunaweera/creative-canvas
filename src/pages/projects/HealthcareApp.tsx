@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft, Activity, Radio, Map, FileText, Mic2, Ambulance,
@@ -5,19 +6,95 @@ import {
   Zap, Globe, Clock, Users, Layers, Wifi, BrainCircuit, Target,
   Pen, Layout, Smartphone, Monitor, Stethoscope,
   HeartPulse, Phone, Bell, Navigation2, ClipboardCheck, Lightbulb,
-  ArrowRight, Palette, Type, Eye, Grid3X3, Contrast, ArrowDown, ArrowUp,
+  ArrowRight, Palette, Type, Eye, Grid3X3, Contrast, ArrowDown, ArrowUp, X, ZoomIn, ZoomOut,
 } from "lucide-react";
 import healthcareMockup from "@/assets/images/projects/healthcare/Mockup.jpg";
 import mediwaveLogo from "@/assets/images/projects/healthcare/mediwave-logo-usage.jpg";
 import Navigation from "@/components/Navigation";
 
 import Footer from "@/components/Footer";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+// Doctor App Screens
+import doctorAppLogin from "@/assets/images/projects/healthcare/screens/Doctor app -desktop/Login.png";
+import doctorAppAed from "@/assets/images/projects/healthcare/screens/Doctor app -desktop/Doctor Primary Screen - AED.png";
+import doctorAppStep1 from "@/assets/images/projects/healthcare/screens/Doctor app -desktop/Doctor Primary Screen - Step 1.png";
+import doctorAppStep5 from "@/assets/images/projects/healthcare/screens/Doctor app -desktop/Doctor Primary Screen - Step 5.png";
+import doctorAppStep6 from "@/assets/images/projects/healthcare/screens/Doctor app -desktop/Doctor Primary Screen - Step 6.png";
+import doctorAppVideoFull from "@/assets/images/projects/healthcare/screens/Doctor app -desktop/Video call - Full Screen.png";
+import doctorAppVideoChat from "@/assets/images/projects/healthcare/screens/Doctor app -desktop/Video with Chat screen.png";
+
+// EMT Screens
+import emtFileShare from "@/assets/images/projects/healthcare/screens/emt/Call a Doctor - File share - Enlarge image.png";
+import emtChatVideo from "@/assets/images/projects/healthcare/screens/emt/Call a doctor - Chat with video.png";
+import emtEcg from "@/assets/images/projects/healthcare/screens/emt/ECG Placement detection with ECG.png";
+import emtEpcr from "@/assets/images/projects/healthcare/screens/emt/EPCR.png";
+import emtItemDetection from "@/assets/images/projects/healthcare/screens/emt/Item Detection.png";
+import emtTutorials from "@/assets/images/projects/healthcare/screens/emt/Tutorials - play item.png";
+import emtVrHud from "@/assets/images/projects/healthcare/screens/emt/VR Project - Hud design concept 1.png";
+
+// ePCR Admin Screens
+import epcrAdminWizard1 from "@/assets/images/projects/healthcare/screens/epcr admin/Patient Details Wizard – 1.png";
+import epcrAdminWizard2 from "@/assets/images/projects/healthcare/screens/epcr admin/Patient Details Wizard – 2.png";
+import epcrAdminSummery from "@/assets/images/projects/healthcare/screens/epcr admin/Patient Details Wizard – Summery.png";
+import epcrAdminPatients from "@/assets/images/projects/healthcare/screens/epcr admin/Patients.png";
+import epcrAdminWeb9 from "@/assets/images/projects/healthcare/screens/epcr admin/Web 1280 – 9.png";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { projects } from "@/data/projects";
 
 const HealthcareAppPage = () => {
+  const [lightboxState, setLightboxState] = useState<{ screens: { img: string, title: string }[], index: number } | null>(null);
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragDistance, setDragDistance] = useState(0);
+
+  useEffect(() => {
+    if (lightboxState !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [lightboxState]);
   const project = projects.find((p) => p.id === "healthcare-app");
   if (!project) return null;
+
+  const doctorScreens = [
+    { img: doctorAppLogin, title: "Login" },
+    { img: doctorAppAed, title: "Primary Screen - AED" },
+    { img: doctorAppStep1, title: "Primary Screen - Step 1" },
+    { img: doctorAppStep5, title: "Primary Screen - Step 5" },
+    { img: doctorAppStep6, title: "Primary Screen - Step 6" },
+    { img: doctorAppVideoFull, title: "Video Call - Full Screen" },
+    { img: doctorAppVideoChat, title: "Video Call with Chat" },
+  ];
+
+  const emtScreens = [
+    { img: emtEpcr, title: "EPCR" },
+    { img: emtEcg, title: "ECG Placement Detection" },
+    { img: emtFileShare, title: "File Share" },
+    { img: emtChatVideo, title: "Chat with Video" },
+    { img: emtItemDetection, title: "Item Detection" },
+    { img: emtTutorials, title: "Tutorials" },
+    { img: emtVrHud, title: "VR Hud Concept" },
+  ];
+
+  const epcrAdminScreens = [
+    { img: epcrAdminPatients, title: "Patients Dashboard" },
+    { img: epcrAdminWizard1, title: "Wizard Step 1" },
+    { img: epcrAdminWizard2, title: "Wizard Step 2" },
+    { img: epcrAdminSummery, title: "Wizard Summary" },
+    { img: epcrAdminWeb9, title: "Admin Portal" },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -1239,13 +1316,119 @@ const HealthcareAppPage = () => {
                 <p className="text-sm text-muted-foreground max-w-xs">Connected Ambulance vitals monitoring, live camera feeds, and patient care record interfaces.</p>
               </div>
 
-              <div className="rounded-2xl border border-border/60 bg-secondary/30 overflow-hidden relative shadow-lg hover:shadow-xl transition-all">
+              {/* Main Mockup */}
+              <div className="rounded-2xl border border-border/60 bg-secondary/30 overflow-hidden relative shadow-lg hover:shadow-xl transition-all mb-12">
                 <img
                   src={healthcareMockup}
                   alt="MediWave Platform — Connected Ambulance vitals dashboard, live camera feeds, and ePCR patient details interface"
                   className="w-full h-auto object-cover"
                   loading="lazy"
                 />
+              </div>
+
+              {/* Doctor App Screens */}
+              <div className="mb-12 mt-12">
+                <h5 className="font-display font-bold text-xl mb-6 text-foreground flex items-center gap-2">
+                  <Stethoscope className="w-5 h-5 text-blue-500" />
+                  Doctor App (Desktop)
+                </h5>
+                <Carousel
+                  opts={{ align: "start", loop: true }}
+                  className="w-full relative"
+                >
+                  <CarouselContent className="-ml-2 md:-ml-4">
+                    {doctorScreens.map((screen, i) => (
+                      <CarouselItem key={i} className="pl-2 md:pl-4 sm:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+                        <div 
+                          className="rounded-xl overflow-hidden border border-border/50 bg-card group relative cursor-zoom-in"
+                          onClick={() => setLightboxState({ screens: doctorScreens, index: i })}
+                        >
+                          <img
+                            src={screen.img}
+                            alt={screen.title}
+                            className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <span className="font-bold text-lg text-foreground">{screen.title}</span>
+                          </div>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                  <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                </Carousel>
+              </div>
+
+              {/* EMT Screens */}
+              <div className="mb-12 mt-12">
+                <h5 className="font-display font-bold text-xl mb-6 text-foreground flex items-center gap-2">
+                  <Ambulance className="w-5 h-5 text-red-500" />
+                  EMT App Screens
+                </h5>
+                <Carousel
+                  opts={{ align: "start", loop: true }}
+                  className="w-full relative"
+                >
+                  <CarouselContent className="-ml-2 md:-ml-4">
+                    {emtScreens.map((screen, i) => (
+                      <CarouselItem key={i} className="pl-2 md:pl-4 sm:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+                        <div 
+                          className="rounded-xl overflow-hidden border border-border/50 bg-card group relative cursor-zoom-in"
+                          onClick={() => setLightboxState({ screens: emtScreens, index: i })}
+                        >
+                          <img
+                            src={screen.img}
+                            alt={screen.title}
+                            className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <span className="font-bold text-lg text-foreground">{screen.title}</span>
+                          </div>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                  <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                </Carousel>
+              </div>
+
+              {/* ePCR Admin Screens */}
+              <div className="mb-8 mt-12">
+                <h5 className="font-display font-bold text-xl mb-6 text-foreground flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-purple-500" />
+                  ePCR Admin Portal
+                </h5>
+                <Carousel
+                  opts={{ align: "start", loop: true }}
+                  className="w-full relative"
+                >
+                  <CarouselContent className="-ml-2 md:-ml-4">
+                    {epcrAdminScreens.map((screen, i) => (
+                      <CarouselItem key={i} className="pl-2 md:pl-4 sm:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+                        <div 
+                          className="rounded-xl overflow-hidden border border-border/50 bg-card group relative cursor-zoom-in"
+                          onClick={() => setLightboxState({ screens: epcrAdminScreens, index: i })}
+                        >
+                          <img
+                            src={screen.img}
+                            alt={screen.title}
+                            className="w-full aspect-[4/3] object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <span className="font-bold text-lg text-foreground">{screen.title}</span>
+                          </div>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                  <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                </Carousel>
               </div>
             </div>
           </AnimatedSection>
@@ -1481,6 +1664,114 @@ const HealthcareAppPage = () => {
           </AnimatedSection>
         </div>
       </section>
+
+      {/* Lightbox Modal */}
+      {lightboxState !== null && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-md transition-opacity duration-300 overflow-hidden select-none"
+          onClick={() => { 
+            if (dragDistance > 5) return;
+            setLightboxState(null); setZoomLevel(1); setPan({ x: 0, y: 0 }); 
+          }}
+          onWheel={(e) => {
+            if (e.deltaY < 0) {
+              setZoomLevel(prev => Math.min(prev + 0.15, 4));
+            } else {
+              setZoomLevel(prev => Math.max(prev - 0.15, 0.5));
+            }
+          }}
+          onMouseDown={(e) => {
+            if (e.button === 0) {
+              setIsDragging(true);
+              setDragDistance(0);
+            }
+          }}
+          onMouseMove={(e) => {
+            if (isDragging) {
+              setPan(prev => ({ x: prev.x + e.movementX, y: prev.y + e.movementY }));
+              setDragDistance(prev => prev + Math.abs(e.movementX) + Math.abs(e.movementY));
+            }
+          }}
+          onMouseUp={(e) => {
+            if (e.button === 0) {
+              setIsDragging(false);
+            }
+          }}
+          onMouseLeave={() => {
+            setIsDragging(false);
+          }}
+          style={{ cursor: isDragging ? 'grabbing' : (zoomLevel > 1 ? 'grab' : 'auto') }}
+        >
+          <div className="fixed top-6 left-6 sm:top-8 sm:left-8 flex gap-3 z-[101]">
+            <button
+              className="w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg"
+              onClick={(e) => {
+                e.stopPropagation();
+                setZoomLevel(prev => Math.min(prev + 0.5, 3));
+              }}
+              title="Zoom In"
+            >
+              <ZoomIn className="w-6 h-6" />
+            </button>
+            <button
+              className="w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg"
+              onClick={(e) => {
+                e.stopPropagation();
+                setZoomLevel(prev => Math.max(prev - 0.5, 0.5));
+              }}
+              title="Zoom Out"
+            >
+              <ZoomOut className="w-6 h-6" />
+            </button>
+          </div>
+
+          <button
+            className="fixed top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
+            onClick={() => { setLightboxState(null); setZoomLevel(1); setPan({ x: 0, y: 0 }); }}
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          <button
+            className="fixed left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxState((prev) => prev !== null ? { ...prev, index: prev.index > 0 ? prev.index - 1 : prev.screens.length - 1 } : null);
+              setZoomLevel(1);
+              setPan({ x: 0, y: 0 });
+            }}
+          >
+            <ArrowLeft className="w-6 h-6" />
+          </button>
+
+          <button
+            className="fixed right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxState((prev) => prev !== null ? { ...prev, index: prev.index < prev.screens.length - 1 ? prev.index + 1 : 0 } : null);
+              setZoomLevel(1);
+              setPan({ x: 0, y: 0 });
+            }}
+          >
+            <ArrowRight className="w-6 h-6" />
+          </button>
+
+          <div className="w-full h-full flex items-center justify-center animate-fade-up min-h-screen p-4 sm:p-8">
+            <img
+              key={lightboxState.index}
+              src={lightboxState.screens[lightboxState.index].img}
+              alt={lightboxState.screens[lightboxState.index].title}
+              className="max-w-full max-h-[95vh] rounded-xl shadow-2xl object-contain border border-border/50"
+              draggable={false}
+              style={{ 
+                transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoomLevel})`,
+                transition: isDragging ? 'none' : 'transform 0.2s ease-out'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>

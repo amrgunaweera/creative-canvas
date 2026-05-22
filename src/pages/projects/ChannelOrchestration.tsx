@@ -18,12 +18,21 @@ import {
 } from "@/components/ui/carousel";
 
 const composeImagesRaw = import.meta.glob('@/assets/images/projects/compose/screens/*.png', { eager: true, import: 'default' });
-const hifiScreens = Object.entries(composeImagesRaw).map(([path, src]: [string, any]) => {
-  const filename = path.split('/').pop()?.replace('.png', '') || '';
-  const parts = filename.split(' - ');
-  const label = parts.length > 2 ? parts.slice(1, -1).join(' - ') : (parts[1] || filename);
-  return { src: src as string, label };
-});
+const hifiScreens = Object.entries(composeImagesRaw)
+  .map(([path, src]: [string, any]) => {
+    const filename = path.split('/').pop()?.replace('.png', '') || '';
+    const parts = filename.split(' - ');
+    const label = parts.length > 2 ? parts.slice(1, -1).join(' - ') : (parts[1] || filename);
+    return { path, src: src as string, label };
+  })
+  .sort((a, b) => {
+    const aIsLogin = a.path.toLowerCase().endsWith('login.png');
+    const bIsLogin = b.path.toLowerCase().endsWith('login.png');
+    if (aIsLogin && !bIsLogin) return -1;
+    if (!aIsLogin && bIsLogin) return 1;
+    return 0;
+  })
+  .map(({ src, label }) => ({ src, label }));
 
 const prototypeImagesRaw = import.meta.glob('@/assets/images/projects/compose/screens/prototypes/*.jpg', { eager: true, import: 'default' });
 const prototypeScreens = Object.entries(prototypeImagesRaw).map(([path, src]: [string, any]) => {
@@ -709,24 +718,40 @@ const ChannelOrchestrationPage = () => {
             </p>
           </AnimatedSection>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {prototypeScreens.map((proto, index) => (
-              <AnimatedSection key={index} delay={index * 60} className="group">
-                <div 
-                  className="rounded-3xl overflow-hidden border border-border/50 bg-secondary/20 aspect-video cursor-zoom-in relative"
-                  onClick={() => setProtoIndex(index)}
-                >
-                  <img 
-                    src={proto.src} 
-                    alt={proto.label}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
-                  />
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="text-white font-medium px-4 py-2 bg-black/50 rounded-full backdrop-blur-sm text-sm">View Details</span>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
+          <div className="w-full pb-8 overflow-hidden">
+            <AnimatedSection>
+              <Carousel 
+                opts={{ align: "start", loop: true }}
+                className="w-full relative"
+              >
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {prototypeScreens.map((proto, index) => (
+                    <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/3">
+                      <div className="p-1">
+                        <div 
+                          className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-video shadow-sm hover:shadow-md transition-shadow"
+                          onClick={() => setProtoIndex(index)}
+                        >
+
+                          <img 
+                            src={proto.src} 
+                            alt={proto.label}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20">
+                            <h4 className="text-white font-display font-bold text-lg sm:text-xl translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                              {proto.label}
+                            </h4>
+                          </div>
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border shadow-md" />
+              </Carousel>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -743,8 +768,8 @@ const ChannelOrchestrationPage = () => {
           <button onClick={(e) => { e.stopPropagation(); setProtoIndex(Math.min(prototypeScreens.length - 1, protoIndex + 1)); }} className="absolute right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10" disabled={protoIndex === prototypeScreens.length - 1}>
             <ChevronRight className="w-5 h-5 text-white" />
           </button>
-          <div className="max-w-6xl max-h-[85vh] w-full" onClick={(e) => e.stopPropagation()}>
-            <img src={prototypeScreens[protoIndex].src} alt={prototypeScreens[protoIndex].label} className="w-full h-full object-contain rounded-xl" />
+          <div className="max-w-screen-2xl max-h-[92vh] w-full" onClick={(e) => e.stopPropagation()}>
+            <img src={prototypeScreens[protoIndex].src} alt={prototypeScreens[protoIndex].label} className="w-full h-[85vh] object-contain rounded-xl" />
             <p className="text-white/70 text-center mt-4 text-sm">{protoIndex + 1} / {prototypeScreens.length}</p>
           </div>
         </div>
@@ -1085,13 +1110,13 @@ const ChannelOrchestrationPage = () => {
                  >
                    <CarouselContent className="-ml-2 md:-ml-4">
                      {hifiScreens.map((screen, index) => (
-                       <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                       <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/2">
                          <div className="p-1">
                            <div 
                              className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-[16/9] shadow-sm hover:shadow-md transition-shadow"
                              onClick={() => setHifiIndex(index)}
                            >
-                             <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+
                              <img 
                                src={screen.src} 
                                alt={screen.label}
@@ -1426,11 +1451,11 @@ const ChannelOrchestrationPage = () => {
           >
             <ChevronRight className="w-6 h-6" />
           </button>
-          <div className="relative max-w-7xl w-full max-h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+          <div className="relative max-w-screen-2xl w-full max-h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
             <img 
               src={hifiScreens[hifiIndex].src} 
               alt={hifiScreens[hifiIndex].label}
-              className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+              className="max-w-full max-h-[92vh] object-contain rounded-lg shadow-2xl"
             />
           </div>
         </div>
