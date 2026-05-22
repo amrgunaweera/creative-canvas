@@ -73,14 +73,14 @@ const EcommercePlatformPage = () => {
           <div className="absolute -top-[10%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-primary/20 blur-[120px] animate-blob mix-blend-screen" />
           <div className="absolute top-[20%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-blue-500/20 blur-[120px] animate-blob mix-blend-screen" style={{ animationDelay: '2s' }} />
           <div className="absolute bottom-[-20%] left-[20%] w-[50vw] h-[50vw] rounded-full bg-indigo-500/10 blur-[120px] animate-blob mix-blend-screen" style={{ animationDelay: '4s' }} />
-          
+
           {/* Subtle Grid Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_10%,transparent_100%)]" />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            
+
             {/* Left Column: Content */}
             <div className="lg:col-span-6 xl:col-span-5 relative z-20">
               <Link to="/work" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8 sm:mb-10 animate-fade-up">
@@ -93,11 +93,11 @@ const EcommercePlatformPage = () => {
                   <Sparkles className="w-3.5 h-3.5" />
                   {project.category}
                 </div>
-                
+
                 <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl leading-[1.1] tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-br from-foreground via-foreground to-foreground/70">
                   {project.title}
                 </h1>
-                
+
                 <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10">
                   {project.fullDescription}
                 </p>
@@ -106,7 +106,7 @@ const EcommercePlatformPage = () => {
                   {[
                     { label: "Role", value: project.role },
                     { label: "Duration", value: project.duration },
-                    { label: "Focus", value: "Telecom UX" },
+                    { label: "Tools", value: project.tools.join(", ") },
                   ].map((m) => (
                     <div key={m.label} className="flex flex-col gap-1 border-l-2 border-primary/30 pl-4">
                       <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{m.label}</span>
@@ -128,7 +128,7 @@ const EcommercePlatformPage = () => {
             {/* Right Column: Creative Animated Visuals */}
             <div className="lg:col-span-6 xl:col-span-7 hidden lg:block relative h-[600px] w-full [perspective:1000px] animate-fade-up-delay-2">
               <div className="absolute inset-0 flex items-center justify-center [transform-style:preserve-3d]">
-                
+
                 {/* Center Main Dashboard Mockup */}
                 <div className="relative z-20 w-[480px] h-[320px] bg-card/40 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden animate-float-slow">
                   {/* Glass Header */}

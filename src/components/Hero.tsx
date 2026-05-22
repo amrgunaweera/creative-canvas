@@ -107,16 +107,15 @@ const Hero = () => {
             <div className="max-w-4xl">
 
               {/* Main heading */}
-              <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.05] py-1 tracking-tight animate-fade-up">
-                <span className="block text-foreground">Crafting</span>
-                <span className="block text-gradient animate-text-gradient">Digital</span>
-                <span className="block text-foreground">Experiences</span>
+              <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-65xl lg:text-6xl xl:text-7xl leading-[1.05] py-1 tracking-tight animate-fade-up">
+                <span className="block text-foreground">Where Strategy</span>
+                <span className="block text-gradient animate-text-gradient">Meets Human</span>
+                <span className="block text-foreground">Experience</span>
               </h1>
 
               {/* Subtitle */}
-              <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl leading-relaxed animate-fade-up-delay">
-                UI/UX Lead specializing in creating meaningful digital experiences
-                that bridge the gap between business goals and human needs.
+              <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-xl text-muted-foreground max-w-2xl leading-relaxed animate-fade-up-delay">
+                UI/UX Lead specializing in scalable product design, intelligent user flows, and emotionally engaging experiences that align user needs with business vision.
               </p>
 
               {/* CTA Buttons */}
