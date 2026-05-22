@@ -144,7 +144,7 @@ export const projects: Project[] = [
     color: "from-accent/20 to-primary/20",
     role: "Lead UI/UX Designer",
     duration: "14 months",
-    tools: ["Figma", "Prototyping", "UX Research", "Design System"],
+    tools: ["Figma", "Prototyping", "React", "Design System"],
     challenge: "Telecoms struggled with fragmented customer touchpoints across 12+ channels, with no unified orchestration layer. Building CX applications required extensive engineering effort, and existing platforms lacked native AI capabilities for personalization and intelligent routing.",
     solution: "Designed a unified low-code platform with drag-and-drop workflow builder, pre-built AI templates, and seamless integration across all digital and legacy channels. The platform enables multi-channel AI deployment with real-time analytics and multilingual NLP support.",
     outcome: "Enabled telecom operators to deploy CX applications 3x faster with intelligent automation. Unified 12+ customer channels under a single orchestration dashboard, reducing development costs while delivering personalized, context-aware customer experiences at scale.",

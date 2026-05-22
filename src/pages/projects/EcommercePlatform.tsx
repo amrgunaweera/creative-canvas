@@ -840,42 +840,42 @@ const EcommercePlatformPage = () => {
               The final visual layer brings the marketplace to life. Every screen was crafted using the Poppins-based design system with white-label theming, ensuring consistency across operator brands while maintaining clear data visualization and intuitive interaction patterns.
             </p>
           </AnimatedSection>
-        </div>
 
-        <div className="w-full px-4 sm:px-8 lg:px-12 pb-8 overflow-hidden">
-          <AnimatedSection>
-            <Carousel
-              opts={{ align: "start", loop: true }}
-              className="w-full relative"
-            >
-              <CarouselContent className="-ml-2 md:-ml-4">
-                {hifiScreens.map((screen, index) => (
-                  <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                    <div className="p-1">
-                      <div
-                        className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-[16/9] shadow-sm hover:shadow-md transition-shadow"
-                        onClick={() => setHifiIndex(index)}
-                      >
-                        <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                        <img
-                          src={screen.src}
-                          alt={screen.label}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20">
-                          <h4 className="text-white font-display font-bold text-lg sm:text-xl translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                            {screen.label}
-                          </h4>
+          <div className="w-full pb-8 overflow-hidden">
+            <AnimatedSection>
+              <Carousel
+                opts={{ align: "start", loop: true }}
+                className="w-full relative"
+              >
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {hifiScreens.map((screen, index) => (
+                    <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                      <div className="p-1">
+                        <div
+                          className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-[16/9] shadow-sm hover:shadow-md transition-shadow"
+                          onClick={() => setHifiIndex(index)}
+                        >
+                          <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                          <img
+                            src={screen.src}
+                            alt={screen.label}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20">
+                            <h4 className="text-white font-display font-bold text-lg sm:text-xl translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                              {screen.label}
+                            </h4>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border shadow-md" />
-              <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border shadow-md" />
-            </Carousel>
-          </AnimatedSection>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border shadow-md" />
+              </Carousel>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 

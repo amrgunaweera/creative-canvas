@@ -6,9 +6,6 @@ import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { projects } from "@/data/projects";
 
-import wireframe1 from "@/assets/images/projects/contact-center/wireframes/Home.jpg";
-import wireframe2 from "@/assets/images/projects/contact-center/wireframes/Autopilot.jpg";
-import wireframe3 from "@/assets/images/projects/contact-center/wireframes/Call Insights.jpg";
 import composeLogo from "@/assets/images/projects/compose/Compose-logo-usage.jpg";
 
 
@@ -28,11 +25,17 @@ const hifiScreens = Object.entries(composeImagesRaw).map(([path, src]: [string, 
   return { src: src as string, label };
 });
 
+const prototypeImagesRaw = import.meta.glob('@/assets/images/projects/compose/screens/prototypes/*.jpg', { eager: true, import: 'default' });
+const prototypeScreens = Object.entries(prototypeImagesRaw).map(([path, src]: [string, any]) => {
+  const filename = path.split('/').pop()?.replace('.jpg', '') || '';
+  return { src: src as string, label: filename };
+});
+
 const ChannelOrchestrationPage = () => {
   const project = projects.find((p) => p.id === "channel-orchestration");
   
-  const [wireframeIndex, setWireframeIndex] = useState<number | null>(null);
   const [hifiIndex, setHifiIndex] = useState<number | null>(null);
+  const [protoIndex, setProtoIndex] = useState<number | null>(null);
 
   const [activeBrandColor, setActiveBrandColor] = useState({
     name: "Compose Blue",
@@ -47,14 +50,6 @@ const ChannelOrchestrationPage = () => {
     { name: "Telecom Orange", primary: "#f97316", secondary: "#ea580c", accent: "#fb923c", focus: "#c2410c" },
     { name: "Enterprise Purple", primary: "#8b5cf6", secondary: "#7c3aed", accent: "#a78bfa", focus: "#6d28d9" },
   ];
-
-  const wireframes = [
-    { src: wireframe1, label: "Omnichannel Dashboard" },
-    { src: wireframe2, label: "AI Flow Builder" },
-    { src: wireframe3, label: "Channel Configuration" },
-  ];
-
-
 
   if (!project) return null;
 
@@ -703,41 +698,57 @@ const ChannelOrchestrationPage = () => {
         </div>
       </section>
 
-      {/* ── Wireframes & Prototyping ── */}
+      {/* ── Rapid Prototyping ── */}
       <section className="py-16 sm:py-24 border-t border-border/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <AnimatedSection className="mb-12 max-w-3xl">
-            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Structure</span>
-            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl mb-6">Wireframes & Prototyping</h3>
+            <span className="text-primary font-medium tracking-widest uppercase text-xs sm:text-sm mb-3 block">Rapid Iteration</span>
+            <h3 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl mb-6">Rapid Prototyping</h3>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              We mapped out the core user flows, focusing on the low-code builder and analytics dashboard. The goal was to simplify complex orchestration logic into intuitive visual nodes.
+              Leveraged <span className="text-foreground font-medium">Loveable</span> for rapid prototyping to quickly validate core interaction patterns — from the low-code orchestration canvas to channel configuration flows. This allowed us to test ideas in hours instead of days and iterate on real, functional prototypes with stakeholders before committing to high-fidelity production designs.
             </p>
           </AnimatedSection>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {wireframes.map((wf, index) => (
-              <AnimatedSection key={index} delay={index * 100} className="group">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {prototypeScreens.map((proto, index) => (
+              <AnimatedSection key={index} delay={index * 60} className="group">
                 <div 
                   className="rounded-3xl overflow-hidden border border-border/50 bg-secondary/20 aspect-video cursor-zoom-in relative"
-                  onClick={() => setWireframeIndex(index)}
+                  onClick={() => setProtoIndex(index)}
                 >
                   <img 
-                    src={wf.src} 
-                    alt={wf.label}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100 mix-blend-luminosity hover:mix-blend-normal"
+                    src={proto.src} 
+                    alt={proto.label}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                   />
                   <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <span className="text-white font-medium px-4 py-2 bg-black/50 rounded-full backdrop-blur-sm text-sm">View Details</span>
                   </div>
-                </div>
-                <div className="mt-4 text-center">
-                  <h4 className="font-semibold text-foreground">{wf.label}</h4>
                 </div>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Prototype Lightbox */}
+      {protoIndex !== null && (
+        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setProtoIndex(null)}>
+          <button onClick={() => setProtoIndex(null)} className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10">
+            <X className="w-5 h-5 text-white" />
+          </button>
+          <button onClick={(e) => { e.stopPropagation(); setProtoIndex(Math.max(0, protoIndex - 1)); }} className="absolute left-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10" disabled={protoIndex === 0}>
+            <ChevronLeft className="w-5 h-5 text-white" />
+          </button>
+          <button onClick={(e) => { e.stopPropagation(); setProtoIndex(Math.min(prototypeScreens.length - 1, protoIndex + 1)); }} className="absolute right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10" disabled={protoIndex === prototypeScreens.length - 1}>
+            <ChevronRight className="w-5 h-5 text-white" />
+          </button>
+          <div className="max-w-6xl max-h-[85vh] w-full" onClick={(e) => e.stopPropagation()}>
+            <img src={prototypeScreens[protoIndex].src} alt={prototypeScreens[protoIndex].label} className="w-full h-full object-contain rounded-xl" />
+            <p className="text-white/70 text-center mt-4 text-sm">{protoIndex + 1} / {prototypeScreens.length}</p>
+          </div>
+        </div>
+      )}
 
       {/* ── Key Features Designed ── */}
       <section className="py-16 sm:py-24 border-t border-border/50 bg-secondary/5 relative">
@@ -1065,42 +1076,42 @@ const ChannelOrchestrationPage = () => {
                  The final visual layer brings the platform to life. We focused on clear data visualization, intuitive interactions, and a clean layout that lets the products shine, using the defined design system.
                </p>
             </AnimatedSection>
-         </div>
             
-         <div className="w-full px-4 sm:px-8 lg:px-12 pb-8 overflow-hidden">
-            <AnimatedSection>
-              <Carousel 
-                opts={{ align: "start", loop: true }}
-                className="w-full relative"
-              >
-                <CarouselContent className="-ml-2 md:-ml-4">
-                  {hifiScreens.map((screen, index) => (
-                    <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                      <div className="p-1">
-                        <div 
-                          className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-[16/9] shadow-sm hover:shadow-md transition-shadow"
-                          onClick={() => setHifiIndex(index)}
-                        >
-                          <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                          <img 
-                            src={screen.src} 
-                            alt={screen.label}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20">
-                            <h4 className="text-white font-display font-bold text-lg sm:text-xl translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                              {screen.label}
-                            </h4>
-                          </div>
-                        </div>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border shadow-md" />
-                <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border shadow-md" />
-              </Carousel>
-            </AnimatedSection>
+            <div className="w-full pb-8 overflow-hidden">
+               <AnimatedSection>
+                 <Carousel 
+                   opts={{ align: "start", loop: true }}
+                   className="w-full relative"
+                 >
+                   <CarouselContent className="-ml-2 md:-ml-4">
+                     {hifiScreens.map((screen, index) => (
+                       <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                         <div className="p-1">
+                           <div 
+                             className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-[16/9] shadow-sm hover:shadow-md transition-shadow"
+                             onClick={() => setHifiIndex(index)}
+                           >
+                             <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                             <img 
+                               src={screen.src} 
+                               alt={screen.label}
+                               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                             />
+                             <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20">
+                               <h4 className="text-white font-display font-bold text-lg sm:text-xl translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                                 {screen.label}
+                               </h4>
+                             </div>
+                           </div>
+                         </div>
+                       </CarouselItem>
+                     ))}
+                   </CarouselContent>
+                   <CarouselPrevious className="left-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                   <CarouselNext className="right-4 bg-background/80 hover:bg-background border-border shadow-md" />
+                 </Carousel>
+               </AnimatedSection>
+            </div>
          </div>
       </section>
 
@@ -1383,49 +1394,6 @@ const ChannelOrchestrationPage = () => {
       </section>
 
       <Footer />
-
-      {/* Wireframe Modal */}
-      {wireframeIndex !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 bg-black/90 backdrop-blur-sm" onClick={() => setWireframeIndex(null)}>
-          <button 
-            className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
-            onClick={(e) => {
-              e.stopPropagation();
-              setWireframeIndex(null);
-            }}
-          >
-            <X className="w-6 h-6" />
-          </button>
-          
-          <button 
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
-            onClick={(e) => {
-              e.stopPropagation();
-              setWireframeIndex(wireframeIndex === 0 ? wireframes.length - 1 : wireframeIndex - 1);
-            }}
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-
-          <button 
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
-            onClick={(e) => {
-              e.stopPropagation();
-              setWireframeIndex(wireframeIndex === wireframes.length - 1 ? 0 : wireframeIndex + 1);
-            }}
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-          <div className="relative max-w-7xl w-full max-h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-            <img 
-              src={wireframes[wireframeIndex].src} 
-              alt={wireframes[wireframeIndex].label}
-              className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
-            />
-          </div>
-        </div>
-      )}
-
       {/* HiFi Modal */}
       {hifiIndex !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 bg-black/90 backdrop-blur-sm" onClick={() => setHifiIndex(null)}>
