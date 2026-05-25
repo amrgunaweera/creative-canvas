@@ -10,6 +10,9 @@ import {
 } from "lucide-react";
 import healthcareMockup from "@/assets/images/projects/healthcare/Mockup.jpg";
 import mediwaveLogo from "@/assets/images/projects/healthcare/mediwave-logo-usage.jpg";
+import vrImage from "@/assets/images/projects/healthcare/vr.png";
+import emtEcgHoloLens from "@/assets/images/projects/healthcare/EMT_ECG-Probe-Placement-Detection-with-HoloLens-1-1.webp";
+import endToEndSuiteImage from "@/assets/images/projects/healthcare/End-to-End-Emergency-Response-Suite-Blog-New-image-01.webp";
 import Navigation from "@/components/Navigation";
 
 import Footer from "@/components/Footer";
@@ -250,6 +253,17 @@ const HealthcareAppPage = () => {
                   </div>
                   <div className="w-24 h-3 bg-white/10 rounded mb-2" />
                   <div className="w-16 h-3 bg-white/5 rounded" />
+                </div>
+
+                {/* Floating Element 4: VR Interface Mockup */}
+                <div className="absolute z-20 -right-24 bottom-6 w-96 shadow-2xl animate-float-medium group hover-lift cursor-pointer transform rotate-3 overflow-hidden rounded-2xl">
+                  <div className="aspect-[16/10] w-full relative">
+                    <img src={vrImage} alt="VR HUD Interface" className="w-full h-full object-cover opacity-85 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute bottom-2 left-2 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-500/80 text-[8px] font-bold text-white tracking-wider uppercase">
+                      VR HUD Active
+                    </div>
+                  </div>
                 </div>
 
                 {/* Connecting Lines / Accents */}
@@ -979,6 +993,7 @@ const HealthcareAppPage = () => {
                 tagColor: "text-blue-400 bg-blue-500/10 border-blue-500/20",
                 desc: "First-of-its-kind solution using Microsoft HoloLens and 5G connectivity to link field EMTs with remote hospital physicians. Paramedics receive AR-guided clinical instructions overlaid on their visual field, enabling specialist-level care from the ambulance.",
                 features: ["Live AR guidance from ED physicians", "Real-time patient vital sign streaming", "Hands-free HoloLens interface", "5G low-latency video consultation"],
+                image: emtEcgHoloLens,
               },
               {
                 icon: Map,
@@ -1005,25 +1020,46 @@ const HealthcareAppPage = () => {
                 features: ["SOAP & CHART format auto-generation", "Multi-medical format support", "Real-time voice-to-structured-text conversion", "Accent-aware medical vocabulary model"],
               },
             ].map((product, i) => (
-              <AnimatedSection key={i} delay={i * 80} className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:border-primary/30 transition-all duration-300 group">
-                <div className="flex items-start gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
-                    <product.icon className="w-6 h-6 text-primary" />
+              <AnimatedSection key={i} delay={i * 80} className="bg-card border border-border/50 rounded-3xl p-6 sm:p-8 hover:border-primary/30 transition-all duration-300 group flex flex-col justify-between">
+                <div>
+                  <div className="flex items-start gap-4 mb-5">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
+                      <product.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-display font-bold text-xl text-foreground">{product.title}</h4>
+                      <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${product.tagColor}`}>{product.tag}</span>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-display font-bold text-xl text-foreground">{product.title}</h4>
-                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${product.tagColor}`}>{product.tag}</span>
-                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-5">{product.desc}</p>
+                  <ul className="space-y-2">
+                    {product.features.map((f) => (
+                      <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-5">{product.desc}</p>
-                <ul className="space-y-2">
-                  {product.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+                {"image" in product && product.image && (
+                  <div 
+                    onClick={() => setLightboxState({ screens: [{ img: product.image, title: product.title }], index: 0 })}
+                    className="mt-6 rounded-2xl overflow-hidden border border-border/60 bg-background/50 p-1 group-hover:border-primary/20 transition-all duration-300 cursor-zoom-in relative group/img-container"
+                  >
+                    <div className="relative w-full h-56 rounded-xl overflow-hidden">
+                      <img 
+                        src={product.image} 
+                        alt={product.title} 
+                        className="w-full h-full object-cover hover:scale-[1.02] transition-transform duration-500" 
+                      />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img-container:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center text-foreground shadow-lg transform translate-y-2 group-hover/img-container:translate-y-0 transition-all duration-300">
+                          <ZoomIn className="w-5 h-5" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </AnimatedSection>
             ))}
           </div>
@@ -1571,24 +1607,7 @@ const HealthcareAppPage = () => {
                 </div>
               </div>
 
-              {/* Validation Metrics Strip */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                {[
-                  { icon: Search, metric: "92%", label: "Task Success Rate", desc: "Across all usability tests" },
-                  { icon: Clock, metric: "<3s", label: "Avg Task Time", desc: "For critical golden-path actions" },
-                  { icon: CheckCircle2, metric: "4.7/5", label: "SUS Score", desc: "System Usability Scale" },
-                  { icon: Activity, metric: "Zero", label: "Critical Errors", desc: "In final round of testing" },
-                ].map((item, i) => (
-                  <AnimatedSection key={i} delay={i * 80} className="bg-card rounded-2xl p-4 sm:p-5 border border-border/50 text-center hover:border-primary/30 hover:shadow-lg transition-all group">
-                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-                      <item.icon className="w-4 h-4 text-primary" />
-                    </div>
-                    <div className="text-xl font-display font-bold text-primary mb-0.5">{item.metric}</div>
-                    <div className="font-semibold text-xs text-foreground mb-0.5">{item.label}</div>
-                    <p className="text-[10px] text-muted-foreground">{item.desc}</p>
-                  </AnimatedSection>
-                ))}
-              </div>
+
             </div>
           </AnimatedSection>
         </div>
@@ -1606,25 +1625,20 @@ const HealthcareAppPage = () => {
             <p className="text-lg text-muted-foreground leading-relaxed">{project.outcome}</p>
           </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Ambulance, metric: "322+", desc: "Ambulances powered by MediWave across Sri Lanka's 1990 Suwa Seriya fleet" },
-              { icon: Clock, metric: "15m 32s", desc: "Average island-wide response time — faster than many developed nations" },
-              { icon: Users, metric: "2M+", desc: "Total patients transported and treated across the MediWave global footprint" },
-              { icon: Globe, metric: "GLOMO '24", desc: "Global Mobile Awards Finalist for Best Mobile Innovation for Connected Health" },
-            ].map((item, idx) => (
-              <AnimatedSection key={idx} delay={idx * 100} className="relative bg-card border border-border/50 rounded-3xl p-6 sm:p-8 text-center hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all group overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-primary/20 transition-all relative z-10 mx-auto">
-                  <item.icon className="w-5 h-5 text-primary" />
-                </div>
-                <h4 className="font-bold text-3xl mb-2 relative z-10 text-foreground">{item.metric}</h4>
-                <p className="text-muted-foreground text-xs leading-relaxed relative z-10">{item.desc}</p>
-              </AnimatedSection>
-            ))}
-          </div>
+          {/* Showcase Image */}
+          <AnimatedSection delay={100}>
+            <div className="rounded-3xl overflow-hidden border border-border/50 bg-card p-2 shadow-xl">
+              <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[21/9] rounded-2xl overflow-hidden">
+                <img 
+                  src={endToEndSuiteImage} 
+                  alt="MediWave End-to-End Emergency Response Suite" 
+                  className="w-full h-full object-cover" 
+                />
+              </div>
+            </div>
+          </AnimatedSection>
 
-          {/* Learnings */}
+          {/* Learnings & Outcomes */}
           <AnimatedSection className="mt-8 grid lg:grid-cols-2 gap-8">
             <div className="bg-primary/5 border border-primary/20 rounded-3xl p-8">
               <h4 className="font-display font-bold text-xl mb-4 text-foreground">Key Design Learnings</h4>
@@ -1643,20 +1657,20 @@ const HealthcareAppPage = () => {
               </ul>
             </div>
             <div className="bg-secondary/30 border border-border/50 rounded-3xl p-8">
-              <h4 className="font-display font-bold text-xl mb-4 text-foreground">Platform Reach</h4>
+              <h4 className="font-display font-bold text-xl mb-4 text-foreground">Impact & Results</h4>
               <div className="space-y-4">
                 {[
-                  { country: "Sri Lanka", detail: "322 ambulances · 1990 Suwa Seriya national service", status: "Live" },
-                  { country: "Australia", detail: "EMS agency deployments across multiple states", status: "Live" },
-                  { country: "Malaysia", detail: "Full platform launch", status: "Launched" },
-                  { country: "United States", detail: "Proof of Concept phase", status: "POC" },
-                ].map((r) => (
-                  <div key={r.country} className="flex items-start justify-between gap-4 py-3 border-b border-border/40 last:border-0">
+                  { title: "Fleet Coverage", desc: "322+ ambulances powered by MediWave island-wide", value: "322+ Units" },
+                  { title: "Response Efficiency", desc: "15m 32s average response time (developed nation standard)", value: "15m 32s" },
+                  { title: "Patient Outcomes", desc: "2M+ total patients successfully treated & transported", value: "2M+ Patients" },
+                  { title: "Industry Recognition", desc: "GLOMO '24 Global Mobile Awards Finalist", value: "GLOMO '24" },
+                ].map((item) => (
+                  <div key={item.title} className="flex items-start justify-between gap-4 py-3 border-b border-border/40 last:border-0">
                     <div>
-                      <div className="font-semibold text-foreground text-sm">{r.country}</div>
-                      <div className="text-xs text-muted-foreground">{r.detail}</div>
+                      <div className="font-semibold text-foreground text-sm">{item.title}</div>
+                      <div className="text-xs text-muted-foreground">{item.desc}</div>
                     </div>
-                    <span className="text-xs font-semibold px-2 py-1 rounded-full bg-primary/10 text-primary shrink-0">{r.status}</span>
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary shrink-0 font-display">{item.value}</span>
                   </div>
                 ))}
               </div>

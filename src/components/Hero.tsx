@@ -2,6 +2,7 @@ import { Button } from "./ui/button";
 import { ArrowDown, Download } from "lucide-react";
 import { useEffect, useRef } from "react";
 import resumePdf from "@/assets/cv/Mishan Gunaweera - UI UX Lead.pdf";
+import profileImage from "@/assets/images/profile-image 2.png";
 
 const Hero = () => {
   const scrollToWork = () => {
@@ -18,6 +19,7 @@ const Hero = () => {
   const panel1Ref = useRef<SVGGElement>(null);
   const panel2Ref = useRef<SVGGElement>(null);
   const panel3Ref = useRef<SVGGElement>(null);
+  const profileImageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let animationFrameId: number;
@@ -69,6 +71,7 @@ const Hero = () => {
       if (panel1Ref.current) panel1Ref.current.style.transform = `translate(${currentX * 0.5}px, ${currentY * 0.5}px)`;
       if (panel2Ref.current) panel2Ref.current.style.transform = `translate(${currentX * 1.5}px, ${currentY * 1.5}px)`;
       if (panel3Ref.current) panel3Ref.current.style.transform = `translate(${currentX * 2.5}px, ${currentY * 2.5}px)`;
+      if (profileImageRef.current) profileImageRef.current.style.transform = `translate(${currentX * 0.3}px, ${currentY * 0.3}px)`;
 
       animationFrameId = requestAnimationFrame(animate);
     };
@@ -152,11 +155,11 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Holographic Parallax Composition */}
+          {/* Profile Image & Parallax Background */}
           <div className="hidden lg:flex lg:col-span-5 xl:col-span-5 justify-center items-center relative h-[500px] xl:h-[600px] w-full" style={{ perspective: '1200px' }}>
 
             {/* Background Particles / Bokeh */}
-            <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 pointer-events-none z-0">
               <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-white/40 rounded-full blur-[2px] animate-pulse" />
               <div className="absolute top-1/3 right-1/4 w-4 h-4 bg-primary/40 rounded-full blur-[2px] animate-float" />
               <div className="absolute bottom-1/4 left-1/3 w-6 h-6 bg-accent/30 rounded-full blur-[3px] animate-float" style={{ animationDelay: '1s' }} />
@@ -164,8 +167,14 @@ const Hero = () => {
               <div className="absolute bottom-1/3 right-1/4 w-8 h-8 bg-primary/20 rounded-full blur-[4px] animate-float" style={{ animationDelay: '2s' }} />
             </div>
 
-            <div className="absolute w-[120%] sm:w-[600px] xl:w-[800px] aspect-square flex items-center justify-center pointer-events-none origin-center right-[-10%] xl:right-[-20%]">
-              {/* SVG HUD centered with drop shadow */}
+            {/* Original SVG HUD Background */}
+            <div
+              className="absolute w-[120%] sm:w-[600px] xl:w-[800px] aspect-square flex items-center justify-center pointer-events-none origin-center right-[-10%] xl:right-[-20%] z-0"
+              style={{
+                maskImage: 'linear-gradient(to right, black 0%, black 45%, transparent 80%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to right, black 0%, black 45%, transparent 80%, transparent 100%)'
+              }}
+            >
               <svg width="100%" height="100%" viewBox="0 0 800 800" fill="none" className="overflow-visible drop-shadow-[0_0_20px_rgba(var(--primary),0.6)] scale-110 lg:scale-[1.15] xl:scale-[1.25]">
                 <defs>
                   <linearGradient id="glowLine" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -235,25 +244,8 @@ const Hero = () => {
                   <circle cx="400" cy="600" r="1.5" />
                 </g>
 
-                {/* Parallax Group 1 (Deep Background - Heavily Blurred) */}
-                <g className="blur-[6px]">
-                  <path className="circuit-path-slow" stroke="url(#glowLine)" strokeWidth="1" fill="none" strokeLinecap="round" strokeLinejoin="round" d="M 100 0 L 100 150 L 200 250 L 200 400 L 300 500 L 300 800" />
-                  <path className="circuit-path" stroke="url(#glowLineReverse)" strokeWidth="1" fill="none" strokeLinecap="round" strokeLinejoin="round" d="M 600 0 L 600 200 L 500 300 L 500 500 L 600 600 L 600 800" />
-                  <path className="circuit-path-slow" stroke="url(#glowLine)" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" d="M 300 0 L 300 100 L 400 200 L 600 200 L 700 100 L 800 100" />
-                </g>
-
-                {/* Parallax Group 2 (Midground) */}
-                <g className="blur-[2px]">
-                  <path className="circuit-path" stroke="url(#glowLine)" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" d="M 0 100 L 150 100 L 250 200 L 400 200 L 500 100 L 800 100" />
-                  <path className="circuit-path-slow" stroke="url(#glowLineReverse)" strokeWidth="1" fill="none" strokeLinecap="round" strokeLinejoin="round" d="M 0 500 L 200 500 L 300 600 L 600 600 L 700 500 L 800 500" />
-                </g>
-
                 {/* Parallax Group 3 (Foreground - Sharpest & Fastest) */}
                 <g className="blur-[0.5px]">
-                  <path className="circuit-path-fast" stroke="#fff" strokeWidth="1" fill="none" strokeLinecap="round" strokeLinejoin="round" d="M 0 300 L 100 300 L 150 250 L 350 250 L 400 300 L 800 300" />
-                  <path className="circuit-path-fast" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" d="M 200 800 L 200 600 L 300 500 L 500 500 L 600 400 L 800 400" />
-                  <path className="circuit-path-fast" stroke="hsl(var(--primary))" strokeWidth="1" fill="none" strokeLinecap="round" strokeLinejoin="round" d="M 0 700 L 100 700 L 200 600 L 400 600 L 500 700 L 800 700" />
-
                   {/* Glowing active nodes */}
                   <circle cx="350" cy="250" r="2.5" fill="#fff" className="animate-pulse drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
                   <circle cx="500" cy="500" r="2" fill="#fff" className="animate-pulse drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" style={{ animationDelay: '0.5s' }} />
@@ -301,17 +293,32 @@ const Hero = () => {
                   </g>
                 </g>
 
-                {/* Foreground floating UI (Sharpest) */}
-                <g ref={panel3Ref} className="origin-center will-change-transform blur-[0.5px]">
-                  <g transform="translate(250, 650)" opacity="0.8">
-                    <path d="M 0 0 L 20 20 L 120 20" fill="none" stroke="#fff" strokeWidth="1" opacity="0.6" />
-                    <circle cx="0" cy="0" r="3" fill="#fff" />
-                    <text x="30" y="15" fill="#fff" fontSize="12" fontFamily="monospace">NODE.ACTIVE // 99.8%</text>
-                    <rect x="30" y="25" width="80" height="2" fill="hsl(var(--primary))" />
-                    <rect x="30" y="25" width="60" height="2" fill="#fff" />
-                  </g>
-                </g>
+
               </svg>
+            </div>
+
+            {/* Faded Grayscale Image (Foreground) */}
+            <div className="absolute inset-0 flex justify-end items-end z-10 pointer-events-none pr-8">
+              <div className="max-h-[120%] w-auto animate-fade-up-delay flex items-end justify-end">
+                <div
+                  ref={profileImageRef}
+                  className="w-full h-full flex items-end justify-end will-change-transform"
+                  style={{
+                    maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 15%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 95%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 15%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 95%, transparent 100%)'
+                  }}
+                >
+                  <img
+                    src={profileImage}
+                    alt="Profile"
+                    className="max-h-full w-auto object-contain object-right-bottom grayscale brightness-75 opacity-90 -scale-x-100 transition-opacity duration-1000"
+                    style={{
+                      maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 92%, transparent 100%)',
+                      WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 92%, transparent 100%)'
+                    }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
