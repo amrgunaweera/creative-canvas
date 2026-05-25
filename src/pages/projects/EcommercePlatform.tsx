@@ -575,7 +575,20 @@ const EcommercePlatformPage = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                 {wireframes.map((item, i) => (
-                  <div key={i} className={`group/wf relative flex flex-col cursor-pointer`} onClick={() => setWireframeIndex(i)}>
+                  <div 
+                    key={i} 
+                    className={`group/wf relative flex flex-col cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-2xl`} 
+                    onClick={() => setWireframeIndex(i)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setWireframeIndex(i);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View wireframe: ${item.label}`}
+                  >
                     <div className="w-full h-[250px] md:h-[300px] rounded-2xl border border-border/60 bg-secondary/20 overflow-hidden relative hover:border-primary/40 transition-all shadow-sm hover:shadow-xl hover:shadow-primary/5">
                       <img
                         src={item.src}
@@ -852,8 +865,17 @@ const EcommercePlatformPage = () => {
                     <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/2">
                       <div className="p-1">
                         <div
-                          className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-[16/9] shadow-sm hover:shadow-md transition-shadow"
+                          className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-[16/9] shadow-sm hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                           onClick={() => setHifiIndex(index)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setHifiIndex(index);
+                            }
+                          }}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`View screenshot: ${screen.label}`}
                         >
 
                           <img
@@ -1152,6 +1174,7 @@ const EcommercePlatformPage = () => {
           <button
             className="absolute top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
             onClick={() => setWireframeIndex(null)}
+            aria-label="Close viewer"
           >
             <X className="w-6 h-6" />
           </button>
@@ -1162,6 +1185,7 @@ const EcommercePlatformPage = () => {
               e.stopPropagation();
               setWireframeIndex((prev) => prev !== null ? (prev > 0 ? prev - 1 : wireframes.length - 1) : null);
             }}
+            aria-label="Previous image"
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
@@ -1172,6 +1196,7 @@ const EcommercePlatformPage = () => {
               e.stopPropagation();
               setWireframeIndex((prev) => prev !== null ? (prev < wireframes.length - 1 ? prev + 1 : 0) : null);
             }}
+            aria-label="Next image"
           >
             <ArrowRight className="w-6 h-6" />
           </button>
@@ -1195,6 +1220,7 @@ const EcommercePlatformPage = () => {
           <button
             className="absolute top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
             onClick={() => setHifiIndex(null)}
+            aria-label="Close viewer"
           >
             <X className="w-6 h-6" />
           </button>
@@ -1205,6 +1231,7 @@ const EcommercePlatformPage = () => {
               e.stopPropagation();
               setHifiIndex((prev) => prev !== null ? (prev > 0 ? prev - 1 : hifiScreens.length - 1) : null);
             }}
+            aria-label="Previous image"
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
@@ -1215,6 +1242,7 @@ const EcommercePlatformPage = () => {
               e.stopPropagation();
               setHifiIndex((prev) => prev !== null ? (prev < hifiScreens.length - 1 ? prev + 1 : 0) : null);
             }}
+            aria-label="Next image"
           >
             <ArrowRight className="w-6 h-6" />
           </button>

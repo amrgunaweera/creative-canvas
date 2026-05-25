@@ -69,7 +69,7 @@ const Navigation = () => {
               <button
                 key={item}
                 onClick={() => handleNavClick(item)}
-                className="font-medium text-muted-foreground hover:text-foreground line-reveal transition-colors duration-300"
+                className="font-medium text-muted-foreground hover:text-foreground line-reveal transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md px-2 py-1"
               >
                 {item}
               </button>
@@ -90,7 +90,7 @@ const Navigation = () => {
             {/* Mobile Menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="md:hidden">
-                <Button variant="ghost" size="icon" className="h-9 w-9">
+                <Button variant="ghost" size="icon" className="h-9 w-9" aria-label="Open menu">
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Open menu</span>
                 </Button>

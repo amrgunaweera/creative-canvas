@@ -1008,8 +1008,17 @@ const ContactCenterPage = () => {
                         <CarouselItem key={i} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/2">
                           <div className="p-1">
                             <div
-                              className="group/wf relative rounded-[2rem] overflow-hidden border border-border/60 bg-card cursor-zoom-in aspect-video shadow-sm hover:shadow-md transition-shadow"
+                              className="group/wf relative rounded-[2rem] overflow-hidden border border-border/60 bg-card cursor-zoom-in aspect-video shadow-sm hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                               onClick={() => setWireframeIndex(i)}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault();
+                                  setWireframeIndex(i);
+                                }
+                              }}
+                              role="button"
+                              tabIndex={0}
+                              aria-label={`View wireframe: ${item.label}`}
                             >
 
                               <img
@@ -1324,8 +1333,17 @@ const ContactCenterPage = () => {
                         <CarouselItem key={i} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/2">
                           <div className="p-1">
                             <div
-                              className="group/vs relative rounded-[2rem] overflow-hidden border border-border/60 bg-card cursor-zoom-in aspect-video shadow-sm hover:shadow-md transition-shadow"
+                              className="group/vs relative rounded-[2rem] overflow-hidden border border-border/60 bg-card cursor-zoom-in aspect-video shadow-sm hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                               onClick={() => setSelectedImageIndex(i)}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault();
+                                  setSelectedImageIndex(i);
+                                }
+                              }}
+                              role="button"
+                              tabIndex={0}
+                              aria-label={`View screenshot: ${item.label}`}
                             >
 
                               <img
@@ -1566,6 +1584,7 @@ const ContactCenterPage = () => {
           <button
             className="absolute top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
             onClick={() => setSelectedImageIndex(null)}
+            aria-label="Close viewer"
           >
             <X className="w-6 h-6" />
           </button>
@@ -1576,6 +1595,7 @@ const ContactCenterPage = () => {
               e.stopPropagation();
               setSelectedImageIndex((prev) => prev !== null ? (prev > 0 ? prev - 1 : screens.length - 1) : null);
             }}
+            aria-label="Previous image"
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
@@ -1586,6 +1606,7 @@ const ContactCenterPage = () => {
               e.stopPropagation();
               setSelectedImageIndex((prev) => prev !== null ? (prev < screens.length - 1 ? prev + 1 : 0) : null);
             }}
+            aria-label="Next image"
           >
             <ArrowRight className="w-6 h-6" />
           </button>
@@ -1609,6 +1630,7 @@ const ContactCenterPage = () => {
           <button
             className="absolute top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
             onClick={() => setWireframeIndex(null)}
+            aria-label="Close viewer"
           >
             <X className="w-6 h-6" />
           </button>
@@ -1619,6 +1641,7 @@ const ContactCenterPage = () => {
               e.stopPropagation();
               setWireframeIndex((prev) => prev !== null ? (prev > 0 ? prev - 1 : wireframes.length - 1) : null);
             }}
+            aria-label="Previous image"
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
@@ -1629,6 +1652,7 @@ const ContactCenterPage = () => {
               e.stopPropagation();
               setWireframeIndex((prev) => prev !== null ? (prev < wireframes.length - 1 ? prev + 1 : 0) : null);
             }}
+            aria-label="Next image"
           >
             <ArrowRight className="w-6 h-6" />
           </button>

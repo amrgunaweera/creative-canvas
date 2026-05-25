@@ -1044,7 +1044,16 @@ const HealthcareAppPage = () => {
                 {"image" in product && product.image && (
                   <div 
                     onClick={() => setLightboxState({ screens: [{ img: product.image, title: product.title }], index: 0 })}
-                    className="mt-6 rounded-2xl overflow-hidden border border-border/60 bg-background/50 p-1 group-hover:border-primary/20 transition-all duration-300 cursor-zoom-in relative group/img-container"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setLightboxState({ screens: [{ img: product.image, title: product.title }], index: 0 });
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View full image: ${product.title}`}
+                    className="mt-6 rounded-2xl overflow-hidden border border-border/60 bg-background/50 p-1 group-hover:border-primary/20 transition-all duration-300 cursor-zoom-in relative group/img-container focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     <div className="relative w-full h-56 rounded-xl overflow-hidden">
                       <img 
@@ -1376,8 +1385,17 @@ const HealthcareAppPage = () => {
                     {doctorScreens.map((screen, i) => (
                       <CarouselItem key={i} className="pl-2 md:pl-4 sm:basis-1/3 lg:basis-1/4 xl:basis-1/5">
                         <div 
-                          className="rounded-xl overflow-hidden border border-border/50 bg-card group relative cursor-zoom-in"
+                          className="rounded-xl overflow-hidden border border-border/50 bg-card group relative cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                           onClick={() => setLightboxState({ screens: doctorScreens, index: i })}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setLightboxState({ screens: doctorScreens, index: i });
+                            }
+                          }}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`View doctor screen: ${screen.title}`}
                         >
                           <img
                             src={screen.img}
@@ -1411,8 +1429,17 @@ const HealthcareAppPage = () => {
                     {emtScreens.map((screen, i) => (
                       <CarouselItem key={i} className="pl-2 md:pl-4 sm:basis-1/3 lg:basis-1/4 xl:basis-1/5">
                         <div 
-                          className="rounded-xl overflow-hidden border border-border/50 bg-card group relative cursor-zoom-in"
+                          className="rounded-xl overflow-hidden border border-border/50 bg-card group relative cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                           onClick={() => setLightboxState({ screens: emtScreens, index: i })}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setLightboxState({ screens: emtScreens, index: i });
+                            }
+                          }}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`View EMT screen: ${screen.title}`}
                         >
                           <img
                             src={screen.img}
@@ -1446,8 +1473,17 @@ const HealthcareAppPage = () => {
                     {epcrAdminScreens.map((screen, i) => (
                       <CarouselItem key={i} className="pl-2 md:pl-4 sm:basis-1/3 lg:basis-1/4 xl:basis-1/5">
                         <div 
-                          className="rounded-xl overflow-hidden border border-border/50 bg-card group relative cursor-zoom-in"
+                          className="rounded-xl overflow-hidden border border-border/50 bg-card group relative cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                           onClick={() => setLightboxState({ screens: epcrAdminScreens, index: i })}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setLightboxState({ screens: epcrAdminScreens, index: i });
+                            }
+                          }}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`View admin screen: ${screen.title}`}
                         >
                           <img
                             src={screen.img}
@@ -1724,6 +1760,7 @@ const HealthcareAppPage = () => {
                 setZoomLevel(prev => Math.min(prev + 0.5, 3));
               }}
               title="Zoom In"
+              aria-label="Zoom in"
             >
               <ZoomIn className="w-6 h-6" />
             </button>
@@ -1734,6 +1771,7 @@ const HealthcareAppPage = () => {
                 setZoomLevel(prev => Math.max(prev - 0.5, 0.5));
               }}
               title="Zoom Out"
+              aria-label="Zoom out"
             >
               <ZoomOut className="w-6 h-6" />
             </button>
@@ -1742,6 +1780,7 @@ const HealthcareAppPage = () => {
           <button
             className="fixed top-6 right-6 sm:top-8 sm:right-8 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
             onClick={() => { setLightboxState(null); setZoomLevel(1); setPan({ x: 0, y: 0 }); }}
+            aria-label="Close viewer"
           >
             <X className="w-6 h-6" />
           </button>
@@ -1754,6 +1793,7 @@ const HealthcareAppPage = () => {
               setZoomLevel(1);
               setPan({ x: 0, y: 0 });
             }}
+            aria-label="Previous image"
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
@@ -1766,6 +1806,7 @@ const HealthcareAppPage = () => {
               setZoomLevel(1);
               setPan({ x: 0, y: 0 });
             }}
+            aria-label="Next image"
           >
             <ArrowRight className="w-6 h-6" />
           </button>

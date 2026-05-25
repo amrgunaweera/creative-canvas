@@ -31,7 +31,8 @@ const Projects = () => {
             <Link
               to={`/project/${project.id}`}
               key={project.id}
-              className="group relative bg-card rounded-xl sm:rounded-2xl overflow-hidden hover-lift cursor-pointer block"
+              className="group relative bg-card rounded-xl sm:rounded-2xl overflow-hidden hover-lift cursor-pointer block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              aria-label={`View project details for ${project.title}`}
             >
               {/* Gradient background */}
               <div

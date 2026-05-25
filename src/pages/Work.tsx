@@ -36,7 +36,7 @@ const WorkPage = () => {
               <Link
                 to={`/project/${project.id}`}
                 key={project.id}
-                className={`group relative bg-card rounded-xl sm:rounded-2xl overflow-hidden hover-lift cursor-pointer block ${
+                className={`group relative bg-card rounded-xl sm:rounded-2xl overflow-hidden hover-lift cursor-pointer block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                   index === 0
                     ? "animate-fade-up"
                     : index === 1
@@ -45,6 +45,7 @@ const WorkPage = () => {
                         ? "animate-fade-up-delay-2"
                         : "animate-fade-up"
                 }`}
+                aria-label={`View project details for ${project.title}`}
               >
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-50 group-hover:opacity-70 transition-opacity duration-500`}

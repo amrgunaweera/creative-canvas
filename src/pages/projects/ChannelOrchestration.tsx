@@ -729,8 +729,17 @@ const ChannelOrchestrationPage = () => {
                     <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/3">
                       <div className="p-1">
                         <div 
-                          className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-video shadow-sm hover:shadow-md transition-shadow"
+                          className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-video shadow-sm hover:shadow-md transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                           onClick={() => setProtoIndex(index)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setProtoIndex(index);
+                            }
+                          }}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`View prototype: ${proto.label}`}
                         >
 
                           <img 
@@ -759,13 +768,13 @@ const ChannelOrchestrationPage = () => {
       {/* Prototype Lightbox */}
       {protoIndex !== null && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setProtoIndex(null)}>
-          <button onClick={() => setProtoIndex(null)} className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10">
+          <button onClick={() => setProtoIndex(null)} className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10" aria-label="Close viewer">
             <X className="w-5 h-5 text-white" />
           </button>
-          <button onClick={(e) => { e.stopPropagation(); setProtoIndex(Math.max(0, protoIndex - 1)); }} className="absolute left-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10" disabled={protoIndex === 0}>
+          <button onClick={(e) => { e.stopPropagation(); setProtoIndex(Math.max(0, protoIndex - 1)); }} className="absolute left-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10" disabled={protoIndex === 0} aria-label="Previous image">
             <ChevronLeft className="w-5 h-5 text-white" />
           </button>
-          <button onClick={(e) => { e.stopPropagation(); setProtoIndex(Math.min(prototypeScreens.length - 1, protoIndex + 1)); }} className="absolute right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10" disabled={protoIndex === prototypeScreens.length - 1}>
+          <button onClick={(e) => { e.stopPropagation(); setProtoIndex(Math.min(prototypeScreens.length - 1, protoIndex + 1)); }} className="absolute right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10" disabled={protoIndex === prototypeScreens.length - 1} aria-label="Next image">
             <ChevronRight className="w-5 h-5 text-white" />
           </button>
           <div className="max-w-screen-2xl max-h-[92vh] w-full" onClick={(e) => e.stopPropagation()}>
@@ -1113,8 +1122,17 @@ const ChannelOrchestrationPage = () => {
                        <CarouselItem key={index} className="pl-2 md:pl-4 sm:basis-1/2 lg:basis-1/2">
                          <div className="p-1">
                            <div 
-                             className="group relative rounded-[2rem] overflow-hidden border border-border/50 bg-card cursor-zoom-in aspect-[16/9] shadow-sm hover:shadow-md transition-shadow"
+                             className="aspect-video rounded-xl overflow-hidden border border-border/50 bg-card group relative cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                              onClick={() => setHifiIndex(index)}
+                             onKeyDown={(e) => {
+                               if (e.key === 'Enter' || e.key === ' ') {
+                                 e.preventDefault();
+                                 setHifiIndex(index);
+                               }
+                             }}
+                             role="button"
+                             tabIndex={0}
+                             aria-label={`View hifi screen: ${screen.label}`}
                            >
 
                              <img 
@@ -1423,31 +1441,34 @@ const ChannelOrchestrationPage = () => {
       {hifiIndex !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 bg-black/90 backdrop-blur-sm" onClick={() => setHifiIndex(null)}>
           <button 
-            className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
+            className="absolute top-4 sm:top-8 right-4 sm:right-8 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
             onClick={(e) => {
               e.stopPropagation();
               setHifiIndex(null);
             }}
+            aria-label="Close viewer"
           >
             <X className="w-6 h-6" />
           </button>
           
           <button 
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
             onClick={(e) => {
               e.stopPropagation();
-              setHifiIndex(hifiIndex === 0 ? hifiScreens.length - 1 : hifiIndex - 1);
+              setHifiIndex((prev) => prev !== null ? (prev > 0 ? prev - 1 : hifiScreens.length - 1) : null);
             }}
+            aria-label="Previous image"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
 
           <button 
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-secondary transition-colors text-foreground shadow-lg z-[101]"
             onClick={(e) => {
               e.stopPropagation();
-              setHifiIndex(hifiIndex === hifiScreens.length - 1 ? 0 : hifiIndex + 1);
+              setHifiIndex((prev) => prev !== null ? (prev < hifiScreens.length - 1 ? prev + 1 : 0) : null);
             }}
+            aria-label="Next image"
           >
             <ChevronRight className="w-6 h-6" />
           </button>

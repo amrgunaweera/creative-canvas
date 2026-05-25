@@ -20,6 +20,7 @@ const ThemeToggle = () => {
         checked={resolvedTheme === "dark"}
         onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
         className="data-[state=checked]:bg-primary"
+        aria-label="Toggle theme"
       />
       <Moon className="w-4 h-4 text-muted-foreground" />
     </div>

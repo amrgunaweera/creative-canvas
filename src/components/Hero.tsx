@@ -127,7 +127,7 @@ const Hero = () => {
                   Explore My Work
                 </Button>
                 <Button variant="outline_hero" size="lg" asChild className="w-full sm:w-auto">
-                  <a href={resumePdf} target="_blank" rel="noopener noreferrer">
+                  <a href={resumePdf} target="_blank" rel="noopener noreferrer" aria-label="Download Resume PDF">
                     <Download className="mr-2 h-4 w-4" />
                     Download Resume
                   </a>
@@ -328,6 +328,7 @@ const Hero = () => {
       <button
         onClick={scrollToWork}
         className="absolute right-4 sm:right-8 lg:right-12 bottom-12 sm:bottom-16 flex flex-col items-center gap-6 group cursor-pointer z-20 hidden md:flex animate-fade-up-delay-2"
+        aria-label="Scroll down to explore work"
       >
         <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-muted-foreground group-hover:text-primary transition-colors duration-300" style={{ writingMode: 'vertical-rl' }}>
           Scroll to explore
